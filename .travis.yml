@@ -19,6 +19,9 @@ install:
 script:
   - echo "compilation ok"
 
+before_cache:
+  - chmod 777 ./build/**
+
 cache:
   directories:
     - /build
