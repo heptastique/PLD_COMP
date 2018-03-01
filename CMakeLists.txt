@@ -1,11 +1,11 @@
 cmake_minimum_required(VERSION 2.8 FATAL_ERROR)
 
-set(EXECUTABLE_OUTPUT_PATH ./bin/)
+set(EXECUTABLE_OUTPUT_PATH ../bin/)
 set(CMAKE_CXX_STANDARD 11)
 
-project(compilatif)
+project(app)
 
-add_subdirectory(antlr/runtime_src)
+add_subdirectory(antlr/runtime_src_linux)
 
 # get all *.cpp files
 file(GLOB SRC_FILES ${PROJECT_SOURCE_DIR}/*.cpp)
