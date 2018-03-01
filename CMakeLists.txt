@@ -12,5 +12,5 @@ file(GLOB SRC_FILES ${PROJECT_SOURCE_DIR}/*.cpp)
 
 add_executable(compilatif ${SRC_FILES} Calc.h)
 
-target_include_directories(compilatif PRIVATE antlr/runtime_src/runtime/src)
+target_include_directories(compilatif PRIVATE antlr/runtime_src_linux/runtime/src)
 target_link_libraries(compilatif antlr4_shared)
