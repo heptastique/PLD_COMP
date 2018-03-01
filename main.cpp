@@ -9,7 +9,7 @@ using namespace antlr4;
 using namespace std;
 
 int main(int, const char **) {
-    ANTLRInputStream input("3*7");
+    ANTLRInputStream input("4+2*8");
     ExprLexer lexer(&input);
     CommonTokenStream tokens(&lexer);
     ExprParser parser(&tokens);
