@@ -10,7 +10,7 @@ add_subdirectory(antlr/runtime_src_linux)
 # get all *.cpp files
 file(GLOB SRC_FILES ${PROJECT_SOURCE_DIR}/*.cpp)
 
-add_executable(compilatif ${SRC_FILES} Calc.h)
+add_executable(app ${SRC_FILES} Calc.h)
 
-target_include_directories(compilatif PRIVATE antlr/runtime_src_linux/runtime/src)
-target_link_libraries(compilatif antlr4_shared)
+target_include_directories(app PRIVATE antlr/runtime_src_linux/runtime/src)
+target_link_libraries(app antlr4_shared)
