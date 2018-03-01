@@ -16,6 +16,9 @@ install:
   - cmake ..
   - make
 
+script:
+  - echo "compilation ok"
+
 cache:
   directories:
     - /usr
