@@ -21,4 +21,4 @@ script:
 
 cache:
   directories:
-    - /usr
+    - /build
