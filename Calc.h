@@ -11,6 +11,18 @@ public:
         return (int) visit(ctx->expr());
     }
 
+    antlrcpp::Any visitAdd (ExprParser::AddContext *ctx) override {
+        return (int) visit(ctx->expr(0)) + (int) visit(ctx->expr(1));
+    }
+
+    antlrcpp::Any visitMoins (ExprParser::MoinsContext *ctx) override {
+        return (int) visit(ctx->expr(0)) - (int) visit(ctx->expr(1));
+    }
+
+    antlrcpp::Any visitMult (ExprParser::MultContext *ctx) override {
+        return (int) visit(ctx->expr(0)) * (int) visit(ctx->expr(1));
+    }
+
     antlrcpp::Any visitPar (ExprParser::ParContext *ctx) override {
         return (int) visit(ctx->expr());
     }
