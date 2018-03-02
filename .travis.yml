@@ -18,6 +18,7 @@ install:
 
 script:
   - echo "compilation ok"
+  - ls -la
 
 before_cache:
   - cd ..
