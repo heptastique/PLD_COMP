@@ -2,3 +2,17 @@ bin
 build
 dist
 .idea
+
+# Generated files
+Expr.interp
+Expr.tokens
+ExprBaseVisitor.cpp
+ExprBaseVisitor.h
+ExprLexer.cpp
+ExprLexer.h
+ExprParser.cpp
+ExprParser.h
+ExprVisitor.cpp
+ExprVisitor.h
+ExprLexer.interp
+ExprLexer.tokens

@@ -1,5 +1,16 @@
 cmake_minimum_required(VERSION 2.8 FATAL_ERROR)
 
+set (GRAMMAR_FILE ../Expr.g4)
+
+set (ANTLR4_CMD "./../antlr/antlr4.sh")
+set (ANTLR4_ARG "-visitor;-no-listener;-Dlanguage=Cpp;${GRAMMAR_FILE}")
+
+execute_process(COMMAND ${ANTLR4_CMD} ${ANTLR4_ARG}
+        RESULT_VARIABLE result
+        OUTPUT_VARIABLE output)
+
+
+
 set(EXECUTABLE_OUTPUT_PATH ../bin/)
 set(CMAKE_CXX_STANDARD 11)
 
