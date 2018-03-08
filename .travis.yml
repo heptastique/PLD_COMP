@@ -14,10 +14,9 @@ before_install:
 
 install:
   - cmake ..
-  - make
 
 script:
-  - echo "compilation ok"
+  - make
   - ls -la ..
 
 before_cache:
