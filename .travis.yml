@@ -27,6 +27,8 @@ before_cache:
 cache:
   directories:
     - build
+    - antlr/build
+    - antlr/install
 
 notifications:
   email:
