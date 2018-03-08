@@ -1,7 +1,13 @@
+# Editor configs
+.idea
+.vscode
+
+# Compiled files
 bin
 build
 dist
-.idea
+antlr/build
+antlr/install
 
 # Generated files
 Expr.interp
