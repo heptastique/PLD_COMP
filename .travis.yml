@@ -18,6 +18,9 @@ install:
 script:
   - make
   - ls -la ..
+  - cd ../tests
+  - chmod +x test.sh lib/assert.sh
+  - ./test.sh
 
 before_cache:
   - cd ..
