@@ -8,3 +8,4 @@ expr: expr '*' expr # mult
     |  '(' expr ')' # par
     ;
 INT     : [0-9]+ ;
+

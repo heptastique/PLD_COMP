@@ -1,0 +1,8 @@
+# Config specific files are protected
+
+/antlr/ @AmosTrask @Raul6469
+CODEOWNERS @AmosTrask @Raul6469
+CMakeLists.txt @AmosTrask @Raul6469
+.travis.yml @AmosTrask @Raul6469
+.gitignore @AmosTrask @Raul6469
+.gitattributes @AmosTrask @Raul6469

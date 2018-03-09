@@ -1,8 +1,8 @@
 #include <iostream>
-#include "ExprLexer.h"
-#include "ExprParser.h"
-#include "ExprBaseVisitor.h"
-#include "Calc.h"
+#include "grammar/ExprLexer.h"
+#include "grammar/ExprParser.h"
+#include "grammar/ExprBaseVisitor.h"
+#include "src/Calc.h"
 #include "antlr4-runtime.h"
 
 using namespace antlr4;
