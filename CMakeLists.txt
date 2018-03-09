@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 2.8 FATAL_ERROR)
 
 project(app)
 
-set (GRAMMAR_FILE ../Expr.g4)
+set (GRAMMAR_FILE ../grammar/Expr.g4)
 set (ANTLR4_CMD "./../antlr/antlr4.sh")
 set (ANTLR4_ARG "-visitor;-no-listener;-Dlanguage=Cpp;${GRAMMAR_FILE}")
 set(ANTLR4_INSTALL_CMD "./../antlr/antlr_installer.sh")
@@ -33,8 +33,8 @@ set(CMAKE_CXX_STANDARD 11)
 
 
 # get all files
-file(GLOB SRC_FILES ${PROJECT_SOURCE_DIR}/*.cpp)
-file(GLOB HEADER_FILES ${PROJECT_SOURCE_DIR}/*.h)
+file(GLOB SRC_FILES ${PROJECT_SOURCE_DIR}/grammar/*.cpp ${PROJECT_SOURCE_DIR}/src/*.cpp ${PROJECT_SOURCE_DIR}/*.cpp)
+file(GLOB HEADER_FILES ${PROJECT_SOURCE_DIR}/grammar/*.h ${PROJECT_SOURCE_DIR}/src/*.h ${PROJECT_SOURCE_DIR}/*.h)
 
 add_executable(app ${SRC_FILES} ${HEADER_FILES})
 
