@@ -1,2 +1,4 @@
 antlr/runtime_src_linux/** linguist-vendored
 tests/lib/** linguist-vendored
+tests/Back/** linguist-vendored
+tests/Front/** linguist-vendored
