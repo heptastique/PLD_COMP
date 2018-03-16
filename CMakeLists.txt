@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 2.8 FATAL_ERROR)
 
 project(app)
 
-set (GRAMMAR_FILE ../grammar/Expr.g4)
+set (GRAMMAR_FILE ../grammar/Prog.g4)
 set (ANTLR4_CMD "./../antlr/antlr4.sh")
 set (ANTLR4_ARG "-visitor;-no-listener;-Dlanguage=Cpp;${GRAMMAR_FILE}")
 set(ANTLR4_INSTALL_CMD "./../antlr/antlr_installer.sh")

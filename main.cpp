@@ -1,38 +1,44 @@
+
 #include <iostream>
-#include "grammar/ExprLexer.h"
-#include "grammar/ExprParser.h"
-#include "grammar/ExprBaseVisitor.h"
-#include "src/Calc.h"
+
 #include "antlr4-runtime.h"
+
+#include "grammar/ProgLexer.h"
+#include "grammar/ProgParser.h"
+#include "grammar/ProgBaseVisitor.h"
+#include "src/Prog.h"
 
 using namespace antlr4;
 using namespace std;
 
-int main(int argc, char* argv[]) {
-    ifstream inputFile;
-    
-    inputFile.open (argv[1]);
-    
-    string contenu;
-    string ligne;
-    
-    if (inputFile)
-    {       
-        while ( getline (inputFile, ligne) )
-        {
-            contenu = contenu + ligne; 
-        }
-    }
-                
-    inputFile.close();
+int main(int, const char **)
+{
+	char * fileContent;
+	long fileSize;
 
-    ANTLRInputStream input(contenu);
-    ExprLexer lexer(&input);
-    CommonTokenStream tokens(&lexer);
-    ExprParser parser(&tokens);
-    tree::ParseTree *tree = parser.prog();
-    Calc visitor;
-    int resultat = (int) visitor.visit(tree);
-    cout << resultat << endl;
-    return 0;
+	FILE * file = fopen("Prog", "rb");
+
+	fseek(file, 0, SEEK_END);
+	fileSize = ftell(file);
+	rewind(file);
+
+	fileContent = (char *) malloc((fileSize + 1) * (sizeof(char)));
+	fread(fileContent, sizeof(char), fileSize, file);
+
+	fileContent[fileSize] = '\0';
+
+	fclose(file);
+
+	ANTLRInputStream input(fileContent);
+	ProgLexer lexer(&input);
+	CommonTokenStream tokens(&lexer);
+	ProgParser parser(&tokens);
+	tree::ParseTree * tree = parser.prog();
+
+	Prog visitor;
+
+	visitor.visit(tree);
+	cout << "Ok" << endl;
+
+	return 0;
 }
