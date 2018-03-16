@@ -14,12 +14,13 @@ before_install:
 
 install:
   - cmake ..
-
-script:
   - make
-  - ls -la ..
+
+before_script:
   - cd ../tests
   - chmod +x test.sh lib/assert.sh
+
+script:
   - ./test.sh
 
 before_cache:
