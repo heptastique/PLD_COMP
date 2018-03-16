@@ -8,6 +8,8 @@ class Programme {
 
 public:
 
+    friend std::ostream& operator<< (std::ostream& stream, const Programme& programme);
+
     void addFunction (Function * function);
 
     void addDeclaration (Declaration * declaration);

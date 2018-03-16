@@ -4,6 +4,13 @@ using namespace std;
 #include <iostream>
 
 
+std::ostream& operator<<(std::ostream& stream, const Declaration& declaration)
+{
+    stream << " Declaration: Name=" << declaration.name << " Type=" << declaration.type << endl;
+    return stream;
+}
+
+
 Declaration &Declaration::operator=(const Declaration &unDeclaration)
 {
 }

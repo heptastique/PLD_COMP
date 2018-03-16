@@ -3,6 +3,12 @@ using namespace std;
 #include "Function.h"
 #include <iostream>
 
+std::ostream& operator<<(std::ostream& stream, const Function& function)
+{
+    stream << " Fonction: Name=" << function.name <<  endl;
+    stream << "     Bloc=" << *function.bloc;
+    return stream;
+}
 
 Function &Function::operator=(const Function &unFunction)
 {

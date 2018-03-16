@@ -3,6 +3,11 @@ using namespace std;
 #include "Instruction.h"
 #include <iostream>
 
+std::ostream& operator<<(std::ostream& stream, const Instruction& instruction)
+{
+    return stream;
+}
+
 Instruction &Instruction::operator=(const Instruction &unInstruction)
 {
 }

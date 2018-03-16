@@ -8,6 +8,8 @@ class Bloc {
 
 public:
 
+    friend std::ostream& operator<< (std::ostream& stream, const Bloc& bloc);
+
     void addInstruction(Instruction * instruction);
 
     Bloc &operator=(const Bloc &unBloc);

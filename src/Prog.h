@@ -16,6 +16,7 @@ class Prog : public ProgBaseVisitor
 {
 	public:
 
+
 	antlrcpp::Any visitLprog(ProgParser::LprogContext *ctx) override
 	{
         std::string some;
@@ -24,6 +25,7 @@ class Prog : public ProgBaseVisitor
             programme->addDeclaration(visit(i));
         }
         programme->addFunction(visit(ctx->fun()));
+        cout << *programme;
 		return programme;
 	}
 
@@ -50,7 +52,7 @@ class Prog : public ProgBaseVisitor
 
     antlrcpp::Any visitLdecl(ProgParser::LdeclContext *ctx) override
     {
-        Type type = getTypeFromString(ctx->type()->toString());
+        Type type = getTypeFromString(ctx->type()->getText());
         Declaration* declaration = new Declaration(ctx->Name()->toString(), type);
         return declaration;
     }

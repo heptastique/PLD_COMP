@@ -8,6 +8,8 @@ class Function {
 
 public:
 
+    friend std::ostream& operator<< (std::ostream& stream, const Function& function);
+
     Function &operator=(const Function &unFunction);
 
     Function(const Function &unFunction);
