@@ -1,5 +1,6 @@
 using namespace std;
 
+#include "Bloc.h"
 #include <iostream>
 
 Bloc &Bloc::operator=(const Bloc &unBloc) {

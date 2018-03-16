@@ -1,5 +1,6 @@
 using namespace std;
 
+#include "Instruction.h"
 #include <iostream>
 
 Instruction &Instruction::operator=(const Instruction &unInstruction) {

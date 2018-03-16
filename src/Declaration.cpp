@@ -1,5 +1,6 @@
 using namespace std;
 
+#include "Declaration.h"
 #include <iostream>
 
 Declaration &Declaration::operator=(const Declaration &unDeclaration) {
