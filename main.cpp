@@ -11,12 +11,12 @@
 using namespace antlr4;
 using namespace std;
 
-int main(int, const char **)
+int main(int argc, const char *argv[])
 {
 	char * fileContent;
 	long fileSize;
 
-	FILE * file = fopen("Prog", "rb");
+	FILE * file = fopen(argv[1], "rb");
 
 	fseek(file, 0, SEEK_END);
 	fileSize = ftell(file);
