@@ -28,6 +28,6 @@ decl : type Name ';'                    # Ldecl;
 
 Name : [a-zA-Z][a-zA-Z0-9]*; 
 
-DefFun : 'void main(){}';
+
 
 WS: [ \t\n\r]+ -> skip;
