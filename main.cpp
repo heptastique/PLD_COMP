@@ -24,6 +24,8 @@ int main(int argc, const char *argv[])
 		cout<<"No input file given"<<endl;
 		return -1;
 	}
+	struct stat fileStat;
+	const char* fileName = argv[1];
 	if(stat(fileName, &fileStat)<0)
 	{
 		switch(errno)
