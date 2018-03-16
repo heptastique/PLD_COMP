@@ -1,4 +1,4 @@
-
+#include <sys/stat.h>
 #include <iostream>
 
 #include "antlr4-runtime.h"
@@ -16,7 +16,16 @@ int main(int argc, const char *argv[])
 	char * fileContent;
 	long fileSize;
 
-	FILE * file = fopen(argv[1], "rb");
+	FILE * file;
+
+	//check if input is given
+	if(argc<2)
+	{
+		cout<<"No input file given"<<endl;
+		return -1;
+	}
+
+	file= fopen(argv[1], "rb");
 
 	fseek(file, 0, SEEK_END);
 	fileSize = ftell(file);
