@@ -3,6 +3,11 @@ using namespace std;
 #include <iostream>
 #include "Programme.h"
 
+void Programme::addFunction(Function *function)
+{
+    this->functions.emplace_back(function);
+}
+
 Programme &Programme::operator=(const Programme &unProgramme)
 {
 }

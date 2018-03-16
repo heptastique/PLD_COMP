@@ -17,11 +17,13 @@ Function::Function(const Function &unFunction)
 }
 
 
-Function::Function()
+Function::Function(const string &name,const Bloc &bloc)
 {
 #ifdef MAP
     cout << "Appel au constructeur de <Function>" << endl;
 #endif
+    this->name = name;
+    this->bloc = bloc;
 }
 
 
