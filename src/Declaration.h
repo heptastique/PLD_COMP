@@ -1,6 +1,8 @@
 #pragma once
 
 #include "Instruction.h"
+#include "Type.h"
+#include <string>
 
 class Declaration : public Instruction {
 
@@ -10,8 +12,11 @@ public:
 
     Declaration(const Declaration &unDeclaration);
 
-    Declaration();
+    Declaration(std::string &name, Type type);
 
     virtual ~Declaration();
 
+private:
+    Type type;
+    std::string name;
 };

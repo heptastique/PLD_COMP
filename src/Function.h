@@ -1,5 +1,6 @@
 #pragma once
 
+#include <string>
 #include "Bloc.h"
 
 class Function {
@@ -11,7 +12,7 @@ public:
 
     Function(const Function &unFunction);
 
-    Function(const std::string &name,const Bloc &Bloc);
+    Function(std::string &name, Bloc &Bloc);
 
     virtual ~Function();
 

@@ -1,7 +1,7 @@
 using namespace std;
 
-#include <iostream>
 #include "Function.h"
+#include <iostream>
 
 
 Function &Function::operator=(const Function &unFunction)
@@ -17,7 +17,7 @@ Function::Function(const Function &unFunction)
 }
 
 
-Function::Function(const string &name,const Bloc &bloc)
+Function::Function(string &name, Bloc &bloc)
 {
 #ifdef MAP
     cout << "Appel au constructeur de <Function>" << endl;
