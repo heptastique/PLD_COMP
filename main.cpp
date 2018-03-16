@@ -1,3 +1,4 @@
+#define MAP
 
 #include <iostream>
 
@@ -7,6 +8,7 @@
 #include "grammar/ProgParser.h"
 #include "grammar/ProgBaseVisitor.h"
 #include "src/Prog.h"
+
 
 using namespace antlr4;
 using namespace std;
@@ -34,7 +36,6 @@ int main(int, const char **)
 	CommonTokenStream tokens(&lexer);
 	ProgParser parser(&tokens);
 	tree::ParseTree * tree = parser.prog();
-
 	Prog visitor;
 
 	visitor.visit(tree);

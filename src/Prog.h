@@ -8,6 +8,7 @@
 #include "Function.h"
 #include "Type.h"
 #include "Declaration.h"
+#include "Programme.h"
 
 using namespace std;
 
@@ -17,8 +18,13 @@ class Prog : public ProgBaseVisitor
 
 	antlrcpp::Any visitLprog(ProgParser::LprogContext *ctx) override
 	{
-        std::cout << "HEY" << std::endl;
-		return visit(ctx);
+        std::string some;
+        Programme* programme = new Programme();
+        for(auto i : ctx->decl()){
+            programme->addDeclaration(visit(i));
+        }
+        programme->addFunction(visit(ctx->fun()));
+		return programme;
 	}
 
     antlrcpp::Any visitLbloc(ProgParser::LblocContext *ctx) override

@@ -15,8 +15,8 @@ bloc: '{' (instr*)? '}'                     # Lbloc;
 
 instr: decl                                 # LinstrDecl;
 
-typeretour: type                            # Ltype                  
-            | 'void'                        # LtyperetourVoid
+typeretour: 'void'                         # LtyperetourVoid
+            | type                      # Ltype
             ;
 
 type: 'char'                                # Lchar
@@ -24,10 +24,10 @@ type: 'char'                                # Lchar
     | 'int64_t'                             # Lint64_t
     ;
 
-decl : type ' ' Name ';'                    # Ldecl;
+decl : type Name ';'                    # Ldecl;
 
 Name : [a-zA-Z][a-zA-Z0-9]*; 
 
 DefFun : 'void main(){}';
 
-WS: [\t\n\r]+ -> skip;
+WS: [ \t\n\r]+ -> skip;
