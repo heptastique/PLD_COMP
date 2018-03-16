@@ -8,6 +8,7 @@
 #include "grammar/ProgBaseVisitor.h"
 #include "src/Prog.h"
 
+
 using namespace antlr4;
 using namespace std;
 
@@ -76,7 +77,6 @@ int main(int argc, const char *argv[])
 	CommonTokenStream tokens(&lexer);
 	ProgParser parser(&tokens);
 	tree::ParseTree * tree = parser.prog();
-
 	Prog visitor;
 
 	visitor.visit(tree);

@@ -1,5 +1,6 @@
 #pragma once
 
+#include <string>
 #include "Bloc.h"
 
 class Function {
@@ -7,15 +8,17 @@ class Function {
 
 public:
 
+    friend std::ostream& operator<< (std::ostream& stream, const Function& function);
+
     Function &operator=(const Function &unFunction);
 
     Function(const Function &unFunction);
 
-    Function(const std::string &name,const Bloc &Bloc);
+    Function(std::string name, Bloc *Bloc);
 
     virtual ~Function();
 
 private:
     std::string name;
-    Bloc bloc;
+    Bloc* bloc;
 };
