@@ -12,7 +12,7 @@ public:
 
     Declaration(const Declaration &unDeclaration);
 
-    Declaration(std::string &name, Type type);
+    Declaration(std::string name, Type type);
 
     virtual ~Declaration();
 

@@ -1,8 +1,11 @@
 #pragma once
 
+#include <string>
+
 enum Type {
-    VOID,
-    INT_32T,
-    INT_64T,
-    CHAR
+    VOID = 0,
+    INT32_T = 1,
+    INT64_T = 2,
+    CHAR = 3,
+    ERROR = -1
 };

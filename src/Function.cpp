@@ -17,7 +17,7 @@ Function::Function(const Function &unFunction)
 }
 
 
-Function::Function(string &name, Bloc &bloc)
+Function::Function(string name, Bloc *bloc)
 {
 #ifdef MAP
     cout << "Appel au constructeur de <Function>" << endl;

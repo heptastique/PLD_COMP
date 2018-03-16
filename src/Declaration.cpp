@@ -17,7 +17,7 @@ Declaration::Declaration(const Declaration &unDeclaration)
 }
 
 
-Declaration::Declaration(string &name, Type type)
+Declaration::Declaration(string name, Type type)
 {
     this->name = name;
     this->type = type;
