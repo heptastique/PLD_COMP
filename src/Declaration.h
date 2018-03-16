@@ -1,6 +1,8 @@
 #pragma once
 
-class Declaration {
+#include "Instruction.h"
+
+class Declaration : public Instruction {
 
 public:
 

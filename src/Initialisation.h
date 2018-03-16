@@ -1,6 +1,8 @@
 #pragma once
 
-class Initialisation {
+#include "Instruction.h"
+
+class Initialisation : public Instruction {
 
 public:
 
