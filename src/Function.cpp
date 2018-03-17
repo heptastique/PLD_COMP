@@ -6,7 +6,7 @@ using namespace std;
 std::ostream& operator<<(std::ostream& stream, const Function& function)
 {
     stream << " Fonction: Name=" << function.name <<  endl;
-    stream << "     Bloc=" << *function.bloc;
+    stream << *function.bloc;
     return stream;
 }
 

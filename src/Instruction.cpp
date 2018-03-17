@@ -5,6 +5,8 @@ using namespace std;
 
 std::ostream& operator<<(std::ostream& stream, const Instruction& instruction)
 {
+    stream << "Instruction:";
+    instruction.print(stream);
     return stream;
 }
 

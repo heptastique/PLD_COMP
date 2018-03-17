@@ -5,7 +5,7 @@ using namespace std;
 
 ostream& operator<<(ostream& stream, const Programme& programme)
 {
-    stream << "Programme :" << endl;
+    stream << "Programme:" << endl;
     for (auto it :  programme.declarions){
         stream << *it;
     }
