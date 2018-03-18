@@ -1,3 +1,3 @@
-void main(char a) {
+void main() {
 
 }
