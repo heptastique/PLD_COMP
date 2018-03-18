@@ -2,6 +2,7 @@
 
 #include <string>
 #include "Bloc.h"
+#include "Declaration.h"
 
 class Function {
 
@@ -9,6 +10,11 @@ class Function {
 public:
 
     friend std::ostream& operator<< (std::ostream& stream, const Function& function);
+
+    void setDeclarations(std::list<Declaration*> declarations)
+    {
+        this->declarations = declarations;
+    }
 
     Function &operator=(const Function &unFunction);
 
@@ -21,4 +27,5 @@ public:
 private:
     std::string name;
     Bloc* bloc;
+    std::list<Declaration*> declarations;
 };

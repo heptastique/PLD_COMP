@@ -6,6 +6,12 @@ using namespace std;
 std::ostream& operator<<(std::ostream& stream, const Function& function)
 {
     stream << " Fonction: Name=" << function.name <<  endl;
+    if(!function.declarations.empty()){
+        stream << "     Param:" << endl;
+        for (auto it : function.declarations){
+            stream << "     " << *it;
+        }
+    }
     stream << *function.bloc;
     return stream;
 }
