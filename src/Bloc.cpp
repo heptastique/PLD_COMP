@@ -5,8 +5,9 @@ using namespace std;
 
 ostream& operator<<(ostream& stream, const Bloc& bloc)
 {
+    stream << "     Bloc:" << endl;
     for (auto it :  bloc.instructions){
-        stream << *it;
+        stream << "     " << *it;
     }
     stream << endl;
     return stream;

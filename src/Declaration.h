@@ -8,6 +8,8 @@ class Declaration : public Instruction {
 
 public:
 
+    void print(std::ostream& stream) const;
+
     friend std::ostream& operator<< (std::ostream& stream, const Declaration& declaration);
 
     Declaration &operator=(const Declaration &unDeclaration);

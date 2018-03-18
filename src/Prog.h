@@ -34,7 +34,7 @@ class Prog : public ProgBaseVisitor
         Bloc* b = new Bloc();
         auto instructions = ctx->instr();
         for(auto i : instructions ){
-            b->addInstruction(visit(i));
+            b->addInstruction((Declaration*)visit(i));
         }
         return b;
     }
@@ -47,7 +47,7 @@ class Prog : public ProgBaseVisitor
 
     antlrcpp::Any visitLinstrDecl(ProgParser::LinstrDeclContext *ctx) override
     {
-        return visit(ctx);
+        return (Declaration*) visit(ctx->decl());
     }
 
     antlrcpp::Any visitLdecl(ProgParser::LdeclContext *ctx) override

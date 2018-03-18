@@ -4,6 +4,11 @@ using namespace std;
 #include <iostream>
 
 
+void Declaration::print(std::ostream &stream) const
+{
+    stream << " Declaration: Name=" << name << " Type=" << type << endl;
+}
+
 std::ostream& operator<<(std::ostream& stream, const Declaration& declaration)
 {
     stream << " Declaration: Name=" << declaration.name << " Type=" << declaration.type << endl;
@@ -24,7 +29,7 @@ Declaration::Declaration(const Declaration &unDeclaration)
 }
 
 
-Declaration::Declaration(string name, Type type)
+Declaration::Declaration(string name, Type type): Instruction()
 {
     this->name = name;
     this->type = type;
