@@ -10,7 +10,7 @@ set(ANTLR4_INSTALL_CMD "./../antlr/antlr_installer.sh")
 find_library(ANTLR_LIBRARY antlr4-runtime PATHS ${PROJECT_SOURCE_DIR}/antlr/install/usr/local/lib)
 if(ANTLR_LIBRARY)
     message("Antlr library found")
-    include_directories(${PROJECT_SOURCE_DIR}/antlr/install/usr/local/include/antlr4-runtime)
+    include_directories(${PROJECT_SOURCE_DIR}/antlr/install/usr/local/include/antlr4-runtime /usr/local/include/antlr4-runtime)
     else()
     message("Antlr library not found")
     execute_process(COMMAND ${ANTLR4_INSTALL_CMD}
@@ -18,7 +18,7 @@ if(ANTLR_LIBRARY)
             OUTPUT_VARIABLE output)
     # Until I find better        
     find_library(ANTLR_LIBRARY antlr4-runtime PATHS ${PROJECT_SOURCE_DIR}/antlr/install/usr/local/lib)
-    include_directories(${PROJECT_SOURCE_DIR}/antlr/install/usr/local/include/antlr4-runtime)
+    include_directories(${PROJECT_SOURCE_DIR}/antlr/install/usr/local/include/antlr4-runtime /usr/local/include/antlr4-runtime)
 endif()
 
 execute_process(COMMAND ${ANTLR4_CMD} ${ANTLR4_ARG}
