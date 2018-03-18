@@ -1,1 +1,3 @@
-s
+void main(char n) {
+
+}
