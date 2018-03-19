@@ -42,7 +42,32 @@ class Prog : public ProgBaseVisitor
     antlrcpp::Any visitLfun(ProgParser::LfunContext *ctx) override
     {
         Function* f = new Function(ctx->Name()->toString(), visit(ctx->bloc()));
+        f->setDeclarations(visit(ctx->params()));
         return f;
+    }
+
+    antlrcpp::Any visitLparams(ProgParser::LparamsContext *ctx) override {
+        std::list<Declaration*> params;
+        for(auto it : ctx->param()){
+            params.emplace_back((Declaration*)(visit(it)));
+        }
+        return params;
+    }
+
+    antlrcpp::Any visitLparam(ProgParser::LparamContext *ctx) override {
+        Type type = getTypeFromString(ctx->type()->getText());
+        Declaration * declaration = new Declaration(ctx->Name()->toString(), type);
+        return declaration;
+    }
+
+    virtual antlrcpp::Any visitLparamsVoid(ProgParser::LparamsVoidContext *ctx) override {
+        std::list<Declaration*> params;
+        return params;
+    }
+
+    virtual antlrcpp::Any visitLparamsEpsilon(ProgParser::LparamsEpsilonContext *ctx) override {
+        std::list<Declaration*> params;
+        return params;
     }
 
     antlrcpp::Any visitLinstrDecl(ProgParser::LinstrDeclContext *ctx) override
@@ -56,6 +81,8 @@ class Prog : public ProgBaseVisitor
         Declaration* declaration = new Declaration(ctx->Name()->toString(), type);
         return declaration;
     }
+
+
 
 
     antlrcpp::Any visitLint32_t(ProgParser::Lint32_tContext *ctx) override {

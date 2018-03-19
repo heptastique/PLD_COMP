@@ -1,4 +1,4 @@
 char a;
-void main(char a) {
+void main() {
 
 }
