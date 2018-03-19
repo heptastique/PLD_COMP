@@ -16,5 +16,5 @@ std::string AddInstruction(){
 }
 
 TEST_CASE("Instruction is added","[bloc]" ) {
-    REQUIRE ( AddInstruction() == "     Bloc:\n     Instruction: Declaration: Name=name Type=3\n\n");
+    REQUIRE ( AddInstruction() == "     Bloc:\n      Instruction: Declaration: Name=name Type=3\n\n");
 }
