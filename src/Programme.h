@@ -14,6 +14,10 @@ public:
 
     void addDeclaration (Declaration * declaration);
 
+    std::list<Function*> getFunctions();
+
+    std::list<Declaration*> getDeclarations();
+
     Programme &operator=(const Programme &unProgramme);
 
     Programme(const Programme &unProgramme);
