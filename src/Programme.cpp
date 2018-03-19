@@ -26,6 +26,16 @@ void Programme::addDeclaration(Declaration *declaration)
     this->declarions.emplace_back(declaration);
 }
 
+std::list<Function*> Programme::getFunctions()
+{
+    return this->functions;
+}
+
+std::list<Declaration*> Programme::getDeclarations() 
+{
+    return this->declarions;
+}
+
 Programme &Programme::operator=(const Programme &unProgramme)
 {
 }

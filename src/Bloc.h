@@ -12,6 +12,8 @@ public:
 
     void addInstruction(Instruction * instruction);
 
+    std::list<Instruction*> getInstructions();
+
     Bloc &operator=(const Bloc &unBloc);
 
     Bloc(const Bloc &unBloc);

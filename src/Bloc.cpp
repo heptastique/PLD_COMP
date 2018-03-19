@@ -21,6 +21,10 @@ void Bloc::addInstruction(Instruction *instruction)
 Bloc &Bloc::operator=(const Bloc &unBloc) {
 }
 
+std::list<Instruction*> Bloc::getInstructions() 
+{
+    return this->instructions;
+}
 
 Bloc::Bloc(const Bloc &unBloc) {
 #ifdef MAP

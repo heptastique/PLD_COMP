@@ -12,6 +12,10 @@ public:
 
     Function &operator=(const Function &unFunction);
 
+    std::string getName();
+
+    Bloc* getBloc();
+
     Function(const Function &unFunction);
 
     Function(std::string name, Bloc *Bloc);

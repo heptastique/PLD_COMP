@@ -20,6 +20,15 @@ Declaration &Declaration::operator=(const Declaration &unDeclaration)
 {
 }
 
+Type Declaration::getType()
+{
+    return this->type;
+}
+
+std::string Declaration::getName() 
+{
+    return this->name;
+}
 
 Declaration::Declaration(const Declaration &unDeclaration)
 {
