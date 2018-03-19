@@ -14,7 +14,7 @@ Function &Function::operator=(const Function &unFunction)
 {
 }
 
-std::string Function::getName() 
+std::string Function::getName()
 {
     return this->name;
 }

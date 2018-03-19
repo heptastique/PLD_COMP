@@ -21,7 +21,7 @@ void Bloc::addInstruction(Instruction *instruction)
 Bloc &Bloc::operator=(const Bloc &unBloc) {
 }
 
-std::list<Instruction*> Bloc::getInstructions() 
+std::list<Instruction*> Bloc::getInstructions()
 {
     return this->instructions;
 }

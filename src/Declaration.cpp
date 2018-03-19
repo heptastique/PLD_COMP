@@ -25,7 +25,7 @@ Type Declaration::getType()
     return this->type;
 }
 
-std::string Declaration::getName() 
+std::string Declaration::getName()
 {
     return this->name;
 }

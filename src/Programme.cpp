@@ -31,7 +31,7 @@ std::list<Function*> Programme::getFunctions()
     return this->functions;
 }
 
-std::list<Declaration*> Programme::getDeclarations() 
+std::list<Declaration*> Programme::getDeclarations()
 {
     return this->declarions;
 }
