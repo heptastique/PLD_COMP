@@ -1,6 +1,6 @@
 grammar Prog;
 
-prog: decl* init* fun                      # Lprog;
+prog: decl* init* fun*                      # Lprog;
 
 fun: typeretour Name '(' params ')' bloc    # Lfun;
 
