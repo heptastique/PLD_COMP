@@ -1,6 +1,6 @@
 grammar Prog;
 
-prog: decl* init* fun*                      # Lprog;
+prog: decl* init* fun                      # Lprog;
 
 fun: typeretour Name '(' params ')' bloc    # Lfun;
 
@@ -36,7 +36,7 @@ appelfonct: Name '(' valeurs ')'            # Lappelfonct;
 retourfonct: 'return' variable ';'          # Lretourfonct;
 
 init: type Name '[' param ']' ';'           # LinitTable
-    | type Name '=' param ','               # Linit
+    | type Name '=' param ';'               # Linit
     ;
 
 valeurs: variable (',' variable)*           # Lvaleurs
@@ -52,6 +52,6 @@ Name: [a-zA-Z][a-zA-Z0-9]*;
 
 Entier: [0-9]+;
 
-Caractere: . ;
+Caractere: '\'' ~['] '\'';
 
 WS: [ \t\n\r]+ -> skip;
