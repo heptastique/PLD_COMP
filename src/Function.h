@@ -20,7 +20,7 @@ public:
 
     Function(const Function &unFunction);
 
-    Function(std::string name, Bloc *Bloc);
+    Function(std::string name, Bloc *Bloc, Type typeRetour);
 
     virtual ~Function();
 

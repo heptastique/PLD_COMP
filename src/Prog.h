@@ -19,7 +19,6 @@ class Prog : public ProgBaseVisitor
 
 	antlrcpp::Any visitLprog(ProgParser::LprogContext *ctx) override
 	{
-        std::string some;
         Programme* programme = new Programme();
         for(auto i : ctx->decl()){
             programme->addDeclaration(visit(i));
@@ -43,7 +42,8 @@ class Prog : public ProgBaseVisitor
 
     antlrcpp::Any visitLfun(ProgParser::LfunContext *ctx) override
     {
-        Function* f = new Function(ctx->Name()->toString(), visit(ctx->bloc()));
+        Type type = visit(ctx->typeretour());
+        Function* f = new Function(ctx->Name()->toString(), visit(ctx->bloc()),type);
         f->setDeclarations(visit(ctx->params()));
         return f;
     }
@@ -70,6 +70,14 @@ class Prog : public ProgBaseVisitor
     antlrcpp::Any visitLparamsEpsilon(ProgParser::LparamsEpsilonContext *ctx) override {
         std::list<Declaration*> params;
         return params;
+    }
+
+    antlrcpp::Any visitLtyperetourVoid(ProgParser::LtyperetourVoidContext *ctx) override {
+        return VOID;
+    }
+
+    antlrcpp::Any visitLtype(ProgParser::LtypeContext *ctx) override {
+        return getTypeFromString(ctx->type()->getText());
     }
 
     antlrcpp::Any visitLinstrDecl(ProgParser::LinstrDeclContext *ctx) override
