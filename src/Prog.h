@@ -24,7 +24,9 @@ class Prog : public ProgBaseVisitor
         for(auto i : ctx->decl()){
             programme->addDeclaration(visit(i));
         }
-        programme->addFunction(visit(ctx->fun()));
+        for(auto i : ctx->fun()){
+            programme->addFunction(visit(i));
+        }
         cout << *programme;
 		return programme;
 	}
@@ -60,12 +62,12 @@ class Prog : public ProgBaseVisitor
         return declaration;
     }
 
-    virtual antlrcpp::Any visitLparamsVoid(ProgParser::LparamsVoidContext *ctx) override {
+    antlrcpp::Any visitLparamsVoid(ProgParser::LparamsVoidContext *ctx) override {
         std::list<Declaration*> params;
         return params;
     }
 
-    virtual antlrcpp::Any visitLparamsEpsilon(ProgParser::LparamsEpsilonContext *ctx) override {
+    antlrcpp::Any visitLparamsEpsilon(ProgParser::LparamsEpsilonContext *ctx) override {
         std::list<Declaration*> params;
         return params;
     }
@@ -81,9 +83,6 @@ class Prog : public ProgBaseVisitor
         Declaration* declaration = new Declaration(ctx->Name()->toString(), type);
         return declaration;
     }
-
-
-
 
     antlrcpp::Any visitLint32_t(ProgParser::Lint32_tContext *ctx) override {
         return visit(ctx);
