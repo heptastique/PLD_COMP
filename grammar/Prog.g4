@@ -31,7 +31,7 @@ decl: type Name '[' ']' ';'                 # LdeclTable
     | type Name ';'                         # Ldecl
     ;
 
-appelfonct: Name '(' valeurs ')'            # Lappelfonct;
+appelfonct: Name '(' valeurs ')' ';'        # Lappelfonct;
 
 retourfonct: 'return' variable ';'          # Lretourfonct;
 
