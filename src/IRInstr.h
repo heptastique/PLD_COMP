@@ -1,15 +1,20 @@
-#pragma once
+# pragma once
 
-#include "ostream"
+# include "CFG.h"
+
 class IRInstr
 {
-	protected:
+	protected :
 
-	public:
+	public :
 
 		IRInstr(const IRInstr &iRInstr);
 
     		IRInstr();
 
 		virtual ~IRInstr();
+
+	private :
+
+		CFG * cFG;
 };

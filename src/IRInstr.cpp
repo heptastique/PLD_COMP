@@ -1,7 +1,7 @@
 using namespace std;
 
-#include "IRInstr.h"
-#include <iostream>
+# include "IRInstr.h"
+# include <iostream>
 
 IRInstr::IRInstr(const IRInstr &iRInstr)
 {
