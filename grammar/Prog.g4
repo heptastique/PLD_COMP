@@ -1,6 +1,6 @@
 grammar Prog;
 
-prog: decl* init* fun*                      # Lprog;
+prog: decl* fun*                      # Lprog;
 
 fun: typeretour Name '(' params ')' bloc    # Lfun;
 
@@ -34,10 +34,6 @@ decl: type Name '[' ']' ';'                 # LdeclTable
 appelfonct: Name '(' valeurs ')'            # Lappelfonct;
 
 retourfonct: 'return' variable ';'          # Lretourfonct;
-
-init: type Name '[' param ']' ';'           # LinitTable
-    | type Name '=' param ';'               # Linit
-    ;
 
 valeurs: variable (',' variable)*           # Lvaleurs
         | /* epsilon */                     # LvaleursEpsilon
