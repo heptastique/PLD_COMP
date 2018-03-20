@@ -28,4 +28,5 @@ private:
     std::string name;
     Bloc* bloc;
     std::list<Declaration*> declarations;
+    Type typeRetour;
 };
