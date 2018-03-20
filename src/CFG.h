@@ -1,5 +1,8 @@
 # pragma once
 
+# include "BasicBlock.h"
+# include <list>
+
 class CFG
 {
 	protected :
@@ -14,5 +17,5 @@ class CFG
 
 	private :
 
-		
+		std::list <BasicBlock*> blocs;
 };
