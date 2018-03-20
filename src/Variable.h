@@ -1,16 +1,19 @@
 #pragma once
 
-class Variable
-{
+#include <ostream>
+
+class Variable {
 
 public:
 
-    Variable & operator = ( const Variable & unVariable );
+    friend std::ostream& operator<< (std::ostream& stream, const Variable& appelFunction);
 
-    Variable ( const Variable & unVariable );
+    Variable &operator=(const Variable &unVariable);
 
-    Variable ( );
+    Variable(const Variable &unVariable);
 
-    virtual ~Variable ( );
+    Variable();
+
+    virtual ~Variable();
 
 };

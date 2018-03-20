@@ -9,6 +9,7 @@
 #include "Type.h"
 #include "Declaration.h"
 #include "Programme.h"
+#include "AppelFunction.h"
 
 using namespace std;
 
@@ -35,7 +36,7 @@ class Prog : public ProgBaseVisitor
         Bloc* b = new Bloc();
         auto instructions = ctx->instr();
         for(auto i : instructions ){
-            b->addInstruction((Declaration*)visit(i));
+            b->addInstruction(visit(i));
         }
         return b;
     }
@@ -51,7 +52,7 @@ class Prog : public ProgBaseVisitor
     antlrcpp::Any visitLparams(ProgParser::LparamsContext *ctx) override {
         std::list<Declaration*> params;
         for(auto it : ctx->param()){
-            params.emplace_back((Declaration*)(visit(it)));
+            params.emplace_back(visit(it));
         }
         return params;
     }
@@ -80,16 +81,35 @@ class Prog : public ProgBaseVisitor
         return getTypeFromString(ctx->type()->getText());
     }
 
-    antlrcpp::Any visitLinstrDecl(ProgParser::LinstrDeclContext *ctx) override
-    {
-        return (Declaration*) visit(ctx->decl());
+    antlrcpp::Any visitLinstrDecl(ProgParser::LinstrDeclContext *ctx) override {
+        Declaration* declaration = visit(ctx->decl());
+        return dynamic_cast<Instruction*> (declaration);
     }
 
-    antlrcpp::Any visitLdecl(ProgParser::LdeclContext *ctx) override
-    {
+    antlrcpp::Any visitLdecl(ProgParser::LdeclContext *ctx) override {
         Type type = getTypeFromString(ctx->type()->getText());
         Declaration* declaration = new Declaration(ctx->Name()->toString(), type);
         return declaration;
+    }
+
+    antlrcpp::Any visitLinstAppelfonct(ProgParser::LinstAppelfonctContext *ctx) override {
+        //return (AppelFunction*) visit(ctx->appelfonct());
+        std::list<Variable*> vars;
+        AppelFunction* appelFunction = new AppelFunction("test", vars);
+        return dynamic_cast<Instruction*> (appelFunction);
+    }
+
+    antlrcpp::Any visitLappelfonct(ProgParser::LappelfonctContext *ctx) override {
+        //std::list<Variable*> vars = visit(ctx->valeurs());
+        std::list<Variable*> vars;
+        AppelFunction* appelFunction = new AppelFunction(ctx->Name()->getText(), vars);
+        return appelFunction;
+    }
+
+    antlrcpp::Any visitLinstRetourfonct(ProgParser::LinstRetourfonctContext *ctx) override {
+        std::list<Variable*> vars;
+        AppelFunction* appelFunction = new AppelFunction("test", vars);
+        return dynamic_cast<Instruction*>(appelFunction);
     }
 
     antlrcpp::Any visitLint32_t(ProgParser::Lint32_tContext *ctx) override {
@@ -98,6 +118,19 @@ class Prog : public ProgBaseVisitor
 
     antlrcpp::Any visitLint64_t(ProgParser::Lint64_tContext *ctx) override {
         return visit(ctx);
+    }
+
+    antlrcpp::Any visitLvaleurs(ProgParser::LvaleursContext *ctx) override {
+        std::list<Variable*> vars;
+        for(auto it : ctx->variable()){
+            vars.emplace_back(visit(it));
+        }
+        return vars;
+    }
+
+    antlrcpp::Any visitLvaleursEpsilon(ProgParser::LvaleursEpsilonContext *ctx) override {
+        std::list<Variable*> vars;
+        return vars;
     }
 
     Type getTypeFromString(const std::string &str)

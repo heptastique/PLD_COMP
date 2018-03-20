@@ -1,16 +1,26 @@
 #pragma once
 
-class AppelFunction
-{
+#include "Instruction.h"
+#include "Variable.h"
+#include <list>
+
+class AppelFunction : public Instruction{
 
 public:
 
-    AppelFunction & operator = ( const AppelFunction & unAppelFunction );
+    friend std::ostream& operator<< (std::ostream& stream, const AppelFunction& appelFunction);
 
-    AppelFunction ( const AppelFunction & unAppelFunction );
+    void print(std::ostream& stream) const;
 
-    AppelFunction ( );
+    AppelFunction &operator=(const AppelFunction &unAppelFunction);
 
-    virtual ~AppelFunction ( );
+    AppelFunction(const AppelFunction &unAppelFunction);
 
+    AppelFunction(std::string name, std::list<Variable *> variables);
+
+    virtual ~AppelFunction();
+
+private:
+    std::string name;
+    std::list<Variable *> variables;
 };

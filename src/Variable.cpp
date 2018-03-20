@@ -3,6 +3,13 @@ using namespace std;
 #include "Variable.h"
 #include <iostream>
 
+std::ostream& operator<<(std::ostream& stream, const Variable& variable)
+{
+    stream << " Variable";
+    return stream;
+}
+
+
 Variable &Variable::operator=(const Variable &unVariable) {
 }
 
