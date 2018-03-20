@@ -20,6 +20,15 @@ Function &Function::operator=(const Function &unFunction)
 {
 }
 
+std::string Function::getName()
+{
+    return this->name;
+}
+
+Bloc * Function::getBloc()
+{
+    return this->bloc;
+}
 
 Function::Function(const Function &unFunction)
 {

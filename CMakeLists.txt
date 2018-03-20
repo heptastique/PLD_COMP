@@ -1,6 +1,7 @@
 cmake_minimum_required(VERSION 2.8 FATAL_ERROR)
 
 project(app)
+project(unittest)
 
 set (GRAMMAR_FILE ../grammar/Prog.g4)
 set (ANTLR4_CMD "./../antlr/antlr4.sh")
@@ -31,10 +32,19 @@ set(CMAKE_CXX_STANDARD 11)
 
 
 # get all files
-file(GLOB SRC_FILES ${PROJECT_SOURCE_DIR}/grammar/*.cpp ${PROJECT_SOURCE_DIR}/src/*.cpp ${PROJECT_SOURCE_DIR}/*.cpp)
+file(GLOB MAIN_FILE ${PROJECT_SOURCE_DIR}/*.cpp)
+file(GLOB SRC_FILES ${PROJECT_SOURCE_DIR}/grammar/*.cpp ${PROJECT_SOURCE_DIR}/src/*.cpp)
 file(GLOB HEADER_FILES ${PROJECT_SOURCE_DIR}/grammar/*.h ${PROJECT_SOURCE_DIR}/src/*.h ${PROJECT_SOURCE_DIR}/*.h)
 
-add_executable(app ${SRC_FILES} ${HEADER_FILES})
+file(GLOB TEST_FILES ${PROJECT_SOURCE_DIR}/tests/UnitTests/*.cpp)
+file(GLOB CATCH_FILE ${PROJECT_SOURCE_DIR}/tests/lib/catch.hpp)
+
+add_executable(app ${SRC_FILES} ${HEADER_FILES} ${MAIN_FILE})
+
+add_executable(unittest ${SRC_FILES} ${HEADER_FILES} ${TEST_FILES} ${CATCH_FILE})
 
 target_link_libraries(app ${ANTLR_LIBRARY})
 target_compile_options(app PRIVATE -Wno-attributes)
+
+target_link_libraries(unittest ${ANTLR_LIBRARY})
+target_compile_options(unittest PRIVATE -Wno-attributes)
