@@ -18,6 +18,7 @@ assert "../bin/app Custom/11-multiple-func.c" "Programme:\n Fonction: Name=test1
 assert "../bin/app Custom/12-return-int32.c" "Programme:\n Fonction: Name=func TypeRetour=1\n     Bloc:\n\n\nOk"
 assert "../bin/app Custom/13-return-int64.c" "Programme:\n Fonction: Name=func TypeRetour=2\n     Bloc:\n\n\nOk"
 assert "../bin/app Custom/14-return-char.c" "Programme:\n Fonction: Name=func TypeRetour=3\n     Bloc:\n\n\nOk"
+assert "../bin/app Custom/15-function-call.c" "Programme:\n Declaration: Name=n Type=3\n Fonction: Name=main TypeRetour=2\n     Param:\n      Declaration: Name=n Type=3\n     Bloc:\n      Instruction: Declaration: Name=n Type=3\n      Instruction: AppelFunction: Name=test\n\n\nOk"
 
 # Given tests
 
