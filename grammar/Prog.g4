@@ -1,6 +1,6 @@
 grammar Prog;
 
-prog: decl* fun+                      		# Lprog;
+prog: include* decl* fun+                   # Lprog;
 
 fun: typeretour Name '(' params ')' bloc    # Lfun;
 
@@ -14,9 +14,12 @@ param: type Name                            # Lparam;
 bloc: '{' instr* '}'                        # Lbloc;
 
 instr: decl                                 # LinstrDecl
+	| affectation							# LinstAffectation
     | appelfonct                            # LinstAppelfonct
     | retourfonct                           # LinstRetourfonct
     ;
+
+affectation: varleftpart operation expr ';'	# Laffectation;
 
 typeretour: 'void'                          # LtyperetourVoid
             | type                          # Ltype
@@ -39,10 +42,26 @@ valeurs: variable (',' variable)*           # Lvaleurs
         | /* epsilon */                     # LvaleursEpsilon
         ;
 
-variable: Name                              # LvariableName
+expr: variable								# LexprVariable;
+
+variable: varleftpart						# Lvariablevarleftpart
         | Entier                            # LvariableEntier
         | Caractere                         # LvariableCaractere
         ;
+
+varleftpart: Name '[' expr ']'				# LvarleftpartTable
+			| Name							# Lvarleftpart
+			;
+	
+operation: '='								# LoperationEqual;
+
+operationunaire: '+'						# Loperationunaire;
+
+operationbinaire: '-'						# Loperationbinaire;
+
+include: '#include' '<' Name '>'			# LincludeSys
+		| '#include' '"' Name '"'			# LincludeCustom
+		;
 
 Name: [a-zA-Z][a-zA-Z0-9]*;
 
