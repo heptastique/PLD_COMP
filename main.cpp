@@ -86,11 +86,11 @@ int main(int argc, const char *argv[])
 	
 	// C++ Memory Representation -> Intermediate Representation
 	
+	//ControlFlowGraph controlFlowGraph = prog->generateIR();
+	
 	// Intermediate Representation -> Assembly
 	
-	ControlFlowGraph controlFlowGraph(prog);
-
-	controlFlowGraph.visit();
+	//controlFlowGraph.generateASM();
 
 	return 0;
 }
