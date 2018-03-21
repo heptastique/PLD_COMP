@@ -10,6 +10,7 @@
 #include "Declaration.h"
 #include "Programme.h"
 #include "AppelFunction.h"
+#include "RetourFonction.h"
 
 using namespace std;
 
@@ -103,10 +104,16 @@ class Prog : public ProgBaseVisitor
     }
 
     antlrcpp::Any visitLinstRetourfonct(ProgParser::LinstRetourfonctContext *ctx) override {
-        std::list<Variable*> vars;
-        AppelFunction* appelFunction = new AppelFunction("test", vars);
-        return dynamic_cast<Instruction*>(appelFunction);
+        return (Instruction*) (visit(ctx->retourfonct()));
     }
+
+    antlrcpp::Any visitLretourfonct(ProgParser::LretourfonctContext *ctx) override {
+        Variable * var = visit(ctx->variable());
+        RetourFonction* retourFonction = new RetourFonction(var);
+        return dynamic_cast<Instruction*>(retourFonction);
+    }
+
+
 
     antlrcpp::Any visitLvaleurs(ProgParser::LvaleursContext *ctx) override {
         std::list<Variable*> vars;
