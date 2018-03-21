@@ -1,6 +1,7 @@
 #pragma once
 
 #include <ostream>
+#include "Type.h"
 
 class Variable {
 
@@ -12,8 +13,11 @@ public:
 
     Variable(const Variable &unVariable);
 
-    Variable();
+    Variable(TypeVariable typeVariable, std::string valeur);
 
     virtual ~Variable();
 
+private:
+    TypeVariable typeVariable;
+    std::string valeur;
 };

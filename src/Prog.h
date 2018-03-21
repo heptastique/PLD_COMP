@@ -93,31 +93,19 @@ class Prog : public ProgBaseVisitor
     }
 
     antlrcpp::Any visitLinstAppelfonct(ProgParser::LinstAppelfonctContext *ctx) override {
-        //return (AppelFunction*) visit(ctx->appelfonct());
-        std::list<Variable*> vars;
-        AppelFunction* appelFunction = new AppelFunction("test", vars);
-        return dynamic_cast<Instruction*> (appelFunction);
+        return (Instruction*) (visit(ctx->appelfonct()));
     }
 
     antlrcpp::Any visitLappelfonct(ProgParser::LappelfonctContext *ctx) override {
-        //std::list<Variable*> vars = visit(ctx->valeurs());
-        std::list<Variable*> vars;
+        std::list<Variable*> vars = visit(ctx->valeurs());
         AppelFunction* appelFunction = new AppelFunction(ctx->Name()->getText(), vars);
-        return appelFunction;
+        return dynamic_cast<Instruction*>(appelFunction);
     }
 
     antlrcpp::Any visitLinstRetourfonct(ProgParser::LinstRetourfonctContext *ctx) override {
         std::list<Variable*> vars;
         AppelFunction* appelFunction = new AppelFunction("test", vars);
         return dynamic_cast<Instruction*>(appelFunction);
-    }
-
-    antlrcpp::Any visitLint32_t(ProgParser::Lint32_tContext *ctx) override {
-        return visit(ctx);
-    }
-
-    antlrcpp::Any visitLint64_t(ProgParser::Lint64_tContext *ctx) override {
-        return visit(ctx);
     }
 
     antlrcpp::Any visitLvaleurs(ProgParser::LvaleursContext *ctx) override {
@@ -132,6 +120,30 @@ class Prog : public ProgBaseVisitor
         std::list<Variable*> vars;
         return vars;
     }
+
+    antlrcpp::Any visitLvariableName(ProgParser::LvariableNameContext *ctx) override {
+        Variable* variable = new Variable (NAME, ctx->Name()->getText());
+        return variable;
+    }
+
+    antlrcpp::Any visitLvariableEntier(ProgParser::LvariableEntierContext *ctx) override {
+        Variable* variable = new Variable (ENTIER, ctx->Entier()->getText());
+        return variable;
+    }
+
+    antlrcpp::Any visitLvariableCaractere(ProgParser::LvariableCaractereContext *ctx) override {
+        Variable* variable = new Variable (CARACTERE, ctx->Caractere()->getText());
+        return variable;
+    }
+
+    antlrcpp::Any visitLint32_t(ProgParser::Lint32_tContext *ctx) override {
+        return visit(ctx);
+    }
+
+    antlrcpp::Any visitLint64_t(ProgParser::Lint64_tContext *ctx) override {
+        return visit(ctx);
+    }
+
 
     Type getTypeFromString(const std::string &str)
     {

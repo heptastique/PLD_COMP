@@ -5,7 +5,7 @@ using namespace std;
 
 std::ostream& operator<<(std::ostream& stream, const Variable& variable)
 {
-    stream << " Variable";
+    stream << " Variable: " << "Type=" << variable.typeVariable << " Valeur=" << variable.valeur << " ";
     return stream;
 }
 
@@ -21,7 +21,9 @@ Variable::Variable(const Variable &unVariable) {
 }
 
 
-Variable::Variable() {
+Variable::Variable(TypeVariable typeVariable, std::string valeur) {
+    this->typeVariable = typeVariable;
+    this->valeur = valeur;
 #ifdef MAP
     cout << "Appel au constructeur de <Variable>" << endl;
 #endif
