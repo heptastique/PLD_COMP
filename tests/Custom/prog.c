@@ -1,0 +1,7 @@
+char a;
+
+void main()
+{
+
+}
+

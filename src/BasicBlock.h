@@ -15,7 +15,7 @@ class BasicBlock
 
 		BasicBlock(const BasicBlock &basicBlock);
 
-    		BasicBlock();
+    	BasicBlock();
 
 		virtual ~BasicBlock();
 

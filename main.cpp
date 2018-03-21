@@ -1,13 +1,13 @@
-#include <sys/stat.h>
-#include <iostream>
+# include <sys/stat.h>
+# include <iostream>
 
-#include "antlr4-runtime.h"
+# include "antlr4-runtime.h"
 
-#include "grammar/ProgLexer.h"
-#include "grammar/ProgParser.h"
-#include "grammar/ProgBaseVisitor.h"
-#include "src/Prog.h"
-
+# include "grammar/ProgLexer.h"
+# include "grammar/ProgParser.h"
+# include "grammar/ProgBaseVisitor.h"
+# include "src/Prog.h"
+# include "src/ControlFlowGraph.h"
 
 using namespace antlr4;
 using namespace std;
@@ -79,8 +79,12 @@ int main(int argc, const char *argv[])
 	tree::ParseTree * tree = parser.prog();
 	Prog visitor;
 
-	visitor.visit(tree);
+	Programme * prog = visitor.visit(tree);
 	cout << "Ok" << endl;
+	
+	ControlFlowGraph controlFlowGraph(prog);
+
+	controlFlowGraph.visit();
 
 	return 0;
 }

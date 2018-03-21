@@ -12,7 +12,7 @@ class IRInstr
 
 		IRInstr(const IRInstr &iRInstr);
 
-    		IRInstr();
+    	IRInstr();
 
 		virtual ~IRInstr();
 
