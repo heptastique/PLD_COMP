@@ -4,9 +4,7 @@
 #include "Type.h"
 
 class Variable {
-
 public:
-
     friend std::ostream& operator<< (std::ostream& stream, const Variable& appelFunction);
 
     Variable &operator=(const Variable &unVariable);

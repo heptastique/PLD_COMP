@@ -5,9 +5,7 @@
 #include <list>
 
 class AppelFunction : public Instruction{
-
 public:
-
     friend std::ostream& operator<< (std::ostream& stream, const AppelFunction& appelFunction);
 
     void print(std::ostream& stream) const;
