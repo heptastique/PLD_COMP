@@ -1,6 +1,8 @@
 # pragma once
 
-# include "CFG.h"
+# include "ControlFlowGraph.h"
+
+class ControlFlowGraph;
 
 class IRInstr
 {
@@ -16,5 +18,5 @@ class IRInstr
 
 	private :
 
-		CFG * cFG;
+		ControlFlowGraph * controlFlowGraph;
 };

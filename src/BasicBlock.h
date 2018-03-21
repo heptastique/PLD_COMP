@@ -3,6 +3,8 @@
 # include "IRInstr.h"
 # include <list>
 
+class IRInstr;
+
 class BasicBlock
 {
 	protected :
