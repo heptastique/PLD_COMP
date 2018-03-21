@@ -59,6 +59,7 @@ int main(int argc, const char *argv[])
 				break;
 		}
 	}
+
 	file= fopen(argv[1], "rb");
 
 	fseek(file, 0, SEEK_END);
@@ -79,18 +80,20 @@ int main(int argc, const char *argv[])
 	CommonTokenStream tokens(&lexer);
 	ProgParser parser(&tokens);
 	tree::ParseTree * tree = parser.prog();
+
 	Prog visitor;
 
 	Programme * prog = visitor.visit(tree);
+
 	cout << "Ok" << endl;
-	
+
 	// C++ Memory Representation -> Intermediate Representation
-	
-	//ControlFlowGraph controlFlowGraph = prog->generateIR();
-	
+
+	ControlFlowGraph controlFlowGraph(prog->generateIR());
+
 	// Intermediate Representation -> Assembly
-	
-	//controlFlowGraph.generateASM();
+
+	controlFlowGraph.generateASM();
 
 	return 0;
 }

@@ -1,18 +1,30 @@
 using namespace std;
 
 # include "ControlFlowGraph.h"
-# include <iostream>
 
-void ControlFlowGraph::visit()
+# include <iostream>
+# include <fstream>
+
+void ControlFlowGraph::generateASM()
 {
 	#ifdef MAP
-		cout << "Appel a la methode visit <ControlFlowGraph>" << endl;
+		cout << "Appel a la methode generateASM <ControlFlowGraph>" << endl;
 	#endif
-	
-	for (auto i : this->prog->getDeclarations())
-	{
-		cout << *i << endl;
-	}
+
+	ofstream aSMFile;
+
+	aSMFile.open("../target/prog.s");
+
+	aSMFile << ".text\n";
+	aSMFile << ".global main\n\n";
+
+	aSMFile << "main:\n\n";
+
+	aSMFile << "\tretq\n\n";
+
+	aSMFile.close();
+
+	cout << "ASM Written to target/prog.s" << endl;
 }
 
 ControlFlowGraph::ControlFlowGraph(const ControlFlowGraph &controlFlowGraph)
@@ -34,7 +46,7 @@ ControlFlowGraph::ControlFlowGraph(Programme * prog)
 	#ifdef MAP
 		cout << "Appel au constructeur de <ControlFlowGraph>" << endl;
 	#endif
-	
+
 	this->prog = prog;
 }
 

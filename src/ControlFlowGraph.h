@@ -5,20 +5,21 @@
 # include <list>
 
 class BasicBlock;
+class Programme;
 
 class ControlFlowGraph
 {
 	protected :
 
 	public :
-	
-		void visit();
+
+		void generateASM();
 
 		ControlFlowGraph(const ControlFlowGraph &controlFlowGraph);
 
-    	ControlFlowGraph();
-    	
-    	ControlFlowGraph(Programme * prog);
+    		ControlFlowGraph();
+
+    		ControlFlowGraph(Programme * prog);
 
 		virtual ~ControlFlowGraph();
 
