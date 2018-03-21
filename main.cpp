@@ -72,6 +72,8 @@ int main(int argc, const char *argv[])
 
 	fclose(file);
 
+	// C Program -> C++ Memory Representation
+
 	ANTLRInputStream input(fileContent);
 	ProgLexer lexer(&input);
 	CommonTokenStream tokens(&lexer);
@@ -81,6 +83,10 @@ int main(int argc, const char *argv[])
 
 	Programme * prog = visitor.visit(tree);
 	cout << "Ok" << endl;
+	
+	// C++ Memory Representation -> Intermediate Representation
+	
+	// Intermediate Representation -> Assembly
 	
 	ControlFlowGraph controlFlowGraph(prog);
 

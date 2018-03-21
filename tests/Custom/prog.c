@@ -1,5 +1,3 @@
-char a;
-
 void main()
 {
 
