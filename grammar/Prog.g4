@@ -1,6 +1,6 @@
 grammar Prog;
 
-prog: decl* fun                             # Lprog;
+prog: decl* fun+                      		# Lprog;
 
 fun: typeretour Name '(' params ')' bloc    # Lfun;
 
@@ -11,12 +11,15 @@ params: 'void'                              # LparamsVoid
 
 param: type Name                            # Lparam;
 
-bloc: '{' (instr*)? '}'                     # Lbloc;
+bloc: '{' instr* '}'                        # Lbloc;
 
-instr: decl                                 # LinstrDecl;
+instr: decl                                 # LinstrDecl
+    | appelfonct                            # LinstAppelfonct
+    | retourfonct                           # LinstRetourfonct
+    ;
 
-typeretour: 'void'                         # LtyperetourVoid
-            | type                      # Ltype
+typeretour: 'void'                          # LtyperetourVoid
+            | type                          # Ltype
             ;
 
 type: 'char'                                # Lchar
@@ -24,10 +27,27 @@ type: 'char'                                # Lchar
     | 'int64_t'                             # Lint64_t
     ;
 
-decl : type Name ';'                    # Ldecl;
+decl: type Name '[' ']' ';'                 # LdeclTable
+    | type Name ';'                         # Ldecl
+    ;
 
-Name : [a-zA-Z][a-zA-Z0-9]*; 
+appelfonct: Name '(' valeurs ')' ';'        # Lappelfonct;
 
+retourfonct: 'return' variable ';'          # Lretourfonct;
 
+valeurs: variable (',' variable)*           # Lvaleurs
+        | /* epsilon */                     # LvaleursEpsilon
+        ;
+
+variable: Name                              # LvariableName
+        | Entier                            # LvariableEntier
+        | Caractere                         # LvariableCaractere
+        ;
+
+Name: [a-zA-Z][a-zA-Z0-9]*;
+
+Entier: [0-9]+;
+
+Caractere: '\'' ~['] '\'';
 
 WS: [ \t\n\r]+ -> skip;

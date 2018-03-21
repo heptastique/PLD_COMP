@@ -9,6 +9,8 @@
 #include "Type.h"
 #include "Declaration.h"
 #include "Programme.h"
+#include "AppelFunction.h"
+#include "RetourFonction.h"
 
 using namespace std;
 
@@ -19,12 +21,13 @@ class Prog : public ProgBaseVisitor
 
 	antlrcpp::Any visitLprog(ProgParser::LprogContext *ctx) override
 	{
-        std::string some;
         Programme* programme = new Programme();
         for(auto i : ctx->decl()){
             programme->addDeclaration(visit(i));
         }
-        programme->addFunction(visit(ctx->fun()));
+        for(auto i : ctx->fun()){
+            programme->addFunction(visit(i));
+        }
         cout << *programme;
 		return programme;
 	}
@@ -34,14 +37,15 @@ class Prog : public ProgBaseVisitor
         Bloc* b = new Bloc();
         auto instructions = ctx->instr();
         for(auto i : instructions ){
-            b->addInstruction((Declaration*)visit(i));
+            b->addInstruction(visit(i));
         }
         return b;
     }
 
     antlrcpp::Any visitLfun(ProgParser::LfunContext *ctx) override
     {
-        Function* f = new Function(ctx->Name()->toString(), visit(ctx->bloc()));
+        Type type = visit(ctx->typeretour());
+        Function* f = new Function(ctx->Name()->toString(), visit(ctx->bloc()),type);
         f->setDeclarations(visit(ctx->params()));
         return f;
     }
@@ -49,7 +53,7 @@ class Prog : public ProgBaseVisitor
     antlrcpp::Any visitLparams(ProgParser::LparamsContext *ctx) override {
         std::list<Declaration*> params;
         for(auto it : ctx->param()){
-            params.emplace_back((Declaration*)(visit(it)));
+            params.emplace_back(visit(it));
         }
         return params;
     }
@@ -60,30 +64,84 @@ class Prog : public ProgBaseVisitor
         return declaration;
     }
 
-    virtual antlrcpp::Any visitLparamsVoid(ProgParser::LparamsVoidContext *ctx) override {
+    antlrcpp::Any visitLparamsVoid(ProgParser::LparamsVoidContext *ctx) override {
         std::list<Declaration*> params;
         return params;
     }
 
-    virtual antlrcpp::Any visitLparamsEpsilon(ProgParser::LparamsEpsilonContext *ctx) override {
+    antlrcpp::Any visitLparamsEpsilon(ProgParser::LparamsEpsilonContext *ctx) override {
         std::list<Declaration*> params;
         return params;
     }
 
-    antlrcpp::Any visitLinstrDecl(ProgParser::LinstrDeclContext *ctx) override
-    {
-        return (Declaration*) visit(ctx->decl());
+    antlrcpp::Any visitLtyperetourVoid(ProgParser::LtyperetourVoidContext *ctx) override {
+        return VOID;
     }
 
-    antlrcpp::Any visitLdecl(ProgParser::LdeclContext *ctx) override
-    {
+    antlrcpp::Any visitLtype(ProgParser::LtypeContext *ctx) override {
+        return getTypeFromString(ctx->type()->getText());
+    }
+
+    antlrcpp::Any visitLinstrDecl(ProgParser::LinstrDeclContext *ctx) override {
+        Declaration* declaration = visit(ctx->decl());
+        return dynamic_cast<Instruction*> (declaration);
+    }
+
+    antlrcpp::Any visitLdecl(ProgParser::LdeclContext *ctx) override {
         Type type = getTypeFromString(ctx->type()->getText());
         Declaration* declaration = new Declaration(ctx->Name()->toString(), type);
         return declaration;
     }
 
+    antlrcpp::Any visitLinstAppelfonct(ProgParser::LinstAppelfonctContext *ctx) override {
+        return (Instruction*) (visit(ctx->appelfonct()));
+    }
+
+    antlrcpp::Any visitLappelfonct(ProgParser::LappelfonctContext *ctx) override {
+        std::list<Variable*> vars = visit(ctx->valeurs());
+        AppelFunction* appelFunction = new AppelFunction(ctx->Name()->getText(), vars);
+        return dynamic_cast<Instruction*>(appelFunction);
+    }
+
+    antlrcpp::Any visitLinstRetourfonct(ProgParser::LinstRetourfonctContext *ctx) override {
+        return (Instruction*) (visit(ctx->retourfonct()));
+    }
+
+    antlrcpp::Any visitLretourfonct(ProgParser::LretourfonctContext *ctx) override {
+        Variable * var = visit(ctx->variable());
+        RetourFonction* retourFonction = new RetourFonction(var);
+        return dynamic_cast<Instruction*>(retourFonction);
+    }
 
 
+
+    antlrcpp::Any visitLvaleurs(ProgParser::LvaleursContext *ctx) override {
+        std::list<Variable*> vars;
+        for(auto it : ctx->variable()){
+            vars.emplace_back(visit(it));
+        }
+        return vars;
+    }
+
+    antlrcpp::Any visitLvaleursEpsilon(ProgParser::LvaleursEpsilonContext *ctx) override {
+        std::list<Variable*> vars;
+        return vars;
+    }
+
+    antlrcpp::Any visitLvariableName(ProgParser::LvariableNameContext *ctx) override {
+        Variable* variable = new Variable (NAME, ctx->Name()->getText());
+        return variable;
+    }
+
+    antlrcpp::Any visitLvariableEntier(ProgParser::LvariableEntierContext *ctx) override {
+        Variable* variable = new Variable (ENTIER, ctx->Entier()->getText());
+        return variable;
+    }
+
+    antlrcpp::Any visitLvariableCaractere(ProgParser::LvariableCaractereContext *ctx) override {
+        Variable* variable = new Variable (CARACTERE, ctx->Caractere()->getText());
+        return variable;
+    }
 
     antlrcpp::Any visitLint32_t(ProgParser::Lint32_tContext *ctx) override {
         return visit(ctx);
@@ -92,6 +150,7 @@ class Prog : public ProgBaseVisitor
     antlrcpp::Any visitLint64_t(ProgParser::Lint64_tContext *ctx) override {
         return visit(ctx);
     }
+
 
     Type getTypeFromString(const std::string &str)
     {

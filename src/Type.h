@@ -9,3 +9,9 @@ enum Type {
     CHAR = 3,
     ERROR = -1
 };
+
+enum TypeVariable {
+    NAME = 0,
+    ENTIER = 1,
+    CARACTERE = 2
+};
