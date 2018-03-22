@@ -19,12 +19,13 @@ install:
 
 before_script:
   - cd ../tests
-  - chmod +x test.sh lib/assert.sh
+  - chmod +x test.sh test-back.sh lib/assert.sh
   - chmod +x ../bin/unittest
 
 script:
   - ../bin/unittest
   - ./test.sh
+  - ./test-back.sh
 
 before_cache:
   - cd ..
