@@ -33,6 +33,6 @@ public:
     virtual ~Programme();
 
     std::list<Function*> functions;
-    std::list<Declaration*> declarions;
+    std::list<Declaration*> declarations;
 };
 
