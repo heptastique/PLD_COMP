@@ -101,7 +101,7 @@ include: '#include' '<' Includename '>'		# LincludeSys
 
 Name: [a-zA-Z][a-zA-Z0-9]*;
 
-Includename: [a-zA-Z][a-zA-Z0-9.]*;
+Includename: [a-zA-Z][a-zA-Z0-9]*[.]?[a-zA-Z0-9]*;
 
 Entier: [0-9]+;
 
