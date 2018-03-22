@@ -3,6 +3,19 @@ using namespace std;
 #include "Affectation.h"
 #include <iostream>
 
+void Affectation::print(std::ostream &stream) const
+{
+    stream << " Affectation: " << *variable << " Operateur=" << operateur << " " << *expression << endl;
+}
+
+std::ostream& operator<<(std::ostream& stream, const Affectation& affectation)
+{
+    stream << " Affectation: " << *affectation.variable << " Operateur=" << affectation.operateur;
+    stream << " " << *affectation.expression<< endl;
+    return stream;
+}
+
+
 Affectation &Affectation::operator=(const Affectation &unAffectation) {
 }
 

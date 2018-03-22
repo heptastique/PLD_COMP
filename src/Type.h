@@ -13,10 +13,10 @@ enum Type {
 enum TypeVariable {
     NAME = 0,
     ENTIER = 1,
-    CARACTERE = 2
+    CARACTERE = 2,
 };
 
 enum Operateur {
-    EGAL = 0,
+    EQUAL = 0,
     PLUS = 1
 };

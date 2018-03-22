@@ -11,6 +11,7 @@
 #include "Programme.h"
 #include "AppelFunction.h"
 #include "RetourFonction.h"
+#include "Affectation.h"
 
 using namespace std;
 
@@ -113,6 +114,18 @@ class Prog : public ProgBaseVisitor
         return dynamic_cast<Instruction*>(retourFonction);
     }
 
+    antlrcpp::Any visitLinstAffectation(ProgParser::LinstAffectationContext *ctx) override {
+        return (Instruction*) (visit(ctx->affectation()));
+    }
+
+    antlrcpp::Any visitLaffectation(ProgParser::LaffectationContext *ctx) override {
+        Variable* var = (Variable*) visit(ctx->varleftpart());
+        Operateur operateur = (Operateur) visit(ctx->operation());
+        Expression* expression = (Expression*) visit(ctx->expr());
+        Affectation* affection = new Affectation(var, operateur, expression);
+        return dynamic_cast<Instruction*>(affection);
+    }
+
     antlrcpp::Any visitLvaleurs(ProgParser::LvaleursContext *ctx) override {
         std::list<Variable*> vars;
         for(auto it : ctx->variable()){
@@ -145,14 +158,15 @@ class Prog : public ProgBaseVisitor
         return variable;
     }
 
-    antlrcpp::Any visitLinstAffectation(ProgParser::LinstAffectationContext *ctx) override {
-        return (Instruction*) (visit(ctx->affectation()));
+    antlrcpp::Any visitLexprVariable(ProgParser::LexprVariableContext *ctx) override {
+        Variable* var = visit(ctx->variable());
+        return dynamic_cast<Expression*> (var);
     }
 
-    antlrcpp::Any visitLaffectation(ProgParser::LaffectationContext *ctx) override {
-        Variable* var = (Variable*) ctx->varleftpart();
-        return visitChildren(ctx);
+    antlrcpp::Any visitLoperationEqual(ProgParser::LoperationEqualContext *ctx) override {
+        return EQUAL;
     }
+
 
     antlrcpp::Any visitLint32_t(ProgParser::Lint32_tContext *ctx) override {
         return visit(ctx);
@@ -162,8 +176,7 @@ class Prog : public ProgBaseVisitor
         return visit(ctx);
     }
 
-    Type getTypeFromString(const std::string &str)
-    {
+    Type getTypeFromString(const std::string &str) {
         if(str == "void")
             return VOID;
         if(str == "char")
@@ -174,4 +187,5 @@ class Prog : public ProgBaseVisitor
             return INT64_T;
         return ERROR;
     }
+
 };

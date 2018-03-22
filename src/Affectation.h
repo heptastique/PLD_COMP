@@ -8,6 +8,10 @@ class Affectation : public Instruction{
 
 public:
 
+    void print(std::ostream& stream) const;
+
+    friend std::ostream& operator<< (std::ostream& stream, const Affectation& affectation);
+
     Affectation &operator=(const Affectation &unAffectation);
 
     Affectation(const Affectation &unAffectation);

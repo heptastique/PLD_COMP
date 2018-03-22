@@ -3,6 +3,13 @@ using namespace std;
 #include "Expression.h"
 #include <iostream>
 
+std::ostream& operator<<(std::ostream& stream, const Expression& expression)
+{
+    stream << "Expression:";
+    expression.print(stream);
+    return stream;
+}
+
 Expression &Expression::operator=(const Expression &unExpression) {
 }
 
