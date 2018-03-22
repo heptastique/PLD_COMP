@@ -95,6 +95,7 @@ int main (int argc, const char * argv[])
 
 	Programme * prog = visitor.visit(tree);
 
+	cout << "Fin" << endl;
 	cout << "Abstract Syntaxic Tree generated" << endl;
 
 	// C++ Memory Representation -> Intermediate Representation
