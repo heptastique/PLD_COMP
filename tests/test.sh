@@ -27,6 +27,7 @@ assert "../bin/app Custom/19-retour-caractere.c" "Programme:\n Fonction: Name=ma
 # Given tests
 
 assert "../bin/app Front/ValidPrograms/01_SimpleDeclaration.c" "Programme:\n Fonction: Name=main TypeRetour=0\n     Bloc:\n      Instruction: Declaration: Name=a Type=3\n\n\nOk"
+assert "../bin/app Front/ValidPrograms/02_IncludeStdint.c" "Programme:\n Fonction: Name=main TypeRetour=0\n     Bloc:\n      Instruction: Declaration: Name=a Type=1\n\n\nOk"
 
 # end of test suite
 assert_end examples
