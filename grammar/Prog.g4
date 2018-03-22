@@ -42,7 +42,12 @@ valeurs: variable (',' variable)*           # Lvaleurs
         | /* epsilon */                     # LvaleursEpsilon
         ;
 
-expr: variable								# LexprVariable;
+expr: variable								# LexprVariable
+    | appelfonct                            # LexprAppelfonction
+    | expr operationbinaire expr            # LexprOperationbinaire
+    | operationunaire expr                  # LexprOperationunaire
+    | '(' expr ')'                          # LexprParentheses
+    ;
 
 variable: varleftpart						# Lvariablevarleftpart
         | Entier                            # LvariableEntier
@@ -53,11 +58,42 @@ varleftpart: Name '[' expr ']'				# LvarleftpartTable
 			| Name							# Lvarleftpart
 			;
 	
-operation: '='								# LoperationEqual;
+operation: '='								# LoperationEqual
+            | '+='                          # LoperationPlusequal
+            | '-='                          # LoperationMoinsequal
+            | '*='                          # LoperationMultequal
+            | '/='                          # LoperationDivequal
+            | '%='                          # LoperationModequal
+            | '^='                          # LoperationXorbitwise
+            | '&='                          # LoperationAndbitwise
+            | '|='                          # LoperationOrbitwise
+            | '<<='                         # LoperationLeftshiftbitwise
+            | '>>='                         # LoperationRightshiftbitwise
+            ;
 
-operationunaire: '+'						# Loperationunaire;
+operationunaire: '-'						# LoperationunaireMoins
+                | '~'                       # LoperationunaireNot
+                ;
 
-operationbinaire: '-'						# Loperationbinaire;
+operationbinaire: '+'						# LoperationbinairePlus
+                | '-'                       # LoperationbinaireMoins
+                | '*'                       # LoperationbinaireMult
+                | '/'                       # LoperationbinaireDiv
+                | '%'                       # LoperationbinaireMod
+                | '=='                      # LoperationbinaireEqual
+                | '!='                      # LoperationbinaireNotequal
+                | '<'                       # LoperationbinaireLt
+                | '>'                       # LoperationbinaireGt
+                | '<='                      # LoperationbinaireLte
+                | '>='                      # LoperationbinaireGte
+                | '&&'                      # LoperationbinaireAnd
+                | '||'                      # LoperationbinaireOr
+                | '&'                       # LoperationbinaireAndbitwise
+                | '|'                       # LoperationbinaireOrbitwise
+                | '<<'                      # LoperationbinaireLeftshiftbiwise
+                | '>>'                      # LoperationbinaireRightshiftbitwise
+                | '^'                       # LoperationbinaireXorbitwise
+                ;         
 
 include: '#include' '<' Includename '>'		# LincludeSys
 		| '#include' '"' Includename '"'	# LincludeCustom
