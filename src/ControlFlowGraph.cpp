@@ -23,8 +23,6 @@ void ControlFlowGraph::generateASM()
 	aSMFile << "\tret\n\n";
 
 	aSMFile.close();
-
-	cout << "ASM Written to ./target/prog.s" << endl;
 }
 
 ControlFlowGraph::ControlFlowGraph(const ControlFlowGraph &controlFlowGraph)
