@@ -128,9 +128,13 @@ class Prog : public ProgBaseVisitor
         return vars;
     }
 
-    antlrcpp::Any visitLvariableName(ProgParser::LvariableNameContext *ctx) override {
-        Variable* variable = new Variable (NAME, ctx->Name()->getText());
-        return variable;
+    antlrcpp::Any visitLvariablevarleftpart(ProgParser::LvariablevarleftpartContext *ctx) override {
+        return (Variable*) visit(ctx->varleftpart());
+    }
+
+    antlrcpp::Any visitLvarleftpart(ProgParser::LvarleftpartContext *ctx) override {
+        Variable* var = new Variable(NAME, ctx->Name()->getText());
+        return var;
     }
 
     antlrcpp::Any visitLvariableEntier(ProgParser::LvariableEntierContext *ctx) override {
