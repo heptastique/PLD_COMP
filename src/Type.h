@@ -15,3 +15,8 @@ enum TypeVariable {
     ENTIER = 1,
     CARACTERE = 2
 };
+
+enum Operateur {
+    EGAL = 0,
+    PLUS = 1
+};

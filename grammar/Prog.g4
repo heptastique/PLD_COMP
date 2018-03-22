@@ -59,8 +59,8 @@ operationunaire: '+'						# Loperationunaire;
 
 operationbinaire: '-'						# Loperationbinaire;
 
-include: '#include' '<' Includename '>'			# LincludeSys
-		| '#include' '"' Includename '"'			# LincludeCustom
+include: '#include' '<' Includename '>'		# LincludeSys
+		| '#include' '"' Includename '"'	# LincludeCustom
 		;
 
 Name: [a-zA-Z][a-zA-Z0-9]*;
