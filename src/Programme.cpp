@@ -6,7 +6,7 @@ using namespace std;
 ostream& operator<<(ostream& stream, const Programme& programme)
 {
     stream << "Programme:" << endl;
-    for (auto it :  programme.declarions){
+    for (auto it :  programme.declarations){
         stream << *it;
     }
     for (auto it :  programme.functions){
@@ -23,7 +23,7 @@ void Programme::addFunction(Function *function)
 
 void Programme::addDeclaration(Declaration *declaration)
 {
-    this->declarions.emplace_back(declaration);
+    this->declarations.emplace_back(declaration);
 }
 
 std::list<Function*> Programme::getFunctions()
@@ -33,7 +33,7 @@ std::list<Function*> Programme::getFunctions()
 
 std::list<Declaration*> Programme::getDeclarations()
 {
-    return this->declarions;
+    return this->declarations;
 }
 
 Programme &Programme::operator=(const Programme &unProgramme)
