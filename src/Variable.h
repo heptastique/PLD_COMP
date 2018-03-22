@@ -2,10 +2,13 @@
 
 #include <ostream>
 #include "Type.h"
+#include "Expression.h"
 
-class Variable {
+class Variable : public Expression {
 public:
-    friend std::ostream& operator<< (std::ostream& stream, const Variable& appelFunction);
+    void print(std::ostream& stream) const;
+
+    friend std::ostream& operator<< (std::ostream& stream, const Variable& variable);
 
     Variable &operator=(const Variable &unVariable);
 

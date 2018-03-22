@@ -3,6 +3,11 @@ using namespace std;
 #include "Variable.h"
 #include <iostream>
 
+void Variable::print(std::ostream &stream) const
+{
+    stream << " Variable: " << "Type=" << typeVariable << " Valeur=" << valeur << " ";
+}
+
 std::ostream& operator<<(std::ostream& stream, const Variable& variable)
 {
     stream << " Variable: " << "Type=" << variable.typeVariable << " Valeur=" << variable.valeur << " ";

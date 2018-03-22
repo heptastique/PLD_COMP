@@ -23,10 +23,13 @@ assert "../bin/app Custom/16-function-call-params.c" "Programme:\n Fonction: Nam
 assert "../bin/app Custom/17-retour-name.c" "Programme:\n Fonction: Name=main TypeRetour=0\n     Bloc:\n      Instruction: RetourFonction: Variable: Type=0 Valeur=name \n\n\nOk"
 assert "../bin/app Custom/18-retour-entier.c" "Programme:\n Fonction: Name=main TypeRetour=0\n     Bloc:\n      Instruction: RetourFonction: Variable: Type=1 Valeur=8 \n\n\nOk"
 assert "../bin/app Custom/19-retour-caractere.c" "Programme:\n Fonction: Name=main TypeRetour=0\n     Bloc:\n      Instruction: RetourFonction: Variable: Type=2 Valeur='a' \n\n\nOk"
+assert "../bin/app Custom/20-affectation-simple.c" "Programme:\n Fonction: Name=main TypeRetour=0\n     Bloc:\n      Instruction: Declaration: Name=a Type=1\n      Instruction: Affectation:  Variable: Type=0 Valeur=a  Operateur=0 Expression: Variable: Type=1 Valeur=1 \n\n\nOk"
+assert "../bin/app Custom/21-affectation-variable.c" "Programme:\n Fonction: Name=main TypeRetour=0\n     Bloc:\n      Instruction: Declaration: Name=a Type=1\n      Instruction: Declaration: Name=b Type=1\n      Instruction: Affectation:  Variable: Type=0 Valeur=a  Operateur=0 Expression: Variable: Type=0 Valeur=b \n      Instruction: Affectation:  Variable: Type=0 Valeur=a  Operateur=0 Expression: Variable: Type=2 Valeur='c' \n\n\nOk"
 
 # Given tests
 
 assert "../bin/app Front/ValidPrograms/01_SimpleDeclaration.c" "Programme:\n Fonction: Name=main TypeRetour=0\n     Bloc:\n      Instruction: Declaration: Name=a Type=3\n\n\nOk"
+assert "../bin/app Front/ValidPrograms/02_IncludeStdint.c" "Programme:\n Fonction: Name=main TypeRetour=0\n     Bloc:\n      Instruction: Declaration: Name=a Type=1\n\n\nOk"
 
 # end of test suite
 assert_end examples
