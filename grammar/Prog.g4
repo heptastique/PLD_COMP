@@ -59,11 +59,13 @@ operationunaire: '+'						# Loperationunaire;
 
 operationbinaire: '-'						# Loperationbinaire;
 
-include: '#include' '<' Name '>'			# LincludeSys
-		| '#include' '"' Name '"'			# LincludeCustom
+include: '#include' '<' Includename '>'			# LincludeSys
+		| '#include' '"' Includename '"'			# LincludeCustom
 		;
 
 Name: [a-zA-Z][a-zA-Z0-9]*;
+
+Includename: [a-zA-Z][a-zA-Z0-9.]*;
 
 Entier: [0-9]+;
 
