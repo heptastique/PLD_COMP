@@ -25,6 +25,7 @@ assert "../bin/app Custom/18-retour-entier.c" "Programme:\n Fonction: Name=main 
 assert "../bin/app Custom/19-retour-caractere.c" "Programme:\n Fonction: Name=main TypeRetour=0\n     Bloc:\n      Instruction: RetourFonction: Expression: Variable: Type=2 Valeur='a' \n\n\nOk"
 assert "../bin/app Custom/20-affectation-simple.c" "Programme:\n Fonction: Name=main TypeRetour=0\n     Bloc:\n      Instruction: Declaration: Name=a Type=1\n      Instruction: Affectation:  Variable: Type=0 Valeur=a  Operateur=0 Expression: Variable: Type=1 Valeur=1 \n\n\nOk"
 assert "../bin/app Custom/21-affectation-variable.c" "Programme:\n Fonction: Name=main TypeRetour=0\n     Bloc:\n      Instruction: Declaration: Name=a Type=1\n      Instruction: Declaration: Name=b Type=1\n      Instruction: Affectation:  Variable: Type=0 Valeur=a  Operateur=0 Expression: Variable: Type=0 Valeur=b \n      Instruction: Affectation:  Variable: Type=0 Valeur=a  Operateur=0 Expression: Variable: Type=2 Valeur='c' \n\n\nOk"
+assert "../bin/app Custom/22-return-fun.c" "Programme:\n Fonction: Name=main TypeRetour=0\n     Bloc:\n      Instruction: RetourFonction: Expression: AppelFunction: Name=fun Variable: Type=0 Valeur=test \n\n\n\nOk"
 
 # Given tests
 

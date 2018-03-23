@@ -15,7 +15,7 @@ bloc: '{' instr* '}'                        # Lbloc;
 
 instr: decl                                 # LinstrDecl
 	| affectation							# LinstAffectation
-    | appelfonct                            # LinstAppelfonct
+    | appelfonct ';'                           # LinstAppelfonct
     | retourfonct                           # LinstRetourfonct
     ;
 
@@ -34,7 +34,7 @@ decl: type Name '[' ']' ';'                 # LdeclTable
     | type Name ';'                         # Ldecl
     ;
 
-appelfonct: Name '(' valeurs ')' ';'        # Lappelfonct;
+appelfonct: Name '(' valeurs ')'            # Lappelfonct;
 
 retourfonct: 'return' expr ';'              # Lretourfonct;
 

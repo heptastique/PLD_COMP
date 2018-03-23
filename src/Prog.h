@@ -95,13 +95,14 @@ class Prog : public ProgBaseVisitor
     }
 
     antlrcpp::Any visitLinstAppelfonct(ProgParser::LinstAppelfonctContext *ctx) override {
-        return (Instruction*) (visit(ctx->appelfonct()));
+        AppelFunction* appelFunction = visit(ctx->appelfonct());
+        return dynamic_cast<Instruction*> (appelFunction);
     }
 
     antlrcpp::Any visitLappelfonct(ProgParser::LappelfonctContext *ctx) override {
         std::list<Variable*> vars = visit(ctx->valeurs());
         AppelFunction* appelFunction = new AppelFunction(ctx->Name()->getText(), vars);
-        return dynamic_cast<Instruction*>(appelFunction);
+        return appelFunction;
     }
 
     antlrcpp::Any visitLinstRetourfonct(ProgParser::LinstRetourfonctContext *ctx) override {
@@ -161,6 +162,11 @@ class Prog : public ProgBaseVisitor
     antlrcpp::Any visitLexprVariable(ProgParser::LexprVariableContext *ctx) override {
         Variable* var = visit(ctx->variable());
         return dynamic_cast<Expression*> (var);
+    }
+
+    antlrcpp::Any visitLexprAppelfonction(ProgParser::LexprAppelfonctionContext *ctx) override {
+        AppelFunction* appelFunction = visit(ctx->appelfonct());
+        return dynamic_cast<Expression*> (appelFunction);
     }
 
     antlrcpp::Any visitLoperationEqual(ProgParser::LoperationEqualContext *ctx) override {
