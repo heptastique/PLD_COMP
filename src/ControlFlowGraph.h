@@ -3,7 +3,9 @@
 # include "BasicBlock.h"
 # include "Programme.h"
 # include <list>
-#include <iostream>
+# include <iostream>
+
+using namespace std;
 
 class BasicBlock;
 class Programme;
@@ -14,7 +16,9 @@ class ControlFlowGraph
 
 	public :
 
-		void generateASM(std::ostream &os) const;
+		void generateProlog(ostream &os, int addressRangeSize) const;
+
+		void generateASM(ostream &os) const;
 
 		ControlFlowGraph(const ControlFlowGraph &controlFlowGraph);
 
@@ -26,6 +30,6 @@ class ControlFlowGraph
 
 	private :
 
-		std::list <BasicBlock *> blocs;
+		list <BasicBlock *> blocs;
 		Programme * prog;
 };
