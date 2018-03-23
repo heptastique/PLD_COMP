@@ -2,27 +2,21 @@ using namespace std;
 
 # include "ControlFlowGraph.h"
 
-# include <iostream>
-# include <fstream>
 
-void ControlFlowGraph::generateASM()
+void ControlFlowGraph::generateASM(std::ostream &os) const
 {
 	#ifdef MAP
 		cout << "Appel a la methode generateASM <ControlFlowGraph>" << endl;
 	#endif
 
-	ofstream aSMFile;
+	
+	os << ".text\n";
+	os << ".global main\n\n";
 
-	aSMFile.open("./target/prog.s");
+	os << "main:\n\n";
 
-	aSMFile << ".text\n";
-	aSMFile << ".global main\n\n";
+	os << "\tret\n\n";
 
-	aSMFile << "main:\n\n";
-
-	aSMFile << "\tret\n\n";
-
-	aSMFile.close();
 }
 
 ControlFlowGraph::ControlFlowGraph(const ControlFlowGraph &controlFlowGraph)
