@@ -7,6 +7,10 @@ void ControlFlowGraph::generateProlog(ostream &os, int addressRangeSize) const
 	#ifdef MAP
 		cout << "Appel a la methode ControlFlowGraph::generateProlog" << endl;
 	#endif
+
+	os << "pusq\t%rbp\n";
+	os << "movq\t%rsp, %rbp\n";
+	os << "subq\t$" << addressRangeSize << ", %rsp\n";
 }
 
 void ControlFlowGraph::generateASM(ostream &os) const
@@ -18,14 +22,14 @@ void ControlFlowGraph::generateASM(ostream &os) const
 	int addressRangeSize = 32;
 
 	generateProlog(os, addressRangeSize);
-	
+	/*
 	os << ".text\n";
 	os << ".global main\n\n";
 
 	os << "main:\n\n";
 
 	os << "\tret\n\n";
-
+	*/
 }
 
 ControlFlowGraph::ControlFlowGraph(const ControlFlowGraph &controlFlowGraph)
