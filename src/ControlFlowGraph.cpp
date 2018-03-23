@@ -2,15 +2,18 @@ using namespace std;
 
 # include "ControlFlowGraph.h"
 
-void ControlFlowGraph::generateProlog(ostream &os, int addressRangeSize) const
+void ControlFlowGraph::generateProlog(ostream &os, string functionName, int addressRangeSize) const
 {
 	#ifdef MAP
 		cout << "Appel a la methode ControlFlowGraph::generateProlog" << endl;
 	#endif
 
-	os << "pusq\t%rbp\n";
-	os << "movq\t%rsp, %rbp\n";
-	os << "subq\t$" << addressRangeSize << ", %rsp\n";
+	os << functionName << ":\n";
+	os << "\n";
+	os << "\tpusq\t%rbp\n";
+	os << "\tmovq\t%rsp, %rbp\n";
+	os << "\tsubq\t$" << addressRangeSize << ", %rsp\n";
+	os << "\n";
 }
 
 void ControlFlowGraph::generateASM(ostream &os) const
@@ -19,9 +22,10 @@ void ControlFlowGraph::generateASM(ostream &os) const
 		cout << "Appel a la methode ControlFlowGraph::generateASM" << endl;
 	#endif
 
+	string functionName = "toto";
 	int addressRangeSize = 32;
 
-	generateProlog(os, addressRangeSize);
+	generateProlog(os, functionName, addressRangeSize);
 	/*
 	os << ".text\n";
 	os << ".global main\n\n";

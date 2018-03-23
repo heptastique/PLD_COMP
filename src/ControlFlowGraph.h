@@ -16,7 +16,7 @@ class ControlFlowGraph
 
 	public :
 
-		void generateProlog(ostream &os, int addressRangeSize) const;
+		void generateProlog(ostream &os, string functionName, int addressRangeSize) const;
 
 		void generateASM(ostream &os) const;
 
