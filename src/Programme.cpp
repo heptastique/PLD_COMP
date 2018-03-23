@@ -7,6 +7,11 @@ ControlFlowGraph Programme::generateIR()
 {
 	ControlFlowGraph controlFlowGraph;
 
+	for (auto it : programme.functions)
+	{
+		ControlFlowGraph functionControlFlowGraph = it->generateIR();
+	}
+
 	return controlFlowGraph;
 }
 
