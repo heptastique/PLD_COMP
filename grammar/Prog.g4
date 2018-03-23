@@ -4,64 +4,31 @@ prog: include* decl* fun+                   # Lprog;
 
 fun: typeretour Name '(' params ')' bloc    # Lfun;
 
-params: 'void'                              # LparamsVoid
-        | param (',' param)*                # Lparams
-        | /* epsilon */                     # LparamsEpsilon
-        ;
-
-param: type Name                            # Lparam;
-
-bloc: '{' instr* '}'                        # Lbloc;
-
 instr: init									# LinstrInit
 	| decl                                  # LinstrDecl
 	| affectation							# LinstAffectation
     | appelfonct ';'                        # LinstAppelfonct
     | retourfonct    						# LinstRetourfonct
-    | expr                       			# LinstExpr
     | insif									# LinstIf
     | inswhile								# LinsWhile
+    | expr                       			# LinstExpr
     ;
-
-affectation: varleftpart operation expr ';'	# Laffectation;
 
 init: type Name '[' Entier? ']' '=' '{' valeurs '}' ';' # LinitTable
 	| type Name '=' expr ';'							# Linit
 	;
-
-insif: 'if' '(' expr ')' bloc ?inselse		# Lif;
-
-inselse: 'else' bloc						# Lelse;
-
-inswhile: 'while' '(' expr ')' bloc			# Lwhile;
-
-typeretour: 'void'                          # LtyperetourVoid
-            | type                          # Ltype
-            ;
-
-type: 'char'                                # Lchar
-    | 'int32_t'                             # Lint32_t
-    | 'int64_t'                             # Lint64_t
-    ;
-
+	
 decl: type Name '[' Entier ']' ';'          # LdeclTable
     | type Name ';'                         # Ldecl
     ;
 
-appelfonct: Name '(' valeurs ')'            # Lappelfonct;
+affectation: varleftpart operation expr ';'	# Laffectation;
 
-retourfonct: 'return' expr ';'              # Lretourfonct;
+appelfonct: Name '(' valeurs ')'            # Lappelfonct;
 
 valeurs: variable (',' variable)*           # Lvaleurs
         | /* epsilon */                     # LvaleursEpsilon
         ;
-
-expr: variable								# LexprVariable
-    | appelfonct                            # LexprAppelfonction
-    | expr operationbinaire expr            # LexprOperationbinaire
-    | operationunaire expr                  # LexprOperationunaire
-    | '(' expr ')'                          # LexprParentheses
-    ;
 
 variable: varleftpart						# Lvariablevarleftpart
         | Entier                            # LvariableEntier
@@ -71,7 +38,40 @@ variable: varleftpart						# Lvariablevarleftpart
 varleftpart: Name '[' expr ']'				# LvarleftpartTable
 			| Name							# Lvarleftpart
 			;
-	
+			     
+expr: variable								# LexprVariable
+    | appelfonct                            # LexprAppelfonction
+    | expr operationbinaire expr            # LexprOperationbinaire
+    | operationunaire expr                  # LexprOperationunaire
+    | '(' expr ')'                          # LexprParentheses
+    ;
+
+params: 'void'                              # LparamsVoid
+        | param (',' param)*                # Lparams
+        | /* epsilon */                     # LparamsEpsilon
+        ;
+
+param: type Name                            # Lparam;
+
+typeretour: 'void'                          # LtyperetourVoid
+            | type                          # Ltype
+            ;
+
+type: 'char'                                # Lchar
+    | 'int32_t'                             # Lint32_t
+    | 'int64_t'                             # Lint64_t
+    ;
+    
+bloc: '{' instr* '}'                        # Lbloc;
+
+insif: 'if' '(' expr ')' bloc ?inselse		# Lif;
+
+inselse: 'else' bloc						# Lelse;
+
+inswhile: 'while' '(' expr ')' bloc			# Lwhile;
+
+retourfonct: 'return' expr ';'              # Lretourfonct;
+
 operation: '='								# LoperationEqual
             | '+='                          # LoperationPlusequal
             | '-='                          # LoperationMoinsequal
@@ -119,6 +119,6 @@ Includename: [a-zA-Z][a-zA-Z0-9]*[.]?[a-zA-Z0-9]*;
 
 Entier: [0-9]+;
 
-Caractere: '\'' ~['] '\'';
+Caractere: '\'' ~['\\] '\'';
 
 WS: [ \t\n\r]+ -> skip;
