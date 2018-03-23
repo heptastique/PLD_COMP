@@ -36,7 +36,7 @@ decl: type Name '[' ']' ';'                 # LdeclTable
 
 appelfonct: Name '(' valeurs ')' ';'        # Lappelfonct;
 
-retourfonct: 'return' variable ';'          # Lretourfonct;
+retourfonct: 'return' expr ';'              # Lretourfonct;
 
 valeurs: variable (',' variable)*           # Lvaleurs
         | /* epsilon */                     # LvaleursEpsilon

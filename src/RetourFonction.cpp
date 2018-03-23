@@ -5,13 +5,13 @@ using namespace std;
 
 void RetourFonction::print(std::ostream &stream) const
 {
-    stream << " RetourFonction:" << *variable;
+    stream << " RetourFonction: " << *expression;
     stream << endl;
 }
 
 std::ostream& operator<<(std::ostream& stream, const RetourFonction& retourFonction)
 {
-    stream << " RetourFonction:" << *retourFonction.variable;
+    stream << " RetourFonction: " << *retourFonction.expression;
     stream << endl;
     return stream;
 }
@@ -27,8 +27,8 @@ RetourFonction::RetourFonction(const RetourFonction &unRetourFonction) {
 }
 
 
-RetourFonction::RetourFonction(Variable* variable) {
-    this->variable = variable;
+RetourFonction::RetourFonction(Expression* expression) {
+    this->expression = expression;
 #ifdef MAP
     cout << "Appel au constructeur de <RetourFonction>" << endl;
 #endif

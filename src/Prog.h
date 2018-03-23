@@ -109,8 +109,8 @@ class Prog : public ProgBaseVisitor
     }
 
     antlrcpp::Any visitLretourfonct(ProgParser::LretourfonctContext *ctx) override {
-        Variable * var = visit(ctx->variable());
-        RetourFonction* retourFonction = new RetourFonction(var);
+        Expression * expression = visit(ctx->expr());
+        RetourFonction* retourFonction = new RetourFonction(expression);
         return dynamic_cast<Instruction*>(retourFonction);
     }
 

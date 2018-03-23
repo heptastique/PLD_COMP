@@ -14,10 +14,10 @@ public:
 
     RetourFonction(const RetourFonction &unRetourFonction);
 
-    RetourFonction(Variable* variable);
+    RetourFonction(Expression* expression);
 
     virtual ~RetourFonction();
 
 private:
-    Variable * variable;
+    Expression* expression;
 };
