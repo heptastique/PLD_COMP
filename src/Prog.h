@@ -167,6 +167,125 @@ class Prog : public ProgBaseVisitor
         return EQUAL;
     }
 
+    antlrcpp::Any visitLoperationPlusequal(ProgParser::LoperationPlusequalContext *ctx) override {
+        return PLUSEQUAL;
+    }
+
+    antlrcpp::Any visitLoperationMoinsequal(ProgParser::LoperationMoinsequalContext *ctx) override {
+        return MINUSEQUAL;
+    }
+
+    antlrcpp::Any visitLoperationMultequal(ProgParser::LoperationMultequalContext *ctx) override {
+        return MULTEQUAL;
+    }
+
+    antlrcpp::Any visitLoperationDivequal(ProgParser::LoperationDivequalContext *ctx) override {
+        return DIVEQUAL;
+    }
+
+    antlrcpp::Any visitLoperationModequal(ProgParser::LoperationModequalContext *ctx) override {
+        return MODEQUAL;
+    }
+
+    antlrcpp::Any visitLoperationXorbitwise(ProgParser::LoperationXorbitwiseContext *ctx) override {
+        return XORBITWISE;
+    }
+
+    antlrcpp::Any visitLoperationAndbitwise(ProgParser::LoperationAndbitwiseContext *ctx) override {
+        return ANDBITWISE;
+    }
+
+    antlrcpp::Any visitLoperationOrbitwise(ProgParser::LoperationOrbitwiseContext *ctx) override {
+        return ORBITWISE;
+    }
+
+    antlrcpp::Any visitLoperationLeftshiftbitwise(ProgParser::LoperationLeftshiftbitwiseContext *ctx) override {
+        return LESTSHIFTBITWISE;
+    }
+
+    antlrcpp::Any visitLoperationRightshiftbitwise(ProgParser::LoperationRightshiftbitwiseContext *ctx) override {
+        return RIGHTSHIFTBITWISE;
+    }
+
+    antlrcpp::Any visitLoperationunaireMoins(ProgParser::LoperationunaireMoinsContext *ctx) override {
+        return MINUSU;
+    }
+
+    antlrcpp::Any visitLoperationunaireNot(ProgParser::LoperationunaireNotContext *ctx) override {
+        return NOT;
+    }
+
+    antlrcpp::Any visitLoperationbinairePlus(ProgParser::LoperationbinairePlusContext *ctx) override {
+        return PLUS;
+    }
+
+    antlrcpp::Any visitLoperationbinaireMoins(ProgParser::LoperationbinaireMoinsContext *ctx) override {
+        return MINUS;
+    }
+
+    antlrcpp::Any visitLoperationbinaireMult(ProgParser::LoperationbinaireMultContext *ctx) override {
+        return MULT;
+    }
+
+    antlrcpp::Any visitLoperationbinaireDiv(ProgParser::LoperationbinaireDivContext *ctx) override {
+        return DIV;
+    }
+
+    antlrcpp::Any visitLoperationbinaireMod(ProgParser::LoperationbinaireModContext *ctx) override {
+        return MOD;
+    }
+
+    antlrcpp::Any visitLoperationbinaireEqual(ProgParser::LoperationbinaireEqualContext *ctx) override {
+        return EQUALEQUAL;
+    }
+
+    antlrcpp::Any visitLoperationbinaireNotequal(ProgParser::LoperationbinaireNotequalContext *ctx) override {
+        return NOTEQUAL;
+    }
+
+    antlrcpp::Any visitLoperationbinaireLt(ProgParser::LoperationbinaireLtContext *ctx) override {
+        return LT;
+    }
+
+    antlrcpp::Any visitLoperationbinaireGt(ProgParser::LoperationbinaireGtContext *ctx) override {
+        return GT;
+    }
+
+    antlrcpp::Any visitLoperationbinaireLte(ProgParser::LoperationbinaireLteContext *ctx) override {
+        return LTE;
+    }
+
+    antlrcpp::Any visitLoperationbinaireGte(ProgParser::LoperationbinaireGteContext *ctx) override {
+        return GTE;
+    }
+
+    antlrcpp::Any visitLoperationbinaireAnd(ProgParser::LoperationbinaireAndContext *ctx) override {
+        return AND;
+    }
+
+    antlrcpp::Any visitLoperationbinaireOr(ProgParser::LoperationbinaireOrContext *ctx) override {
+        return OR;
+    }
+
+    antlrcpp::Any visitLoperationbinaireAndbitwise(ProgParser::LoperationbinaireAndbitwiseContext *ctx) override {
+        return ANDBB;
+    }
+
+    antlrcpp::Any visitLoperationbinaireOrbitwise(ProgParser::LoperationbinaireOrbitwiseContext *ctx) override {
+        return ORBB;
+    }
+
+    antlrcpp::Any visitLoperationbinaireLeftshiftbiwise(ProgParser::LoperationbinaireLeftshiftbiwiseContext *ctx) override {
+        return LEFTSHIFTBITWISEB;
+    }
+
+    antlrcpp::Any visitLoperationbinaireRightshiftbitwise(ProgParser::LoperationbinaireRightshiftbitwiseContext *ctx) override {
+        return RIGHTSHIFTBITWISEB;
+    }
+
+    antlrcpp::Any visitLoperationbinaireXorbitwise(ProgParser::LoperationbinaireXorbitwiseContext *ctx) override {
+        return XORBITWISEB;
+    }
 
     antlrcpp::Any visitLint32_t(ProgParser::Lint32_tContext *ctx) override {
         return visit(ctx);
