@@ -30,7 +30,7 @@ valeurs: variable (',' variable)*           # Lvaleurs
         | /* epsilon */                     # LvaleursEpsilon
         ;
 
-variable: varleftpart						# Lvariablevarleftpart
+variable: prepostop? varleftpart prepostop? # Lvariablevarleftpart
         | Entier                            # LvariableEntier
         | Caractere                         # LvariableCaractere
         ;
@@ -109,6 +109,10 @@ operationbinaire: '+'						# LoperationbinairePlus
                 | '^'                       # LoperationbinaireXorbitwise
                 ;         
 
+prepostop: '++'								# LprepostopInc
+			| '--'							# LprepostopDec
+			;
+				
 include: '#include' '<' Includename '>'		# LincludeSys
 		| '#include' '"' Includename '"'	# LincludeCustom
 		;
