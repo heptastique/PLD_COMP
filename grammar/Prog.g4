@@ -13,13 +13,27 @@ param: type Name                            # Lparam;
 
 bloc: '{' instr* '}'                        # Lbloc;
 
-instr: decl                                 # LinstrDecl
+instr: init									# LinstrInit
+	| decl                                  # LinstrDecl
 	| affectation							# LinstAffectation
-    | appelfonct ';'                           # LinstAppelfonct
-    | retourfonct                           # LinstRetourfonct
+    | appelfonct ';'                        # LinstAppelfonct
+    | retourfonct    						# LinstRetourfonct
+    | expr                       			# LinstExpr
+    | insif									# LinstIf
+    | inswhile								# LinsWhile
     ;
 
 affectation: varleftpart operation expr ';'	# Laffectation;
+
+init: type Name '[' Entier? ']' '=' '{' valeurs '}' ';' # LinitTable
+	| type Name '=' expr ';'							# Linit
+	;
+
+insif: 'if' '(' expr ')' bloc ?inselse		# Lif;
+
+inselse: 'else' bloc						# Lelse;
+
+inswhile: 'while' '(' expr ')' bloc			# Lwhile;
 
 typeretour: 'void'                          # LtyperetourVoid
             | type                          # Ltype
@@ -30,7 +44,7 @@ type: 'char'                                # Lchar
     | 'int64_t'                             # Lint64_t
     ;
 
-decl: type Name '[' ']' ';'                 # LdeclTable
+decl: type Name '[' Entier ']' ';'          # LdeclTable
     | type Name ';'                         # Ldecl
     ;
 
