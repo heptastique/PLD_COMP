@@ -12,6 +12,8 @@
 #include "AppelFunction.h"
 #include "RetourFonction.h"
 #include "Affectation.h"
+#include "OperationBinaire.h"
+#include "OperationUnaire.h"
 
 using namespace std;
 
@@ -167,6 +169,26 @@ class Prog : public ProgBaseVisitor
     antlrcpp::Any visitLexprAppelfonction(ProgParser::LexprAppelfonctionContext *ctx) override {
         AppelFunction* appelFunction = visit(ctx->appelfonct());
         return dynamic_cast<Expression*> (appelFunction);
+    }
+
+    antlrcpp::Any visitLexprOperationbinaire(ProgParser::LexprOperationbinaireContext *ctx) override {
+        Expression* expressionL = visit(ctx->expr(0));
+        Expression* expressionR = visit(ctx->expr(1));
+        Operateur operateur = visit(ctx->operationbinaire());
+        OperationBinaire* operationBinaire = new OperationBinaire(expressionL, expressionR, operateur);
+        return static_cast<Expression*> (operationBinaire);
+    }
+
+    antlrcpp::Any visitLexprOperationunaire(ProgParser::LexprOperationunaireContext *ctx) override {
+        Expression* expression = visit(ctx->expr());
+        Operateur operateur = visit(ctx->operationunaire());
+        OperationUnaire* operationUnaire = new OperationUnaire (operateur, expression);
+        return static_cast<Expression*> (operationUnaire);
+    }
+
+    antlrcpp::Any visitLexprParentheses(ProgParser::LexprParenthesesContext *ctx) override {
+        Expression* expression = visit(ctx->expr());
+        return expression;
     }
 
     antlrcpp::Any visitLoperationEqual(ProgParser::LoperationEqualContext *ctx) override {
