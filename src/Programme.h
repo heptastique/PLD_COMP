@@ -1,12 +1,18 @@
-#pragma once
+# pragma once
 
-#include "Function.h"
-#include "Declaration.h"
-#include <list>
+# include "Function.h"
+# include "Declaration.h"
+# include "ControlFlowGraph.h"
+
+# include <list>
+
+class ControlFlowGraph;
 
 class Programme {
 
 public:
+
+    ControlFlowGraph generateIR();
 
     friend std::ostream& operator<< (std::ostream& stream, const Programme& programme);
 

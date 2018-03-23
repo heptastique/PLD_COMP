@@ -3,6 +3,13 @@ using namespace std;
 #include <iostream>
 #include "Programme.h"
 
+ControlFlowGraph Programme::generateIR()
+{
+	ControlFlowGraph controlFlowGraph;
+
+	return controlFlowGraph;
+}
+
 ostream& operator<<(ostream& stream, const Programme& programme)
 {
     stream << "Programme:" << endl;

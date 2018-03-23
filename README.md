@@ -7,11 +7,18 @@
 ```
 $ sudo apt-get install uuid-dev 
 ```
-- Run the application
-```
+- Run the application (Creates Assembly)
+```bash
 $ mkdir build
 $ cd build
 $ cmake ..
 $ make
-$ ./../bin/app
+$ cd ..
+$ mkdir -p target
+$ ./bin/app <target_file.c>
+```
+- Compile and Run Assembly
+```bash
+$ ./scripts/compile.sh
+$ ./target/prog.out
 ```
