@@ -109,8 +109,14 @@ int main (int argc, const char * argv[])
 	// Intermediate Representation -> Assembly
 
 	cout << "Generating Assembly" << endl;
-
-	controlFlowGraph.generateASM();
+	ofstream aSMFile;
+	aSMFile.open("./target/prog.s");
+	if(aSMFile.bad()||aSMFile.fail()||!aSMFile.good())
+	{
+		cout<<"Failed to open prog.s"<<endl;
+	}
+	controlFlowGraph.generateASM(aSMFile);
+	aSMFile.close();
 
 	cout << "Assembly generated" << endl;
 
