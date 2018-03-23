@@ -2,13 +2,20 @@ using namespace std;
 
 # include "ControlFlowGraph.h"
 
-
-void ControlFlowGraph::generateASM(std::ostream &os) const
+void ControlFlowGraph::generateProlog(ostream &os) const
 {
 	#ifdef MAP
-		cout << "Appel a la methode generateASM <ControlFlowGraph>" << endl;
+		cout << "Appel a la methode ControlFlowGraph::generateProlog" << endl;
+	#endif
+}
+
+void ControlFlowGraph::generateASM(ostream &os) const
+{
+	#ifdef MAP
+		cout << "Appel a la methode ControlFlowGraph::generateASM" << endl;
 	#endif
 
+	generateProlog(os);
 	
 	os << ".text\n";
 	os << ".global main\n\n";
