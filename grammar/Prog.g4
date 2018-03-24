@@ -11,7 +11,7 @@ instr: init									# LinstrInit
     | retourfonct    						# LinstRetourfonct
     | insif									# LinstIf
     | inswhile								# LinsWhile
-    | expr                       			# LinstExpr
+    | expr ';'                      		# LinstExpr
     ;
 
 init: type Name '[' Entier? ']' '=' '{' valeurs '}' ';' # LinitTable
@@ -30,7 +30,9 @@ valeurs: variable (',' variable)*           # Lvaleurs
         | /* epsilon */                     # LvaleursEpsilon
         ;
 
-variable: prepostop? varleftpart prepostop? # Lvariablevarleftpart
+variable: prepostop varleftpart            # Lvariablevarleftpartpre
+        | varleftpart prepostop            # Lvariablevarleftpartpos
+        | varleftpart                       # Lvariablevarleftpart
         | Entier                            # LvariableEntier
         | Caractere                         # LvariableCaractere
         ;
