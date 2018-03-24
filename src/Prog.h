@@ -149,9 +149,9 @@ class Prog : public ProgBaseVisitor
     antlrcpp::Any visitLif(ProgParser::LifContext *ctx) override {
         Expression* condition = (Expression*) visit(ctx->expr());
         If* anIf = new If(condition, visit(ctx->bloc()));
-        /*if(!ctx->inselse()->isEmpty()){
+        if(ctx->inselse() != nullptr){
             cout << "not empty" << endl;
-        }*/
+        }
         return dynamic_cast<Instruction*>(anIf);
     }
 
