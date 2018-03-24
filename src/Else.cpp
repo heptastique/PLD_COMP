@@ -5,12 +5,12 @@ using namespace std;
 
 void Else::print(std::ostream &stream) const
 {
-    stream << " Else: " << *bloc << endl;
+    stream << "     Else: " << endl << *bloc << endl;
 }
 
 std::ostream& operator<<(std::ostream& stream, const Else& anElse)
 {
-    stream << " Else: " << *anElse.bloc << endl;
+    stream << "     Else: " << endl <<  *anElse.bloc << endl;
 }
 
 Else &Else::operator=(const Else &unElse) {

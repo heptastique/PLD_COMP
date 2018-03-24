@@ -150,9 +150,14 @@ class Prog : public ProgBaseVisitor
         Expression* condition = (Expression*) visit(ctx->expr());
         If* anIf = new If(condition, visit(ctx->bloc()));
         if(ctx->inselse() != nullptr){
-            cout << "not empty" << endl;
+            anIf->setElse(visit(ctx->inselse()));
         }
         return dynamic_cast<Instruction*>(anIf);
+    }
+
+    antlrcpp::Any visitLelse(ProgParser::LelseContext *ctx) override {
+        Else* anElse = new Else ((Bloc*)visit(ctx->bloc()));
+        return anElse;
     }
 
     antlrcpp::Any visitLvaleurs(ProgParser::LvaleursContext *ctx) override {
