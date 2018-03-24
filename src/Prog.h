@@ -15,6 +15,8 @@
 #include "OperationBinaire.h"
 #include "OperationUnaire.h"
 #include "While.h"
+#include "If.h"
+#include "Else.h"
 
 using namespace std;
 
@@ -138,6 +140,19 @@ class Prog : public ProgBaseVisitor
         Expression* condition = (Expression*) visit(ctx->expr());
         While* aWhile = new While(visit(ctx->bloc()), condition);
         return dynamic_cast<Instruction*>(aWhile);
+    }
+
+    antlrcpp::Any visitLinstIf(ProgParser::LinstIfContext *ctx) override {
+        return (Instruction*)(visit(ctx->insif()));
+    }
+
+    antlrcpp::Any visitLif(ProgParser::LifContext *ctx) override {
+        Expression* condition = (Expression*) visit(ctx->expr());
+        If* anIf = new If(condition, visit(ctx->bloc()));
+        /*if(!ctx->inselse()->isEmpty()){
+            cout << "not empty" << endl;
+        }*/
+        return dynamic_cast<Instruction*>(anIf);
     }
 
     antlrcpp::Any visitLvaleurs(ProgParser::LvaleursContext *ctx) override {

@@ -3,6 +3,16 @@ using namespace std;
 #include "Else.h"
 #include <iostream>
 
+void Else::print(std::ostream &stream) const
+{
+    stream << " Else: " << *bloc << endl;
+}
+
+std::ostream& operator<<(std::ostream& stream, const Else& anElse)
+{
+    stream << " Else: " << *anElse.bloc << endl;
+}
+
 Else &Else::operator=(const Else &unElse) {
 }
 
@@ -14,7 +24,8 @@ Else::Else(const Else &unElse) {
 }
 
 
-Else::Else() {
+Else::Else(Bloc* bloc) {
+    this->bloc = bloc;
 #ifdef MAP
     cout << "Appel au constructeur de <Else>" << endl;
 #endif

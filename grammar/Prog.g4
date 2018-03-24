@@ -64,7 +64,7 @@ type: 'char'                                # Lchar
     
 bloc: '{' instr* '}'                        # Lbloc;
 
-insif: 'if' '(' expr ')' bloc ?inselse		# Lif;
+insif: 'if' '(' expr ')' bloc inselse?		# Lif;
 
 inselse: 'else' bloc						# Lelse;
 
