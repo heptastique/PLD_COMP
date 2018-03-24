@@ -79,5 +79,7 @@ assert_contains "../bin/app Front/ValidPrograms/53_FunctionCallPutChar.c" "Progr
 assert_contains "../bin/app Front/ValidPrograms/54_FunctionCallCustom.c" "Programme:\n Fonction: Name=function TypeRetour=0\n     Param:\n      Declaration: Name=a Type=3\n     Bloc:\n      Instruction: AppelFunction: Name=putchar Variable: Type=0 Valeur=a \n\n Fonction: Name=main TypeRetour=0\n     Bloc:\n      Instruction: AppelFunction: Name=function Variable: Type=2 Valeur='a' \n\n\nFin"
 assert_contains "../bin/app Front/ValidPrograms/55_Return.c" "Programme:\n Fonction: Name=function TypeRetour=1\n     Param:\n      Declaration: Name=a Type=1\n     Bloc:\n      Instruction: RetourFonction: Expression: OperationBinaire: Expression: Variable: Type=0 Valeur=a  Operateur=13 Expression: Variable: Type=1 Valeur=1 \n\n\n Fonction: Name=main TypeRetour=0\n     Bloc:\n      Instruction: Declaration: Name=a Type=1\n      Instruction: Affectation:  Variable: Type=0 Valeur=a  Operateur=0 Expression: Variable: Type=1 Valeur=1 \n      Instruction: Affectation:  Variable: Type=0 Valeur=a  Operateur=0 Expression: AppelFunction: Name=function Variable: Type=0 Valeur=a \n\n\n\nFin"
 
+assert_contains "../bin/app Front/ValidPrograms/57_VarInitialization.c" "Programme:\n Fonction: Name=main TypeRetour=0\n     Bloc:\n      Instruction: Initialisation: Type=2 Name=a Expression: Variable: Type=1 Valeur=5 \n\n\nFin"
+
 # end of test suite
 assert_end examples
