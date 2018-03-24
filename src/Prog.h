@@ -17,6 +17,7 @@
 #include "While.h"
 #include "If.h"
 #include "Else.h"
+#include "Initialisation.h"
 
 using namespace std;
 
@@ -86,6 +87,18 @@ class Prog : public ProgBaseVisitor
 
     antlrcpp::Any visitLtype(ProgParser::LtypeContext *ctx) override {
         return getTypeFromString(ctx->type()->getText());
+    }
+
+    antlrcpp::Any visitLinstrInit(ProgParser::LinstrInitContext *ctx) override {
+        Initialisation* initialisation = visit(ctx->init());
+        return dynamic_cast<Instruction*> (initialisation);
+    }
+
+    antlrcpp::Any visitLinit(ProgParser::LinitContext *ctx) override {
+        Type type = getTypeFromString(ctx->type()->getText());
+        Expression* expression = visit(ctx->expr());
+        Initialisation* initialisation = new Initialisation(type, expression, ctx->Name()->toString());
+        return initialisation;
     }
 
     antlrcpp::Any visitLinstrDecl(ProgParser::LinstrDeclContext *ctx) override {
