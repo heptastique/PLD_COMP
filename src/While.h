@@ -1,15 +1,27 @@
 #pragma once
 
-class While {
+#include "Instruction.h"
+#include "Bloc.h"
+#include "Expression.h"
+
+class While : public Instruction {
 
 public:
+
+    void print(std::ostream& stream) const;
+
+    friend std::ostream& operator<< (std::ostream& stream, const While& aWhile);
 
     While &operator=(const While &unWhile);
 
     While(const While &unWhile);
 
-    While();
+    While(Bloc* bloc, Expression* condition);
 
     virtual ~While();
+
+private:
+    Bloc* bloc;
+    Expression* condition;
 
 };

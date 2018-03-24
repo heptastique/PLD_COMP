@@ -14,6 +14,7 @@
 #include "Affectation.h"
 #include "OperationBinaire.h"
 #include "OperationUnaire.h"
+#include "While.h"
 
 using namespace std;
 
@@ -127,6 +128,16 @@ class Prog : public ProgBaseVisitor
         Expression* expression = (Expression*) visit(ctx->expr());
         Affectation* affection = new Affectation(var, operateur, expression);
         return dynamic_cast<Instruction*>(affection);
+    }
+
+    antlrcpp::Any visitLinsWhile(ProgParser::LinsWhileContext *ctx) override {
+        return (Instruction*)(visit(ctx->inswhile()));
+    }
+
+    antlrcpp::Any visitLwhile(ProgParser::LwhileContext *ctx) override {
+        Expression* condition = (Expression*) visit(ctx->expr());
+        While* aWhile = new While(visit(ctx->bloc()), condition);
+        return dynamic_cast<Instruction*>(aWhile);
     }
 
     antlrcpp::Any visitLvaleurs(ProgParser::LvaleursContext *ctx) override {
