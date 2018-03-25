@@ -47,9 +47,11 @@ void ControlFlowGraph::generateASM(ostream &os) const
 
 	while (basicBlock != basicBlocks.end())
 	{
-		list <IRInstr> :: iterator iRInstr = basicBlock->getIRInstrs().begin();
+		list <IRInstr> iRInstrs = basicBlock->getIRInstrs();
 
-		while (iRInstr != basicBlock->getIRInstrs().end())
+		list <IRInstr> :: iterator iRInstr = iRInstrs.begin();
+
+		while (iRInstr != iRInstrs.end())
 		{
 			if (iRInstr->getMnemonique() == FUNCTION_DECLARATION)
 			{

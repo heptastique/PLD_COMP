@@ -8,16 +8,24 @@ Mnemonique IRInstr::getMnemonique() const
 	return mnemonique;
 }
 
-string IRInstr::getParam(int index)
+string IRInstr::getParam(int index) const
 {
-	list <string> :: iterator it = params.begin();
+	list <string> :: const_iterator param = params.begin();
 
-	for (int i = 0; i < index; i = i + 1)
+	int i = 0;
+
+	while (param != params.end() && i < index)
 	{
-		++ it;
+		param ++;;
+		i = i + 1;
 	}
 
-	return *it;
+	if (i == index)
+	{
+		return *param;
+	}
+
+	return "";
 }
 
 list <string> IRInstr::getParams() const
