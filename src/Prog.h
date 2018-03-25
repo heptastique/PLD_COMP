@@ -12,6 +12,12 @@
 #include "AppelFunction.h"
 #include "RetourFonction.h"
 #include "Affectation.h"
+#include "OperationBinaire.h"
+#include "OperationUnaire.h"
+#include "While.h"
+#include "If.h"
+#include "Else.h"
+#include "Initialisation.h"
 
 using namespace std;
 
@@ -83,6 +89,18 @@ class Prog : public ProgBaseVisitor
         return getTypeFromString(ctx->type()->getText());
     }
 
+    antlrcpp::Any visitLinstrInit(ProgParser::LinstrInitContext *ctx) override {
+        Initialisation* initialisation = visit(ctx->init());
+        return dynamic_cast<Instruction*> (initialisation);
+    }
+
+    antlrcpp::Any visitLinit(ProgParser::LinitContext *ctx) override {
+        Type type = getTypeFromString(ctx->type()->getText());
+        Expression* expression = visit(ctx->expr());
+        Initialisation* initialisation = new Initialisation(type, expression, ctx->Name()->toString());
+        return initialisation;
+    }
+
     antlrcpp::Any visitLinstrDecl(ProgParser::LinstrDeclContext *ctx) override {
         Declaration* declaration = visit(ctx->decl());
         return dynamic_cast<Instruction*> (declaration);
@@ -95,13 +113,14 @@ class Prog : public ProgBaseVisitor
     }
 
     antlrcpp::Any visitLinstAppelfonct(ProgParser::LinstAppelfonctContext *ctx) override {
-        return (Instruction*) (visit(ctx->appelfonct()));
+        AppelFunction* appelFunction = visit(ctx->appelfonct());
+        return dynamic_cast<Instruction*> (appelFunction);
     }
 
     antlrcpp::Any visitLappelfonct(ProgParser::LappelfonctContext *ctx) override {
         std::list<Variable*> vars = visit(ctx->valeurs());
         AppelFunction* appelFunction = new AppelFunction(ctx->Name()->getText(), vars);
-        return dynamic_cast<Instruction*>(appelFunction);
+        return appelFunction;
     }
 
     antlrcpp::Any visitLinstRetourfonct(ProgParser::LinstRetourfonctContext *ctx) override {
@@ -109,8 +128,8 @@ class Prog : public ProgBaseVisitor
     }
 
     antlrcpp::Any visitLretourfonct(ProgParser::LretourfonctContext *ctx) override {
-        Variable * var = visit(ctx->variable());
-        RetourFonction* retourFonction = new RetourFonction(var);
+        Expression * expression = visit(ctx->expr());
+        RetourFonction* retourFonction = new RetourFonction(expression);
         return dynamic_cast<Instruction*>(retourFonction);
     }
 
@@ -124,6 +143,34 @@ class Prog : public ProgBaseVisitor
         Expression* expression = (Expression*) visit(ctx->expr());
         Affectation* affection = new Affectation(var, operateur, expression);
         return dynamic_cast<Instruction*>(affection);
+    }
+
+    antlrcpp::Any visitLinsWhile(ProgParser::LinsWhileContext *ctx) override {
+        return (Instruction*)(visit(ctx->inswhile()));
+    }
+
+    antlrcpp::Any visitLwhile(ProgParser::LwhileContext *ctx) override {
+        Expression* condition = (Expression*) visit(ctx->expr());
+        While* aWhile = new While(visit(ctx->bloc()), condition);
+        return dynamic_cast<Instruction*>(aWhile);
+    }
+
+    antlrcpp::Any visitLinstIf(ProgParser::LinstIfContext *ctx) override {
+        return (Instruction*)(visit(ctx->insif()));
+    }
+
+    antlrcpp::Any visitLif(ProgParser::LifContext *ctx) override {
+        Expression* condition = (Expression*) visit(ctx->expr());
+        If* anIf = new If(condition, visit(ctx->bloc()));
+        if(ctx->inselse() != nullptr){
+            anIf->setElse(visit(ctx->inselse()));
+        }
+        return dynamic_cast<Instruction*>(anIf);
+    }
+
+    antlrcpp::Any visitLelse(ProgParser::LelseContext *ctx) override {
+        Else* anElse = new Else ((Bloc*)visit(ctx->bloc()));
+        return anElse;
     }
 
     antlrcpp::Any visitLvaleurs(ProgParser::LvaleursContext *ctx) override {
@@ -163,10 +210,154 @@ class Prog : public ProgBaseVisitor
         return dynamic_cast<Expression*> (var);
     }
 
+    antlrcpp::Any visitLexprAppelfonction(ProgParser::LexprAppelfonctionContext *ctx) override {
+        AppelFunction* appelFunction = visit(ctx->appelfonct());
+        return dynamic_cast<Expression*> (appelFunction);
+    }
+
+    antlrcpp::Any visitLexprOperationbinaire(ProgParser::LexprOperationbinaireContext *ctx) override {
+        Expression* expressionL = visit(ctx->expr(0));
+        Expression* expressionR = visit(ctx->expr(1));
+        Operateur operateur = visit(ctx->operationbinaire());
+        OperationBinaire* operationBinaire = new OperationBinaire(expressionL, expressionR, operateur);
+        return static_cast<Expression*> (operationBinaire);
+    }
+
+    antlrcpp::Any visitLexprOperationunaire(ProgParser::LexprOperationunaireContext *ctx) override {
+        Expression* expression = visit(ctx->expr());
+        Operateur operateur = visit(ctx->operationunaire());
+        OperationUnaire* operationUnaire = new OperationUnaire (operateur, expression);
+        return static_cast<Expression*> (operationUnaire);
+    }
+
+    antlrcpp::Any visitLexprParentheses(ProgParser::LexprParenthesesContext *ctx) override {
+        Expression* expression = visit(ctx->expr());
+        return expression;
+    }
+
     antlrcpp::Any visitLoperationEqual(ProgParser::LoperationEqualContext *ctx) override {
         return EQUAL;
     }
 
+    antlrcpp::Any visitLoperationPlusequal(ProgParser::LoperationPlusequalContext *ctx) override {
+        return PLUSEQUAL;
+    }
+
+    antlrcpp::Any visitLoperationMoinsequal(ProgParser::LoperationMoinsequalContext *ctx) override {
+        return MINUSEQUAL;
+    }
+
+    antlrcpp::Any visitLoperationMultequal(ProgParser::LoperationMultequalContext *ctx) override {
+        return MULTEQUAL;
+    }
+
+    antlrcpp::Any visitLoperationDivequal(ProgParser::LoperationDivequalContext *ctx) override {
+        return DIVEQUAL;
+    }
+
+    antlrcpp::Any visitLoperationModequal(ProgParser::LoperationModequalContext *ctx) override {
+        return MODEQUAL;
+    }
+
+    antlrcpp::Any visitLoperationXorbitwise(ProgParser::LoperationXorbitwiseContext *ctx) override {
+        return XORBITWISE;
+    }
+
+    antlrcpp::Any visitLoperationAndbitwise(ProgParser::LoperationAndbitwiseContext *ctx) override {
+        return ANDBITWISE;
+    }
+
+    antlrcpp::Any visitLoperationOrbitwise(ProgParser::LoperationOrbitwiseContext *ctx) override {
+        return ORBITWISE;
+    }
+
+    antlrcpp::Any visitLoperationLeftshiftbitwise(ProgParser::LoperationLeftshiftbitwiseContext *ctx) override {
+        return LESTSHIFTBITWISE;
+    }
+
+    antlrcpp::Any visitLoperationRightshiftbitwise(ProgParser::LoperationRightshiftbitwiseContext *ctx) override {
+        return RIGHTSHIFTBITWISE;
+    }
+
+    antlrcpp::Any visitLoperationunaireMoins(ProgParser::LoperationunaireMoinsContext *ctx) override {
+        return MINUSU;
+    }
+
+    antlrcpp::Any visitLoperationunaireNot(ProgParser::LoperationunaireNotContext *ctx) override {
+        return NOT;
+    }
+
+    antlrcpp::Any visitLoperationbinairePlus(ProgParser::LoperationbinairePlusContext *ctx) override {
+        return PLUS;
+    }
+
+    antlrcpp::Any visitLoperationbinaireMoins(ProgParser::LoperationbinaireMoinsContext *ctx) override {
+        return MINUS;
+    }
+
+    antlrcpp::Any visitLoperationbinaireMult(ProgParser::LoperationbinaireMultContext *ctx) override {
+        return MULT;
+    }
+
+    antlrcpp::Any visitLoperationbinaireDiv(ProgParser::LoperationbinaireDivContext *ctx) override {
+        return DIV;
+    }
+
+    antlrcpp::Any visitLoperationbinaireMod(ProgParser::LoperationbinaireModContext *ctx) override {
+        return MOD;
+    }
+
+    antlrcpp::Any visitLoperationbinaireEqual(ProgParser::LoperationbinaireEqualContext *ctx) override {
+        return EQUALEQUAL;
+    }
+
+    antlrcpp::Any visitLoperationbinaireNotequal(ProgParser::LoperationbinaireNotequalContext *ctx) override {
+        return NOTEQUAL;
+    }
+
+    antlrcpp::Any visitLoperationbinaireLt(ProgParser::LoperationbinaireLtContext *ctx) override {
+        return LT;
+    }
+
+    antlrcpp::Any visitLoperationbinaireGt(ProgParser::LoperationbinaireGtContext *ctx) override {
+        return GT;
+    }
+
+    antlrcpp::Any visitLoperationbinaireLte(ProgParser::LoperationbinaireLteContext *ctx) override {
+        return LTE;
+    }
+
+    antlrcpp::Any visitLoperationbinaireGte(ProgParser::LoperationbinaireGteContext *ctx) override {
+        return GTE;
+    }
+
+    antlrcpp::Any visitLoperationbinaireAnd(ProgParser::LoperationbinaireAndContext *ctx) override {
+        return AND;
+    }
+
+    antlrcpp::Any visitLoperationbinaireOr(ProgParser::LoperationbinaireOrContext *ctx) override {
+        return OR;
+    }
+
+    antlrcpp::Any visitLoperationbinaireAndbitwise(ProgParser::LoperationbinaireAndbitwiseContext *ctx) override {
+        return ANDBB;
+    }
+
+    antlrcpp::Any visitLoperationbinaireOrbitwise(ProgParser::LoperationbinaireOrbitwiseContext *ctx) override {
+        return ORBB;
+    }
+
+    antlrcpp::Any visitLoperationbinaireLeftshiftbiwise(ProgParser::LoperationbinaireLeftshiftbiwiseContext *ctx) override {
+        return LEFTSHIFTBITWISEB;
+    }
+
+    antlrcpp::Any visitLoperationbinaireRightshiftbitwise(ProgParser::LoperationbinaireRightshiftbitwiseContext *ctx) override {
+        return RIGHTSHIFTBITWISEB;
+    }
+
+    antlrcpp::Any visitLoperationbinaireXorbitwise(ProgParser::LoperationbinaireXorbitwiseContext *ctx) override {
+        return XORBITWISEB;
+    }
 
     antlrcpp::Any visitLint32_t(ProgParser::Lint32_tContext *ctx) override {
         return visit(ctx);

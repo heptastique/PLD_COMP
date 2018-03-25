@@ -4,22 +4,56 @@ prog: include* decl* fun+                   # Lprog;
 
 fun: typeretour Name '(' params ')' bloc    # Lfun;
 
+instr: init									# LinstrInit
+	| decl                                  # LinstrDecl
+	| affectation							# LinstAffectation
+    | appelfonct ';'                        # LinstAppelfonct
+    | retourfonct    						# LinstRetourfonct
+    | insif									# LinstIf
+    | inswhile								# LinsWhile
+    | expr ';'                      		# LinstExpr
+    ;
+
+init: type Name '[' Entier? ']' '=' '{' valeurs '}' ';' # LinitTable
+	| type Name '=' expr ';'							# Linit
+	;
+	
+decl: type Name '[' Entier ']' ';'          # LdeclTable
+    | type Name ';'                         # Ldecl
+    ;
+
+affectation: varleftpart operation expr ';'	# Laffectation;
+
+appelfonct: Name '(' valeurs ')'            # Lappelfonct;
+
+valeurs: variable (',' variable)*           # Lvaleurs
+        | /* epsilon */                     # LvaleursEpsilon
+        ;
+
+variable: prepostop varleftpart            # Lvariablevarleftpartpre
+        | varleftpart prepostop            # Lvariablevarleftpartpos
+        | varleftpart                       # Lvariablevarleftpart
+        | Entier                            # LvariableEntier
+        | Caractere                         # LvariableCaractere
+        ;
+
+varleftpart: Name '[' expr ']'				# LvarleftpartTable
+			| Name							# Lvarleftpart
+			;
+			     
+expr: variable								# LexprVariable
+    | appelfonct                            # LexprAppelfonction
+    | expr operationbinaire expr            # LexprOperationbinaire
+    | operationunaire expr                  # LexprOperationunaire
+    | '(' expr ')'                          # LexprParentheses
+    ;
+
 params: 'void'                              # LparamsVoid
         | param (',' param)*                # Lparams
         | /* epsilon */                     # LparamsEpsilon
         ;
 
 param: type Name                            # Lparam;
-
-bloc: '{' instr* '}'                        # Lbloc;
-
-instr: decl                                 # LinstrDecl
-	| affectation							# LinstAffectation
-    | appelfonct                            # LinstAppelfonct
-    | retourfonct                           # LinstRetourfonct
-    ;
-
-affectation: varleftpart operation expr ';'	# Laffectation;
 
 typeretour: 'void'                          # LtyperetourVoid
             | type                          # Ltype
@@ -29,46 +63,68 @@ type: 'char'                                # Lchar
     | 'int32_t'                             # Lint32_t
     | 'int64_t'                             # Lint64_t
     ;
+    
+bloc: '{' instr* '}'                        # Lbloc;
 
-decl: type Name '[' ']' ';'                 # LdeclTable
-    | type Name ';'                         # Ldecl
-    ;
+insif: 'if' '(' expr ')' bloc inselse?		# Lif;
 
-appelfonct: Name '(' valeurs ')' ';'        # Lappelfonct;
+inselse: 'else' bloc						# Lelse;
 
-retourfonct: 'return' variable ';'          # Lretourfonct;
+inswhile: 'while' '(' expr ')' bloc			# Lwhile;
 
-valeurs: variable (',' variable)*           # Lvaleurs
-        | /* epsilon */                     # LvaleursEpsilon
-        ;
+retourfonct: 'return' expr ';'              # Lretourfonct;
 
-expr: variable								# LexprVariable;
+operation: '='								# LoperationEqual
+            | '+='                          # LoperationPlusequal
+            | '-='                          # LoperationMoinsequal
+            | '*='                          # LoperationMultequal
+            | '/='                          # LoperationDivequal
+            | '%='                          # LoperationModequal
+            | '^='                          # LoperationXorbitwise
+            | '&='                          # LoperationAndbitwise
+            | '|='                          # LoperationOrbitwise
+            | '<<='                         # LoperationLeftshiftbitwise
+            | '>>='                         # LoperationRightshiftbitwise
+            ;
 
-variable: varleftpart						# Lvariablevarleftpart
-        | Entier                            # LvariableEntier
-        | Caractere                         # LvariableCaractere
-        ;
+operationunaire: '-'						# LoperationunaireMoins
+                | '~'                       # LoperationunaireNot
+                ;
 
-varleftpart: Name '[' expr ']'				# LvarleftpartTable
-			| Name							# Lvarleftpart
+operationbinaire: '+'						# LoperationbinairePlus
+                | '-'                       # LoperationbinaireMoins
+                | '*'                       # LoperationbinaireMult
+                | '/'                       # LoperationbinaireDiv
+                | '%'                       # LoperationbinaireMod
+                | '=='                      # LoperationbinaireEqual
+                | '!='                      # LoperationbinaireNotequal
+                | '<'                       # LoperationbinaireLt
+                | '>'                       # LoperationbinaireGt
+                | '<='                      # LoperationbinaireLte
+                | '>='                      # LoperationbinaireGte
+                | '&&'                      # LoperationbinaireAnd
+                | '||'                      # LoperationbinaireOr
+                | '&'                       # LoperationbinaireAndbitwise
+                | '|'                       # LoperationbinaireOrbitwise
+                | '<<'                      # LoperationbinaireLeftshiftbiwise
+                | '>>'                      # LoperationbinaireRightshiftbitwise
+                | '^'                       # LoperationbinaireXorbitwise
+                ;         
+
+prepostop: '++'								# LprepostopInc
+			| '--'							# LprepostopDec
 			;
-	
-operation: '='								# LoperationEqual;
-
-operationunaire: '+'						# Loperationunaire;
-
-operationbinaire: '-'						# Loperationbinaire;
-
+				
 include: '#include' '<' Includename '>'		# LincludeSys
 		| '#include' '"' Includename '"'	# LincludeCustom
 		;
 
 Name: [a-zA-Z][a-zA-Z0-9]*;
 
-Includename: [a-zA-Z][a-zA-Z0-9.]*;
+Includename: [a-zA-Z][a-zA-Z0-9]*[.]?[a-zA-Z0-9]*;
 
 Entier: [0-9]+;
 
-Caractere: '\'' ~['] '\'';
+Caractere: '\'' ~['\\] '\'';
 
 WS: [ \t\n\r]+ -> skip;
