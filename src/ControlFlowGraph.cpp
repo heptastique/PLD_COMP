@@ -2,6 +2,11 @@ using namespace std;
 
 # include "ControlFlowGraph.h"
 
+void ControlFlowGraph::addBasicBlock(BasicBlock basicBlock)
+{
+	basicBlocks.push_back(basicBlock);
+}
+
 void ControlFlowGraph::generateProlog(ostream &os, string functionName, int addressRangeSize) const
 {
 	#ifdef MAP
@@ -22,10 +27,16 @@ void ControlFlowGraph::generateASM(ostream &os) const
 		cout << "Appel a la methode ControlFlowGraph::generateASM" << endl;
 	#endif
 
+	// TODO : Link to first BasicBlock
+
+	BasicBlock basicBlock = basicBlocks.front();
+	IRInstr iRInstr = basicBlock.getIRInstrs().front();
+
 	string functionName = "toto";
 	int addressRangeSize = 32;
 
-	generateProlog(os, functionName, addressRangeSize);
+	generateProlog(os, iRInstr.getParam(0), stoi(iRInstr.getParam(1)));
+
 	/*
 	os << ".text\n";
 	os << ".global main\n\n";
@@ -50,13 +61,13 @@ ControlFlowGraph::ControlFlowGraph()
 	#endif
 }
 
-ControlFlowGraph::ControlFlowGraph(Programme * prog)
+ControlFlowGraph::ControlFlowGraph(Programme * programme)
 {
 	#ifdef MAP
 		cout << "Appel au constructeur de <ControlFlowGraph>" << endl;
 	#endif
 
-	this->prog = prog;
+	this->programme = programme;
 }
 
 ControlFlowGraph::~ControlFlowGraph()

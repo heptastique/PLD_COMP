@@ -16,6 +16,8 @@ class ControlFlowGraph
 
 	public :
 
+		void addBasicBlock(BasicBlock basicBlock);
+
 		void generateProlog(ostream &os, string functionName, int addressRangeSize) const;
 
 		void generateASM(ostream &os) const;
@@ -30,6 +32,6 @@ class ControlFlowGraph
 
 	private :
 
-		list <BasicBlock *> blocs;
-		Programme * prog;
+		list <BasicBlock> basicBlocks;
+		Programme * programme;
 };

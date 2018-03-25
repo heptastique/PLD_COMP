@@ -1,7 +1,10 @@
 # pragma once
 
 # include "IRInstr.h"
+# include <string>
 # include <list>
+
+using namespace std;
 
 class IRInstr;
 
@@ -10,6 +13,10 @@ class BasicBlock
 	protected :
 
 	public :
+
+		list <IRInstr> getIRInstrs() const;
+
+		void addFunctionDefinition(string functionName, int adressRangeSize);
 
 		void generateASM();
 
@@ -21,7 +28,7 @@ class BasicBlock
 
 	private :
 
-		std::list <IRInstr *> iRInstrs;
+		list <IRInstr> iRInstrs;
 		BasicBlock * successor;
 		BasicBlock * condSuccessor;
 };

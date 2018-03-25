@@ -1,7 +1,9 @@
 using namespace std;
 
-#include "Function.h"
-#include <iostream>
+# include "Function.h"
+# include "BasicBlock.h"
+
+# include <iostream>
 
 ControlFlowGraph Function::generateIR()
 {
@@ -9,28 +11,39 @@ ControlFlowGraph Function::generateIR()
 
 	// Add Prolog
 
-	controlFlowGraph.addBasicBlock();
+	BasicBlock prolog;
+
+	prolog.addFunctionDefinition(this->name, 32);
+
+	controlFlowGraph.addBasicBlock(prolog);
 
 	// Add Epilog
 
-	return controlFlowGraph	
+	return controlFlowGraph;
 }
 
 std::ostream& operator<<(std::ostream& stream, const Function& function)
 {
-    stream << " Fonction: Name=" << function.name << " TypeRetour=" << function.typeRetour << endl;
-    if(!function.declarations.empty()){
-        stream << "     Param:" << endl;
-        for (auto it : function.declarations){
-            stream << "     " << *it;
-        }
-    }
-    stream << *function.bloc;
-    return stream;
+	stream << " Fonction: Name=" << function.name << " TypeRetour=" << function.typeRetour << endl;
+
+	if(!function.declarations.empty())
+	{
+		stream << "     Param:" << endl;
+
+		for (auto it : function.declarations)
+		{
+			stream << "     " << *it;
+	        }
+	}
+
+	stream << *function.bloc;
+
+	return stream;
 }
 
 Function &Function::operator=(const Function &unFunction)
 {
+
 }
 
 std::string Function::getName()
@@ -45,9 +58,9 @@ Bloc * Function::getBloc()
 
 Function::Function(const Function &unFunction)
 {
-#ifdef MAP
-    cout << "Appel au constructeur de copie de <Function>" << endl;
-#endif
+	#ifdef MAP
+		cout << "Appel au constructeur de copie de <Function>" << endl;
+	#endif
 }
 
 

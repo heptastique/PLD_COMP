@@ -1,13 +1,18 @@
 #pragma once
 
-#include <string>
-#include "Bloc.h"
-#include "Declaration.h"
+# include "Bloc.h"
+# include "Declaration.h"
+# include "ControlFlowGraph.h"
 
-class Function {
+# include <string>
 
+class ControlFlowGraph;
 
-public:
+class Function
+{
+	public:
+
+		ControlFlowGraph generateIR();
 
     friend std::ostream& operator<< (std::ostream& stream, const Function& function);
 
@@ -28,7 +33,8 @@ public:
 
     virtual ~Function();
 
-private:
+	private:
+
     std::string name;
     Bloc* bloc;
     std::list<Declaration*> declarations;

@@ -7,9 +7,11 @@ ControlFlowGraph Programme::generateIR()
 {
 	ControlFlowGraph controlFlowGraph;
 
-	for (auto it : programme.functions)
+	for (auto it : functions)
 	{
-		ControlFlowGraph functionControlFlowGraph = it->generateIR();
+		cout << "function" << endl;
+
+		controlFlowGraph = it->generateIR();
 	}
 
 	return controlFlowGraph;
@@ -17,15 +19,21 @@ ControlFlowGraph Programme::generateIR()
 
 ostream& operator<<(ostream& stream, const Programme& programme)
 {
-    stream << "Programme:" << endl;
-    for (auto it :  programme.declarations){
-        stream << *it;
-    }
-    for (auto it :  programme.functions){
-        stream << *it;
-    }
-    stream<<endl;
-    return stream;
+	stream << "Programme:" << endl;
+
+	for (auto it :  programme.declarations)
+	{
+		stream << *it;
+	}
+
+	for (auto it :  programme.functions)
+	{
+        	stream << *it;
+	}
+
+    	stream<<endl;
+
+	return stream;
 }
 
 void Programme::addFunction(Function *function)

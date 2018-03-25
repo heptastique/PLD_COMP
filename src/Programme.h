@@ -6,13 +6,14 @@
 
 # include <list>
 
+class Function;
 class ControlFlowGraph;
 
-class Programme {
+class Programme
+{
+	public:
 
-public:
-
-    ControlFlowGraph generateIR();
+	    ControlFlowGraph generateIR();
 
     friend std::ostream& operator<< (std::ostream& stream, const Programme& programme);
 
