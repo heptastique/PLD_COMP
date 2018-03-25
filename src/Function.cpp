@@ -9,15 +9,11 @@ ControlFlowGraph Function::generateIR()
 {
 	ControlFlowGraph controlFlowGraph;
 
-	// Add Prolog
+	BasicBlock prologBasicBlock;
 
-	BasicBlock prolog;
+	prologBasicBlock.addFunctionDefinition(this->name, 32);
 
-	prolog.addFunctionDefinition(this->name, 32);
-
-	controlFlowGraph.addBasicBlock(prolog);
-
-	// Add Epilog
+	controlFlowGraph.addBasicBlock(prologBasicBlock);
 
 	return controlFlowGraph;
 }

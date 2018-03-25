@@ -2,6 +2,22 @@ using namespace std;
 
 # include "ControlFlowGraph.h"
 
+list <BasicBlock> ControlFlowGraph::getBasicBlocks() const
+{
+	list <BasicBlock> basicBlocksCopy;
+
+	list <BasicBlock> :: const_iterator it = basicBlocks.begin();
+
+	while (it != basicBlocks.end())
+	{
+		basicBlocksCopy.push_back(*it);
+
+		it ++;
+	}
+
+	return basicBlocksCopy;
+}
+
 void ControlFlowGraph::addBasicBlock(BasicBlock basicBlock)
 {
 	basicBlocks.push_back(basicBlock);
@@ -27,24 +43,24 @@ void ControlFlowGraph::generateASM(ostream &os) const
 		cout << "Appel a la methode ControlFlowGraph::generateASM" << endl;
 	#endif
 
-	// TODO : Link to first BasicBlock
+	list <BasicBlock> :: const_iterator basicBlock = basicBlocks.begin();
 
-	BasicBlock basicBlock = basicBlocks.front();
-	IRInstr iRInstr = basicBlock.getIRInstrs().front();
+	while (basicBlock != basicBlocks.end())
+	{
+		list <IRInstr> :: iterator iRInstr = basicBlock->getIRInstrs().begin();
 
-	string functionName = "toto";
-	int addressRangeSize = 32;
+		while (iRInstr != basicBlock->getIRInstrs().end())
+		{
+			if (iRInstr->getMnemonique() == FUNCTION_DECLARATION)
+			{
+				generateProlog(os, iRInstr->getParam(0), stoi(iRInstr->getParam(1)));
+			}
 
-	generateProlog(os, iRInstr.getParam(0), stoi(iRInstr.getParam(1)));
+			iRInstr ++;
+		}
 
-	/*
-	os << ".text\n";
-	os << ".global main\n\n";
-
-	os << "main:\n\n";
-
-	os << "\tret\n\n";
-	*/
+		basicBlock ++;
+	}
 }
 
 ControlFlowGraph::ControlFlowGraph(const ControlFlowGraph &controlFlowGraph)
@@ -52,6 +68,10 @@ ControlFlowGraph::ControlFlowGraph(const ControlFlowGraph &controlFlowGraph)
 	#ifdef MAP
 		cout << "Appel au constructeur de copie de <ControlFlowGraph>" << endl;
 	#endif
+
+	programme = controlFlowGraph.programme;
+
+	basicBlocks = controlFlowGraph.getBasicBlocks();
 }
 
 ControlFlowGraph::ControlFlowGraph()

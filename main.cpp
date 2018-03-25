@@ -93,7 +93,7 @@ int main (int argc, const char * argv[])
 
 	Prog visitor;
 
-	Programme * prog = visitor.visit(tree);
+	Programme * programme = visitor.visit(tree);
 
 	cout << "Fin" << endl;
 	cout << "Abstract Syntaxic Tree generated" << endl;
@@ -102,7 +102,7 @@ int main (int argc, const char * argv[])
 
 	cout << "Generating Intermediate Representation" << endl;
 
-	ControlFlowGraph controlFlowGraph(prog->generateIR());
+	ControlFlowGraph controlFlowGraph = programme->generateIR();
 
 	cout << "Intermediate Representation generated" << endl;
 
@@ -114,9 +114,9 @@ int main (int argc, const char * argv[])
 
 	aSMFile.open("./target/prog.s");
 
-	if(aSMFile.bad()||aSMFile.fail()||!aSMFile.good())
+	if(aSMFile.bad() || aSMFile.fail() || !aSMFile.good())
 	{
-		cout<<"Failed to open prog.s"<<endl;
+		cout << "Failed to open prog.s" << endl;
 	}
 
 	controlFlowGraph.generateASM(aSMFile);

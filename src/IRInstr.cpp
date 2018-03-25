@@ -3,6 +3,11 @@ using namespace std;
 # include "IRInstr.h"
 # include <iostream>
 
+Mnemonique IRInstr::getMnemonique() const
+{
+	return mnemonique;
+}
+
 string IRInstr::getParam(int index)
 {
 	list <string> :: iterator it = params.begin();
@@ -17,18 +22,18 @@ string IRInstr::getParam(int index)
 
 list <string> IRInstr::getParams() const
 {
-	list <string> ret;
+	list <string> paramsCopy;
 
 	list <string> :: const_iterator it = params.begin();
 
 	while (it != params.end())
 	{
-		ret.push_back(*it);
+		paramsCopy.push_back(*it);
 
 		++ it;
 	}
 
-	return ret;
+	return paramsCopy;
 }
 
 IRInstr::IRInstr(const IRInstr &iRInstr)
@@ -37,17 +42,17 @@ IRInstr::IRInstr(const IRInstr &iRInstr)
 		cout << "Appel au constructeur de copie de <IRInstr>" << endl;
 	#endif
 
-	mnemo = iRInstr.mnemo;
+	mnemonique = iRInstr.mnemonique;
 	params = iRInstr.getParams();
 }
 
-IRInstr::IRInstr(Mnemo mnemo, list <string> params)
+IRInstr::IRInstr(Mnemonique mnemonique, list <string> params)
 {
 	#ifdef MAP
 		cout << "Appel au constructeur de <IRInstr>" << endl;
 	#endif
 
-	this->mnemo = mnemo;
+	this->mnemonique = mnemonique;
 
 	list <string> :: iterator it = params.begin();
 
