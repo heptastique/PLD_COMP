@@ -4,7 +4,7 @@
 #include "Variable.h"
 #include <list>
 
-class AppelFunction : public Instruction{
+class AppelFunction : public Expression {
 public:
     friend std::ostream& operator<< (std::ostream& stream, const AppelFunction& appelFunction);
 

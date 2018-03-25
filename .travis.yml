@@ -24,8 +24,8 @@ before_script:
 
 script:
   - ../bin/unittest
-  - ./symbols-test.sh
-  - ./asm-test.sh
+  - ./symbols-test.sh -v
+  - ./asm-test.sh -v
 
 before_cache:
   - cd ..
