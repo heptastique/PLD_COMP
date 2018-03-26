@@ -6,6 +6,8 @@
 
 # include <list>
 
+using namespace std;
+
 class Function;
 class ControlFlowGraph;
 
@@ -13,27 +15,29 @@ class Programme
 {
 	public:
 
-	    ControlFlowGraph generateIR();
+		ControlFlowGraph generateIR();
 
-    friend std::ostream& operator<< (std::ostream& stream, const Programme& programme);
+		friend ostream & operator<<(ostream & stream, const Programme & programme);
 
-    void addFunction (Function * function);
+		void addFunction(Function * function);
 
-    void addDeclaration (Declaration * declaration);
+		void addDeclaration(Declaration * declaration);
 
-    std::list<Function*> getFunctions();
+		list <Function*> getFunctions();
 
-    std::list<Declaration*> getDeclarations();
+		list <Declaration*> getDeclarations();
 
-    Programme &operator=(const Programme &unProgramme);
+		Programme & operator=(const Programme & programme);
 
-    Programme(const Programme &unProgramme);
+		Programme(const Programme & programme);
 
-    Programme();
+		Programme();
 
-    virtual ~Programme();
+		virtual ~Programme();
 
-    std::list<Function*> functions;
-    std::list<Declaration*> declarations;
+	private :
+
+		list <Function*> functions;
+		list <Declaration*> declarations;
 };
 

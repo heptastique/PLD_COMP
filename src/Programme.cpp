@@ -1,23 +1,31 @@
 using namespace std;
 
-#include <iostream>
-#include "Programme.h"
+# include <iostream>
+# include "Programme.h"
 
+// Generate IR
 ControlFlowGraph Programme::generateIR()
 {
+	// IR iR;
+
 	ControlFlowGraph controlFlowGraph;
 
+	// For each Function of Program
 	for (auto function : functions)
 	{
-		cout << "function" << endl;
-
+		// Generate ControlFlowGraph
 		controlFlowGraph = function->generateIR();
+
+		// Add ControlFlowGraph to IR
+		// iR.addControlFlowGraph(controlFlowGraph);
 	}
+
+	// return iR;
 
 	return controlFlowGraph;
 }
 
-ostream& operator<<(ostream& stream, const Programme& programme)
+ostream & operator<<(ostream & stream, const Programme & programme)
 {
 	stream << "Programme:" << endl;
 
@@ -28,57 +36,56 @@ ostream& operator<<(ostream& stream, const Programme& programme)
 
 	for (auto function :  programme.functions)
 	{
-        	stream << *function;
+		stream << *function;
 	}
 
-    	stream<<endl;
+	stream << endl;
 
 	return stream;
 }
 
 void Programme::addFunction(Function *function)
 {
-    this->functions.emplace_back(function);
+	this->functions.emplace_back(function);
 }
 
 void Programme::addDeclaration(Declaration *declaration)
 {
-    this->declarations.emplace_back(declaration);
+	this->declarations.emplace_back(declaration);
 }
 
-std::list<Function*> Programme::getFunctions()
+list <Function*> Programme::getFunctions()
 {
-    return this->functions;
+	return this->functions;
 }
 
-std::list<Declaration*> Programme::getDeclarations()
+list <Declaration*> Programme::getDeclarations()
 {
-    return this->declarations;
+	return this->declarations;
 }
 
-Programme &Programme::operator=(const Programme &unProgramme)
+Programme & Programme::operator=(const Programme & programme)
 {
+
 }
 
-Programme::Programme(const Programme &unProgramme)
+Programme::Programme(const Programme & programme)
 {
-#ifdef MAP
-    cout << "Appel au constructeur de copie de <Programme>" << endl;
-#endif
+	#ifdef MAP
+		cout << "Appel au constructeur de copie de <Programme>" << endl;
+	#endif
 }
-
 
 Programme::Programme()
 {
-#ifdef MAP
-    cout << "Appel au constructeur de <Programme>" << endl;
-#endif
+	#ifdef MAP
+		cout << "Appel au constructeur de <Programme>" << endl;
+	#endif
 }
-
 
 Programme::~Programme()
 {
-#ifdef MAP
-    cout << "Appel au destructeur de <Programme>" << endl;
-#endif
+	#ifdef MAP
+		cout << "Appel au destructeur de <Programme>" << endl;
+	#endif
 }
