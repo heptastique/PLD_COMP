@@ -1,10 +1,12 @@
-#pragma once
+# pragma once
 
 # include "Bloc.h"
 # include "Declaration.h"
 # include "ControlFlowGraph.h"
 
 # include <string>
+
+using namespace std;
 
 class ControlFlowGraph;
 
@@ -14,29 +16,26 @@ class Function
 
 		ControlFlowGraph generateIR();
 
-    friend std::ostream& operator<< (std::ostream& stream, const Function& function);
+		friend ostream & operator<<(ostream & stream, const Function & function);
 
-    void setDeclarations(std::list<Declaration*> declarations)
-    {
-        this->declarations = declarations;
-    }
+		void setDeclarations(list <Declaration*> declarations)
 
-    Function &operator=(const Function &unFunction);
+		Function & operator=(const Function & function);
 
-    std::string getName();
+		string getName();
 
-    Bloc* getBloc();
+		Bloc * getBloc();
 
-    Function(const Function &unFunction);
+		Function(const Function & function);
 
-    Function(std::string name, Bloc *Bloc, Type typeRetour);
+		Function(string name, Bloc * bloc, Type typeRetour);
 
-    virtual ~Function();
+		virtual ~Function();
 
 	private:
 
-    std::string name;
-    Bloc* bloc;
-    std::list<Declaration*> declarations;
-    Type typeRetour;
+		string name;
+		Bloc * bloc;
+		list <Declaration*> declarations;
+		Type typeRetour;
 };
