@@ -27,15 +27,13 @@ ostream & operator<<(ostream & stream, const Function & function)
 {
 	stream << " Fonction: Name=" << function.name << " TypeRetour=" << function.typeRetour << endl;
 
-	if (!function.declarations.empty())
-	{
-		stream << " Param:" << endl;
-
-		for (auto declaration : function.declarations)
+	if(!function.declarations.empty()) {
+        stream << "     Param:" << endl;
+        for (auto declaration : function.declarations)
 		{
-			stream << " " << *declaration;
-	}
-	}
+            stream << "     " << *declaration;
+        }
+    }
 
 	stream << *function.bloc;
 
