@@ -8,18 +8,7 @@ using namespace std;
 
 list <IRInstr> BasicBlock::getIRInstrs() const
 {
-	list <IRInstr> ret;
-
-	list <IRInstr> :: const_iterator it = iRInstrs.begin();
-
-	while (it != iRInstrs.end())
-	{
-		ret.push_back(*it);
-
-		++it;
-	}
-
-	return ret;
+	return iRInstrs;
 }
 
 void BasicBlock::addFunctionDefinition(string functionName, int addressRangeSize)

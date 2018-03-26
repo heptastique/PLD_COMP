@@ -20,9 +20,9 @@ class BasicBlock
 
 		void generateASM();
 
-		BasicBlock(const BasicBlock &basicBlock);
+		BasicBlock(const BasicBlock & basicBlock);
 
-    	BasicBlock();
+    		BasicBlock();
 
 		virtual ~BasicBlock();
 

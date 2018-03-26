@@ -18,7 +18,7 @@ class Function
 
 		friend ostream & operator<<(ostream & stream, const Function & function);
 
-		void setDeclarations(list <Declaration*> declarations)
+		void setDeclarations(list <Declaration*> declarations);
 
 		Function & operator=(const Function & function);
 
