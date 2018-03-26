@@ -33,6 +33,13 @@ list <string> IRInstr::getParams() const
 	return params;
 }
 
+IRInstr::IRInstr()
+{
+	#ifdef MAP
+		cout << "Appel au constructeur de <IRInstr>" << endl;
+	#endif
+}
+
 IRInstr::IRInstr(const IRInstr &iRInstr)
 {
 	#ifdef MAP
@@ -40,7 +47,7 @@ IRInstr::IRInstr(const IRInstr &iRInstr)
 	#endif
 
 	mnemonique = iRInstr.mnemonique;
-	params = iRInstr.getParams();
+	params = iRInstr.params;
 }
 
 IRInstr::IRInstr(Mnemonique mnemonique, list <string> params)
@@ -51,13 +58,6 @@ IRInstr::IRInstr(Mnemonique mnemonique, list <string> params)
 
 	this->mnemonique = mnemonique;
 	this->params = params;
-}
-
-IRInstr::IRInstr()
-{
-	#ifdef MAP
-		cout << "Appel au constructeur de <IRInstr>" << endl;
-	#endif
 }
 
 IRInstr::~IRInstr()

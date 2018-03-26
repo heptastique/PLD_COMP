@@ -8,6 +8,7 @@
 # include "grammar/ProgBaseVisitor.h"
 # include "src/Prog.h"
 # include "src/ControlFlowGraph.h"
+# include "src/IR.h"
 
 using namespace antlr4;
 using namespace std;
@@ -114,7 +115,7 @@ int main (int argc, const char * argv[])
 
 	// Generate IR from Abstract Syntaxic Tree
 
-	ControlFlowGraph controlFlowGraph = programme->generateIR();
+	IR iR = programme->generateIR();
 
 	cout << "Intermediate Representation generated" << endl;
 
@@ -135,9 +136,9 @@ int main (int argc, const char * argv[])
 		cout << "Failed to open prog.s" << endl;
 	}
 
-	// Generate ASM from Control Flow Graph
+	// Generate ASM from IR
 
-	controlFlowGraph.generateASM(aSMFile);
+	iR.generateASM(aSMFile);
 
 	aSMFile.close();
 

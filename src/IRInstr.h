@@ -16,8 +16,6 @@ enum Mnemonique
 
 class IRInstr
 {
-	protected :
-
 	public :
 
 		Mnemonique getMnemonique() const;

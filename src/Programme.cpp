@@ -1,28 +1,29 @@
 using namespace std;
 
-# include <iostream>
 # include "Programme.h"
 
-// Generate IR
-ControlFlowGraph Programme::generateIR()
-{
-	// IR iR;
+# include <iostream>
 
+// Generate IR
+IR Programme::generateIR()
+{
+	// Create IR
+	IR iR;
+
+	// Create Control Flow Graph
 	ControlFlowGraph controlFlowGraph;
 
 	// For each Function of Program
 	for (auto function : functions)
 	{
-		// Generate ControlFlowGraph
+		// Generate Function Control Flow Graph
 		controlFlowGraph = function->generateIR();
 
-		// Add ControlFlowGraph to IR
-		// iR.addControlFlowGraph(controlFlowGraph);
+		// Add Function Control Flow Graph to IR
+		iR.addControlFlowGraph(controlFlowGraph);
 	}
 
-	// return iR;
-
-	return controlFlowGraph;
+	return iR;
 }
 
 ostream & operator<<(ostream & stream, const Programme & programme)
