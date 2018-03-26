@@ -25,7 +25,7 @@ class IRInstr
 		string getParam(int index) const;
 		list <string> getParams() const;
 
-		IRInstr(const IRInstr &iRInstr);
+		IRInstr(const IRInstr & iRInstr);
 
     		IRInstr();
 		IRInstr(Mnemonique mnemonique, list <string> params);

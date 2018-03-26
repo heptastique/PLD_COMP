@@ -4,18 +4,7 @@ using namespace std;
 
 list <BasicBlock> ControlFlowGraph::getBasicBlocks() const
 {
-	list <BasicBlock> basicBlocksCopy;
-
-	list <BasicBlock> :: const_iterator it = basicBlocks.begin();
-
-	while (it != basicBlocks.end())
-	{
-		basicBlocksCopy.push_back(*it);
-
-		it ++;
-	}
-
-	return basicBlocksCopy;
+	return basicBlocks;
 }
 
 void ControlFlowGraph::addBasicBlock(BasicBlock basicBlock)
@@ -23,7 +12,8 @@ void ControlFlowGraph::addBasicBlock(BasicBlock basicBlock)
 	basicBlocks.push_back(basicBlock);
 }
 
-void ControlFlowGraph::generateProlog(ostream &os, string functionName, int addressRangeSize) const
+// Generate Prolog of Function
+void ControlFlowGraph::generateProlog(ostream & os, string functionName, int addressRangeSize) const
 {
 	#ifdef MAP
 		cout << "Appel a la methode ControlFlowGraph::generateProlog" << endl;
@@ -37,31 +27,30 @@ void ControlFlowGraph::generateProlog(ostream &os, string functionName, int addr
 	os << "\n";
 }
 
-void ControlFlowGraph::generateASM(ostream &os) const
+// Generate ASM
+void ControlFlowGraph::generateASM(ostream & os) const
 {
 	#ifdef MAP
 		cout << "Appel a la methode ControlFlowGraph::generateASM" << endl;
 	#endif
 
-	list <BasicBlock> :: const_iterator basicBlock = basicBlocks.begin();
-
-	while (basicBlock != basicBlocks.end())
+	// For each BasicBlock of ControlFLowGraph
+	for (auto basicBlock : basicBlocks)
 	{
-		list <IRInstr> iRInstrs = basicBlock->getIRInstrs();
-
-		list <IRInstr> :: iterator iRInstr = iRInstrs.begin();
-
-		while (iRInstr != iRInstrs.end())
+		// For each IRInstr of BasicBlock
+		for (auto iRInstr : basicBlock.getIRInstrs())
 		{
-			if (iRInstr->getMnemonique() == FUNCTION_DECLARATION)
+			// If IRInstr if a Function Declaration
+			if (iRInstr.getMnemonique() == FUNCTION_DECLARATION)
 			{
-				generateProlog(os, iRInstr->getParam(0), stoi(iRInstr->getParam(1)));
+				// Generate Prolog of Function
+				generateProlog(os, iRInstr.getParam(0), stoi(iRInstr.getParam(1)));
+
+				// Generate Body
+
+				// Generate Epilog
 			}
-
-			iRInstr ++;
 		}
-
-		basicBlock ++;
 	}
 }
 

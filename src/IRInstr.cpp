@@ -30,18 +30,7 @@ string IRInstr::getParam(int index) const
 
 list <string> IRInstr::getParams() const
 {
-	list <string> paramsCopy;
-
-	list <string> :: const_iterator it = params.begin();
-
-	while (it != params.end())
-	{
-		paramsCopy.push_back(*it);
-
-		++ it;
-	}
-
-	return paramsCopy;
+	return params;
 }
 
 IRInstr::IRInstr(const IRInstr &iRInstr)
@@ -61,14 +50,7 @@ IRInstr::IRInstr(Mnemonique mnemonique, list <string> params)
 	#endif
 
 	this->mnemonique = mnemonique;
-
-	list <string> :: iterator it = params.begin();
-
-	while (it != params.end())
-	{
-		this->params.push_back(*it);
-		++ it;
-	}
+	this->params = params;
 }
 
 IRInstr::IRInstr()
