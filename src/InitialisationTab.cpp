@@ -25,9 +25,11 @@ InitialisationTab &InitialisationTab::operator=(const InitialisationTab &unIniti
 }
 
 
-InitialisationTab::InitialisationTab(Type type, Expression* expression, std::string name, std::list<Variable*> variables): Initialisation(type, expression, name) {
+InitialisationTab::InitialisationTab(Type type,std::string name, std::list<Variable*> variables) {
+    this->name = name;
+    this->type = type;
     this->variables = variables;
-    this->size = variables.size();
+    this->size = to_string(variables.size());
 #ifdef MAP
     cout << "Appel au constructeur de <InitialisationTab>" << endl;
 #endif
