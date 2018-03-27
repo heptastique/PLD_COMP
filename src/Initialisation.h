@@ -15,6 +15,8 @@ public:
 
     Initialisation &operator=(const Initialisation &unInitialisation);
 
+    void resolveScopeVariables(std::list<Declaration*> declProgramme, std::list<Declaration*> paramFunction, std::list<Declaration*> declBloc);
+
     Initialisation(const Initialisation &unInitialisation);
 
     Initialisation(Type type, Expression* expression, std::string name);

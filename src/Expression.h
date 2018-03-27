@@ -12,6 +12,8 @@ public:
 
     Expression &operator=(const Expression &unExpression);
 
+    void resolveScopeVariables(std::list<Declaration*> declProgramme, std::list<Declaration*> paramFunction, std::list<Declaration*> declBloc);
+
     Expression(const Expression &unExpression);
 
     Expression();

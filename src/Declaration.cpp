@@ -20,6 +20,10 @@ Declaration &Declaration::operator=(const Declaration &unDeclaration)
 {
 }
 
+void Declaration::resolveScopeVariables(std::list<Declaration*> declProgramme, std::list<Declaration*> paramFunction, std::list<Declaration*> declBloc)
+{
+}
+
 Type Declaration::getType()
 {
     return this->type;

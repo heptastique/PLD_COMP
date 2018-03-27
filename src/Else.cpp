@@ -16,13 +16,15 @@ std::ostream& operator<<(std::ostream& stream, const Else& anElse)
 Else &Else::operator=(const Else &unElse) {
 }
 
+void Else::resolveScopeVariables(std::list<Declaration*> declProgramme, std::list<Declaration*> paramFunction, std::list<Declaration*> declBloc){
+    this->bloc->resolveScopeVariables(declProgramme, paramFunction, declBloc);
+}
 
 Else::Else(const Else &unElse) {
 #ifdef MAP
     cout << "Appel au constructeur de copie de <Else>" << endl;
 #endif
 }
-
 
 Else::Else(Bloc* bloc) {
     this->bloc = bloc;

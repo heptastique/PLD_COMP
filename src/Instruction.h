@@ -1,6 +1,10 @@
 #pragma once
 
 #include "ostream"
+#include <list>
+
+class Declaration;
+
 class Instruction {
 
 protected:
@@ -9,6 +13,8 @@ protected:
 public:
 
     friend std::ostream& operator<< (std::ostream& stream, Instruction const& instruction);
+
+    virtual void resolveScopeVariables(std::list<Declaration*> declProgramme, std::list<Declaration*> paramFunction, std::list<Declaration*> declBloc) = 0;
 
     Instruction &operator=(const Instruction &unInstruction);
 

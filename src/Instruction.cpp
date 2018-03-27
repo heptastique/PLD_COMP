@@ -14,7 +14,6 @@ Instruction &Instruction::operator=(const Instruction &unInstruction)
 {
 }
 
-
 Instruction::Instruction(const Instruction &unInstruction)
 {
 #ifdef MAP

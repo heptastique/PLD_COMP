@@ -14,6 +14,8 @@ public:
 
     Affectation &operator=(const Affectation &unAffectation);
 
+    void resolveScopeVariables(std::list<Declaration*> declProgramme, std::list<Declaration*> paramFunction, std::list<Declaration*> declBloc);
+
     Affectation(const Affectation &unAffectation);
 
     Affectation(Variable* variable, Operateur operateur, Expression* expression);

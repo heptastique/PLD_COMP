@@ -12,6 +12,10 @@ public:
 
     AppelFunction &operator=(const AppelFunction &unAppelFunction);
 
+    void resolveScopeVariables(std::list<Declaration*> declProgramme, std::list<Declaration*> paramFunction, std::list<Declaration*> declBloc);
+
+    list <Variable *> getVariables();
+
     AppelFunction(const AppelFunction &unAppelFunction);
 
     AppelFunction(std::string name, std::list<Variable *> variables);

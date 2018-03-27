@@ -20,6 +20,9 @@ Initialisation &Initialisation::operator=(const Initialisation &unInitialisation
 {
 }
 
+void Initialisation::resolveScopeVariables(std::list<Declaration*> declProgramme, std::list<Declaration*> paramFunction, std::list<Declaration*> declBloc){
+    this->expression->resolveScopeVariables(declProgramme, paramFunction, declBloc);
+}
 
 Initialisation::Initialisation(const Initialisation &unInitialisation)
 {

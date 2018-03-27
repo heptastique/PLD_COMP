@@ -17,6 +17,10 @@ std::ostream& operator<<(std::ostream& stream, const While& aWhile)
 While &While::operator=(const While &unWhile) {
 }
 
+void While::resolveScopeVariables(std::list<Declaration*> declProgramme, std::list<Declaration*> paramFunction, std::list<Declaration*> declBloc){
+    this->condition->resolveScopeVariables(declProgramme, paramFunction, declBloc);
+    this->bloc->resolveScopeVariables(declProgramme, paramFunction, declBloc);
+}
 
 While::While(const While &unWhile) {
 #ifdef MAP

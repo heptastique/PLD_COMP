@@ -25,6 +25,16 @@ std::ostream& operator<<(std::ostream& stream, const AppelFunction& appelFunctio
 AppelFunction &AppelFunction::operator=(const AppelFunction &unAppelFunction) {
 }
 
+void AppelFunction::resolveScopeVariables(std::list<Declaration*> declProgramme, std::list<Declaration*> paramFunction, std::list<Declaration*> declBloc){
+    std::list<Variable *> variables = getVariables();
+    for (auto variable : variables){
+        variable->resolveScopeVariables(declProgramme,paramFunction,declBloc);
+    }
+}
+
+list <Variable *> AppelFunction::getVariables(){
+    return this->variables;
+}
 
 AppelFunction::AppelFunction(const AppelFunction &unAppelFunction) {
 #ifdef MAP

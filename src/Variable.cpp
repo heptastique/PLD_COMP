@@ -18,6 +18,40 @@ std::ostream& operator<<(std::ostream& stream, const Variable& variable)
 Variable &Variable::operator=(const Variable &unVariable) {
 }
 
+void Variable::resolveScopeVariables(std::list<Declaration*> declProgramme, std::list<Declaration*> paramFunction, std::list<Declaration*> declBloc){
+    bool notfound = true;
+    for ( auto decl : declBloc){
+        if ( decl->getName().compare(this->valeur))
+        {
+            notfound = false;
+            this->declarationAssociee = decl;
+            break;
+        }
+    }
+    if ( notfound ){
+        for ( auto decl : paramFunction){
+            if ( decl->getName().compare(this->valeur))
+            {
+                notfound = false;
+                this->declarationAssociee = decl;
+                break;
+            }
+        }
+    }
+    if ( notfound ){
+        for ( auto decl : declProgramme){
+            if ( decl->getName().compare(this->valeur))
+            {
+                notfound = false;
+                this->declarationAssociee = decl;
+                break;
+            }
+        }
+    }
+    if (notfound){
+        cout << "variable " << this->valeur << " is not instantiated" << endl;
+    }
+}
 
 Variable::Variable(const Variable &unVariable) {
 #ifdef MAP

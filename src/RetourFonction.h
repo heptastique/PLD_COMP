@@ -12,6 +12,8 @@ public:
 
     RetourFonction &operator=(const RetourFonction &unRetourFonction);
 
+    void resolveScopeVariables(std::list<Declaration*> declProgramme, std::list<Declaration*> paramFunction, std::list<Declaration*> declBloc);
+
     RetourFonction(const RetourFonction &unRetourFonction);
 
     RetourFonction(Expression* expression);

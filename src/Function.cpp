@@ -53,7 +53,7 @@ Bloc * Function::getBloc()
 	return this->bloc;
 }
 
-void Function::setParameters(list<Declaration*> parameters)
+void Function::setParameters(std::list<Declaration*> parameters)
 {
     this->parameters = parameters;
 }

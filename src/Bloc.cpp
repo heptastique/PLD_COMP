@@ -29,7 +29,14 @@ void Bloc::addDeclaration(Declaration *declaration)
 }
 
 void Bloc::resolveScopeVariables(std::list<Declaration*> declProgramme, std::list<Declaration*> paramFunction){
-
+    for ( auto instruction : this->instructions){
+        instruction->resolveScopeVariables(declProgramme,paramFunction,this->declarations);
+    }
+}
+void Bloc::resolveScopeVariables(std::list<Declaration*> declProgramme, std::list<Declaration*> paramFunction, std::list<Declaration*> declBloc){
+    for ( auto instruction : this->instructions){
+        instruction->resolveScopeVariables(declProgramme,paramFunction,declBloc);
+    }
 }
 
 Bloc &Bloc::operator=(const Bloc &unBloc) {
