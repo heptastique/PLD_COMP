@@ -28,7 +28,6 @@ class Prog : public ProgBaseVisitor
 {
 	public:
 
-
 	antlrcpp::Any visitLprog(ProgParser::LprogContext *ctx) override
 	{
         Programme* programme = new Programme();
@@ -93,9 +92,9 @@ class Prog : public ProgBaseVisitor
     }
 
     antlrcpp::Any visitLinstrInit(ProgParser::LinstrInitContext *ctx) override {
-        std::list<Instruction*> insts;
-        insts.emplace_back((visit(ctx->init())));
-        return insts;
+        std::list<Instruction*> instructions;
+        instructions.emplace_back((visit(ctx->init())));
+        return instructions;
     }
 
     antlrcpp::Any visitLinit(ProgParser::LinitContext *ctx) override {
@@ -118,12 +117,12 @@ class Prog : public ProgBaseVisitor
 
     antlrcpp::Any visitLinstrDecl(ProgParser::LinstrDeclContext *ctx) override {
         std::list<Declaration*> declarations = visit(ctx->decl());
-        std::list<Instruction*> insts;
+        std::list<Instruction*> instructions;
         for(auto decl : declarations)
         {
-            insts.emplace_back(dynamic_cast<Instruction*>(decl));
+            instructions.emplace_back(dynamic_cast<Instruction*>(decl));
         }
-        return insts;
+        return instructions;
     }
 
     antlrcpp::Any visitLdeclparamTable(ProgParser::LdeclparamTableContext *ctx) override {
@@ -151,10 +150,10 @@ class Prog : public ProgBaseVisitor
     }
 
     antlrcpp::Any visitLinstAppelfonct(ProgParser::LinstAppelfonctContext *ctx) override {
-        std::list<Instruction*> insts;
+        std::list<Instruction*> instructions;
         AppelFunction* appelFunction = visit(ctx->appelfonct());
-        insts.emplace_back(dynamic_cast<Instruction*>(appelFunction));
-        return insts;
+        instructions.emplace_back(dynamic_cast<Instruction*>(appelFunction));
+        return instructions;
     }
 
     antlrcpp::Any visitLappelfonct(ProgParser::LappelfonctContext *ctx) override {
@@ -164,9 +163,9 @@ class Prog : public ProgBaseVisitor
     }
 
     antlrcpp::Any visitLinstRetourfonct(ProgParser::LinstRetourfonctContext *ctx) override {
-        std::list<Instruction*> insts;
-        insts.emplace_back(visit(ctx->retourfonct()));
-        return insts;
+        std::list<Instruction*> instructions;
+        instructions.emplace_back(visit(ctx->retourfonct()));
+        return instructions;
     }
 
     antlrcpp::Any visitLretourfonct(ProgParser::LretourfonctContext *ctx) override {
@@ -180,7 +179,7 @@ class Prog : public ProgBaseVisitor
     }
 
     antlrcpp::Any visitLaffectation(ProgParser::LaffectationContext *ctx) override {
-        std::list<Instruction*> insts;
+        std::list<Instruction*> instructions;
         Operateur operateur = (Operateur) visit(ctx->operation());
 
         auto varleftparts = ctx->varleftpart();
@@ -189,15 +188,15 @@ class Prog : public ProgBaseVisitor
             Variable* var = (Variable*) visit(ctx->varleftpart(i));
             Expression* expression = (Expression*) visit(ctx->expr(i));
             Affectation* affection = new Affectation(var, operateur, expression);
-            insts.emplace_back(dynamic_cast<Instruction*>(affection));
+            instructions.emplace_back(dynamic_cast<Instruction*>(affection));
         }
-        return insts;
+        return instructions;
     }
 
     antlrcpp::Any visitLinsWhile(ProgParser::LinsWhileContext *ctx) override {
-        std::list<Instruction*> insts;
-        insts.emplace_back(visit(ctx->inswhile()));
-        return insts;
+        std::list<Instruction*> instructions;
+        instructions.emplace_back(visit(ctx->inswhile()));
+        return instructions;
     }
 
     antlrcpp::Any visitLwhile(ProgParser::LwhileContext *ctx) override {
@@ -207,9 +206,9 @@ class Prog : public ProgBaseVisitor
     }
 
     antlrcpp::Any visitLinstIf(ProgParser::LinstIfContext *ctx) override {
-        std::list<Instruction*> insts;
-        insts.emplace_back(visit(ctx->insif()));
-        return insts;
+        std::list<Instruction*> instructions;
+        instructions.emplace_back(visit(ctx->insif()));
+        return instructions;
     }
 
     antlrcpp::Any visitLif(ProgParser::LifContext *ctx) override {
