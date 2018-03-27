@@ -1,0 +1,7 @@
+Programme:
+ Fonction: Name=main TypeRetour=0
+     Bloc:
+      Instruction: Declaration: Name=a Type=3
+
+
+Fin

@@ -1,0 +1,10 @@
+Programme:
+ Fonction: Name=main TypeRetour=1
+     Bloc:
+      Instruction: AppelFunction: Name=func1 Variable: Type=2 Valeur='a' 
+      Instruction: AppelFunction: Name=func2 Variable: Type=0 Valeur=name 
+      Instruction: AppelFunction: Name=func3 Variable: Type=0 Valeur=name  Variable: Type=1 Valeur=4 
+
+
+Fin
+Abstract Syntaxic Tree generated

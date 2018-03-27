@@ -1,0 +1,6 @@
+Programme:
+ Fonction: Name=main TypeRetour=0
+     Bloc:
+
+
+Fin

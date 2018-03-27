@@ -1,0 +1,17 @@
+Programme:
+ Fonction: Name=function TypeRetour=1
+     Param:
+      Declaration: Name=a Type=1
+     Bloc:
+      Instruction: RetourFonction: Expression: OperationBinaire: Expression: Variable: Type=0 Valeur=a  Operateur=13 Expression: Variable: Type=1 Valeur=1 
+
+
+ Fonction: Name=main TypeRetour=0
+     Bloc:
+      Instruction: Declaration: Name=a Type=1
+      Instruction: Affectation:  Variable: Type=0 Valeur=a  Operateur=0 Expression: Variable: Type=1 Valeur=1 
+      Instruction: Affectation:  Variable: Type=0 Valeur=a  Operateur=0 Expression: AppelFunction: Name=function Variable: Type=0 Valeur=a 
+
+
+
+Fin

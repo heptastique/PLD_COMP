@@ -1,0 +1,14 @@
+Programme:
+ Fonction: Name=main TypeRetour=0
+     Bloc:
+      Instruction: Declaration: Name=a Type=1
+      Instruction: Affectation:  Variable: Type=0 Valeur=a  Operateur=0 Expression: OperationBinaire: Expression: OperationBinaire: Expression: OperationBinaire: Expression: OperationBinaire: Expression: OperationBinaire: Expression: OperationBinaire: Expression: Variable: Type=1 Valeur=1  Operateur=13 Expression: Variable: Type=1 Valeur=2 
+ Operateur=15 Expression: Variable: Type=1 Valeur=4 
+ Operateur=14 Expression: Variable: Type=1 Valeur=4 
+ Operateur=16 Expression: Variable: Type=1 Valeur=2 
+ Operateur=13 Expression: Variable: Type=1 Valeur=3 
+ Operateur=17 Expression: Variable: Type=1 Valeur=2 
+
+
+
+Fin

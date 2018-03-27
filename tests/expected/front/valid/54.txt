@@ -1,0 +1,13 @@
+Programme:
+ Fonction: Name=function TypeRetour=0
+     Param:
+      Declaration: Name=a Type=3
+     Bloc:
+      Instruction: AppelFunction: Name=putchar Variable: Type=0 Valeur=a 
+
+ Fonction: Name=main TypeRetour=0
+     Bloc:
+      Instruction: AppelFunction: Name=function Variable: Type=2 Valeur='a' 
+
+
+Fin

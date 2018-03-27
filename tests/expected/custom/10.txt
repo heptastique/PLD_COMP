@@ -1,0 +1,14 @@
+Programme:
+ Declaration: Name=a Type=3
+ Declaration: Name=leInt Type=2
+ Fonction: Name=main TypeRetour=0
+     Param:
+      Declaration: Name=c Type=3
+      Declaration: Name=oint Type=1
+      Declaration: Name=bigInt Type=2
+     Bloc:
+      Instruction: Declaration: Name=b Type=3
+      Instruction: Declaration: Name=i Type=1
+
+
+Fin
