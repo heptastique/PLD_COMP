@@ -19,37 +19,39 @@ Variable &Variable::operator=(const Variable &unVariable) {
 }
 
 void Variable::resolveScopeVariables(std::list<Declaration*> declProgramme, std::list<Declaration*> paramFunction, std::list<Declaration*> declBloc){
-    bool notfound = true;
-    for ( auto decl : declBloc){
-        if ( decl->getName().compare(this->valeur) == 0)
-        {
-            notfound = false;
-            this->declarationAssociee = decl;
-            break;
-        }
-    }
-    if ( notfound ){
-        for ( auto decl : paramFunction){
-            if ( decl->getName().compare(this->valeur) == 0)
-            {
+    if (this->typeVariable == NAME) {
+        bool notfound = true;
+        for (auto decl : declBloc) {
+            if (decl->getName().compare(this->valeur) == 0) {
                 notfound = false;
                 this->declarationAssociee = decl;
+                cout << decl->getName() << " from bloc assigned to " << this->valeur << endl;
                 break;
             }
         }
-    }
-    if ( notfound ){
-        for ( auto decl : declProgramme){
-            if ( decl->getName().compare(this->valeur) == 0)
-            {
-                notfound = false;
-                this->declarationAssociee = decl;
-                break;
+        if (notfound) {
+            for (auto decl : paramFunction) {
+                if (decl->getName().compare(this->valeur) == 0) {
+                    notfound = false;
+                    this->declarationAssociee = decl;
+                    cout << decl->getName() << " from function parameters assigned to " << this->valeur << endl;
+                    break;
+                }
             }
         }
-    }
-    if (notfound){
-        cout << "variable " << this->valeur << " is not instantiated" << endl;
+        if (notfound) {
+            for (auto decl : declProgramme) {
+                if (decl->getName().compare(this->valeur) == 0) {
+                    notfound = false;
+                    this->declarationAssociee = decl;
+                    cout << decl->getName() << " from global variables assigned to " << this->valeur << endl;
+                    break;
+                }
+            }
+        }
+        if (notfound) {
+            cout << "variable " << this->valeur << " is not instantiated" << endl;
+        }
     }
 }
 

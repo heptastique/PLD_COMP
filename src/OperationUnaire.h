@@ -12,6 +12,8 @@ public:
 
     OperationUnaire &operator=(const OperationUnaire &unOperationUnaire);
 
+    void resolveScopeVariables(std::list<Declaration*> declProgramme, std::list<Declaration*> paramFunction, std::list<Declaration*> declBloc);
+
     OperationUnaire(const OperationUnaire &unOperationUnaire);
 
     OperationUnaire(Operateur operateur, Expression* expression);

@@ -20,6 +20,9 @@ std::ostream& operator<<(std::ostream& stream, const OperationUnaire& operationU
 OperationUnaire &OperationUnaire::operator=(const OperationUnaire &unOperationUnaire) {
 }
 
+void OperationUnaire::resolveScopeVariables(std::list<Declaration*> declProgramme, std::list<Declaration*> paramFunction, std::list<Declaration*> declBloc){
+    this->expression->resolveScopeVariables(declProgramme, paramFunction, declBloc);
+}
 
 OperationUnaire::OperationUnaire(const OperationUnaire &unOperationUnaire) {
 #ifdef MAP

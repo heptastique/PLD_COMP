@@ -12,6 +12,8 @@ public:
 
     OperationBinaire &operator=(const OperationBinaire &unOperationBinaire);
 
+    void resolveScopeVariables(std::list<Declaration*> declProgramme, std::list<Declaration*> paramFunction, std::list<Declaration*> declBloc);
+
     OperationBinaire(const OperationBinaire &unOperationBinaire);
 
     OperationBinaire(Expression* expressionL, Expression* expressionR, Operateur operateur);
