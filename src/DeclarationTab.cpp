@@ -12,7 +12,7 @@ void DeclarationTab::print(std::ostream &stream) const
 std::ostream& operator<<(std::ostream& stream, const DeclarationTab& declarationtTab)
 {
     stream << " DeclarationTab: Name=" << declarationtTab.name << " Type=" << declarationtTab.type;
-    stream << " Size=" << declarationtTab.size;
+    stream << " Size=" << declarationtTab.size << endl;
     return stream;
 }
 

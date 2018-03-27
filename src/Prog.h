@@ -67,6 +67,16 @@ class Prog : public ProgBaseVisitor
         return params;
     }
 
+    antlrcpp::Any visitLparamTable(ProgParser::LparamTableContext *ctx) override {
+        Type type = getTypeFromString(ctx->type()->getText());
+        DeclarationTab* declarationTab = new DeclarationTab (ctx->Name()->getText(), type, "0");
+        if(ctx->Entier() != nullptr)
+        {
+            declarationTab->setSize(ctx->Entier()->getText());
+        }
+        return dynamic_cast<Declaration*>(declarationTab);
+    }
+
     antlrcpp::Any visitLparam(ProgParser::LparamContext *ctx) override {
         Type type = getTypeFromString(ctx->type()->getText());
         Declaration * declaration = new Declaration(ctx->Name()->toString(), type);

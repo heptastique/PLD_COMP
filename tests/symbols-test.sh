@@ -78,7 +78,7 @@ assert_contains_file "../bin/app Front/ValidPrograms/52_Int64Dec.c"             
 assert_contains_file "../bin/app Front/ValidPrograms/53_FunctionCallPutChar.c"              "expected/front/valid/53.txt"
 assert_contains_file "../bin/app Front/ValidPrograms/54_FunctionCallCustom.c"               "expected/front/valid/54.txt"
 assert_contains_file "../bin/app Front/ValidPrograms/55_Return.c"                           "expected/front/valid/55.txt"
-
+assert_contains_file "../bin/app Front/ValidPrograms/56_ArrayAsParam.c"                     "expected/front/valid/56.txt"
 assert_contains_file "../bin/app Front/ValidPrograms/57_VarInitialization.c"                "expected/front/valid/57.txt"
 assert_contains_file "../bin/app Front/ValidPrograms/58_MultipleVarDeclarations.c"          "expected/front/valid/58.txt"
 

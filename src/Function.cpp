@@ -2,6 +2,7 @@ using namespace std;
 
 # include "Function.h"
 # include "BasicBlock.h"
+#include "DeclarationTab.h"
 
 # include <iostream>
 
@@ -52,7 +53,13 @@ ostream & operator<<(ostream & stream, const Function & function)
     if(!function.parameters.empty()){
         stream << "     Param:" << endl;
         for (auto it : function.parameters){
-            stream << "     " << *it;
+			if(DeclarationTab *decla = dynamic_cast<DeclarationTab*>(it))
+			{
+				stream << "     " << *decla;
+			} else
+			{
+				stream << "     " << *it;
+			}
         }
     }
 
