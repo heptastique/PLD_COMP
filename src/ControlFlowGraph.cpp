@@ -33,7 +33,7 @@ void ControlFlowGraph::generateEpilog(ostream & os, int addressRangeSize) const
 	#endif
 
 	os << "\taddq\t$" << addressRangeSize << ", %rsp\n";
-	os << "\tpopq\t%rsp\n";
+	os << "\tpopq\t%rbp\n";
 	os << "\tretq\n";
 }
 
