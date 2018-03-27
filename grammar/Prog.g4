@@ -51,10 +51,10 @@ params: 'void'                              # LparamsVoid
         | /* epsilon */                     # LparamsEpsilon
         ;
 
-param: type Name "[" Entier? "]"			# LparamTable
+param: type Name '[' Entier? ']'			# LparamTable
 	| type Name                         	# Lparam;
 
-declParams: Name "[" Entier "]"				# LdeclparamTable
+declParams: Name '[' Entier ']'				# LdeclparamTable
 			| Name                     		# Ldeclparam;
 			
 typeretour: 'void'                          # LtyperetourVoid
