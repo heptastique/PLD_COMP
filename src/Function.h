@@ -16,6 +16,8 @@ class Function
 
     ControlFlowGraph generateIR();
 
+    int calculateAddressRangeSize();
+
     friend ostream & operator<<(ostream & stream, const Function & function);
 
     Function & operator=(const Function & function);
