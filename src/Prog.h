@@ -53,7 +53,7 @@ class Prog : public ProgBaseVisitor
     {
         Type type = visit(ctx->typeretour());
         Function* f = new Function(ctx->Name()->toString(), visit(ctx->bloc()),type);
-        f->setDeclarations(visit(ctx->params()));
+        f->setParameters(visit(ctx->params()));
         return f;
     }
 

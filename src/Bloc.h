@@ -3,6 +3,7 @@
 #include <string>
 #include <list>
 #include "Instruction.h"
+#include "Declaration.h"
 
 class Bloc {
 
@@ -12,7 +13,11 @@ public:
 
     void addInstruction(Instruction * instruction);
 
+    void addDeclaration(Declaration * declaration);
+
     std::list<Instruction*> getInstructions();
+
+    void resolveScopeVariables(std::list<Declaration*> declProgramme, std::list<Declaration*> paramFunction);
 
     Bloc &operator=(const Bloc &unBloc);
 
@@ -24,5 +29,5 @@ public:
 
 private:
     std::list<Instruction*> instructions;
-
+    std::list<Declaration*> declarations;
 };

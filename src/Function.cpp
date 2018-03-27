@@ -6,9 +6,9 @@ using namespace std;
 std::ostream& operator<<(std::ostream& stream, const Function& function)
 {
     stream << " Fonction: Name=" << function.name << " TypeRetour=" << function.typeRetour << endl;
-    if(!function.declarations.empty()){
+    if(!function.parameters.empty()){
         stream << "     Param:" << endl;
-        for (auto it : function.declarations){
+        for (auto it : function.parameters){
             stream << "     " << *it;
         }
     }
@@ -30,13 +30,22 @@ Bloc * Function::getBloc()
     return this->bloc;
 }
 
+std::list<Declaration*> Function::getParameters()
+{
+    return this->parameters;
+}
+
+void Function::resolveScopeVariables(std::list<Declaration*> declProgramme)
+{
+    this->bloc->resolveScopeVariables(declProgramme, this->getParameters());
+}
+
 Function::Function(const Function &unFunction)
 {
 #ifdef MAP
     cout << "Appel au constructeur de copie de <Function>" << endl;
 #endif
 }
-
 
 Function::Function(string name, Bloc * bloc, Type typeRetour)
 {

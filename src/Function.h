@@ -4,6 +4,7 @@
 #include "Bloc.h"
 #include "Declaration.h"
 
+
 class Function {
 
 
@@ -11,9 +12,9 @@ public:
 
     friend std::ostream& operator<< (std::ostream& stream, const Function& function);
 
-    void setDeclarations(std::list<Declaration*> declarations)
+    void setParameters(std::list<Declaration*> parameters)
     {
-        this->declarations = declarations;
+        this->parameters = parameters;
     }
 
     Function &operator=(const Function &unFunction);
@@ -21,6 +22,10 @@ public:
     std::string getName();
 
     Bloc* getBloc();
+
+    std::list<Declaration*> getParameters();
+
+    void resolveScopeVariables(std::list<Declaration*> declProgramme);
 
     Function(const Function &unFunction);
 
@@ -31,6 +36,6 @@ public:
 private:
     std::string name;
     Bloc* bloc;
-    std::list<Declaration*> declarations;
+    std::list<Declaration*> parameters;
     Type typeRetour;
 };

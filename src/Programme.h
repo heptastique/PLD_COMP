@@ -24,6 +24,8 @@ public:
 
     std::list<Declaration*> getDeclarations();
 
+    void resolveScopeVariables();
+
     Programme &operator=(const Programme &unProgramme);
 
     Programme(const Programme &unProgramme);

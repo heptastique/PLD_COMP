@@ -43,6 +43,13 @@ std::list<Declaration*> Programme::getDeclarations()
     return this->declarations;
 }
 
+void Programme::resolveScopeVariables()
+{
+    for (auto it :  this->functions){
+        it->resolveScopeVariables(this->getDeclarations());
+    }
+}
+
 Programme &Programme::operator=(const Programme &unProgramme)
 {
 }
