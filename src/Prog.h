@@ -19,6 +19,7 @@
 #include "Else.h"
 #include "Initialisation.h"
 #include "DeclarationTab.h"
+#include "VariableIndex.h"
 
 using namespace std;
 
@@ -195,6 +196,12 @@ class Prog : public ProgBaseVisitor
 
     antlrcpp::Any visitLvariablevarleftpart(ProgParser::LvariablevarleftpartContext *ctx) override {
         return (Variable*) visit(ctx->varleftpart());
+    }
+
+    antlrcpp::Any visitLvarleftpartTable(ProgParser::LvarleftpartTableContext *ctx) override {
+        Expression* index = visit(ctx->expr());
+        VariableIndex* varIndex = new VariableIndex(NAME, ctx->Name()->getText(), index);
+        return dynamic_cast<Variable*> (varIndex);
     }
 
     antlrcpp::Any visitLvarleftpart(ProgParser::LvarleftpartContext *ctx) override {

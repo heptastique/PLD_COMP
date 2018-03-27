@@ -18,7 +18,7 @@ public:
 
     virtual ~Variable();
 
-private:
+protected:
     TypeVariable typeVariable;
     std::string valeur;
 };
