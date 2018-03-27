@@ -15,12 +15,31 @@ ControlFlowGraph Function::generateIR()
 	BasicBlock prologBasicBlock;
 
 	// Add Function Definition to Prolog BasicBlock
-	prologBasicBlock.addFunctionDefinition(this->name, 32);
+	prologBasicBlock.addFunctionDefinition(this->name, this->calculateAdressRangeSize());
 
 	// Add Prolog BasicBlock to Function ControlFlowGraph
 	controlFlowGraph.addBasicBlock(prologBasicBlock);
 
 	return controlFlowGraph;
+}
+
+int Function::calculateAdressRangeSize()
+{
+	int taille = 0;
+	
+	for(auto declaration : this->bloc->getDeclarations())
+	{
+		if(declaration->getType() == INT32_T || declaration->getType() == CHAR)
+		{
+			taille += 8;
+		}
+		else if(declaration->getType() == INT64_T)
+		{
+			taille += 16;
+		}
+	}
+
+	return taille;
 }
 
 ostream & operator<<(ostream & stream, const Function & function)
