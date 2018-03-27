@@ -18,6 +18,7 @@
 #include "If.h"
 #include "Else.h"
 #include "Initialisation.h"
+#include "DeclarationTab.h"
 
 using namespace std;
 
@@ -104,6 +105,12 @@ class Prog : public ProgBaseVisitor
     antlrcpp::Any visitLinstrDecl(ProgParser::LinstrDeclContext *ctx) override {
         Declaration* declaration = visit(ctx->decl());
         return dynamic_cast<Instruction*> (declaration);
+    }
+
+    antlrcpp::Any visitLdeclTable(ProgParser::LdeclTableContext *ctx) override {
+        Type type = getTypeFromString(ctx->type()->getText());
+        DeclarationTab* declarationTab = new DeclarationTab(ctx->Name()->toString(), type, ctx->Entier()->getText());
+        return dynamic_cast<Declaration*> (declarationTab);
     }
 
     antlrcpp::Any visitLdecl(ProgParser::LdeclContext *ctx) override {

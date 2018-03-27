@@ -24,7 +24,7 @@ public:
 
     virtual ~Declaration();
 
-private:
+protected:
     Type type;
     std::string name;
 };
