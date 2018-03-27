@@ -43,11 +43,6 @@ Function & Function::operator=(const Function & function)
 
 }
 
-void Function::setDeclarations(list <Declaration*> declarations)
-{
-	this->declarations = declarations;
-}
-
 string Function::getName()
 {
 	return this->name;
@@ -56,6 +51,11 @@ string Function::getName()
 Bloc * Function::getBloc()
 {
 	return this->bloc;
+}
+
+void Function::setParameters(list<Declaration*> parameters)
+{
+    this->parameters = parameters;
 }
 
 std::list<Declaration*> Function::getParameters()

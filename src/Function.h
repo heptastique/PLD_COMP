@@ -13,19 +13,14 @@ class ControlFlowGraph;
 class Function
 {
 	public:
-  
-    void setParameters(std::list<Declaration*> parameters)
-    {
-        this->parameters = parameters;
-    }
 
-		ControlFlowGraph generateIR();
+    ControlFlowGraph generateIR();
 
-		friend ostream & operator<<(ostream & stream, const Function & function);
+    friend ostream & operator<<(ostream & stream, const Function & function);
 
-		void setDeclarations(list <Declaration*> declarations);
+    Function & operator=(const Function & function);
 
-		Function & operator=(const Function & function);
+    void setParameters(list <Declaration*> parameters);
 
     std::list<Declaration*> getParameters();
 

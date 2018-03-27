@@ -40,6 +40,11 @@ std::list<Instruction*> Bloc::getInstructions()
     return this->instructions;
 }
 
+std::list<Declaration*> Bloc::getDeclarations()
+{
+    return this->declarations;
+}
+
 Bloc::Bloc(const Bloc &unBloc) {
 #ifdef MAP
     cout << "Appel au constructeur de copie de <Bloc>" << endl;

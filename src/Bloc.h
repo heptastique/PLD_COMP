@@ -17,6 +17,8 @@ public:
 
     std::list<Instruction*> getInstructions();
 
+    std::list<Declaration*> getDeclarations();
+
     void resolveScopeVariables(std::list<Declaration*> declProgramme, std::list<Declaration*> paramFunction);
 
     Bloc &operator=(const Bloc &unBloc);
