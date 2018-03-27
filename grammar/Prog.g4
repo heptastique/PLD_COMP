@@ -14,10 +14,8 @@ instr: init									# LinstrInit
     | expr ';'                      		# LinstExpr
     ;
 
-init: type Name '[' Entier? ']' '=' '{' valeurs '}' ';' # LinitTable
-	| type Name '=' expr ';'							# Linit
-	;
-	
+init: type initParams (',' initParams)* ';' # LinitTable;
+		
 decl: type declParams (',' declParams)* ';' # Ldecl;
 
 affectation: varleftpart (',' varleftpart)* operation expr (',' expr)* ';'	# Laffectation;
@@ -52,11 +50,17 @@ params: 'void'                              # LparamsVoid
         ;
 
 param: type Name '[' Entier? ']'			# LparamTable
-	| type Name                         	# Lparam;
+	| type Name                         	# Lparam
+	;
 
 declParams: Name '[' Entier ']'				# LdeclparamTable
-			| Name                     		# Ldeclparam;
+			| Name                     		# Ldeclparam
+			;
 			
+initParams: Name '[' Entier? ']' ('=' '{' valeurs '}')? # LinitparamTable
+		| Name ('=' expr)? 								# Linitparam
+		;
+		
 typeretour: 'void'                          # LtyperetourVoid
             | type                          # Ltype
             ;
