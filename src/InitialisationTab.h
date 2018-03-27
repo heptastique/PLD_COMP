@@ -1,16 +1,32 @@
 #pragma once
 
-class InitialisationTab
-{
+
+#include "Initialisation.h"
+#include "Variable.h"
+#include <list>
+
+class InitialisationTab : public Initialisation {
 
 public:
 
-    InitialisationTab & operator = ( const InitialisationTab & unInitialisationTab );
+    void print(std::ostream& stream) const;
 
-    InitialisationTab ( const InitialisationTab & unInitialisationTab );
+    friend std::ostream& operator<< (std::ostream& stream, const InitialisationTab& initialisationTab);
 
-    InitialisationTab ( );
+    void setIndex(std::string size){
+        this->size = size;
+    }
 
-    virtual ~InitialisationTab ( );
+    InitialisationTab &operator=(const InitialisationTab &unInitialisationTab);
+
+    InitialisationTab(Type type, Expression* expression, std::string name, std::list<Variable*> variables);
+
+    virtual ~InitialisationTab();
+
+private:
+
+    // There could be no index
+    std::string size;
+    std::list<Variable*> variables;
 
 };

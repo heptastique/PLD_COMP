@@ -103,6 +103,13 @@ class Prog : public ProgBaseVisitor
         return initialisation;
     }
 
+    /*antlrcpp::Any visitLinitTable(ProgParser::LinitTableContext *ctx) override {
+        Type type = getTypeFromString(ctx->type()->getText());
+        std::list<Variable*> variables = visit(ctx->valeurs());
+        Initialisation* initialisation = new Initialisation(type, expression, ctx->Name()->toString());
+        return initialisation;
+    }*/
+
     antlrcpp::Any visitLinstrDecl(ProgParser::LinstrDeclContext *ctx) override {
         Declaration* declaration = visit(ctx->decl());
         return dynamic_cast<Instruction*> (declaration);
