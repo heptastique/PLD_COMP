@@ -18,11 +18,9 @@ init: type Name '[' Entier? ']' '=' '{' valeurs '}' ';' # LinitTable
 	| type Name '=' expr ';'							# Linit
 	;
 	
-decl: type Name '[' Entier ']' ';'          # LdeclTable
-    | type Name ';'                         # Ldecl
-    ;
+decl: type declParams (',' declParams)* ';' # Ldecl;
 
-affectation: varleftpart operation expr ';'	# Laffectation;
+affectation: varleftpart (',' varleftpart)* operation expr (',' expr)* ';'	# Laffectation;
 
 appelfonct: Name '(' valeurs ')'            # Lappelfonct;
 
@@ -53,8 +51,12 @@ params: 'void'                              # LparamsVoid
         | /* epsilon */                     # LparamsEpsilon
         ;
 
-param: type Name                            # Lparam;
+param: type Name "[" Entier? "]"			# LparamTable
+	| type Name                         	# Lparam;
 
+declParams: Name "[" Entier "]"				# LdeclparamTable
+			| Name                     		# Ldeclparam;
+			
 typeretour: 'void'                          # LtyperetourVoid
             | type                          # Ltype
             ;
