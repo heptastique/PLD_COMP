@@ -1,0 +1,7 @@
+Programme:
+ Fonction: Name=main TypeRetour=0
+     Bloc:
+      Instruction: AppelFunction: Name=putchar Variable: Type=2 Valeur='a' 
+
+
+Fin

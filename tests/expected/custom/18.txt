@@ -1,0 +1,7 @@
+Programme:
+ Fonction: Name=main TypeRetour=0
+     Bloc:
+      Instruction: RetourFonction: Expression: Variable: Type=1 Valeur=8 
+
+
+Fin
