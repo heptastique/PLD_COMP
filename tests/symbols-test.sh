@@ -61,6 +61,7 @@ assert_contains_file "../bin/app Front/ValidPrograms/32_OperatorModAssign.c"    
 assert_contains_file "../bin/app Front/ValidPrograms/33_OperatorBitAndAssign.c"             "expected/front/valid/33.txt"
 assert_contains_file "../bin/app Front/ValidPrograms/34_OperatorBitOrAssign.c"              "expected/front/valid/34.txt"
 assert_contains_file "../bin/app Front/ValidPrograms/35_OperatorBitXorAssign.c"             "expected/front/valid/35.txt"
+
 assert_contains_file "../bin/app Front/ValidPrograms/37_Par.c"                              "expected/front/valid/37.txt"
 assert_contains_file "../bin/app Front/ValidPrograms/38_ArithmeticExpression.c"             "expected/front/valid/38.txt"
 assert_contains_file "../bin/app Front/ValidPrograms/39_ArithmeticExpressionWithPar.c"      "expected/front/valid/39.txt"
@@ -68,12 +69,17 @@ assert_contains_file "../bin/app Front/ValidPrograms/40_If.c"                   
 assert_contains_file "../bin/app Front/ValidPrograms/41_IfElse.c"                           "expected/front/valid/41.txt"
 assert_contains_file "../bin/app Front/ValidPrograms/42_While.c"                            "expected/front/valid/42.txt"
 assert_contains_file "../bin/app Front/ValidPrograms/44_IfElseIf.c"                         "expected/front/valid/44.txt"
+assert_contains_file "../bin/app Front/ValidPrograms/46_ArrayDec.c"                         "expected/front/valid/46.txt"
+assert_contains_file "../bin/app Front/ValidPrograms/47_ArrayUse.c"                         "expected/front/valid/47.txt"
+
 assert_contains_file "../bin/app Front/ValidPrograms/50_CharConst.c"                        "expected/front/valid/50.txt"
 assert_contains_file "../bin/app Front/ValidPrograms/51_CharConstSpecial.c"                 "expected/front/valid/51.txt"
 assert_contains_file "../bin/app Front/ValidPrograms/52_Int64Dec.c"                         "expected/front/valid/52.txt"
 assert_contains_file "../bin/app Front/ValidPrograms/53_FunctionCallPutChar.c"              "expected/front/valid/53.txt"
 assert_contains_file "../bin/app Front/ValidPrograms/54_FunctionCallCustom.c"               "expected/front/valid/54.txt"
 assert_contains_file "../bin/app Front/ValidPrograms/55_Return.c"                           "expected/front/valid/55.txt"
+
 assert_contains_file "../bin/app Front/ValidPrograms/57_VarInitialization.c"                "expected/front/valid/57.txt"
+assert_contains_file "../bin/app Front/ValidPrograms/58_MultipleVarDeclarations.c"          "expected/front/valid/58.txt"
 
 assert_end examples

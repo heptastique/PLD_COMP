@@ -5,12 +5,12 @@ using namespace std;
 
 void VariableIndex::print(std::ostream &stream) const
 {
-    stream << " VariableIndex: " << "Type=" << typeVariable << " Valeur=" << valeur << " " << "Tab=" << *index ;
+    stream << " VariableIndex: " << "Type=" << typeVariable << " Valeur=" << valeur << " " << " Tab=" << *index ;
 }
 
 std::ostream& operator<<(std::ostream& stream, const VariableIndex& variableIndex)
 {
-    stream << " VariableIndex: " << "Type=" << variableIndex.typeVariable << " Valeur=" << variableIndex.valeur << "Tab=" << *variableIndex.index ;
+    stream << " VariableIndex: " << "Type=" << variableIndex.typeVariable << " Valeur=" << variableIndex.valeur << " Tab=" << *variableIndex.index ;
     return stream;
 }
 

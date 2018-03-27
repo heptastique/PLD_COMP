@@ -1,0 +1,8 @@
+Programme:
+ Fonction: Name=main TypeRetour=0
+     Bloc:
+      Instruction: Declaration: Name=a Type=2
+      Instruction: Declaration: Name=b Type=2
+
+
+Fin
