@@ -14,8 +14,11 @@ ControlFlowGraph Function::generateIR()
 	// Create Prolog BasicBlock
 	BasicBlock prologBasicBlock;
 
+	// Calculate Address Range Size
+	int addressRangeSize = calculateAddressRangeSize();
+
 	// Add Function Definition to Prolog BasicBlock
-	prologBasicBlock.addFunctionDefinition(this->name, this->calculateAdressRangeSize());
+	prologBasicBlock.addFunctionDefinition(name, adressRangeSize());
 
 	// Add Prolog BasicBlock to Function ControlFlowGraph
 	controlFlowGraph.addBasicBlock(prologBasicBlock);
@@ -26,8 +29,8 @@ ControlFlowGraph Function::generateIR()
 int Function::calculateAdressRangeSize()
 {
 	int taille = 0;
-	
-	for(auto declaration : this->bloc->getDeclarations())
+
+	for(auto declaration : bloc->getDeclarations())
 	{
 		if(declaration->getType() == INT32_T || declaration->getType() == CHAR)
 		{
