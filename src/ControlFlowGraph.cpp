@@ -21,10 +21,20 @@ void ControlFlowGraph::generateProlog(ostream & os, string functionName, int add
 
 	os << functionName << ":\n";
 	os << "\n";
-	os << "\tpusq\t%rbp\n";
+	os << "\tpushq\t%rbp\n";
 	os << "\tmovq\t%rsp, %rbp\n";
 	os << "\tsubq\t$" << addressRangeSize << ", %rsp\n";
 	os << "\n";
+}
+void ControlFlowGraph::generateEpilog(ostream & os, int addressRangeSize) const
+{
+	#ifdef MAP
+		cout << "Appel a la methode ControlFlowGraph::generateProlog" << endl;
+	#endif
+
+	os << "\taddq\t$" << addressRangeSize << ", %rsp\n";
+	os << "\tpopq\t%rsp\n";
+	os << "\tretq\n";
 }
 
 // Generate ASM
@@ -49,7 +59,9 @@ void ControlFlowGraph::generateASM(ostream & os) const
 				// Generate Body
 
 				// Generate Epilog
-			}
+			generateEpilog(os,stoi(iRInstr.getParam(1)));
+			}	
+
 		}
 	}
 }
@@ -64,6 +76,7 @@ ControlFlowGraph::ControlFlowGraph(const ControlFlowGraph &controlFlowGraph)
 
 	basicBlocks = controlFlowGraph.getBasicBlocks();
 }
+
 
 ControlFlowGraph::ControlFlowGraph()
 {
