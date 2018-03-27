@@ -14,7 +14,7 @@ instr: init									# LinstrInit
     | expr ';'                      		# LinstExpr
     ;
 
-init: type initParams (',' initParams)* ';' # LinitTable;
+init: type initParams (',' initParams)* ';' # Linit;
 		
 decl: type declParams (',' declParams)* ';' # Ldecl;
 
