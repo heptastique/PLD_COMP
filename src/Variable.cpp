@@ -21,7 +21,7 @@ Variable &Variable::operator=(const Variable &unVariable) {
 void Variable::resolveScopeVariables(std::list<Declaration*> declProgramme, std::list<Declaration*> paramFunction, std::list<Declaration*> declBloc){
     bool notfound = true;
     for ( auto decl : declBloc){
-        if ( decl->getName().compare(this->valeur))
+        if ( decl->getName().compare(this->valeur) == 0)
         {
             notfound = false;
             this->declarationAssociee = decl;
@@ -30,7 +30,7 @@ void Variable::resolveScopeVariables(std::list<Declaration*> declProgramme, std:
     }
     if ( notfound ){
         for ( auto decl : paramFunction){
-            if ( decl->getName().compare(this->valeur))
+            if ( decl->getName().compare(this->valeur) == 0)
             {
                 notfound = false;
                 this->declarationAssociee = decl;
@@ -40,7 +40,7 @@ void Variable::resolveScopeVariables(std::list<Declaration*> declProgramme, std:
     }
     if ( notfound ){
         for ( auto decl : declProgramme){
-            if ( decl->getName().compare(this->valeur))
+            if ( decl->getName().compare(this->valeur) == 0)
             {
                 notfound = false;
                 this->declarationAssociee = decl;
