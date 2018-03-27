@@ -2,21 +2,56 @@ using namespace std;
 
 # include "ControlFlowGraph.h"
 
+list <BasicBlock> ControlFlowGraph::getBasicBlocks() const
+{
+	return basicBlocks;
+}
 
-void ControlFlowGraph::generateASM(std::ostream &os) const
+void ControlFlowGraph::addBasicBlock(BasicBlock basicBlock)
+{
+	basicBlocks.push_back(basicBlock);
+}
+
+// Generate Prolog of Function
+void ControlFlowGraph::generateProlog(ostream & os, string functionName, int addressRangeSize) const
 {
 	#ifdef MAP
-		cout << "Appel a la methode generateASM <ControlFlowGraph>" << endl;
+		cout << "Appel a la methode ControlFlowGraph::generateProlog" << endl;
 	#endif
 
-	
-	os << ".text\n";
-	os << ".global main\n\n";
+	os << functionName << ":\n";
+	os << "\n";
+	os << "\tpusq\t%rbp\n";
+	os << "\tmovq\t%rsp, %rbp\n";
+	os << "\tsubq\t$" << addressRangeSize << ", %rsp\n";
+	os << "\n";
+}
 
-	os << "main:\n\n";
+// Generate ASM
+void ControlFlowGraph::generateASM(ostream & os) const
+{
+	#ifdef MAP
+		cout << "Appel a la methode ControlFlowGraph::generateASM" << endl;
+	#endif
 
-	os << "\tret\n\n";
+	// For each BasicBlock of ControlFLowGraph
+	for (auto basicBlock : basicBlocks)
+	{
+		// For each IRInstr of BasicBlock
+		for (auto iRInstr : basicBlock.getIRInstrs())
+		{
+			// If IRInstr if a Function Declaration
+			if (iRInstr.getMnemonique() == FUNCTION_DECLARATION)
+			{
+				// Generate Prolog of Function
+				generateProlog(os, iRInstr.getParam(0), stoi(iRInstr.getParam(1)));
 
+				// Generate Body
+
+				// Generate Epilog
+			}
+		}
+	}
 }
 
 ControlFlowGraph::ControlFlowGraph(const ControlFlowGraph &controlFlowGraph)
@@ -24,6 +59,10 @@ ControlFlowGraph::ControlFlowGraph(const ControlFlowGraph &controlFlowGraph)
 	#ifdef MAP
 		cout << "Appel au constructeur de copie de <ControlFlowGraph>" << endl;
 	#endif
+
+	programme = controlFlowGraph.programme;
+
+	basicBlocks = controlFlowGraph.getBasicBlocks();
 }
 
 ControlFlowGraph::ControlFlowGraph()
@@ -33,13 +72,13 @@ ControlFlowGraph::ControlFlowGraph()
 	#endif
 }
 
-ControlFlowGraph::ControlFlowGraph(Programme * prog)
+ControlFlowGraph::ControlFlowGraph(Programme * programme)
 {
 	#ifdef MAP
 		cout << "Appel au constructeur de <ControlFlowGraph>" << endl;
 	#endif
 
-	this->prog = prog;
+	this->programme = programme;
 }
 
 ControlFlowGraph::~ControlFlowGraph()
