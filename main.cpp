@@ -8,13 +8,16 @@
 # include "grammar/ProgBaseVisitor.h"
 # include "src/Prog.h"
 # include "src/ControlFlowGraph.h"
+# include "src/IR.h"
 
 using namespace antlr4;
 using namespace std;
 
 int main (int argc, const char * argv[])
 {
-	// C Programm
+	/*
+		Input C Programm
+	*/
 
 	cout << "Reading C Program" << endl;
 
@@ -23,7 +26,7 @@ int main (int argc, const char * argv[])
 
 	FILE * file;
 
-	//check if input is given
+	// check if input is given
 	if (argc < 2)
 	{
 		cout << "No input file given" << endl;
@@ -81,7 +84,11 @@ int main (int argc, const char * argv[])
 
 	cout << "C Program read" << endl;
 
-	// C Program -> C++ Memory Representation
+
+
+	/*
+		C Program -> C++ Memory Representation
+	*/
 
 	cout << "Generating Abstract Syntaxic Tree" << endl;
 
@@ -93,32 +100,51 @@ int main (int argc, const char * argv[])
 
 	Prog visitor;
 
-	Programme * prog = visitor.visit(tree);
+	Programme * programme = visitor.visit(tree);
 
 	cout << "Fin" << endl;
 	cout << "Abstract Syntaxic Tree generated" << endl;
 
-	// C++ Memory Representation -> Intermediate Representation
+
+
+	/*
+		C++ Memory Representation -> Intermediate Representation
+	*/
 
 	cout << "Generating Intermediate Representation" << endl;
 
-	ControlFlowGraph controlFlowGraph(prog->generateIR());
+	// Generate IR from Abstract Syntaxic Tree
+
+	IR iR = programme->generateIR();
 
 	cout << "Intermediate Representation generated" << endl;
 
-	// Intermediate Representation -> Assembly
+
+
+	/*
+		Intermediate Representation -> Assembly
+	*/
 
 	cout << "Generating Assembly" << endl;
+
 	ofstream aSMFile;
+
 	aSMFile.open("./target/prog.s");
-	if(aSMFile.bad()||aSMFile.fail()||!aSMFile.good())
+
+	if (aSMFile.bad() || aSMFile.fail() || !aSMFile.good())
 	{
-		cout<<"Failed to open prog.s"<<endl;
+		cout << "Failed to open prog.s" << endl;
 	}
-	controlFlowGraph.generateASM(aSMFile);
+
+	// Generate ASM from IR
+
+	iR.generateASM(aSMFile);
+
 	aSMFile.close();
 
 	cout << "Assembly generated" << endl;
+
+
 
 	return 0;
 }

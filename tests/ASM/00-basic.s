@@ -1,7 +1,5 @@
-.text
-.global main
-
 main:
 
-	ret
-
+	pusq	%rbp
+	movq	%rsp, %rbp
+	subq	$32, %rsp

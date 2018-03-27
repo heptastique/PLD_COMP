@@ -3,38 +3,45 @@
 # include "Function.h"
 # include "Declaration.h"
 # include "ControlFlowGraph.h"
+# include "IR.h"
 
 # include <list>
 
+using namespace std;
+
+class IR;
+class Function;
 class ControlFlowGraph;
 
-class Programme {
+class Programme
+{
+	public:
 
-public:
+		IR generateIR();
 
-    ControlFlowGraph generateIR();
+		friend ostream & operator<<(ostream & stream, const Programme & programme);
 
-    friend std::ostream& operator<< (std::ostream& stream, const Programme& programme);
+		void addFunction(Function * function);
 
-    void addFunction (Function * function);
+		void addDeclaration(Declaration * declaration);
 
-    void addDeclaration (Declaration * declaration);
+		list <Function*> getFunctions();
 
-    std::list<Function*> getFunctions();
+		list <Declaration*> getDeclarations();
 
-    std::list<Declaration*> getDeclarations();
+		Programme & operator=(const Programme & programme);
 
     void resolveScopeVariables();
 
-    Programme &operator=(const Programme &unProgramme);
+		Programme(const Programme & programme);
 
-    Programme(const Programme &unProgramme);
+		Programme();
 
-    Programme();
+		virtual ~Programme();
 
-    virtual ~Programme();
+	private :
 
-    std::list<Function*> functions;
-    std::list<Declaration*> declarations;
+		list <Function*> functions;
+		list <Declaration*> declarations;
 };
 
