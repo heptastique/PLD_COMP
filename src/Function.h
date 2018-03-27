@@ -1,10 +1,10 @@
 # pragma once
 
+# include <string>
+
 # include "Bloc.h"
 # include "Declaration.h"
 # include "ControlFlowGraph.h"
-
-# include <string>
 
 using namespace std;
 
@@ -14,28 +14,34 @@ class Function
 {
 	public:
 
-		ControlFlowGraph generateIR();
+    ControlFlowGraph generateIR();
 
-		friend ostream & operator<<(ostream & stream, const Function & function);
+    int calculateAddressRangeSize();
 
-		void setDeclarations(list <Declaration*> declarations);
+    friend ostream & operator<<(ostream & stream, const Function & function);
 
-		Function & operator=(const Function & function);
+    Function & operator=(const Function & function);
+
+    void setParameters(list <Declaration*> parameters);
+
+    std::list<Declaration*> getParameters();
+
+    void resolveScopeVariables(std::list<Declaration*> declProgramme);
 
 		string getName();
 
 		Bloc * getBloc();
 
 		Function(const Function & function);
-
-		Function(string name, Bloc * bloc, Type typeRetour);
+  
+    Function(string name, Bloc * bloc, Type typeRetour);
 
 		virtual ~Function();
 
-	private:
 
-		string name;
-		Bloc * bloc;
-		list <Declaration*> declarations;
-		Type typeRetour;
+private:
+    std::string name;
+    Bloc* bloc;
+    std::list<Declaration*> parameters;
+    Type typeRetour;
 };

@@ -3,6 +3,7 @@ using namespace std;
 #include "Bloc.h"
 #include <iostream>
 
+
 ostream& operator<<(ostream& stream, const Bloc& bloc)
 {
     stream << "     Bloc:" << endl;
@@ -16,6 +17,19 @@ ostream& operator<<(ostream& stream, const Bloc& bloc)
 void Bloc::addInstruction(Instruction *instruction)
 {
     this->instructions.emplace_back(instruction);
+    if(Declaration* declaration = dynamic_cast<Declaration*>(instruction))
+    {
+        addDeclaration(declaration);
+    }
+}
+
+void Bloc::addDeclaration(Declaration *declaration)
+{
+    this->declarations.emplace_back(declaration);
+}
+
+void Bloc::resolveScopeVariables(std::list<Declaration*> declProgramme, std::list<Declaration*> paramFunction){
+
 }
 
 Bloc &Bloc::operator=(const Bloc &unBloc) {
@@ -24,6 +38,11 @@ Bloc &Bloc::operator=(const Bloc &unBloc) {
 std::list<Instruction*> Bloc::getInstructions()
 {
     return this->instructions;
+}
+
+std::list<Declaration*> Bloc::getDeclarations()
+{
+    return this->declarations;
 }
 
 Bloc::Bloc(const Bloc &unBloc) {

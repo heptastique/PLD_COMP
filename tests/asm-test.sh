@@ -12,6 +12,9 @@ mkdir -p target
 ../bin/app Custom/01-simple-func.c > ./target/output
 assert_file "cat ./target/prog.s" "./ASM/00-basic.s"
 
+../bin/app Front/ValidPrograms/01_SimpleDeclaration.c > ./target/output
+assert_file "cat ./target/prog.s" "./ASM/01-simpleDeclaration.s"
+
 ## Clean up after tests
 rm -rf target
 
