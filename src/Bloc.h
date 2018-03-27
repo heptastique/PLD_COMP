@@ -11,9 +11,9 @@ public:
 
     friend std::ostream& operator<< (std::ostream& stream, const Bloc& bloc);
 
-    void addInstruction(Instruction * instruction);
+    void addInstructions(std::list<Instruction*> instructions);
 
-    void addDeclaration(Declaration * declaration);
+    void addDeclarations(std::list<Declaration*> declarations);
 
     std::list<Instruction*> getInstructions();
 

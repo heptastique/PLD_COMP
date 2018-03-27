@@ -4,10 +4,10 @@
 #include "../../src/Type.h"
 #include "../../src/Declaration.h"
 
-Instruction* AddInstruction(Instruction* inst){
+Instruction* AddInstruction(std::list<Instruction*> insts){
     Bloc* b = new Bloc();
 
-    b->addInstruction(inst);
+    b->addInstructions(insts);
 
     std::list<Instruction*> list = b->getInstructions();
 
@@ -16,5 +16,7 @@ Instruction* AddInstruction(Instruction* inst){
 
 TEST_CASE("Instruction is added","[bloc]" ) {
     Instruction * inst = new Declaration("name",CHAR);
-    REQUIRE ( AddInstruction(inst) == inst);
+    std::list<Instruction*> insts;
+    insts.emplace_back(inst);
+    REQUIRE ( AddInstruction(insts) == inst);
 }

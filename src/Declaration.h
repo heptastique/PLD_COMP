@@ -14,6 +14,8 @@ public:
 
     Declaration &operator=(const Declaration &unDeclaration);
 
+    void setType(Type type);
+
     Type getType();
 
     std::string getName();

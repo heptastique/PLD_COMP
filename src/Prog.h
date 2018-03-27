@@ -32,7 +32,7 @@ class Prog : public ProgBaseVisitor
 	{
         Programme* programme = new Programme();
         for(auto i : ctx->decl()){
-            programme->addDeclaration(visit(i));
+            programme->addDeclarations(visit(i));
         }
         for(auto i : ctx->fun()){
             programme->addFunction(visit(i));
@@ -46,7 +46,7 @@ class Prog : public ProgBaseVisitor
         Bloc* b = new Bloc();
         auto instructions = ctx->instr();
         for(auto i : instructions ){
-            b->addInstruction(visit(i));
+            b->addInstructions(visit(i));
         }
         return b;
     }
@@ -111,20 +111,37 @@ class Prog : public ProgBaseVisitor
     }*/
 
     antlrcpp::Any visitLinstrDecl(ProgParser::LinstrDeclContext *ctx) override {
-        Declaration* declaration = visit(ctx->decl());
-        return dynamic_cast<Instruction*> (declaration);
+        std::list<Declaration*> declarations = visit(ctx->decl());
+        std::list<Instruction*> inst;
+        for(auto decl : declarations)
+        {
+            inst.emplace_back(dynamic_cast<Instruction*>(decl));
+        }
+        return inst;
     }
 
-    antlrcpp::Any visitLdeclTable(ProgParser::LdeclTableContext *ctx) override {
-        Type type = getTypeFromString(ctx->type()->getText());
-        DeclarationTab* declarationTab = new DeclarationTab(ctx->Name()->toString(), type, ctx->Entier()->getText());
-        return dynamic_cast<Declaration*> (declarationTab);
+    antlrcpp::Any visitLdeclparamTable(ProgParser::LdeclparamTableContext *ctx) override {
+        DeclarationTab* declarationTab = new DeclarationTab (ctx->Name()->getText(), VOID, ctx->Entier()->getText());
+        return dynamic_cast<Declaration*>(declarationTab);
+    }
+
+    antlrcpp::Any visitLdeclparam(ProgParser::LdeclparamContext *ctx) override {
+        Declaration* declaration = new Declaration (ctx->Name()->getText(), VOID);
+        return declaration;
     }
 
     antlrcpp::Any visitLdecl(ProgParser::LdeclContext *ctx) override {
+        std::list<Declaration*> declarations;
         Type type = getTypeFromString(ctx->type()->getText());
-        Declaration* declaration = new Declaration(ctx->Name()->toString(), type);
-        return declaration;
+
+        for(auto it : ctx->declParams())
+        {
+            Declaration* declaration = visit(it);
+            declaration->setType(type);
+            declarations.emplace_back(declaration);
+        }
+
+        return declarations;
     }
 
     antlrcpp::Any visitLinstAppelfonct(ProgParser::LinstAppelfonctContext *ctx) override {
@@ -153,11 +170,11 @@ class Prog : public ProgBaseVisitor
     }
 
     antlrcpp::Any visitLaffectation(ProgParser::LaffectationContext *ctx) override {
-        Variable* var = (Variable*) visit(ctx->varleftpart());
+        /*Variable* var = (Variable*) visit(ctx->varleftpart());
         Operateur operateur = (Operateur) visit(ctx->operation());
         Expression* expression = (Expression*) visit(ctx->expr());
         Affectation* affection = new Affectation(var, operateur, expression);
-        return dynamic_cast<Instruction*>(affection);
+        return dynamic_cast<Instruction*>(affection);*/
     }
 
     antlrcpp::Any visitLinsWhile(ProgParser::LinsWhileContext *ctx) override {

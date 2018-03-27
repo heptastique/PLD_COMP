@@ -14,18 +14,23 @@ ostream& operator<<(ostream& stream, const Bloc& bloc)
     return stream;
 }
 
-void Bloc::addInstruction(Instruction *instruction)
+void Bloc::addInstructions(std::list<Instruction*> instructions)
 {
-    this->instructions.emplace_back(instruction);
-    if(Declaration* declaration = dynamic_cast<Declaration*>(instruction))
-    {
-        addDeclaration(declaration);
+    for(auto inst : instructions){
+        this->instructions.emplace_back(inst);
+        if(Declaration* declaration = dynamic_cast<Declaration*>(inst))
+        {
+            this->declarations.emplace_back(declaration);
+        }
     }
 }
 
-void Bloc::addDeclaration(Declaration *declaration)
+void Bloc::addDeclarations(std::list<Declaration*> declarations)
 {
-    this->declarations.emplace_back(declaration);
+    for(auto decl : declarations)
+    {
+        this->declarations.emplace_back(decl);
+    }
 }
 
 void Bloc::resolveScopeVariables(std::list<Declaration*> declProgramme, std::list<Declaration*> paramFunction){
