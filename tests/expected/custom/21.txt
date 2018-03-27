@@ -1,0 +1,10 @@
+Programme:
+ Fonction: Name=main TypeRetour=0
+     Bloc:
+      Instruction: Declaration: Name=a Type=1
+      Instruction: Declaration: Name=b Type=1
+      Instruction: Affectation:  Variable: Type=0 Valeur=a  Operateur=0 Expression: Variable: Type=0 Valeur=b 
+      Instruction: Affectation:  Variable: Type=0 Valeur=a  Operateur=0 Expression: Variable: Type=2 Valeur='c' 
+
+
+Fin

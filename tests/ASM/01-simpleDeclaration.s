@@ -2,8 +2,8 @@ main:
 
 	pushq	%rbp
 	movq	%rsp, %rbp
-	subq	$0, %rsp
+	subq	$8, %rsp
 
-	addq	$0, %rsp
+	addq	$8, %rsp
 	popq	%rbp
 	retq

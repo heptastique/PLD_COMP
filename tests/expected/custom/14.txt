@@ -1,0 +1,6 @@
+Programme:
+ Fonction: Name=func TypeRetour=3
+     Bloc:
+
+
+Fin

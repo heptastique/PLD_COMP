@@ -15,6 +15,8 @@ public:
 
     void addDeclarations(std::list<Declaration*> declarations);
 
+    void addDeclaration(Declaration * declaration);
+
     std::list<Instruction*> getInstructions();
 
     std::list<Declaration*> getDeclarations();
