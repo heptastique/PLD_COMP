@@ -26,7 +26,7 @@ ControlFlowGraph Function::generateIR()
 	// Create Body BasicBlock
 	BasicBlock bodyBasicBlock;
 
-	bodyBasicBlock = bloc->generateIR();
+	bloc->generateIR(&controlFlowGraph);
 
 	// Add Body BasicBlock to Function ControlFlowGraph
 	controlFlowGraph.addBasicBlock(bodyBasicBlock);

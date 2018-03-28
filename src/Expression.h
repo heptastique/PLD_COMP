@@ -2,12 +2,13 @@
 
 #include <iostream>
 #include "Instruction.h"
-# include "ControlFlowGraph.h"
+// # include "ControlFlowGraph.h"
 
 class Expression : public Instruction {
+
 protected:
 
-	virtual void generateIR(ControlFlowGraph * controlFlowGraph) = 0;
+	//virtual void generateIR(ControlFlowGraph * controlFlowGraph) = 0;
 
 	virtual void print(std::ostream& stream) const = 0;
 

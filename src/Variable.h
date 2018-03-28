@@ -3,10 +3,12 @@
 #include <ostream>
 #include "Type.h"
 #include "Expression.h"
+# include "ControlFlowGraph.h"
 
 class Variable : public Expression {
+
 public:
-	void generateIR(ControlFlowGraph * controlFlowGraph);
+	//void generateIR(ControlFlowGraph * controlFlowGraph);
 
     void print(std::ostream& stream) const;
 

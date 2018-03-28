@@ -1,7 +1,7 @@
 #pragma once
 
 #include "ostream"
-# include "ControlFlowGraph.h"
+//# include "ControlFlowGraph.h"
 
 //class ControlFlowGraph;
 
@@ -9,7 +9,7 @@ class Instruction {
 
 protected:
 
-	virtual void generateIR(ControlFlowGraph * controlFlowGraph) = 0;
+	//void generateIR(ControlFlowGraph * controlFlowGraph);
 
 	virtual void print(std::ostream& stream) const = 0;
 

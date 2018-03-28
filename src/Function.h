@@ -10,6 +10,7 @@ using namespace std;
 
 class ControlFlowGraph;
 class Bloc;
+class Declaration;
 
 class Function
 {

@@ -12,6 +12,7 @@ using namespace std;
 class IR;
 class Function;
 class ControlFlowGraph;
+class Declaration;
 
 class Programme
 {
