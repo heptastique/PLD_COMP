@@ -21,6 +21,7 @@
 #include "DeclarationTab.h"
 #include "VariableIndex.h"
 #include "InitialisationTab.h"
+#include "VariableOpe.h"
 
 using namespace std;
 
@@ -265,6 +266,30 @@ class Prog : public ProgBaseVisitor
         return dynamic_cast<Variable*> (varIndex);
     }
 
+    antlrcpp::Any visitLvariablevarleftpartpre(ProgParser::LvariablevarleftpartpreContext *ctx) override {
+        Variable* variable = visit(ctx->varleftpart());
+        PrePos prePos = PREDEC;
+        if((bool)visit(ctx->prepostop()))
+        {
+            prePos = PREINC;
+        }
+        VariableOpe* variableOpe = new VariableOpe(NAME, variable->getValeur(), prePos);
+        delete variable;
+        return dynamic_cast<Variable*>(variableOpe);
+    }
+
+    antlrcpp::Any visitLvariablevarleftpartpos(ProgParser::LvariablevarleftpartposContext *ctx) override {
+        Variable* variable = visit(ctx->varleftpart());
+        PrePos prePos = POSDEC;
+        if((bool)visit(ctx->prepostop()))
+        {
+            prePos = POSINC;
+        }
+        VariableOpe* variableOpe = new VariableOpe(NAME, variable->getValeur(), prePos);
+        delete variable;
+        return dynamic_cast<Variable*>(variableOpe);
+    }
+
     antlrcpp::Any visitLvarleftpart(ProgParser::LvarleftpartContext *ctx) override {
         Variable* var = new Variable(NAME, ctx->Name()->getText());
         return var;
@@ -432,6 +457,14 @@ class Prog : public ProgBaseVisitor
 
     antlrcpp::Any visitLoperationbinaireXorbitwise(ProgParser::LoperationbinaireXorbitwiseContext *ctx) override {
         return XORBITWISEB;
+    }
+
+    antlrcpp::Any visitLprepostopInc(ProgParser::LprepostopIncContext *ctx) override {
+        return true;
+    }
+
+    antlrcpp::Any visitLprepostopDec(ProgParser::LprepostopDecContext *ctx) override {
+        return false;
     }
 
     antlrcpp::Any visitLint32_t(ProgParser::Lint32_tContext *ctx) override {

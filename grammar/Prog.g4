@@ -28,8 +28,8 @@ valeurs: variable (',' variable)*           # Lvaleurs
         | /* epsilon */                     # LvaleursEpsilon
         ;
 
-variable: prepostop varleftpart            # Lvariablevarleftpartpre
-        | varleftpart prepostop            # Lvariablevarleftpartpos
+variable: prepostop varleftpart             # Lvariablevarleftpartpre
+        | varleftpart prepostop             # Lvariablevarleftpartpos
         | varleftpart                       # Lvariablevarleftpart
         | Entier                            # LvariableEntier
         | Caractere                         # LvariableCaractere
