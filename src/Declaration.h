@@ -14,6 +14,8 @@ public:
 
     Declaration &operator=(const Declaration &unDeclaration);
 
+    void setType(Type type);
+
     Type getType();
 
     std::string getName();
@@ -24,7 +26,7 @@ public:
 
     virtual ~Declaration();
 
-private:
+protected:
     Type type;
     std::string name;
 };

@@ -20,6 +20,11 @@ Declaration &Declaration::operator=(const Declaration &unDeclaration)
 {
 }
 
+void Declaration::setType(Type type)
+{
+    this->type = type;
+}
+
 Type Declaration::getType()
 {
     return this->type;

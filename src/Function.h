@@ -14,29 +14,29 @@ class Function
 {
 	public:
 
+	friend ostream & operator<<(ostream & stream, const Function & function);
+
     ControlFlowGraph generateIR();
 
     int calculateAddressRangeSize();
 
-    friend ostream & operator<<(ostream & stream, const Function & function);
-
-    Function & operator=(const Function & function);
-
-    void setParameters(list <Declaration*> parameters);
-
-    std::list<Declaration*> getParameters();
-
     void resolveScopeVariables(std::list<Declaration*> declProgramme);
 
-		string getName();
+	void setParameters(list <Declaration*> parameters);
 
-		Bloc * getBloc();
+	string getName();
 
-		Function(const Function & function);
+	std::list<Declaration*> getParameters();
+
+	Bloc * getBloc();
+
+	Function & operator=(const Function & function);
+
+	Function(const Function & function);
   
     Function(string name, Bloc * bloc, Type typeRetour);
 
-		virtual ~Function();
+	virtual ~Function();
 
 
 private:

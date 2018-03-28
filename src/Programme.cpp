@@ -50,9 +50,12 @@ void Programme::addFunction(Function *function)
 	this->functions.emplace_back(function);
 }
 
-void Programme::addDeclaration(Declaration *declaration)
+void Programme::addDeclarations(list<Declaration*> declarations)
 {
-	this->declarations.emplace_back(declaration);
+	for(auto decl : declarations){
+		this->declarations.emplace_back(decl);
+	}
+
 }
 
 list <Function*> Programme::getFunctions()
