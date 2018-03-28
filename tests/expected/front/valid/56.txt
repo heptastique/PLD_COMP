@@ -4,15 +4,15 @@ Programme:
       DeclarationTab: Name=a Type=1 Size=0
       Declaration: Name=n Type=1
      Bloc:
-      Instruction: Initialisation: Type=1 Name=i Expression: VariableIndex: Type=0 Valeur=a  Tab=Expression: Variable: Type=0 Valeur=i
-      Instruction: RetourFonction: Expression: Variable: Type=0 Valeur=result
+      Instruction: Initialisation: Type=1 Name=i Expression: VariableIndex: Type=0 Valeur=a  Tab=Expression: Variable: Type=0 Valeur=i 
+      Instruction: RetourFonction: Expression: Variable: Type=0 Valeur=result 
 
  Fonction: Name=main TypeRetour=0
      Bloc:
       Instruction: DeclarationTab: Name=a Type=1 Size=10
       Instruction: Declaration: Name=i Type=1
       Instruction: Declaration: Name=r Type=1
-      Instruction: Affectation:  Variable: Type=0 Valeur=r  Operateur=0 Expression: AppelFunction: Name=function Variable: Type=0 Valeur=a  Variable: Type=1 Valeur=10
+      Instruction: Affectation:  Variable: Type=0 Valeur=r  Operateur=0 Expression: AppelFunction: Name=function Variable: Type=0 Valeur=a  Variable: Type=1 Valeur=10 
 
 
 
