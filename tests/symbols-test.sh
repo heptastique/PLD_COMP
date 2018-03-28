@@ -30,6 +30,7 @@ assert_contains_file "../bin/app Custom/21-affectation-variable.c"              
 assert_contains_file "../bin/app Custom/22-return-fun.c"                                    "expected/custom/22.txt"
 assert_contains_file "../bin/app Custom/24-function-call-index.c"                           "expected/custom/24.txt"
 assert_contains_file "../bin/app Custom/25-inc-dec.c"                         			    "expected/custom/25.txt"
+assert_contains_file "../bin/app Custom/26-mult-init.c"                         			"expected/custom/26.txt"
 
 # Given tests
 

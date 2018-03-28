@@ -17,6 +17,10 @@ public:
         this->size = size;
     }
 
+    void setType(Type type){
+        this->type = type;
+    }
+
     InitialisationTab &operator=(const InitialisationTab &unInitialisationTab);
 
     InitialisationTab(Type type, std::string name, std::list<Variable*> variables);

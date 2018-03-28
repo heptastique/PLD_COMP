@@ -13,6 +13,10 @@ public:
 
     friend std::ostream& operator<< (std::ostream& stream, const Initialisation& initialisation);
 
+    void setType(Type type){
+        this->type = type;
+    }
+
     Initialisation &operator=(const Initialisation &unInitialisation);
 
     Initialisation(const Initialisation &unInitialisation);

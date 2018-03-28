@@ -4,8 +4,8 @@ prog: include* decl* fun+                   # Lprog;
 
 fun: typeretour Name '(' params ')' bloc    # Lfun;
 
-instr: init									# LinstrInit
-	| decl                                  # LinstrDecl
+instr: decl                                  # LinstrDecl
+	| init									# LinstrInit
 	| affectation							# LinstAffectation
     | appelfonct ';'                        # LinstAppelfonct
     | retourfonct    						# LinstRetourfonct
@@ -14,9 +14,9 @@ instr: init									# LinstrInit
     | expr ';'                      		# LinstExpr
     ;
 
-init: type initParams (',' initParams)* ';' # Linit;
-
 decl: type declParams (',' declParams)* ';' # Ldecl;
+
+init: type initParams (',' initParams)* ';' # Linit;
 
 affectation: varleftpart (',' varleftpart)* operation expr (',' expr)* ';'	# Laffectation;
 
