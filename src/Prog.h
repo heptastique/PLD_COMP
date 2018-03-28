@@ -123,6 +123,11 @@ class Prog : public ProgBaseVisitor
                 initTab->setType(type);
                 instructions.emplace_back(instruction);
             }
+            if(Declaration* declaration = dynamic_cast<Declaration*>(instruction))
+            {
+                declaration->setType(type);
+                instructions.emplace_back(instruction);
+            }
         }
         return instructions;
     }
@@ -141,6 +146,11 @@ class Prog : public ProgBaseVisitor
             initialisationTab->setSize(ctx->Entier()->getText());
         }
         return dynamic_cast<Instruction*>(initialisationTab);
+    }
+
+    antlrcpp::Any visitLinitparamDecl(ProgParser::LinitparamDeclContext *ctx) override {
+        Declaration* declaration = new Declaration (ctx->Name()->getText(), VOID);
+        return dynamic_cast<Instruction*>(declaration);
     }
 
     antlrcpp::Any visitLinstrDecl(ProgParser::LinstrDeclContext *ctx) override {

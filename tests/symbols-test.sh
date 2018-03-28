@@ -88,5 +88,6 @@ assert_contains_file "../bin/app Front/ValidPrograms/55_Return.c"               
 assert_contains_file "../bin/app Front/ValidPrograms/56_ArrayAsParam.c"                     "expected/front/valid/56.txt"
 assert_contains_file "../bin/app Front/ValidPrograms/57_VarInitialization.c"                "expected/front/valid/57.txt"
 assert_contains_file "../bin/app Front/ValidPrograms/58_MultipleVarDeclarations.c"          "expected/front/valid/58.txt"
+assert_contains_file "../bin/app Front/ValidPrograms/59_MixedDeclarationsInitializations.c" "expected/front/valid/59.txt"
 
 assert_end examples

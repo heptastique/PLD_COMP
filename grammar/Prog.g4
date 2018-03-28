@@ -58,7 +58,8 @@ declParams: Name '[' Entier ']'				# LdeclparamTable
 			;
 			
 initParams: Name '[' Entier? ']' ('=' '{' valeurs '}')? # LinitparamTable
-		| Name ('=' expr)? 								# Linitparam
+		| Name '=' expr 								# Linitparam
+		| Name											# LinitparamDecl
 		;
 
 typeretour: 'void'                          # LtyperetourVoid
