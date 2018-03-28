@@ -9,6 +9,7 @@
 using namespace std;
 
 class ControlFlowGraph;
+class Bloc;
 
 class Function
 {

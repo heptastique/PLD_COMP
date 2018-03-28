@@ -2,11 +2,14 @@
 
 #include "Instruction.h"
 #include "Type.h"
+
 #include <string>
 
 class Declaration : public Instruction {
 
 public:
+
+	void generateIR(ControlFlowGraph * controlFlowGraph);
 
     void print(std::ostream& stream) const;
 

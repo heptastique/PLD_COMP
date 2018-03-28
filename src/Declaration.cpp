@@ -3,6 +3,10 @@ using namespace std;
 #include "Declaration.h"
 #include <iostream>
 
+void Declaration::generateIR(ControlFlowGraph * controlFlowGraph)
+{
+	//
+}
 
 void Declaration::print(std::ostream &stream) const
 {

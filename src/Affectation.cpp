@@ -3,6 +3,11 @@ using namespace std;
 #include "Affectation.h"
 #include <iostream>
 
+void Affectation::generateIR(ControlFlowGraph * controlFlowGraph)
+{
+	//
+}
+
 void Affectation::print(std::ostream &stream) const
 {
     stream << " Affectation: " << *variable << " Operateur=" << operateur << " " << *expression << endl;

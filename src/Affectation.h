@@ -8,7 +8,9 @@ class Affectation : public Instruction{
 
 public:
 
-    void print(std::ostream& stream) const;
+	void generateIR(ControlFlowGraph * controlFlowGraph);
+
+void print(std::ostream& stream) const;
 
     friend std::ostream& operator<< (std::ostream& stream, const Affectation& affectation);
 

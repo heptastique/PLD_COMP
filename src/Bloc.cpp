@@ -3,6 +3,16 @@ using namespace std;
 #include "Bloc.h"
 #include <iostream>
 
+// Generate IR
+void Bloc::generateIR(ControlFlowGraph * controlFlowGraph)
+{
+	// For each Instruction of Bloc
+	for (auto instruction : instructions)
+	{
+		// Generate IR for Instruction
+		instruction->generateIR(controlFlowGraph);
+	}
+}
 
 ostream& operator<<(ostream& stream, const Bloc& bloc)
 {

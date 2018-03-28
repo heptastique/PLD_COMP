@@ -3,6 +3,11 @@ using namespace std;
 #include "Variable.h"
 #include <iostream>
 
+void Variable::generateIR(ControlFlowGraph * controlFlowGraph)
+{
+	cout << "Variable::generateIR" << endl;
+}
+
 void Variable::print(std::ostream &stream) const
 {
     stream << " Variable: " << "Type=" << typeVariable << " Valeur=" << valeur << " ";

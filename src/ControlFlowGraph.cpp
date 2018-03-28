@@ -57,11 +57,11 @@ void ControlFlowGraph::generateASM(ostream & os) const
 				generateProlog(os, iRInstr.getParam(0), stoi(iRInstr.getParam(1)));
 
 				// Generate Body
+				// 
 
 				// Generate Epilog
-			generateEpilog(os,stoi(iRInstr.getParam(1)));
-			}	
-
+				generateEpilog(os,stoi(iRInstr.getParam(1)));
+			}
 		}
 	}
 }

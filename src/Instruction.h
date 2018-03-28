@@ -1,10 +1,17 @@
 #pragma once
 
 #include "ostream"
+# include "ControlFlowGraph.h"
+
+//class ControlFlowGraph;
+
 class Instruction {
 
 protected:
-    virtual void print(std::ostream& stream) const = 0;
+
+	virtual void generateIR(ControlFlowGraph * controlFlowGraph) = 0;
+
+	virtual void print(std::ostream& stream) const = 0;
 
 public:
 

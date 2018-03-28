@@ -4,10 +4,16 @@
 #include <list>
 #include "Instruction.h"
 #include "Declaration.h"
+# include "ControlFlowGraph.h"
+
+class Instruction;
+class ControlFlowGraph;
 
 class Bloc {
 
 public:
+
+	void generateIR(ControlFlowGraph * controlFlowGraph);
 
     friend std::ostream& operator<< (std::ostream& stream, const Bloc& bloc);
 
