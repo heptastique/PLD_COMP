@@ -235,6 +235,13 @@ class Prog : public ProgBaseVisitor
         return anElse;
     }
 
+    antlrcpp::Any visitLinstExpr(ProgParser::LinstExprContext *ctx) override {
+        std::list<Instruction*> instructions;
+        Expression* expression = visit(ctx->expr());
+        instructions.emplace_back(dynamic_cast<Instruction*>(expression));
+        return instructions;
+    }
+
     antlrcpp::Any visitLvaleurs(ProgParser::LvaleursContext *ctx) override {
         std::list<Variable*> vars;
         for(auto it : ctx->variable()){
