@@ -28,7 +28,7 @@ assert_contains_file "../bin/app Custom/19-retour-caractere.c"                  
 assert_contains_file "../bin/app Custom/20-affectation-simple.c"                            "expected/custom/20.txt"
 assert_contains_file "../bin/app Custom/21-affectation-variable.c"                          "expected/custom/21.txt"
 assert_contains_file "../bin/app Custom/22-return-fun.c"                                    "expected/custom/22.txt"
-
+assert_contains_file "../bin/app Custom/24-function-call-index.c"                           "expected/custom/24.txt"
 # Given tests
 
 assert_contains_file "../bin/app Front/ValidPrograms/01_SimpleDeclaration.c"                "expected/front/valid/01.txt"
