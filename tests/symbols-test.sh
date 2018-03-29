@@ -30,6 +30,8 @@ assert_contains_file "../bin/app Custom/21-affectation-variable.c"              
 assert_contains_file "../bin/app Custom/22-return-fun.c"                                    "expected/custom/22.txt"
 assert_contains_file "../bin/app Custom/24-function-call-index.c"                           "expected/custom/24.txt"
 assert_contains_file "../bin/app Custom/25-inc-dec.c"                                       "expected/custom/25.txt"
+assert_contains_file "../bin/app Custom/26-mult-init.c"                                     "expected/custom/26.txt"
+
 
 # Given tests
 
@@ -87,5 +89,6 @@ assert_contains_file "../bin/app Front/ValidPrograms/55_Return.c"               
 assert_contains_file "../bin/app Front/ValidPrograms/56_ArrayAsParam.c"                     "expected/front/valid/56.txt"
 assert_contains_file "../bin/app Front/ValidPrograms/57_VarInitialization.c"                "expected/front/valid/57.txt"
 assert_contains_file "../bin/app Front/ValidPrograms/58_MultipleVarDeclarations.c"          "expected/front/valid/58.txt"
+assert_contains_file "../bin/app Front/ValidPrograms/59_MixedDeclarationsInitializations.c" "expected/front/valid/59.txt"
 
 assert_end examples

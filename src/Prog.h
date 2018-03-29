@@ -103,27 +103,54 @@ class Prog : public ProgBaseVisitor
     }
 
     antlrcpp::Any visitLinstrInit(ProgParser::LinstrInitContext *ctx) override {
-        std::list<Instruction*> instructions;
-        instructions.emplace_back((visit(ctx->init())));
+        std::list<Instruction*> instructions = visit(ctx->init());
         return instructions;
     }
 
     antlrcpp::Any visitLinit(ProgParser::LinitContext *ctx) override {
+        std::list<Instruction*> instructions;
         Type type = getTypeFromString(ctx->type()->getText());
+        for(auto inst : ctx->initParams())
+        {
+            Instruction* instruction = visit(inst);
+            if(Initialisation* init = dynamic_cast<Initialisation*>(instruction))
+            {
+                init->setType(type);
+                instructions.emplace_back(instruction);
+            }
+            if(InitialisationTab* initTab = dynamic_cast<InitialisationTab*>(instruction))
+            {
+                initTab->setType(type);
+                instructions.emplace_back(instruction);
+            }
+            if(Declaration* declaration = dynamic_cast<Declaration*>(instruction))
+            {
+                declaration->setType(type);
+                instructions.emplace_back(instruction);
+            }
+        }
+        return instructions;
+    }
+
+    antlrcpp::Any visitLinitparam(ProgParser::LinitparamContext *ctx) override {
         Expression* expression = visit(ctx->expr());
-        Initialisation* initialisation = new Initialisation(type, expression, ctx->Name()->toString());
+        Initialisation* initialisation = new Initialisation(VOID, expression, ctx->Name()->toString());
         return dynamic_cast<Instruction*>(initialisation);
     }
 
-    antlrcpp::Any visitLinitTable(ProgParser::LinitTableContext *ctx) override {
-        Type type = getTypeFromString(ctx->type()->getText());
+    antlrcpp::Any visitLinitparamTable(ProgParser::LinitparamTableContext *ctx) override {
         std::list<Variable*> variables = visit(ctx->valeurs());
-        InitialisationTab* initialisationTab = new InitialisationTab(type, ctx->Name()->toString(), variables);
+        InitialisationTab* initialisationTab = new InitialisationTab(VOID, ctx->Name()->toString(), variables);
         if(ctx->Entier() != nullptr)
         {
             initialisationTab->setSize(ctx->Entier()->getText());
         }
         return dynamic_cast<Instruction*>(initialisationTab);
+    }
+
+    antlrcpp::Any visitLinitparamDecl(ProgParser::LinitparamDeclContext *ctx) override {
+        Declaration* declaration = new Declaration (ctx->Name()->getText(), VOID);
+        return dynamic_cast<Instruction*>(declaration);
     }
 
     antlrcpp::Any visitLinstrDecl(ProgParser::LinstrDeclContext *ctx) override {
