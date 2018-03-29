@@ -24,7 +24,7 @@ void RetourFonction::resolveScopeVariables(std::list<Declaration*> declProgramme
 }
 
 void RetourFonction::resolveTypeExpr(){
-    this->resolveTypeExpr();
+    this->expression->resolveTypeExpr();
 }
 
 RetourFonction::RetourFonction(const RetourFonction &unRetourFonction) {
