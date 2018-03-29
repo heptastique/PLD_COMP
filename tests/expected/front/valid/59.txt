@@ -1,0 +1,9 @@
+Programme:
+ Fonction: Name=main TypeRetour=0
+     Bloc:
+      Instruction: Initialisation: Type=2 Name=a Expression: Variable: Type=1 Valeur=3 
+      Instruction: Initialisation: Type=2 Name=b Expression: Variable: Type=1 Valeur=2 
+      Instruction: Declaration: Name=c Type=2
+
+
+Fin

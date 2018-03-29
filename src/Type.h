@@ -49,3 +49,10 @@ enum Operateur {
     RIGHTSHIFTBITWISEB = 29,
     XORBITWISEB = 30
 };
+
+enum PrePos {
+    PREINC = 0,
+    PREDEC = 1,
+    POSINC = 2,
+    POSDEC = 3
+};

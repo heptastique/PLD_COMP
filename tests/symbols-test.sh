@@ -28,6 +28,10 @@ assert_contains_file "../bin/app Custom/19-retour-caractere.c"                  
 assert_contains_file "../bin/app Custom/20-affectation-simple.c"                            "expected/custom/20.txt"
 assert_contains_file "../bin/app Custom/21-affectation-variable.c"                          "expected/custom/21.txt"
 assert_contains_file "../bin/app Custom/22-return-fun.c"                                    "expected/custom/22.txt"
+assert_contains_file "../bin/app Custom/24-function-call-index.c"                           "expected/custom/24.txt"
+assert_contains_file "../bin/app Custom/25-inc-dec.c"                                       "expected/custom/25.txt"
+assert_contains_file "../bin/app Custom/26-mult-init.c"                                     "expected/custom/26.txt"
+
 
 # Given tests
 
@@ -50,6 +54,10 @@ assert_contains_file "../bin/app Front/ValidPrograms/16_OperatorBOr.c"          
 assert_contains_file "../bin/app Front/ValidPrograms/17_OperatorBAnd.c"                     "expected/front/valid/17.txt"
 assert_contains_file "../bin/app Front/ValidPrograms/18_OperatorNeg.c"                      "expected/front/valid/18.txt"
 assert_contains_file "../bin/app Front/ValidPrograms/20_OperatorRightShift.c"               "expected/front/valid/20.txt"
+assert_contains_file "../bin/app Front/ValidPrograms/21_OperatorIncPost.c"                  "expected/front/valid/21.txt"
+assert_contains_file "../bin/app Front/ValidPrograms/22_OperatorIncPre.c"                   "expected/front/valid/22.txt"
+assert_contains_file "../bin/app Front/ValidPrograms/23_OperatorDecPost.c"                  "expected/front/valid/23.txt"
+assert_contains_file "../bin/app Front/ValidPrograms/24_OperatorDecPre.c"                   "expected/front/valid/24.txt"
 assert_contains_file "../bin/app Front/ValidPrograms/25_OperatorNot.c"                      "expected/front/valid/25.txt"
 assert_contains_file "../bin/app Front/ValidPrograms/26_OperatorXor.c"                      "expected/front/valid/26.txt"
 assert_contains_file "../bin/app Front/ValidPrograms/27_OperatorComp.c"                     "expected/front/valid/27.txt"
@@ -81,5 +89,6 @@ assert_contains_file "../bin/app Front/ValidPrograms/55_Return.c"               
 assert_contains_file "../bin/app Front/ValidPrograms/56_ArrayAsParam.c"                     "expected/front/valid/56.txt"
 assert_contains_file "../bin/app Front/ValidPrograms/57_VarInitialization.c"                "expected/front/valid/57.txt"
 assert_contains_file "../bin/app Front/ValidPrograms/58_MultipleVarDeclarations.c"          "expected/front/valid/58.txt"
+assert_contains_file "../bin/app Front/ValidPrograms/59_MixedDeclarationsInitializations.c" "expected/front/valid/59.txt"
 
 assert_end examples

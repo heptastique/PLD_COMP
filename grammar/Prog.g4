@@ -4,8 +4,8 @@ prog: include* decl* fun+                   # Lprog;
 
 fun: typeretour Name '(' params ')' bloc    # Lfun;
 
-instr: init									# LinstrInit
-	| decl                                  # LinstrDecl
+instr: decl                                  # LinstrDecl
+	| init									# LinstrInit
 	| affectation							# LinstAffectation
     | appelfonct ';'                        # LinstAppelfonct
     | retourfonct    						# LinstRetourfonct
@@ -14,11 +14,9 @@ instr: init									# LinstrInit
     | expr ';'                      		# LinstExpr
     ;
 
-init: type Name '[' Entier? ']' '=' '{' valeurs '}' ';' # LinitTable
-	| type Name '=' expr ';'							# Linit
-	;
-	
 decl: type declParams (',' declParams)* ';' # Ldecl;
+
+init: type initParams (',' initParams)* ';' # Linit;
 
 affectation: varleftpart (',' varleftpart)* operation expr (',' expr)* ';'	# Laffectation;
 
@@ -28,8 +26,8 @@ valeurs: variable (',' variable)*           # Lvaleurs
         | /* epsilon */                     # LvaleursEpsilon
         ;
 
-variable: prepostop varleftpart            # Lvariablevarleftpartpre
-        | varleftpart prepostop            # Lvariablevarleftpartpos
+variable: prepostop varleftpart             # Lvariablevarleftpartpre
+        | varleftpart prepostop             # Lvariablevarleftpartpos
         | varleftpart                       # Lvariablevarleftpart
         | Entier                            # LvariableEntier
         | Caractere                         # LvariableCaractere
@@ -52,11 +50,18 @@ params: 'void'                              # LparamsVoid
         ;
 
 param: type Name '[' Entier? ']'			# LparamTable
-	| type Name                         	# Lparam;
+	| type Name                         	# Lparam
+	;
 
 declParams: Name '[' Entier ']'				# LdeclparamTable
-			| Name                     		# Ldeclparam;
+			| Name                     		# Ldeclparam
+			;
 			
+initParams: Name '[' Entier? ']' ('=' '{' valeurs '}')? # LinitparamTable
+		| Name '=' expr 								# Linitparam
+		| Name											# LinitparamDecl
+		;
+
 typeretour: 'void'                          # LtyperetourVoid
             | type                          # Ltype
             ;
