@@ -41,6 +41,7 @@ void Variable::resolveScopeVariables(std::list<Declaration*> declProgramme, std:
         }
         if (notfound) {
             for (auto decl : declProgramme) {
+                cout << decl <<endl;
                 if (decl->getName().compare(this->valeur) == 0) {
                     notfound = false;
                     this->declarationAssociee = decl;
@@ -56,8 +57,13 @@ void Variable::resolveScopeVariables(std::list<Declaration*> declProgramme, std:
 }
 
 void Variable::resolveTypeExpr() {
+    cout << declarationAssociee << endl;
     if (this->declarationAssociee != nullptr){
         this->setType(this->declarationAssociee->getType());
+    }
+    else
+    {
+        cout << "np" << endl;
     }
 }
 

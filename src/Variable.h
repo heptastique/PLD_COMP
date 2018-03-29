@@ -26,5 +26,5 @@ public:
 private:
     TypeVariable typeVariable;
     std::string valeur;
-    Declaration * declarationAssociee;
+    Declaration * declarationAssociee = nullptr;
 };
