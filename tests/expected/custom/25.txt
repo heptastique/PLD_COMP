@@ -1,0 +1,15 @@
+Programme:
+ Fonction: Name=main TypeRetour=0
+     Bloc:
+      Instruction: VariableOpe: Type=0 Valeur=a  Ope=0
+      Instruction: VariableOpe: Type=0 Valeur=a  Ope=1
+      Instruction: VariableOpe: Type=0 Valeur=a  Ope=2
+      Instruction: VariableOpe: Type=0 Valeur=a  Ope=3
+      Instruction: VariableIndex: Type=0 Valeur=a  Tab=Expression: VariableOpe: Type=0 Valeur=a  Ope=0
+      Instruction: AppelFunction: Name=test VariableOpe: Type=0 Valeur=a Ope=1
+
+      Instruction: Affectation:  Variable: Type=0 Valeur=a  Operateur=0 Expression: VariableOpe: Type=0 Valeur=a  Ope=0
+
+
+
+Fin
