@@ -85,6 +85,10 @@ void Function::resolveScopeVariables(std::list<Declaration*> declProgramme, std:
 	this->bloc->resolveScopeVariables(declProgramme, this->getParameters(), functionProgram);
 }
 
+void Function::resolveTypeExpr(){
+    this->bloc->resolveTypeExpr();
+}
+
 Function::Function(const Function & function)
 {
 	#ifdef MAP

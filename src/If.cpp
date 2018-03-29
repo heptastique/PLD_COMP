@@ -28,6 +28,10 @@ void If::resolveScopeVariables(std::list<Declaration*> declProgramme, std::list<
     }
 }
 
+void If::resolveTypeExpr(){
+    this->bloc->resolveTypeExpr();
+}
+
 void If::setElse(Else *anElse) {
     this->anElse = anElse;
     this->hasElse = true;

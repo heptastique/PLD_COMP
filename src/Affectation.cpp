@@ -22,6 +22,10 @@ void Affectation::resolveScopeVariables(std::list<Declaration *> declProgramme, 
     this->variable->resolveScopeVariables(declProgramme,paramFunction,declBloc, functionProgram);
 }
 
+void Affectation::resolveTypeExpr(){
+    this->expression->resolveTypeExpr();
+}
+
 Affectation::Affectation(const Affectation &unAffectation) {
 #ifdef MAP
     cout << "Appel au constructeur de copie de <Affectation>" << endl;

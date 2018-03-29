@@ -33,6 +33,8 @@ class Programme
 
     	void resolveScopeVariables();
 
+        void resolveTypeExpr();
+
 		Programme(const Programme & programme);
 
 		Programme();

@@ -24,6 +24,10 @@ void Initialisation::resolveScopeVariables(std::list<Declaration*> declProgramme
     this->expression->resolveScopeVariables(declProgramme, paramFunction, declBloc, functionProgram);
 }
 
+void Initialisation::resolveTypeExpr(){
+    this->expression->resolveTypeExpr();
+}
+
 Initialisation::Initialisation(const Initialisation &unInitialisation)
 {
 #ifdef MAP

@@ -14,6 +14,8 @@ public:
 
     void resolveScopeVariables(std::list<Declaration*> declProgramme, std::list<Declaration*> paramFunction, std::list<Declaration*> declBloc, std::list<Function*> functionProgram);
 
+    void resolveTypeExpr();
+
     RetourFonction(const RetourFonction &unRetourFonction);
 
     RetourFonction(Expression* expression);

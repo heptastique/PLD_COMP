@@ -54,6 +54,12 @@ void Bloc::resolveScopeVariables(std::list<Declaration*> declProgramme, std::lis
     }
 }
 
+void Bloc::resolveTypeExpr(){
+    for ( auto instruction : this->instructions){
+        instruction->resolveTypeExpr();
+    }
+}
+
 Bloc &Bloc::operator=(const Bloc &unBloc) {
 }
 

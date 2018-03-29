@@ -102,6 +102,12 @@ void Programme::resolveScopeVariables()
     }
 }
 
+void Programme::resolveTypeExpr(){
+    for (auto function :  this->functions){
+        function->resolveTypeExpr();
+    }
+}
+
 Programme & Programme::operator=(const Programme & programme)
 {
 

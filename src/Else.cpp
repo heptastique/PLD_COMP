@@ -20,6 +20,10 @@ void Else::resolveScopeVariables(std::list<Declaration*> declProgramme, std::lis
     this->bloc->resolveScopeVariables(declProgramme, paramFunction, declBloc, functionProgram);
 }
 
+void Else::resolveTypeExpr(){
+    this->bloc->resolveTypeExpr();
+}
+
 Else::Else(const Else &unElse) {
 #ifdef MAP
     cout << "Appel au constructeur de copie de <Else>" << endl;

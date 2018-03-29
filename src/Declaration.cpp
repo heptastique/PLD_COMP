@@ -24,6 +24,10 @@ void Declaration::resolveScopeVariables(std::list<Declaration*> declProgramme, s
 {
 }
 
+void Declaration::resolveTypeExpr(){
+
+}
+
 Type Declaration::getType()
 {
     return this->type;

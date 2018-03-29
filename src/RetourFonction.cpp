@@ -23,6 +23,10 @@ void RetourFonction::resolveScopeVariables(std::list<Declaration*> declProgramme
     this->expression->resolveScopeVariables(declProgramme, paramFunction, declBloc, functionProgram);
 }
 
+void RetourFonction::resolveTypeExpr(){
+    this->resolveTypeExpr();
+}
+
 RetourFonction::RetourFonction(const RetourFonction &unRetourFonction) {
 #ifdef MAP
     cout << "Appel au constructeur de copie de <RetourFonction>" << endl;

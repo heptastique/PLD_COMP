@@ -15,6 +15,8 @@ public:
 
     void resolveScopeVariables(std::list<Declaration*> declProgramme, std::list<Declaration*> paramFunction, std::list<Declaration*> declBloc, std::list<Function*> functionProgram);
 
+    void resolveTypeExpr();
+
     void setElse(Else* anElse);
 
     If &operator=(const If &unIf);

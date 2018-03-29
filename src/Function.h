@@ -25,6 +25,8 @@ class Function
 
         void resolveScopeVariables(std::list<Declaration*> declProgramme, std::list<Function*> functionProgram);
 
+        void resolveTypeExpr();
+
         string getName();
 
         Bloc * getBloc();

@@ -113,6 +113,8 @@ int main (int argc, const char * argv[])
 
 	programme->resolveScopeVariables();
 
+    programme->resolveTypeExpr();
+
 
 	/*
 		C++ Memory Representation -> Intermediate Representation

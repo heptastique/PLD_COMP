@@ -22,6 +22,10 @@ void While::resolveScopeVariables(std::list<Declaration*> declProgramme, std::li
     this->bloc->resolveScopeVariables(declProgramme, paramFunction, declBloc, functionProgram);
 }
 
+void While::resolveTypeExpr(){
+    this->bloc->resolveTypeExpr();
+}
+
 While::While(const While &unWhile) {
 #ifdef MAP
     cout << "Appel au constructeur de copie de <While>" << endl;
