@@ -3,27 +3,31 @@ using namespace std;
 # include "ErrorHandling.h"
 # include <iostream>
 
-void ErrorHandling::ThrowError(int code, int line)
+void ErrorHandling::ThrowError(int code, int line, string name)
 {
     cout << "\033[1;31mLigne " << line << " - Erreur " << code << " : ";
 
     switch(code) {
         // Semantic errors
         case 101:
-            cerr << "Déclaration de variable déjà existante" << endl;
+            cerr << "Déclaration de la variable " << name << " déjà existante dans le bloc de la fonction" << endl;
             exit(101);
             break;
         case 102:
-            cerr << "Déclaration de variable définie en paramètre de la fonction" << endl;
+            cerr << "Déclaration de la variable " << name << " déjà définie en paramètre de la fonction" << endl;
             exit(102);
             break;
         case 103:
-            cerr << "Déclaration d'une variable déjà définie globalement" << endl;
+            cerr << "Déclaration de la variable " << name << " déjà définie globalement" << endl;
             exit(103);
             break;
         case 104:
-            cerr << "Utilisation d'une variable non déclarée" << endl;
+            cerr << "Utilisation d'une variable non déclarée : " << name << endl;
             exit(104);
+            break;
+        case 105:
+            cerr << "la fonction " << name << " existe dèjà" << endl;
+            exit(105);
             break;
 
         // Lex errors
