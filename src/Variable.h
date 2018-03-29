@@ -3,6 +3,7 @@
 #include <ostream>
 #include "Type.h"
 #include "Expression.h"
+#include "Declaration.h"
 
 class Variable : public Expression {
 public:
@@ -20,6 +21,10 @@ public:
 
     Variable &operator=(const Variable &unVariable);
 
+    void resolveScopeVariables(std::list<Declaration*> declProgramme, std::list<Declaration*> paramFunction, std::list<Declaration*> declBloc, std::list<Function*> functionProgram);
+
+    void resolveTypeExpr();
+
     Variable(const Variable &unVariable);
 
     Variable(TypeVariable typeVariable, std::string valeur);
@@ -29,4 +34,5 @@ public:
 protected:
     TypeVariable typeVariable;
     std::string valeur;
+    Declaration * declarationAssociee = nullptr;
 };

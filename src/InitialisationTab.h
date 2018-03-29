@@ -17,6 +17,10 @@ public:
         this->size = size;
     }
 
+    void resolveScopeVariables(std::list<Declaration*> declProgramme, std::list<Declaration*> paramFunction, std::list<Declaration*> declBloc, std::list<Function*> functionProgram);
+
+    void resolveTypeExpr();
+
     void setType(Type type){
         this->type = type;
     }

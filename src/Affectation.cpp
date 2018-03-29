@@ -22,10 +22,16 @@ std::ostream& operator<<(std::ostream& stream, const Affectation& affectation)
     return stream;
 }
 
-
 Affectation &Affectation::operator=(const Affectation &unAffectation) {
 }
 
+void Affectation::resolveScopeVariables(std::list<Declaration *> declProgramme, std::list<Declaration *> paramFunction, std::list<Declaration *> declBloc, std::list<Function*> functionProgram) {
+    this->variable->resolveScopeVariables(declProgramme,paramFunction,declBloc, functionProgram);
+}
+
+void Affectation::resolveTypeExpr(){
+    this->expression->resolveTypeExpr();
+}
 
 Affectation::Affectation(const Affectation &unAffectation) {
 #ifdef MAP

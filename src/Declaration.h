@@ -1,8 +1,8 @@
 #pragma once
 
-#include "Instruction.h"
 #include "Type.h"
 #include <string>
+#include "Instruction.h"
 
 class Declaration : public Instruction {
 
@@ -13,6 +13,10 @@ public:
     friend std::ostream& operator<< (std::ostream& stream, const Declaration& declaration);
 
     Declaration &operator=(const Declaration &unDeclaration);
+
+    void resolveScopeVariables(std::list<Declaration*> declProgramme, std::list<Declaration*> paramFunction, std::list<Declaration*> declBloc, std::list<Function*> functionProgram);
+
+    void resolveTypeExpr();
 
     void setType(Type type);
 

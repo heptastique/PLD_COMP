@@ -21,9 +21,21 @@ std::ostream& operator<<(std::ostream& stream, const InitialisationTab& initiali
     return stream;
 }
 
-InitialisationTab &InitialisationTab::operator=(const InitialisationTab &unInitialisationTab) {
+void InitialisationTab::resolveScopeVariables(std::list<Declaration*> declProgramme, std::list<Declaration*> paramFunction, std::list<Declaration*> declBloc, std::list<Function*> functionProgram){
+    for(auto var : this->variables){
+        var->resolveScopeVariables(declProgramme, paramFunction, declBloc, functionProgram);
+    }
+
 }
 
+void InitialisationTab::resolveTypeExpr(){
+    for(auto var : this->variables) {
+        var->resolveTypeExpr();
+    }
+}
+
+InitialisationTab &InitialisationTab::operator=(const InitialisationTab &unInitialisationTab) {
+}
 
 InitialisationTab::InitialisationTab(Type type,std::string name, std::list<Variable*> variables) {
     this->name = name;

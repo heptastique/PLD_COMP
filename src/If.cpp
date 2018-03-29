@@ -20,6 +20,18 @@ std::ostream& operator<<(std::ostream& stream, const If& anIf)
     return stream;
 }
 
+void If::resolveScopeVariables(std::list<Declaration*> declProgramme, std::list<Declaration*> paramFunction, std::list<Declaration*> declBloc, std::list<Function*> functionProgram){
+    this->condition->resolveScopeVariables(declProgramme, paramFunction, declBloc, functionProgram);
+    this->bloc->resolveScopeVariables(declProgramme, paramFunction, declBloc, functionProgram);
+    if(this->hasElse) {
+        this->anElse->resolveScopeVariables(declProgramme, paramFunction, declBloc, functionProgram);
+    }
+}
+
+void If::resolveTypeExpr(){
+    this->bloc->resolveTypeExpr();
+}
+
 void If::setElse(Else *anElse) {
     this->anElse = anElse;
     this->hasElse = true;

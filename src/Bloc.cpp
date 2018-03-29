@@ -33,8 +33,36 @@ void Bloc::addDeclarations(std::list<Declaration*> declarations)
     }
 }
 
-void Bloc::resolveScopeVariables(std::list<Declaration*> declProgramme, std::list<Declaration*> paramFunction){
+void Bloc::resolveScopeVariables(std::list<Declaration*> declProgramme, std::list<Declaration*> paramFunction, std::list<Function*> functionProgram){
+    list<Declaration*>::iterator it;
+    for(it = this->declarations.begin(); it!=this->declarations.end(); ++it){
+        auto it2 = it;
+        ++it2;
+        while(it2!= this->declarations.end()){
+            Declaration * declaration = *it;
+            Declaration * declaration2 = *it2;
+            if ( declaration->getName().compare(declaration2->getName()) == 0)
+            {
+                cout << "variable " << declaration2->getName() << " already exist inside this bloc" << endl;
+            }
+            ++it2;
+        }
+    }
 
+    for ( auto instruction : this->instructions){
+        instruction->resolveScopeVariables(declProgramme,paramFunction,this->declarations, functionProgram);
+    }
+}
+void Bloc::resolveScopeVariables(std::list<Declaration*> declProgramme, std::list<Declaration*> paramFunction, std::list<Declaration*> declBloc, std::list<Function*> functionProgram){
+    for ( auto instruction : this->instructions){
+        instruction->resolveScopeVariables(declProgramme,paramFunction,declBloc, functionProgram);
+    }
+}
+
+void Bloc::resolveTypeExpr(){
+    for ( auto instruction : this->instructions){
+        instruction->resolveTypeExpr();
+    }
 }
 
 Bloc &Bloc::operator=(const Bloc &unBloc) {

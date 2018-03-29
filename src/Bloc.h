@@ -5,6 +5,7 @@
 #include "Instruction.h"
 #include "Declaration.h"
 
+class Function;
 class Bloc {
 
 public:
@@ -21,7 +22,11 @@ public:
 
     std::list<Declaration*> getDeclarations();
 
-    void resolveScopeVariables(std::list<Declaration*> declProgramme, std::list<Declaration*> paramFunction);
+    void resolveScopeVariables(std::list<Declaration*> declProgramme, std::list<Declaration*> paramFunction, std::list<Function*> functionProgram);
+
+    void resolveScopeVariables(std::list<Declaration*> declProgramme, std::list<Declaration*> paramFunction, std::list<Declaration*> declBloc, std::list<Function*> functionProgram);
+
+    void resolveTypeExpr();
 
     Bloc &operator=(const Bloc &unBloc);
 

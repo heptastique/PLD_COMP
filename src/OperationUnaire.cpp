@@ -20,6 +20,27 @@ std::ostream& operator<<(std::ostream& stream, const OperationUnaire& operationU
 OperationUnaire &OperationUnaire::operator=(const OperationUnaire &unOperationUnaire) {
 }
 
+void OperationUnaire::resolveScopeVariables(std::list<Declaration*> declProgramme, std::list<Declaration*> paramFunction, std::list<Declaration*> declBloc, std::list<Function*> functionProgram){
+    this->expression->resolveScopeVariables(declProgramme, paramFunction, declBloc, functionProgram);
+}
+
+void OperationUnaire::resolveTypeExpr() {
+    this->expression->resolveTypeExpr();
+    Type typeExpr = expression->getType();
+    switch ( typeExpr){
+        case CHAR :
+            this->setType( INT32_T);
+            break;
+        case INT32_T:
+            this->setType( INT32_T);
+            break;
+        case INT64_T:
+            this->setType( INT64_T);
+            break;
+        default :
+            cout << "error attributing type" << endl;
+    }
+}
 
 OperationUnaire::OperationUnaire(const OperationUnaire &unOperationUnaire) {
 #ifdef MAP

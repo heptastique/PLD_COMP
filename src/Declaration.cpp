@@ -20,9 +20,18 @@ Declaration &Declaration::operator=(const Declaration &unDeclaration)
 {
 }
 
+
+void Declaration::resolveScopeVariables(std::list<Declaration*> declProgramme, std::list<Declaration*> paramFunction, std::list<Declaration*> declBloc, std::list<Function*> functionProgram)
+{
+}
+
+void Declaration::resolveTypeExpr(){
+}
+
 void Declaration::setType(Type type)
 {
     this->type = type;
+
 }
 
 Type Declaration::getType()

@@ -14,6 +14,10 @@ public:
 
     While &operator=(const While &unWhile);
 
+    void resolveScopeVariables(std::list<Declaration*> declProgramme, std::list<Declaration*> paramFunction, std::list<Declaration*> declBloc, std::list<Function*> functionProgram);
+
+    void resolveTypeExpr();
+
     While(const While &unWhile);
 
     While(Bloc* bloc, Expression* condition);
