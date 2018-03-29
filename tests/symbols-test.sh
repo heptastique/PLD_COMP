@@ -32,6 +32,7 @@ assert_contains_file "../bin/app Custom/24-function-call-index.c"               
 assert_contains_file "../bin/app Custom/25-inc-dec.c"                                       "expected/custom/25.txt"
 assert_contains_file "../bin/app Custom/26-mult-init.c"                                     "expected/custom/26.txt"
 
+
 # Given tests
 
 assert_contains_file "../bin/app Front/ValidPrograms/01_SimpleDeclaration.c"                "expected/front/valid/01.txt"
