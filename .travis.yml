@@ -20,10 +20,8 @@ install:
 before_script:
   - cd ../tests
   - chmod +x asm-test.sh symbols-test.sh lib/assert.sh
-  - chmod +x ../bin/unittest
 
 script:
-  - ../bin/unittest
   - ./symbols-test.sh -v
   - ./asm-test.sh -v
 
