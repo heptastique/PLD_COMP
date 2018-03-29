@@ -1,0 +1,7 @@
+Programme:
+ Fonction: Name=main TypeRetour=0
+     Bloc:
+      Instruction: DeclarationTab: Name=a Type=1 Size=10
+
+
+Fin

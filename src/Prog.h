@@ -18,6 +18,10 @@
 #include "If.h"
 #include "Else.h"
 #include "Initialisation.h"
+#include "DeclarationTab.h"
+#include "VariableIndex.h"
+#include "InitialisationTab.h"
+#include "VariableOpe.h"
 
 using namespace std;
 
@@ -25,12 +29,11 @@ class Prog : public ProgBaseVisitor
 {
 	public:
 
-
 	antlrcpp::Any visitLprog(ProgParser::LprogContext *ctx) override
 	{
         Programme* programme = new Programme();
         for(auto i : ctx->decl()){
-            programme->addDeclaration(visit(i));
+            programme->addDeclarations(visit(i));
         }
         for(auto i : ctx->fun()){
             programme->addFunction(visit(i));
@@ -44,7 +47,7 @@ class Prog : public ProgBaseVisitor
         Bloc* b = new Bloc();
         auto instructions = ctx->instr();
         for(auto i : instructions ){
-            b->addInstruction(visit(i));
+            b->addInstructions(visit(i));
         }
         return b;
     }
@@ -63,6 +66,16 @@ class Prog : public ProgBaseVisitor
             params.emplace_back(visit(it));
         }
         return params;
+    }
+
+    antlrcpp::Any visitLparamTable(ProgParser::LparamTableContext *ctx) override {
+        Type type = getTypeFromString(ctx->type()->getText());
+        DeclarationTab* declarationTab = new DeclarationTab (ctx->Name()->getText(), type, "0");
+        if(ctx->Entier() != nullptr)
+        {
+            declarationTab->setSize(ctx->Entier()->getText());
+        }
+        return dynamic_cast<Declaration*>(declarationTab);
     }
 
     antlrcpp::Any visitLparam(ProgParser::LparamContext *ctx) override {
@@ -90,31 +103,95 @@ class Prog : public ProgBaseVisitor
     }
 
     antlrcpp::Any visitLinstrInit(ProgParser::LinstrInitContext *ctx) override {
-        Initialisation* initialisation = visit(ctx->init());
-        return dynamic_cast<Instruction*> (initialisation);
+        std::list<Instruction*> instructions = visit(ctx->init());
+        return instructions;
     }
 
     antlrcpp::Any visitLinit(ProgParser::LinitContext *ctx) override {
+        std::list<Instruction*> instructions;
         Type type = getTypeFromString(ctx->type()->getText());
+        for(auto inst : ctx->initParams())
+        {
+            Instruction* instruction = visit(inst);
+            if(Initialisation* init = dynamic_cast<Initialisation*>(instruction))
+            {
+                init->setType(type);
+                instructions.emplace_back(instruction);
+            }
+            if(InitialisationTab* initTab = dynamic_cast<InitialisationTab*>(instruction))
+            {
+                initTab->setType(type);
+                instructions.emplace_back(instruction);
+            }
+            if(Declaration* declaration = dynamic_cast<Declaration*>(instruction))
+            {
+                declaration->setType(type);
+                instructions.emplace_back(instruction);
+            }
+        }
+        return instructions;
+    }
+
+    antlrcpp::Any visitLinitparam(ProgParser::LinitparamContext *ctx) override {
         Expression* expression = visit(ctx->expr());
-        Initialisation* initialisation = new Initialisation(type, expression, ctx->Name()->toString());
-        return initialisation;
+        Initialisation* initialisation = new Initialisation(VOID, expression, ctx->Name()->toString());
+        return dynamic_cast<Instruction*>(initialisation);
+    }
+
+    antlrcpp::Any visitLinitparamTable(ProgParser::LinitparamTableContext *ctx) override {
+        std::list<Variable*> variables = visit(ctx->valeurs());
+        InitialisationTab* initialisationTab = new InitialisationTab(VOID, ctx->Name()->toString(), variables);
+        if(ctx->Entier() != nullptr)
+        {
+            initialisationTab->setSize(ctx->Entier()->getText());
+        }
+        return dynamic_cast<Instruction*>(initialisationTab);
+    }
+
+    antlrcpp::Any visitLinitparamDecl(ProgParser::LinitparamDeclContext *ctx) override {
+        Declaration* declaration = new Declaration (ctx->Name()->getText(), VOID);
+        return dynamic_cast<Instruction*>(declaration);
     }
 
     antlrcpp::Any visitLinstrDecl(ProgParser::LinstrDeclContext *ctx) override {
-        Declaration* declaration = visit(ctx->decl());
-        return dynamic_cast<Instruction*> (declaration);
+        std::list<Declaration*> declarations = visit(ctx->decl());
+        std::list<Instruction*> instructions;
+        for(auto decl : declarations)
+        {
+            instructions.emplace_back(dynamic_cast<Instruction*>(decl));
+        }
+        return instructions;
     }
 
-    antlrcpp::Any visitLdecl(ProgParser::LdeclContext *ctx) override {
-        Type type = getTypeFromString(ctx->type()->getText());
-        Declaration* declaration = new Declaration(ctx->Name()->toString(), type);
+    antlrcpp::Any visitLdeclparamTable(ProgParser::LdeclparamTableContext *ctx) override {
+        DeclarationTab* declarationTab = new DeclarationTab (ctx->Name()->getText(), VOID, ctx->Entier()->getText());
+        return dynamic_cast<Declaration*>(declarationTab);
+    }
+
+    antlrcpp::Any visitLdeclparam(ProgParser::LdeclparamContext *ctx) override {
+        Declaration* declaration = new Declaration (ctx->Name()->getText(), VOID);
         return declaration;
     }
 
+    antlrcpp::Any visitLdecl(ProgParser::LdeclContext *ctx) override {
+        std::list<Declaration*> declarations;
+        Type type = getTypeFromString(ctx->type()->getText());
+
+        for(auto it : ctx->declParams())
+        {
+            Declaration* declaration = visit(it);
+            declaration->setType(type);
+            declarations.emplace_back(declaration);
+        }
+
+        return declarations;
+    }
+
     antlrcpp::Any visitLinstAppelfonct(ProgParser::LinstAppelfonctContext *ctx) override {
+        std::list<Instruction*> instructions;
         AppelFunction* appelFunction = visit(ctx->appelfonct());
-        return dynamic_cast<Instruction*> (appelFunction);
+        instructions.emplace_back(dynamic_cast<Instruction*>(appelFunction));
+        return instructions;
     }
 
     antlrcpp::Any visitLappelfonct(ProgParser::LappelfonctContext *ctx) override {
@@ -124,7 +201,9 @@ class Prog : public ProgBaseVisitor
     }
 
     antlrcpp::Any visitLinstRetourfonct(ProgParser::LinstRetourfonctContext *ctx) override {
-        return (Instruction*) (visit(ctx->retourfonct()));
+        std::list<Instruction*> instructions;
+        instructions.emplace_back(visit(ctx->retourfonct()));
+        return instructions;
     }
 
     antlrcpp::Any visitLretourfonct(ProgParser::LretourfonctContext *ctx) override {
@@ -134,19 +213,28 @@ class Prog : public ProgBaseVisitor
     }
 
     antlrcpp::Any visitLinstAffectation(ProgParser::LinstAffectationContext *ctx) override {
-        return (Instruction*) (visit(ctx->affectation()));
+        return visit(ctx->affectation());
     }
 
     antlrcpp::Any visitLaffectation(ProgParser::LaffectationContext *ctx) override {
-        Variable* var = (Variable*) visit(ctx->varleftpart());
+        std::list<Instruction*> instructions;
         Operateur operateur = (Operateur) visit(ctx->operation());
-        Expression* expression = (Expression*) visit(ctx->expr());
-        Affectation* affection = new Affectation(var, operateur, expression);
-        return dynamic_cast<Instruction*>(affection);
+
+        auto varleftparts = ctx->varleftpart();
+        for(int i = 0; i < varleftparts.size(); ++i )
+        {
+            Variable* var = (Variable*) visit(ctx->varleftpart(i));
+            Expression* expression = (Expression*) visit(ctx->expr(i));
+            Affectation* affection = new Affectation(var, operateur, expression);
+            instructions.emplace_back(dynamic_cast<Instruction*>(affection));
+        }
+        return instructions;
     }
 
     antlrcpp::Any visitLinsWhile(ProgParser::LinsWhileContext *ctx) override {
-        return (Instruction*)(visit(ctx->inswhile()));
+        std::list<Instruction*> instructions;
+        instructions.emplace_back(visit(ctx->inswhile()));
+        return instructions;
     }
 
     antlrcpp::Any visitLwhile(ProgParser::LwhileContext *ctx) override {
@@ -156,7 +244,9 @@ class Prog : public ProgBaseVisitor
     }
 
     antlrcpp::Any visitLinstIf(ProgParser::LinstIfContext *ctx) override {
-        return (Instruction*)(visit(ctx->insif()));
+        std::list<Instruction*> instructions;
+        instructions.emplace_back(visit(ctx->insif()));
+        return instructions;
     }
 
     antlrcpp::Any visitLif(ProgParser::LifContext *ctx) override {
@@ -171,6 +261,13 @@ class Prog : public ProgBaseVisitor
     antlrcpp::Any visitLelse(ProgParser::LelseContext *ctx) override {
         Else* anElse = new Else ((Bloc*)visit(ctx->bloc()));
         return anElse;
+    }
+
+    antlrcpp::Any visitLinstExpr(ProgParser::LinstExprContext *ctx) override {
+        std::list<Instruction*> instructions;
+        Expression* expression = visit(ctx->expr());
+        instructions.emplace_back(dynamic_cast<Instruction*>(expression));
+        return instructions;
     }
 
     antlrcpp::Any visitLvaleurs(ProgParser::LvaleursContext *ctx) override {
@@ -188,6 +285,36 @@ class Prog : public ProgBaseVisitor
 
     antlrcpp::Any visitLvariablevarleftpart(ProgParser::LvariablevarleftpartContext *ctx) override {
         return (Variable*) visit(ctx->varleftpart());
+    }
+
+    antlrcpp::Any visitLvarleftpartTable(ProgParser::LvarleftpartTableContext *ctx) override {
+        Expression* index = visit(ctx->expr());
+        VariableIndex* varIndex = new VariableIndex(NAME, ctx->Name()->getText(), index);
+        return dynamic_cast<Variable*> (varIndex);
+    }
+
+    antlrcpp::Any visitLvariablevarleftpartpre(ProgParser::LvariablevarleftpartpreContext *ctx) override {
+        Variable* variable = visit(ctx->varleftpart());
+        PrePos prePos = PREDEC;
+        if((bool)visit(ctx->prepostop()))
+        {
+            prePos = PREINC;
+        }
+        VariableOpe* variableOpe = new VariableOpe(NAME, variable->getValeur(), prePos);
+        delete variable;
+        return dynamic_cast<Variable*>(variableOpe);
+    }
+
+    antlrcpp::Any visitLvariablevarleftpartpos(ProgParser::LvariablevarleftpartposContext *ctx) override {
+        Variable* variable = visit(ctx->varleftpart());
+        PrePos prePos = POSDEC;
+        if((bool)visit(ctx->prepostop()))
+        {
+            prePos = POSINC;
+        }
+        VariableOpe* variableOpe = new VariableOpe(NAME, variable->getValeur(), prePos);
+        delete variable;
+        return dynamic_cast<Variable*>(variableOpe);
     }
 
     antlrcpp::Any visitLvarleftpart(ProgParser::LvarleftpartContext *ctx) override {
@@ -357,6 +484,14 @@ class Prog : public ProgBaseVisitor
 
     antlrcpp::Any visitLoperationbinaireXorbitwise(ProgParser::LoperationbinaireXorbitwiseContext *ctx) override {
         return XORBITWISEB;
+    }
+
+    antlrcpp::Any visitLprepostopInc(ProgParser::LprepostopIncContext *ctx) override {
+        return true;
+    }
+
+    antlrcpp::Any visitLprepostopDec(ProgParser::LprepostopDecContext *ctx) override {
+        return false;
     }
 
     antlrcpp::Any visitLint32_t(ProgParser::Lint32_tContext *ctx) override {

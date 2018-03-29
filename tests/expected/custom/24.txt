@@ -1,0 +1,9 @@
+Programme:
+ Fonction: Name=main TypeRetour=0
+     Param:
+      DeclarationTab: Name=a Type=3 Size=0
+     Bloc:
+      Instruction: AppelFunction: Name=appel VariableIndex: Type=0 Valeur=a Tab=Expression: Variable: Type=1 Valeur=1 
+
+
+Fin

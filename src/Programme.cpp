@@ -50,9 +50,12 @@ void Programme::addFunction(Function *function)
 	this->functions.emplace_back(function);
 }
 
-void Programme::addDeclaration(Declaration *declaration)
+void Programme::addDeclarations(list<Declaration*> declarations)
 {
-	this->declarations.emplace_back(declaration);
+	for(auto decl : declarations){
+		this->declarations.emplace_back(decl);
+	}
+
 }
 
 list <Function*> Programme::getFunctions()
@@ -67,8 +70,44 @@ list <Declaration*> Programme::getDeclarations()
 
 void Programme::resolveScopeVariables()
 {
-    for (auto it :  this->functions){
-        it->resolveScopeVariables(this->getDeclarations());
+	list<Declaration*>::iterator it;
+	for(it = this->declarations.begin(); it != this->declarations.end(); ++it){
+        list<Declaration*>::iterator it2 = it;
+        ++it2;
+        while(it2 != this->declarations.end()){
+			Declaration * declaration = *it;
+			Declaration * declaration2 = *it2;
+			if ( declaration->getName().compare(declaration2->getName()) == 0)
+			{
+				cout << "variable " << declaration2->getName() << " already exist !" << endl;
+			}
+            ++it2;
+		}
+	}
+    // test if 2 functions share the same name
+    list<Function*>::iterator itfunction;
+    for(itfunction = this->functions.begin(); itfunction!=this->functions.end(); ++itfunction){
+        auto itfunction2 = itfunction;
+        ++itfunction2;
+        while(itfunction2!= this->functions.end()){
+            Function * function = *itfunction;
+            Function * function2 = *itfunction2;
+            if ( function->getName().compare(function2->getName()) == 0)
+            {
+                cout << "function " << function2->getName() << " already exist" << endl;
+            }
+            ++itfunction2;
+        }
+    }
+
+	for (auto function :  this->functions){
+		function->resolveScopeVariables(this->getDeclarations(), this->functions);
+    }
+}
+
+void Programme::resolveTypeExpr(){
+    for (auto function :  this->functions){
+        function->resolveTypeExpr();
     }
 }
 

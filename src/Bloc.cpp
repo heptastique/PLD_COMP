@@ -24,22 +24,55 @@ ostream& operator<<(ostream& stream, const Bloc& bloc)
     return stream;
 }
 
-void Bloc::addInstruction(Instruction *instruction)
+void Bloc::addInstructions(std::list<Instruction*> instructions)
 {
-    this->instructions.emplace_back(instruction);
-    if(Declaration* declaration = dynamic_cast<Declaration*>(instruction))
-    {
-        addDeclaration(declaration);
+    for(auto inst : instructions){
+        this->instructions.emplace_back(inst);
+        if(Declaration* declaration = dynamic_cast<Declaration*>(inst))
+        {
+            this->declarations.emplace_back(declaration);
+        }
     }
 }
 
-void Bloc::addDeclaration(Declaration *declaration)
+void Bloc::addDeclarations(std::list<Declaration*> declarations)
 {
-    this->declarations.emplace_back(declaration);
+    for(auto decl : declarations)
+    {
+        this->declarations.emplace_back(decl);
+    }
 }
 
-void Bloc::resolveScopeVariables(std::list<Declaration*> declProgramme, std::list<Declaration*> paramFunction){
+void Bloc::resolveScopeVariables(std::list<Declaration*> declProgramme, std::list<Declaration*> paramFunction, std::list<Function*> functionProgram){
+    list<Declaration*>::iterator it;
+    for(it = this->declarations.begin(); it!=this->declarations.end(); ++it){
+        auto it2 = it;
+        ++it2;
+        while(it2!= this->declarations.end()){
+            Declaration * declaration = *it;
+            Declaration * declaration2 = *it2;
+            if ( declaration->getName().compare(declaration2->getName()) == 0)
+            {
+                cout << "variable " << declaration2->getName() << " already exist inside this bloc" << endl;
+            }
+            ++it2;
+        }
+    }
 
+    for ( auto instruction : this->instructions){
+        instruction->resolveScopeVariables(declProgramme,paramFunction,this->declarations, functionProgram);
+    }
+}
+void Bloc::resolveScopeVariables(std::list<Declaration*> declProgramme, std::list<Declaration*> paramFunction, std::list<Declaration*> declBloc, std::list<Function*> functionProgram){
+    for ( auto instruction : this->instructions){
+        instruction->resolveScopeVariables(declProgramme,paramFunction,declBloc, functionProgram);
+    }
+}
+
+void Bloc::resolveTypeExpr(){
+    for ( auto instruction : this->instructions){
+        instruction->resolveTypeExpr();
+    }
 }
 
 Bloc &Bloc::operator=(const Bloc &unBloc) {

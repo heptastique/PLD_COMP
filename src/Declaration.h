@@ -1,10 +1,10 @@
 #pragma once
 
-#include "Instruction.h"
 #include "Type.h"
 //# include "ControlFlowGraph.h"
 
 #include <string>
+#include "Instruction.h"
 
 //class ControlFlowGraph;
 
@@ -20,6 +20,12 @@ public:
 
     Declaration &operator=(const Declaration &unDeclaration);
 
+    void resolveScopeVariables(std::list<Declaration*> declProgramme, std::list<Declaration*> paramFunction, std::list<Declaration*> declBloc, std::list<Function*> functionProgram);
+
+    void resolveTypeExpr();
+
+    void setType(Type type);
+
     Type getType();
 
     std::string getName();
@@ -30,7 +36,7 @@ public:
 
     virtual ~Declaration();
 
-private:
+protected:
     Type type;
     std::string name;
 };

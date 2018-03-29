@@ -105,6 +105,15 @@ int main (int argc, const char * argv[])
 	cout << "Fin" << endl;
 	cout << "Abstract Syntaxic Tree generated" << endl;
 
+	/*
+
+	 * Variables scope resolution
+
+	*/
+
+	programme->resolveScopeVariables();
+
+    programme->resolveTypeExpr();
 
 
 	/*

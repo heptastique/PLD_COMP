@@ -2,6 +2,7 @@ using namespace std;
 
 # include "Function.h"
 # include "BasicBlock.h"
+#include "DeclarationTab.h"
 
 # include <iostream>
 
@@ -36,6 +37,7 @@ ControlFlowGraph Function::generateIR()
 
 int Function::calculateAddressRangeSize()
 {
+
 	int taille = 0;
 
 	for(auto declaration : bloc->getDeclarations())
@@ -59,7 +61,13 @@ ostream & operator<<(ostream & stream, const Function & function)
     if(!function.parameters.empty()){
         stream << "     Param:" << endl;
         for (auto it : function.parameters){
-            stream << "     " << *it;
+			if(DeclarationTab *decla = dynamic_cast<DeclarationTab*>(it))
+			{
+				stream << "     " << *decla;
+			} else
+			{
+				stream << "     " << *it;
+			}
         }
     }
 
@@ -83,7 +91,11 @@ Bloc * Function::getBloc()
 	return this->bloc;
 }
 
-void Function::setParameters(list<Declaration*> parameters)
+Type Function::getTypeRetour (){
+    return this->typeRetour;
+}
+
+void Function::setParameters(std::list<Declaration*> parameters)
 {
     this->parameters = parameters;
 }
@@ -93,9 +105,26 @@ std::list<Declaration*> Function::getParameters()
     return this->parameters;
 }
 
-void Function::resolveScopeVariables(std::list<Declaration*> declProgramme)
+void Function::resolveScopeVariables(std::list<Declaration*> declProgramme, std::list<Function*> functionProgram)
 {
-    this->bloc->resolveScopeVariables(declProgramme, this->getParameters());
+	list<Declaration*>::iterator it;
+	for(it = this->parameters.begin(); it!=this->parameters.end(); ++it){
+        auto it2 = it;
+        ++it2;
+        while(it2!= this->parameters.end()) {
+            Declaration *parameters = *it;
+            Declaration *parameters2 = *it2;
+            if (parameters->getName().compare(parameters2->getName()) == 0) {
+                cout << "variable " << parameters2->getName() << " already exist in functions parameters" << endl;
+            }
+            ++it2;
+        }
+	}
+	this->bloc->resolveScopeVariables(declProgramme, this->getParameters(), functionProgram);
+}
+
+void Function::resolveTypeExpr(){
+    this->bloc->resolveTypeExpr();
 }
 
 Function::Function(const Function & function)

@@ -3,6 +3,7 @@
 #include <iostream>
 #include "Instruction.h"
 // # include "ControlFlowGraph.h"
+#include "Type.h"
 
 class Expression : public Instruction {
 
@@ -18,10 +19,21 @@ public:
 
     Expression &operator=(const Expression &unExpression);
 
+    void resolveScopeVariables(std::list<Declaration*> declProgramme, std::list<Declaration*> paramFunction, std::list<Declaration*> declBloc, std::list<Function*> functionProgram);
+
+    Type getType();
+
+    void setType(Type type);
+
+    virtual void resolveTypeExpr() = 0;
+
     Expression(const Expression &unExpression);
 
     Expression();
 
     virtual ~Expression();
+
+private:
+    Type type;
 
 };

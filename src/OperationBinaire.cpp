@@ -20,6 +20,28 @@ std::ostream& operator<<(std::ostream& stream, const OperationBinaire& operation
 OperationBinaire &OperationBinaire::operator=(const OperationBinaire &unOperationBinaire) {
 }
 
+void OperationBinaire::resolveScopeVariables(std::list<Declaration*> declProgramme, std::list<Declaration*> paramFunction, std::list<Declaration*> declBloc, std::list<Function*> functionProgram){
+    this->expressionL->resolveScopeVariables(declProgramme, paramFunction, declBloc, functionProgram);
+    this->expressionR->resolveScopeVariables(declProgramme, paramFunction, declBloc, functionProgram);
+}
+
+void OperationBinaire::resolveTypeExpr() {
+    this->expressionL->resolveTypeExpr();
+    this->expressionR->resolveTypeExpr();
+    Type typeExprL = expressionL->getType();
+    Type typeExprR = expressionL->getType();
+    if ( typeExprL == INT64_T || typeExprR == INT64_T) {
+        this->setType( INT64_T);
+    } else {
+        if ( typeExprL == INT32_T || typeExprL == CHAR){
+            this->setType( INT32_T);
+        }
+        else
+        {
+            cout << "error attributing type" << endl;
+        }
+    }
+}
 
 OperationBinaire::OperationBinaire(const OperationBinaire &unOperationBinaire) {
 #ifdef MAP
