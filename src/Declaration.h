@@ -18,6 +18,8 @@ public:
 
     void resolveTypeExpr();
 
+    void setType(Type type);
+
     Type getType();
 
     std::string getName();
@@ -28,7 +30,7 @@ public:
 
     virtual ~Declaration();
 
-private:
+protected:
     Type type;
     std::string name;
 };

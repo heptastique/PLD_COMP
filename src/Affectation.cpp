@@ -1,11 +1,18 @@
 using namespace std;
 
 #include "Affectation.h"
+#include "VariableIndex.h"
 #include <iostream>
 
 void Affectation::print(std::ostream &stream) const
 {
-    stream << " Affectation: " << *variable << " Operateur=" << operateur << " " << *expression << endl;
+    if(VariableIndex *var= dynamic_cast<VariableIndex*>(variable))
+    {
+        stream << " Affectation: " << *var << " Operateur=" << operateur << " " << *expression << endl;
+    }else{
+        stream << " Affectation: " << *variable << " Operateur=" << operateur << " " << *expression << endl;
+    }
+
 }
 
 std::ostream& operator<<(std::ostream& stream, const Affectation& affectation)

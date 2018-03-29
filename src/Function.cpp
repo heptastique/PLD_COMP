@@ -2,6 +2,7 @@ using namespace std;
 
 # include "Function.h"
 # include "BasicBlock.h"
+#include "DeclarationTab.h"
 
 # include <iostream>
 
@@ -14,13 +15,36 @@ ControlFlowGraph Function::generateIR()
 	// Create Prolog BasicBlock
 	BasicBlock prologBasicBlock;
 
+	// Calculate Address Range Size
+	int addressRangeSize = calculateAddressRangeSize();
+
 	// Add Function Definition to Prolog BasicBlock
-	prologBasicBlock.addFunctionDefinition(this->name, 32);
+	prologBasicBlock.addFunctionDefinition(name, addressRangeSize);
 
 	// Add Prolog BasicBlock to Function ControlFlowGraph
 	controlFlowGraph.addBasicBlock(prologBasicBlock);
 
 	return controlFlowGraph;
+}
+
+int Function::calculateAddressRangeSize()
+{
+
+	int taille = 0;
+
+	for(auto declaration : bloc->getDeclarations())
+	{
+		if(declaration->getType() == INT32_T || declaration->getType() == CHAR)
+		{
+			taille += 8;
+		}
+		else if(declaration->getType() == INT64_T)
+		{
+			taille += 16;
+		}
+	}
+
+	return taille;
 }
 
 ostream & operator<<(ostream & stream, const Function & function)
@@ -29,7 +53,13 @@ ostream & operator<<(ostream & stream, const Function & function)
     if(!function.parameters.empty()){
         stream << "     Param:" << endl;
         for (auto it : function.parameters){
-            stream << "     " << *it;
+			if(DeclarationTab *decla = dynamic_cast<DeclarationTab*>(it))
+			{
+				stream << "     " << *decla;
+			} else
+			{
+				stream << "     " << *it;
+			}
         }
     }
 

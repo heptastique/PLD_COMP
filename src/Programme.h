@@ -23,7 +23,7 @@ class Programme
 
 		void addFunction(Function * function);
 
-		void addDeclaration(Declaration * declaration);
+		void addDeclarations(std::list<Declaration*> declarations);
 
 		list <Function*> getFunctions();
 

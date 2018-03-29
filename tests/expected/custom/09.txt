@@ -1,0 +1,9 @@
+Programme:
+ Fonction: Name=main TypeRetour=0
+     Param:
+      Declaration: Name=n Type=3
+      Declaration: Name=i Type=1
+     Bloc:
+
+
+Fin

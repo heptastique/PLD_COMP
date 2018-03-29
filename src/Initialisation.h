@@ -25,7 +25,7 @@ public:
 
     virtual ~Initialisation();
 
-private:
+protected:
     Type type;
     Expression* expression;
     std::string name;

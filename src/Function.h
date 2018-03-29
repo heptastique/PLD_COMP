@@ -19,6 +19,8 @@ class Function
 
         Function & operator=(const Function & function);
 
+		int calculateAddressRangeSize();
+
         void setParameters(list <Declaration*> parameters);
 
         std::list<Declaration*> getParameters();

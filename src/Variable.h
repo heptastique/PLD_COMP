@@ -23,7 +23,7 @@ public:
 
     virtual ~Variable();
 
-private:
+protected:
     TypeVariable typeVariable;
     std::string valeur;
     Declaration * declarationAssociee = nullptr;

@@ -1,6 +1,7 @@
 using namespace std;
 
 #include "Variable.h"
+#include "VariableIndex.h"
 #include <iostream>
 
 void Variable::print(std::ostream &stream) const
