@@ -3,6 +3,11 @@ using namespace std;
 #include "Instruction.h"
 #include <iostream>
 
+void Instruction::generateIR(ControlFlowGraph * controlFlowGraph)
+{
+
+}
+
 std::ostream& operator<<(std::ostream& stream, const Instruction& instruction)
 {
     stream << "Instruction:";

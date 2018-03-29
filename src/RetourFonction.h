@@ -6,6 +6,9 @@
 
 class RetourFonction : public Instruction{
 public:
+
+    void generateIR(ControlFlowGraph * controlFlowGraph){};
+
     friend std::ostream& operator<< (std::ostream& stream, const RetourFonction& retourFonction);
 
     void print(std::ostream& stream) const;

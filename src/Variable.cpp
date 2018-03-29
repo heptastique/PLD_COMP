@@ -4,10 +4,10 @@ using namespace std;
 #include "VariableIndex.h"
 #include <iostream>
 
-//void Variable::generateIR(ControlFlowGraph * controlFlowGraph)
-//{
-	//cout << "Variable::generateIR" << endl;
-//}
+void Variable::generateIR(ControlFlowGraph * controlFlowGraph)
+{
+	cout << "Variable::generateIR" << endl;
+}
 
 void Variable::print(std::ostream &stream) const
 {

@@ -10,7 +10,7 @@ void Bloc::generateIR(ControlFlowGraph * controlFlowGraph)
 	for (auto instruction : instructions)
 	{
 		// Generate IR for Instruction
-		//instruction->generateIR(controlFlowGraph);
+		instruction->generateIR(controlFlowGraph);
 	}
 }
 

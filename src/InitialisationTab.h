@@ -9,6 +9,8 @@ class InitialisationTab : public Instruction {
 
 public:
 
+    void generateIR(ControlFlowGraph * controlFlowGraph);
+
     void print(std::ostream& stream) const;
 
     friend std::ostream& operator<< (std::ostream& stream, const InitialisationTab& initialisationTab);

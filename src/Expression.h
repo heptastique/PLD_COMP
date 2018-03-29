@@ -2,9 +2,10 @@
 
 #include <iostream>
 #include "Instruction.h"
-// # include "ControlFlowGraph.h"
+//#include "ControlFlowGraph.h"
 #include "Type.h"
 
+class ControlFlowGraph;
 class Expression : public Instruction {
 
 protected:
