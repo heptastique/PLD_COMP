@@ -62,6 +62,12 @@ void ControlFlowGraph::generateASM(ostream & os) const
 				// Generate Epilog
 				generateEpilog(os,stoi(iRInstr.getParam(1)));
 			}
+			// If IRInstr if a Function Return
+			//else if (iRInstr.getMnemonique() == FUNCTION_RETURN)
+			//{
+				// Generate Epilog
+				//generateEpilog(os,stoi(iRInstr.getParam(1)));
+			//}
 		}
 	}
 }

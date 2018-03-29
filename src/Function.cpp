@@ -11,7 +11,7 @@ ControlFlowGraph Function::generateIR()
 {
 	// Create Function ControlFlowGraph
 	ControlFlowGraph controlFlowGraph;
-
+	
 	// Create Prolog BasicBlock
 	BasicBlock prologBasicBlock;
 
@@ -24,13 +24,18 @@ ControlFlowGraph Function::generateIR()
 	// Add Prolog BasicBlock to Function ControlFlowGraph
 	controlFlowGraph.addBasicBlock(prologBasicBlock);
 
-	// Create Body BasicBlock
-	BasicBlock bodyBasicBlock;
-
+	// Generate IR for Body
 	bloc->generateIR(&controlFlowGraph);
 
-	// Add Body BasicBlock to Function ControlFlowGraph
-	controlFlowGraph.addBasicBlock(bodyBasicBlock);
+	// Create Epilog BasicBlock
+	//BasicBlock epilogBasicBlock;
+	
+	// Add Function Return to Function ControlFlowGraph
+	//epilogBasicBlock.addFunctionReturn();
+	
+	// Add Epilog BasicBlock to Function ControlFlowGraph
+	//controlFlowGraph.addBasicBlock(epilogBasicBlock);
+
 
 	return controlFlowGraph;
 }
