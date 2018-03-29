@@ -6,6 +6,22 @@ using namespace std;
 #include "VariableOpe.h"
 #include <iostream>
 
+void AppelFunction::generateIR(ControlFlowGraph * controlFlowGraph)
+{
+	// add IRInstr call
+	
+	
+	
+	list <string> params;
+
+	params.push_back(name);
+	params.push_back("r0");
+	
+	IRInstr iRInstr(FUNCTION_CALL, params);
+	
+	
+}
+
 void AppelFunction::print(std::ostream &stream) const
 {
     stream << " AppelFunction: Name=" << name;

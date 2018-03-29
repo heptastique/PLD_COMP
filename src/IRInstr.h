@@ -11,7 +11,9 @@ class ControlFlowGraph;
 
 enum Mnemonique
 {
-	FUNCTION_DECLARATION = 0
+	FUNCTION_DECLARATION = 0,
+	FUNCTION_RETURN = 1,
+	FUNCTION_CALL = 2
 };
 
 class IRInstr

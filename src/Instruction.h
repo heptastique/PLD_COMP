@@ -6,7 +6,6 @@
 
 class Declaration;
 class Function;
-//class ControlFlowGraph;
 
 class Instruction {
 
