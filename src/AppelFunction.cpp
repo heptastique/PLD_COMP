@@ -1,13 +1,30 @@
 using namespace std;
 
 #include "AppelFunction.h"
+#include "DeclarationTab.h"
+#include "VariableIndex.h"
+#include "VariableOpe.h"
 #include <iostream>
 
 void AppelFunction::print(std::ostream &stream) const
 {
     stream << " AppelFunction: Name=" << name;
     for (auto it : variables){
-        stream << *it;
+
+        if(VariableIndex *varInd = dynamic_cast<VariableIndex*>(it))
+        {
+            stream << *varInd;
+        } else
+        {
+            if(VariableOpe *varOpe = dynamic_cast<VariableOpe*>(it))
+            {
+                stream << *varOpe;
+            }
+            else
+            {
+                stream << *it;
+            }
+        }
     }
     stream << endl;
 }

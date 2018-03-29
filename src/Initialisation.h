@@ -13,6 +13,10 @@ public:
 
     friend std::ostream& operator<< (std::ostream& stream, const Initialisation& initialisation);
 
+    void setType(Type type){
+        this->type = type;
+    }
+
     Initialisation &operator=(const Initialisation &unInitialisation);
 
     void resolveScopeVariables(std::list<Declaration*> declProgramme, std::list<Declaration*> paramFunction, std::list<Declaration*> declBloc, std::list<Function*> functionProgram);

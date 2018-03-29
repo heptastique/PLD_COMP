@@ -11,6 +11,14 @@ public:
 
     friend std::ostream& operator<< (std::ostream& stream, const Variable& variable);
 
+    TypeVariable getType(){
+        return typeVariable;
+    }
+
+    std::string getValeur(){
+        return valeur;
+    }
+
     Variable &operator=(const Variable &unVariable);
 
     void resolveScopeVariables(std::list<Declaration*> declProgramme, std::list<Declaration*> paramFunction, std::list<Declaration*> declBloc, std::list<Function*> functionProgram);
