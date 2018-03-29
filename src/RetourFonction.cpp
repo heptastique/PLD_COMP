@@ -19,8 +19,8 @@ std::ostream& operator<<(std::ostream& stream, const RetourFonction& retourFonct
 RetourFonction &RetourFonction::operator=(const RetourFonction &unRetourFonction) {
 }
 
-void RetourFonction::resolveScopeVariables(std::list<Declaration*> declProgramme, std::list<Declaration*> paramFunction, std::list<Declaration*> declBloc){
-    this->expression->resolveScopeVariables(declProgramme, paramFunction, declBloc);
+void RetourFonction::resolveScopeVariables(std::list<Declaration*> declProgramme, std::list<Declaration*> paramFunction, std::list<Declaration*> declBloc, std::list<Function*> functionProgram){
+    this->expression->resolveScopeVariables(declProgramme, paramFunction, declBloc, functionProgram);
 }
 
 RetourFonction::RetourFonction(const RetourFonction &unRetourFonction) {

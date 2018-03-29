@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Variable.h"
 #include "Instruction.h"
+#include "Variable.h"
 #include "Expression.h"
 
 class Affectation : public Instruction{
@@ -14,7 +14,7 @@ public:
 
     Affectation &operator=(const Affectation &unAffectation);
 
-    void resolveScopeVariables(std::list<Declaration*> declProgramme, std::list<Declaration*> paramFunction, std::list<Declaration*> declBloc);
+    void resolveScopeVariables(std::list<Declaration*> declProgramme, std::list<Declaration*> paramFunction, std::list<Declaration*> declBloc, std::list<Function*> functionProgram);
 
     Affectation(const Affectation &unAffectation);
 

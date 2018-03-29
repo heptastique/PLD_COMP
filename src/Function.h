@@ -1,45 +1,46 @@
 # pragma once
 
 # include <string>
-
-# include "Bloc.h"
-# include "Declaration.h"
 # include "ControlFlowGraph.h"
+# include "Bloc.h"
+# include "Type.h"
 
 using namespace std;
 
 class ControlFlowGraph;
-
+class Declaration;
 class Function
 {
 	public:
 
-    ControlFlowGraph generateIR();
+        ControlFlowGraph generateIR();
 
-    friend ostream & operator<<(ostream & stream, const Function & function);
+        friend ostream & operator<<(ostream & stream, const Function & function);
 
-    Function & operator=(const Function & function);
+        Function & operator=(const Function & function);
 
-    void setParameters(list <Declaration*> parameters);
+        void setParameters(list <Declaration*> parameters);
 
-    std::list<Declaration*> getParameters();
+        std::list<Declaration*> getParameters();
 
-    void resolveScopeVariables(std::list<Declaration*> declProgramme);
+        void resolveScopeVariables(std::list<Declaration*> declProgramme, std::list<Function*> functionProgram);
 
-		string getName();
+        string getName();
 
-		Bloc * getBloc();
+        Bloc * getBloc();
 
-		Function(const Function & function);
-  
-    Function(string name, Bloc * bloc, Type typeRetour);
+        Type getTypeRetour ();
 
-		virtual ~Function();
+        Function(const Function & function);
+
+        Function(string name, Bloc * bloc, Type typeRetour);
+
+        virtual ~Function();
 
 
-private:
-    std::string name;
-    Bloc* bloc;
-    std::list<Declaration*> parameters;
-    Type typeRetour;
+    private:
+        std::string name;
+        Bloc* bloc;
+        std::list<Declaration*> parameters;
+        Type typeRetour;
 };

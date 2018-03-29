@@ -2,6 +2,7 @@
 
 #include "Instruction.h"
 #include "Variable.h"
+#include "Function.h"
 #include <list>
 
 class AppelFunction : public Expression {
@@ -12,7 +13,9 @@ public:
 
     AppelFunction &operator=(const AppelFunction &unAppelFunction);
 
-    void resolveScopeVariables(std::list<Declaration*> declProgramme, std::list<Declaration*> paramFunction, std::list<Declaration*> declBloc);
+    void resolveScopeVariables(std::list<Declaration*> declProgramme, std::list<Declaration*> paramFunction, std::list<Declaration*> declBloc, std::list<Function*> functionProgram);
+
+    void resolveTypeExpr();
 
     list <Variable *> getVariables();
 
@@ -25,4 +28,5 @@ public:
 private:
     std::string name;
     std::list<Variable *> variables;
+    Function* functionAssociee;
 };

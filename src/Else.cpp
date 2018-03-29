@@ -16,8 +16,8 @@ std::ostream& operator<<(std::ostream& stream, const Else& anElse)
 Else &Else::operator=(const Else &unElse) {
 }
 
-void Else::resolveScopeVariables(std::list<Declaration*> declProgramme, std::list<Declaration*> paramFunction, std::list<Declaration*> declBloc){
-    this->bloc->resolveScopeVariables(declProgramme, paramFunction, declBloc);
+void Else::resolveScopeVariables(std::list<Declaration*> declProgramme, std::list<Declaration*> paramFunction, std::list<Declaration*> declBloc, std::list<Function*> functionProgram){
+    this->bloc->resolveScopeVariables(declProgramme, paramFunction, declBloc, functionProgram);
 }
 
 Else::Else(const Else &unElse) {

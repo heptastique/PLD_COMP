@@ -31,7 +31,7 @@ class Programme
 
 		Programme & operator=(const Programme & programme);
 
-    void resolveScopeVariables();
+    	void resolveScopeVariables();
 
 		Programme(const Programme & programme);
 

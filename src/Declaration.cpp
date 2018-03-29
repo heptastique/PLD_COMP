@@ -20,7 +20,7 @@ Declaration &Declaration::operator=(const Declaration &unDeclaration)
 {
 }
 
-void Declaration::resolveScopeVariables(std::list<Declaration*> declProgramme, std::list<Declaration*> paramFunction, std::list<Declaration*> declBloc)
+void Declaration::resolveScopeVariables(std::list<Declaration*> declProgramme, std::list<Declaration*> paramFunction, std::list<Declaration*> declBloc, std::list<Function*> functionProgram)
 {
 }
 

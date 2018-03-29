@@ -18,8 +18,8 @@ std::ostream& operator<<(std::ostream& stream, const Affectation& affectation)
 Affectation &Affectation::operator=(const Affectation &unAffectation) {
 }
 
-void Affectation::resolveScopeVariables(std::list<Declaration *> declProgramme, std::list<Declaration *> paramFunction, std::list<Declaration *> declBloc) {
-    this->variable->resolveScopeVariables(declProgramme,paramFunction,declBloc);
+void Affectation::resolveScopeVariables(std::list<Declaration *> declProgramme, std::list<Declaration *> paramFunction, std::list<Declaration *> declBloc, std::list<Function*> functionProgram) {
+    this->variable->resolveScopeVariables(declProgramme,paramFunction,declBloc, functionProgram);
 }
 
 Affectation::Affectation(const Affectation &unAffectation) {

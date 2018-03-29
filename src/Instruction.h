@@ -4,7 +4,7 @@
 #include <list>
 
 class Declaration;
-
+class Function;
 class Instruction {
 
 protected:
@@ -14,7 +14,7 @@ public:
 
     friend std::ostream& operator<< (std::ostream& stream, Instruction const& instruction);
 
-    virtual void resolveScopeVariables(std::list<Declaration*> declProgramme, std::list<Declaration*> paramFunction, std::list<Declaration*> declBloc) = 0;
+    virtual void resolveScopeVariables(std::list<Declaration*> declProgramme, std::list<Declaration*> paramFunction, std::list<Declaration*> declBloc, std::list<Function*> functionProgram) = 0;
 
     Instruction &operator=(const Instruction &unInstruction);
 

@@ -18,7 +18,7 @@ std::ostream& operator<<(std::ostream& stream, const Variable& variable)
 Variable &Variable::operator=(const Variable &unVariable) {
 }
 
-void Variable::resolveScopeVariables(std::list<Declaration*> declProgramme, std::list<Declaration*> paramFunction, std::list<Declaration*> declBloc){
+void Variable::resolveScopeVariables(std::list<Declaration*> declProgramme, std::list<Declaration*> paramFunction, std::list<Declaration*> declBloc, std::list<Function*> functionProgram){
     if (this->typeVariable == NAME) {
         bool notfound = true;
         for (auto decl : declBloc) {
@@ -52,6 +52,12 @@ void Variable::resolveScopeVariables(std::list<Declaration*> declProgramme, std:
         if (notfound) {
             cout << "variable " << this->valeur << " is not instantiated" << endl;
         }
+    }
+}
+
+void Variable::resolveTypeExpr() {
+    if (this->declarationAssociee != nullptr){
+        this->setType(this->declarationAssociee->getType());
     }
 }
 
