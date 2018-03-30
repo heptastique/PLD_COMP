@@ -14,6 +14,10 @@ public:
 
     VariableOpe &operator=(const VariableOpe &unVariableOpe);
 
+    void resolveScopeVariables(std::vector<Declaration*> declProgramme, std::vector<Declaration*> paramFunction, std::vector<Declaration*> declBloc, std::vector<Function*> functionProgram);
+
+    void resolveTypeExpr();
+
     VariableOpe(TypeVariable typeVariable, std::string valeur, PrePos ope);
 
     virtual ~VariableOpe();

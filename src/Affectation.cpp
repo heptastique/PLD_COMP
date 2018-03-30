@@ -33,6 +33,7 @@ Affectation &Affectation::operator=(const Affectation &unAffectation) {
 
 void Affectation::resolveScopeVariables(std::vector<Declaration *> declProgramme, std::vector<Declaration *> paramFunction, std::vector<Declaration *> declBloc, std::vector<Function*> functionProgram) {
     this->variable->resolveScopeVariables(declProgramme,paramFunction,declBloc, functionProgram);
+    this->expression->resolveScopeVariables(declProgramme,paramFunction,declBloc, functionProgram);
 }
 
 void Affectation::resolveTypeExpr(){

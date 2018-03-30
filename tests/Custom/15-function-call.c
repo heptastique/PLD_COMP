@@ -3,3 +3,6 @@ int64_t main(char n){
     char n;
     test();
 }
+void test (){
+
+}
