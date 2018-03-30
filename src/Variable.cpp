@@ -53,21 +53,20 @@ void Variable::resolveScopeVariables(std::list<Declaration*> declProgramme, std:
             }
         }
         if (notfound) {
-            cout << "variable " << this->valeur << " is not instantiated" << endl;
+            ErrorHandling::ThrowError(104, 0, this->valeur);
         }
     }
 }
 
 void Variable::resolveTypeExpr() {
     cout << declarationAssociee << endl;
-    if ( this->typeVariable == NAME)
-        if (this->declarationAssociee != nullptr){
+    if ( this->typeVariable == NAME) {
+        if (this->declarationAssociee != nullptr) {
             this->setType(this->declarationAssociee->getType());
+        } else {
+            ErrorHandling::ThrowError(104, 0, this->valeur);
         }
-        else
-        {
-            ErrorHandling::ThrowError(104,0, this->valeur);
-        }
+    }
 }
 
 Variable::Variable(const Variable &unVariable) {
