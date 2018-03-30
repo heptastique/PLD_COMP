@@ -3,6 +3,11 @@ using namespace std;
 #include "OperationBinaire.h"
 #include <iostream>
 
+string OperationBinaire::generateIR(ControlFlowGraph *controlFlowGraph)
+{
+    return "";
+}
+
 void OperationBinaire::print(std::ostream &stream) const
 {
     stream << " OperationBinaire: " << *expressionL << " Operateur=" << operateur << " " << *expressionR;

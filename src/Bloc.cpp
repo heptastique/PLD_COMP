@@ -2,16 +2,16 @@ using namespace std;
 
 #include "Bloc.h"
 #include "ErrorHandling.h"
+#include "RetourFonction.h"
 #include <iostream>
 
 // Generate IR
 void Bloc::generateIR(ControlFlowGraph * controlFlowGraph)
 {
 	// For each Instruction of Bloc
-	for (auto instruction : instructions)
-	{
-		// Generate IR for Instruction
-		instruction->generateIR(controlFlowGraph);
+	for (auto instruction : instructions) {
+        // Generate IR for Instruction
+        instruction->generateIR(controlFlowGraph);
 	}
 }
 

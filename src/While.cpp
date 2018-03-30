@@ -3,6 +3,11 @@ using namespace std;
 #include "While.h"
 #include <iostream>
 
+string While::generateIR(ControlFlowGraph *controlFlowGraph)
+{
+    return "";
+}
+
 void While::print(std::ostream &stream) const
 {
     stream << " While: Condition=" << *condition << *bloc << endl;

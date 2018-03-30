@@ -3,6 +3,11 @@ using namespace std;
 #include "OperationUnaire.h"
 #include <iostream>
 
+string OperationUnaire::generateIR(ControlFlowGraph *controlFlowGraph)
+{
+    return "";
+}
+
 void OperationUnaire::print(std::ostream &stream) const
 {
     stream << " OperationUnaire: Operateur=" << operateur << " " << *expression;

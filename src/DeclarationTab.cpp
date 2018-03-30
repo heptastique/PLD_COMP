@@ -6,7 +6,7 @@ using namespace std;
 
 string DeclarationTab::generateIR(ControlFlowGraph * controlFlowGraph)
 {
-
+    return "";
 }
 
 void DeclarationTab::print(std::ostream &stream) const

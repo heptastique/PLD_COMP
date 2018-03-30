@@ -6,7 +6,7 @@ using namespace std;
 
 string Affectation::generateIR(ControlFlowGraph * controlFlowGraph)
 {
-	//
+	return "";
 }
 
 void Affectation::print(std::ostream &stream) const

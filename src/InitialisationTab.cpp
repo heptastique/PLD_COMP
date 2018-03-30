@@ -5,7 +5,7 @@ using namespace std;
 
 string InitialisationTab::generateIR(ControlFlowGraph * controlFlowGraph)
 {
-
+    return "";
 }
 
 void InitialisationTab::print(std::ostream &stream) const

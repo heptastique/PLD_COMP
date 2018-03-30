@@ -21,6 +21,7 @@ string Variable::generateIR(ControlFlowGraph * controlFlowGraph)
 	
 	return reg;
 	*/
+	return "";
 }
 
 void Variable::print(std::ostream &stream) const
