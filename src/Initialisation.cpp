@@ -28,7 +28,7 @@ void Initialisation::resolveTypeExpr(){
     this->expression->resolveTypeExpr();
 }
 
-Initialisation::Initialisation(const Initialisation &unInitialisation) : Declaration(unInitialisation)
+Initialisation::Initialisation(const Initialisation &unInitialisation)
 {
 #ifdef MAP
     cout << "Appel au constructeur de copie de <Initialisation>" << endl;

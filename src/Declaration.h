@@ -24,6 +24,8 @@ public:
 
     std::string getName();
 
+    Declaration();
+
     Declaration(const Declaration &unDeclaration);
 
     Declaration(std::string name, Type type);

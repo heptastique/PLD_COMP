@@ -44,6 +44,12 @@ std::string Declaration::getName()
     return this->name;
 }
 
+Declaration::Declaration(){
+#ifdef MAP
+    cout << "Appel au constructeur par default de <Declaration>" << endl;
+#endif
+}
+
 Declaration::Declaration(const Declaration &unDeclaration)
 {
 #ifdef MAP
