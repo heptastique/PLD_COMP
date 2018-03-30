@@ -162,6 +162,27 @@ assert_contains_file() {
     _assert_fail "expected to contain $expected${_indent}got $result" "$1" "$3"
 }
 
+assert_contains_file_0() {
+    # assert <command> <expected stdout> [stdin]
+    (( tests_ran++ )) || :
+    [[ -z "$DISCOVERONLY" ]] || return
+    expected=`cat ${2:-}`
+    result="$(eval 2>/dev/null $1 <<< ${3:-})" || true
+    status=0
+    (eval $1 <<< ${3:-}) > /dev/null 2>&1 || status=$?
+    expectedExit=0
+    if [[ "$result" =~ .*$expected.* ]]; then
+        if [[ "$status" -eq 0 ]]; then
+            [[ -z "$DEBUG" ]] || echo -n .
+            return
+        fi
+    fi
+    result="$(sed -e :a -e '$!N;s/\n/\\n/;ta' <<< "$result")"
+    [[ -z "$result" ]] && result="nothing" || result="\"$result\""
+    [[ -z "$2" ]] && expected="nothing" || expected="\"$2\""
+    _assert_fail "expected to contain $expected${_indent}got $result" "$1" "$3"
+}
+
 assert_raises() {
     # assert_raises <command> <expected code> [stdin]
     (( tests_ran++ )) || :
