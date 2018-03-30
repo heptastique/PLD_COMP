@@ -33,7 +33,7 @@ assert_contains_file_0 "../bin/app Custom/25-inc-dec.c"                         
 assert_contains_file_0 "../bin/app Custom/26-mult-init.c"                                     "expected/custom/26.txt"
 
 
-# Given tests_0
+# Given tests
 
 assert_contains_file_0 "../bin/app Front/ValidPrograms/01_SimpleDeclaration.c"                "expected/front/valid/01.txt"
 assert_contains_file_0 "../bin/app Front/ValidPrograms/02_IncludeStdint.c"                    "expected/front/valid/02.txt"
