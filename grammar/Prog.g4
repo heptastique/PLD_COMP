@@ -83,21 +83,21 @@ insfor: 'for' '(' forpartone? ';' forparttwo? ';' forpartthree? ')' bloc # Lfor;
 
 retourfonct: 'return' expr ';'              # Lretourfonct;
 
-forpartone: decl							# LforpartoneDecl
-		| init								# LforpartoneInit
-		| affectation						# LforpartoneAffectation
-		| expr								# LforpartoneExpr
-		;
+forpartone: decl                            # LforpartoneDecl
+        | init                              # LforpartoneInit
+        | affectation                       # LforpartoneAffectation
+        | expr                              # LforpartoneExpr
+        ;
 
-forparttwo: type Name '=' expr				# LforparttwoInit
-		| affectation						# LforparttwoAffectation
-		| expr								# LforparttwoExpr
-		;
+forparttwo: type Name '=' expr              # LforparttwoInit
+        | affectation                       # LforparttwoAffectation
+        | expr                              # LforparttwoExpr
+        ;
 
-forpartthree: affectation					# LforpartthreeAffectation
-		| expr								# LforpartthreeExpr
-		;
-		
+forpartthree: affectation                   # LforpartthreeAffectation
+        | expr                              # LforpartthreeExpr
+        ;
+
 operation: '='								# LoperationEqual
             | '+='                          # LoperationPlusequal
             | '-='                          # LoperationMoinsequal
