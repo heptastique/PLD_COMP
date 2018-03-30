@@ -4,6 +4,11 @@ using namespace std;
 #include <iostream>
 
 
+void DeclarationTab::generateIR(ControlFlowGraph * controlFlowGraph)
+{
+
+}
+
 void DeclarationTab::print(std::ostream &stream) const
 {
     stream << " DeclarationTab: Name=" << name << " Type=" << type << " Size=" << size << endl;

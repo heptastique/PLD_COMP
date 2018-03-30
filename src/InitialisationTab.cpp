@@ -3,6 +3,11 @@ using namespace std;
 #include "InitialisationTab.h"
 #include <iostream>
 
+void InitialisationTab::generateIR(ControlFlowGraph * controlFlowGraph)
+{
+
+}
+
 void InitialisationTab::print(std::ostream &stream) const
 {
     stream << " InitialisationTab: Type=" << type << " Name=" << name << " Size=" << size;

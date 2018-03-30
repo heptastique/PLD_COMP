@@ -7,6 +7,9 @@
 
 class AppelFunction : public Expression {
 public:
+
+    void generateIR(ControlFlowGraph * controlFlowGraph);
+
     friend std::ostream& operator<< (std::ostream& stream, const AppelFunction& appelFunction);
 
     void print(std::ostream& stream) const;
@@ -28,5 +31,5 @@ public:
 private:
     std::string name;
     std::vector<Variable *> variables;
-    Function* functionAssociee;
+    Function* functionAssociee = nullptr;
 };

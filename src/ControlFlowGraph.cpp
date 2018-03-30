@@ -2,14 +2,23 @@ using namespace std;
 
 # include "ControlFlowGraph.h"
 
-vector <BasicBlock> ControlFlowGraph::getBasicBlocks() const
+void ControlFlowGraph::addIRInstr(IRInstr iRInstr)
+{
+	currentBasicBlock->addIRInstr(iRInstr);
+}
+
+vector <BasicBlock*> ControlFlowGraph::getBasicBlocks() const
 {
 	return basicBlocks;
 }
 
-void ControlFlowGraph::addBasicBlock(BasicBlock basicBlock)
+void ControlFlowGraph::newBasicBlock()
 {
-	basicBlocks.push_back(basicBlock);
+	BasicBlock * newBasicBlock = new BasicBlock;
+	
+	basicBlocks.push_back(newBasicBlock);
+	
+	currentBasicBlock = newBasicBlock;
 }
 
 // Generate Prolog of Function
@@ -35,6 +44,7 @@ void ControlFlowGraph::generateEpilog(ostream & os, int addressRangeSize) const
 	os << "\taddq\t$" << addressRangeSize << ", %rsp\n";
 	os << "\tpopq\t%rbp\n";
 	os << "\tretq\n";
+	os << "\n";
 }
 
 // Generate ASM
@@ -48,20 +58,28 @@ void ControlFlowGraph::generateASM(ostream & os) const
 	for (auto basicBlock : basicBlocks)
 	{
 		// For each IRInstr of BasicBlock
-		for (auto iRInstr : basicBlock.getIRInstrs())
+		for (auto iRInstr : basicBlock->getIRInstrs())
 		{
-			// If IRInstr if a Function Declaration
-			if (iRInstr.getMnemonique() == FUNCTION_DECLARATION)
+			// For each Kind of IRInstr
+			switch (iRInstr.getMnemonique())
 			{
-				// Generate Prolog of Function
-				generateProlog(os, iRInstr.getParam(0), stoi(iRInstr.getParam(1)));
-
-				// Generate Body
-
-				// Generate Epilog
-			generateEpilog(os,stoi(iRInstr.getParam(1)));
-			}	
-
+				// Function Declaration
+				case FUNCTION_DECLARATION :
+				{
+					// Generate Prolog of Function
+					generateProlog(os, iRInstr.getParam(0), stoi(iRInstr.getParam(1)));
+					
+					break;
+				}
+				// Function Return
+				case FUNCTION_RETURN :
+				{
+					// Generate Epilog
+					generateEpilog(os, stoi(iRInstr.getParam(0)));
+					
+					break;
+				}
+			}
 		}
 	}
 }
@@ -74,7 +92,12 @@ ControlFlowGraph::ControlFlowGraph(const ControlFlowGraph &controlFlowGraph)
 
 	programme = controlFlowGraph.programme;
 
-	basicBlocks = controlFlowGraph.getBasicBlocks();
+	for (auto basicBlock : controlFlowGraph.basicBlocks)
+	{
+		basicBlocks.push_back(basicBlock);
+	}
+
+	currentBasicBlock = basicBlocks.back();
 }
 
 
@@ -83,6 +106,8 @@ ControlFlowGraph::ControlFlowGraph()
 	#ifdef MAP
 		cout << "Appel au constructeur de <ControlFlowGraph>" << endl;
 	#endif
+
+	currentBasicBlock = new BasicBlock;
 }
 
 ControlFlowGraph::ControlFlowGraph(Programme * programme)
@@ -90,6 +115,8 @@ ControlFlowGraph::ControlFlowGraph(Programme * programme)
 	#ifdef MAP
 		cout << "Appel au constructeur de <ControlFlowGraph>" << endl;
 	#endif
+
+	currentBasicBlock = new BasicBlock;
 
 	this->programme = programme;
 }

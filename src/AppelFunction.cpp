@@ -4,7 +4,31 @@ using namespace std;
 #include "DeclarationTab.h"
 #include "VariableIndex.h"
 #include "VariableOpe.h"
+#include "ErrorHandling.h"
 #include <iostream>
+
+void AppelFunction::generateIR(ControlFlowGraph * controlFlowGraph)
+{
+	// Generate IR for Parameters
+
+	for (auto variable : variables)
+	{
+		//variable->generateIR();
+	}
+
+	// add IRInstr call
+
+
+
+	vector <string> params;
+
+	params.push_back(name);
+	params.push_back("r0");
+
+	IRInstr iRInstr(FUNCTION_CALL, params);
+
+
+}
 
 void AppelFunction::print(std::ostream &stream) const
 {
@@ -50,7 +74,11 @@ void AppelFunction::resolveScopeVariables(std::vector<Declaration*> declProgramm
     for ( auto function : functionProgram){
         if (function->getName().compare(this->name) == 0){
             this->functionAssociee = function;
+            return;
         }
+    }
+    if ( this->name.compare("putchar") != 0){
+        ErrorHandling::ThrowError(106,0,this->name);
     }
 }
 

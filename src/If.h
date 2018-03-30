@@ -9,6 +9,8 @@ class If : public Instruction {
 
 public:
 
+    void generateIR(ControlFlowGraph * controlFlowGraph){};
+
     void print(std::ostream& stream) const;
 
     friend std::ostream& operator<< (std::ostream& stream, const If& anIf);
