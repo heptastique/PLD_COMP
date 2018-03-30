@@ -1,19 +1,19 @@
 # include "BasicBlock.h"
 
 # include <string>
-# include <list>
+# include <vector>
 # include <iostream>
 
 using namespace std;
 
-list <IRInstr> BasicBlock::getIRInstrs() const
+vector <IRInstr> BasicBlock::getIRInstrs() const
 {
 	return iRInstrs;
 }
 
 void BasicBlock::addFunctionDefinition(string functionName, int addressRangeSize)
 {
-	list <string> params;
+	vector <string> params;
 
 	params.push_back(functionName);
 	params.push_back(to_string(addressRangeSize));

@@ -5,7 +5,7 @@
 # include "ControlFlowGraph.h"
 # include "IR.h"
 
-# include <list>
+# include <vector>
 
 using namespace std;
 
@@ -23,11 +23,11 @@ class Programme
 
 		void addFunction(Function * function);
 
-		void addDeclarations(std::list<Declaration*> declarations);
+		void addDeclarations(std::vector<Declaration*> declarations);
 
-		list <Function*> getFunctions();
+		vector <Function*> getFunctions();
 
-		list <Declaration*> getDeclarations();
+		vector <Declaration*> getDeclarations();
 
 		Programme & operator=(const Programme & programme);
 
@@ -43,7 +43,7 @@ class Programme
 
 	private :
 
-		list <Function*> functions;
-		list <Declaration*> declarations;
+		vector <Function*> functions;
+		vector <Declaration*> declarations;
 };
 

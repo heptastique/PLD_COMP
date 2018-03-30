@@ -2,7 +2,7 @@ using namespace std;
 
 # include "ControlFlowGraph.h"
 
-list <BasicBlock> ControlFlowGraph::getBasicBlocks() const
+vector <BasicBlock> ControlFlowGraph::getBasicBlocks() const
 {
 	return basicBlocks;
 }

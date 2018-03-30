@@ -51,7 +51,7 @@ void Programme::addFunction(Function *function)
 	this->functions.emplace_back(function);
 }
 
-void Programme::addDeclarations(list<Declaration*> declarations)
+void Programme::addDeclarations(vector<Declaration*> declarations)
 {
 	for(auto decl : declarations){
 		this->declarations.emplace_back(decl);
@@ -59,21 +59,21 @@ void Programme::addDeclarations(list<Declaration*> declarations)
 
 }
 
-list <Function*> Programme::getFunctions()
+vector <Function*> Programme::getFunctions()
 {
 	return this->functions;
 }
 
-list <Declaration*> Programme::getDeclarations()
+vector <Declaration*> Programme::getDeclarations()
 {
 	return this->declarations;
 }
 
 void Programme::resolveScopeVariables()
 {
-	list<Declaration*>::iterator it;
+	vector<Declaration*>::iterator it;
 	for(it = this->declarations.begin(); it != this->declarations.end(); ++it){
-        list<Declaration*>::iterator it2 = it;
+        vector<Declaration*>::iterator it2 = it;
         ++it2;
         while(it2 != this->declarations.end()){
 			Declaration * declaration = *it;
@@ -86,7 +86,7 @@ void Programme::resolveScopeVariables()
 		}
 	}
     // test if 2 functions share the same name
-    list<Function*>::iterator itfunction;
+    vector<Function*>::iterator itfunction;
     for(itfunction = this->functions.begin(); itfunction!=this->functions.end(); ++itfunction){
         auto itfunction2 = itfunction;
         ++itfunction2;

@@ -2,7 +2,7 @@
 
 # include "BasicBlock.h"
 # include "Programme.h"
-# include <list>
+# include <vector>
 # include <iostream>
 
 using namespace std;
@@ -16,7 +16,7 @@ class ControlFlowGraph
 
 	public :
 
-		list <BasicBlock> getBasicBlocks() const;
+		vector <BasicBlock> getBasicBlocks() const;
 
 		void addBasicBlock(BasicBlock basicBlock);
 
@@ -37,5 +37,5 @@ class ControlFlowGraph
 	private :
 
 		Programme * programme;
-		list <BasicBlock> basicBlocks;
+		vector <BasicBlock> basicBlocks;
 };

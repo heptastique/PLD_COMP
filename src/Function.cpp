@@ -88,19 +88,19 @@ Type Function::getTypeRetour (){
     return this->typeRetour;
 }
 
-void Function::setParameters(std::list<Declaration*> parameters)
+void Function::setParameters(std::vector<Declaration*> parameters)
 {
     this->parameters = parameters;
 }
 
-std::list<Declaration*> Function::getParameters()
+std::vector<Declaration*> Function::getParameters()
 {
     return this->parameters;
 }
 
-void Function::resolveScopeVariables(std::list<Declaration*> declProgramme, std::list<Function*> functionProgram)
+void Function::resolveScopeVariables(std::vector<Declaration*> declProgramme, std::vector<Function*> functionProgram)
 {
-	list<Declaration*>::iterator it;
+	vector<Declaration*>::iterator it;
 	for(it = this->parameters.begin(); it!=this->parameters.end(); ++it){
         auto it2 = it;
         ++it2;
