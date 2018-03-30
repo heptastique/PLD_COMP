@@ -149,6 +149,6 @@ Includename: [a-zA-Z][a-zA-Z0-9]*[.]?[a-zA-Z0-9]*;
 
 Entier: [0-9]+;
 
-Caractere: '\'' ~['\\] '\'';
+Caractere: '\''('\\'['"?abfnrtv\\]|.|)'\'';
 
 WS: [ \t\n\r]+ -> skip;
