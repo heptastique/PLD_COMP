@@ -111,9 +111,9 @@ int main (int argc, const char * argv[])
 
 	*/
 
-	//programme->resolveScopeVariables();
+	programme->resolveScopeVariables();
 
-    //programme->resolveTypeExpr();
+    programme->resolveTypeExpr();
 
 
 	/*
