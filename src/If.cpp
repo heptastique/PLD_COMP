@@ -30,6 +30,10 @@ void If::resolveScopeVariables(std::vector<Declaration*> declProgramme, std::vec
 
 void If::resolveTypeExpr(){
     this->bloc->resolveTypeExpr();
+    this->condition->resolveTypeExpr();
+    if(this->hasElse) {
+        this->anElse->resolveTypeExpr();
+    }
 }
 
 void If::setElse(Else *anElse) {

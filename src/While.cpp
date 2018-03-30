@@ -24,6 +24,7 @@ void While::resolveScopeVariables(std::vector<Declaration*> declProgramme, std::
 
 void While::resolveTypeExpr(){
     this->bloc->resolveTypeExpr();
+    this->condition->resolveTypeExpr();
 }
 
 While::While(const While &unWhile) {
