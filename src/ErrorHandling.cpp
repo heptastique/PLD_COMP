@@ -5,7 +5,7 @@ using namespace std;
 
 void ErrorHandling::ThrowError(int code, int line, string name)
 {
-    cout << "\033[1;31mLigne " << line << " - Erreur " << code << " : ";
+    cout << "Ligne " << line << " - Erreur " << code << " : ";
 
     switch(code) {
         // Semantic errors
@@ -63,7 +63,7 @@ void ErrorHandling::ThrowError(int code, int line, string name)
             break;
     }
 
-    cout << "033[0m\n" << endl;
+    cout << "\n" << endl;
 
     exit(code);
 }
