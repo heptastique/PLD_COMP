@@ -8,18 +8,25 @@ using namespace std;
 
 void AppelFunction::generateIR(ControlFlowGraph * controlFlowGraph)
 {
+	// Generate IR for Parameters
+
+	for (auto variable : variables)
+	{
+		//variable->generateIR();
+	}
+
 	// add IRInstr call
-	
-	
-	
+
+
+
 	list <string> params;
 
 	params.push_back(name);
 	params.push_back("r0");
-	
+
 	IRInstr iRInstr(FUNCTION_CALL, params);
-	
-	
+
+
 }
 
 void AppelFunction::print(std::ostream &stream) const
