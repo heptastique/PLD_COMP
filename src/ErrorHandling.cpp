@@ -3,54 +3,58 @@ using namespace std;
 # include "ErrorHandling.h"
 # include <iostream>
 
-void ErrorHandling::ThrowError(int code, int line)
+void ErrorHandling::ThrowError(int code, int line, string name)
 {
     cout << "\033[1;31mLigne " << line << " - Erreur " << code << " : ";
 
     switch(code) {
         // Semantic errors
         case 101:
-            cerr << "Déclaration de variable déjà existante" << endl;
+            cout << "Déclaration de la variable " << name << " déjà existante dans le bloc de la fonction" << endl;
             exit(101);
             break;
         case 102:
-            cerr << "Déclaration de variable définie en paramètre de la fonction" << endl;
+            cout << "Déclaration de la variable " << name << " déjà définie en paramètre de la fonction" << endl;
             exit(102);
             break;
         case 103:
-            cerr << "Déclaration d'une variable déjà définie globalement" << endl;
+            cout << "Déclaration de la variable " << name << " déjà définie globalement" << endl;
             exit(103);
             break;
         case 104:
-            cerr << "Utilisation d'une variable non déclarée" << endl;
+            cout << "Utilisation d'une variable non déclarée : " << name << endl;
             exit(104);
+            break;
+        case 105:
+            cout << "La fonction " << name << " existe déjà" << endl;
+            exit(105);
             break;
 
         // Lex errors
         case 201:
-            cerr << "Caractère invalide rencontré" << endl;
+            cout << "Caractère invalide rencontré" << endl;
             exit(201);
             break;
         
         // Syntax errors:
         case 301:
-            cerr << "Deux opérateurs suivis recontrés" << endl;
+            cout << "Deux opérateurs suivis recontrés" << endl;
             exit(301);
             break;
         case 302:
-            cerr << "Deux opérandes suivies rencontrées" << endl;
+            cout << "Deux opérandes suivies rencontrées" << endl;
             exit(302);
             break;
         case 303:
-            cerr << "Absence de point-virgule en fin de ligne" << endl;
+            cout << "Absence de point-virgule en fin de ligne" << endl;
             exit(303);
             break;
         case 304:
-            cerr << "Parenthèse attendue" << endl;
+            cout << "Parenthèse attendue" << endl;
             exit(304);
             break;
         case 305:
-            cerr << "Trop de parenthèses fermantes" << endl;
+            cout << "Trop de parenthèses fermantes" << endl;
             exit(305);
             break;
     }
