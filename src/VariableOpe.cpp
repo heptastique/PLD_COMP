@@ -22,6 +22,13 @@ std::ostream& operator<<(std::ostream& stream, const VariableOpe& variableOpe)
 VariableOpe &VariableOpe::operator=(const VariableOpe &unVariableOpe) {
 }
 
+void VariableOpe::resolveScopeVariables(std::vector<Declaration*> declProgramme, std::vector<Declaration*> paramFunction, std::vector<Declaration*> declBloc, std::vector<Function*> functionProgram){
+    Variable::resolveScopeVariables(declBloc,paramFunction,declBloc,functionProgram);
+}
+
+void VariableOpe::resolveTypeExpr(){
+    Variable::resolveTypeExpr();
+}
 
 VariableOpe::VariableOpe(TypeVariable typeVariable, std::string valeur, PrePos ope): Variable(typeVariable, valeur) {
     this->ope = ope;

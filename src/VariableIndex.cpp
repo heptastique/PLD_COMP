@@ -19,6 +19,17 @@ std::ostream& operator<<(std::ostream& stream, const VariableIndex& variableInde
     return stream;
 }
 
+void VariableIndex::resolveScopeVariables(std::vector<Declaration*> declProgramme, std::vector<Declaration*> paramFunction, std::vector<Declaration*> declBloc, std::vector<Function*> functionProgram)
+{
+    Variable::resolveScopeVariables(declProgramme, paramFunction, declBloc, functionProgram);
+    this->index->resolveScopeVariables(declProgramme, paramFunction, declBloc, functionProgram);
+}
+
+void VariableIndex::resolveTypeExpr(){
+    Variable::resolveTypeExpr();
+    this->index->resolveTypeExpr();
+}
+
 VariableIndex &VariableIndex::operator=(const VariableIndex &unVariableIndex) {
 }
 

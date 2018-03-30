@@ -1,3 +1,4 @@
+Generating Abstract Syntaxic Tree
 Programme:
  Declaration: Name=n Type=3
  Fonction: Name=main TypeRetour=2
@@ -6,6 +7,9 @@ Programme:
      Bloc:
       Instruction: Declaration: Name=n Type=3
       Instruction: AppelFunction: Name=test
+
+ Fonction: Name=test TypeRetour=0
+     Bloc:
 
 
 Fin

@@ -1,6 +1,8 @@
+Generating Abstract Syntaxic Tree
 Programme:
  Fonction: Name=main TypeRetour=0
      Bloc:
+      Instruction: Declaration: Name=a Type=3
       Instruction: VariableOpe: Type=0 Valeur=a  Ope=0
       Instruction: VariableOpe: Type=0 Valeur=a  Ope=1
       Instruction: VariableOpe: Type=0 Valeur=a  Ope=2
@@ -10,6 +12,11 @@ Programme:
 
       Instruction: Affectation:  Variable: Type=0 Valeur=a  Operateur=0 Expression: VariableOpe: Type=0 Valeur=a  Ope=0
 
+
+ Fonction: Name=test TypeRetour=0
+     Param:
+      Declaration: Name=a Type=3
+     Bloc:
 
 
 Fin

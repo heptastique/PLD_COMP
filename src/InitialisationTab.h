@@ -1,11 +1,11 @@
 #pragma once
 
 
-#include "Initialisation.h"
+#include "DeclarationTab.h"
 #include "Variable.h"
 #include <vector>
 
-class InitialisationTab : public Instruction {
+class InitialisationTab : public DeclarationTab {
 
 public:
 
@@ -15,17 +15,9 @@ public:
 
     friend std::ostream& operator<< (std::ostream& stream, const InitialisationTab& initialisationTab);
 
-    void setSize(std::string size){
-        this->size = size;
-    }
-
     void resolveScopeVariables(std::vector<Declaration*> declProgramme, std::vector<Declaration*> paramFunction, std::vector<Declaration*> declBloc, std::vector<Function*> functionProgram);
 
     void resolveTypeExpr();
-
-    void setType(Type type){
-        this->type = type;
-    }
 
     InitialisationTab &operator=(const InitialisationTab &unInitialisationTab);
 
@@ -36,8 +28,5 @@ public:
 private:
 
     // There could be no size
-    std::string size;
     std::vector<Variable*> variables;
-    std::string name;
-    Type type;
 };

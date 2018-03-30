@@ -1,10 +1,27 @@
+Generating Abstract Syntaxic Tree
 Programme:
  Fonction: Name=main TypeRetour=1
      Bloc:
+      Instruction: Declaration: Name=name Type=3
       Instruction: AppelFunction: Name=func1 Variable: Type=2 Valeur='a' 
       Instruction: AppelFunction: Name=func2 Variable: Type=0 Valeur=name 
       Instruction: AppelFunction: Name=func3 Variable: Type=0 Valeur=name  Variable: Type=1 Valeur=4 
 
+ Fonction: Name=func1 TypeRetour=3
+     Param:
+      Declaration: Name=a Type=3
+     Bloc:
+
+ Fonction: Name=func2 TypeRetour=3
+     Param:
+      Declaration: Name=a Type=3
+     Bloc:
+
+ Fonction: Name=func3 TypeRetour=3
+     Param:
+      Declaration: Name=a Type=3
+      Declaration: Name=b Type=3
+     Bloc:
+
 
 Fin
-Abstract Syntaxic Tree generated

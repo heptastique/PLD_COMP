@@ -39,11 +39,9 @@ Initialisation::Initialisation(const Initialisation &unInitialisation)
 #endif
 }
 
-Initialisation::Initialisation(Type type, Expression* expression, std::string name)
+Initialisation::Initialisation(Type type, Expression* expression, std::string name) : Declaration( name, type)
 {
-    this->type = type;
     this->expression = expression;
-    this->name = name;
 #ifdef MAP
     cout << "Appel au constructeur de <Initialisation>" << endl;
 #endif
