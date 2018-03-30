@@ -9,6 +9,14 @@ using namespace std;
 
 void AppelFunction::generateIR(ControlFlowGraph * controlFlowGraph)
 {
+	// Special Case for putchar
+	if (name == "putchar")
+	{
+		cout << "call putchar" << endl;
+		
+		
+	}
+	
 	// Generate IR for Parameters
 
 	for (auto variable : variables)
