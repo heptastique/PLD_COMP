@@ -1,3 +1,4 @@
+Generating Abstract Syntaxic Tree
 Programme:
  Declaration: Name=test Type=3
  Fonction: Name=main TypeRetour=0
