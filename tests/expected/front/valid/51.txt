@@ -3,7 +3,7 @@ Programme:
  Fonction: Name=main TypeRetour=0
      Bloc:
       Instruction: Declaration: Name=a Type=3
-      Instruction: Affectation:  Variable: Type=0 Valeur=a  Operateur=0 Expression: Variable: Type=0 Valeur=n 
+      Instruction: Affectation:  Variable: Type=0 Valeur=a  Operateur=0 Expression: Variable: Type=2 Valeur='\n'
 
 
 Fin
