@@ -10,7 +10,14 @@ void Variable::generateIR(ControlFlowGraph * controlFlowGraph)
 
 	/*
 	string reg = createNewReg();
-	controlFlowGraph->addInstruction("reg<-value");
+	
+	list <string> params;
+	
+	params.push_back(reg);
+	params.push_back(valeur);
+	
+	controlFlowGraph->addInstruction(IRInstr(REG_STORE), params);
+	
 	return reg;
 	*/
 }
