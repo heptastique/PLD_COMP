@@ -1,12 +1,14 @@
 # pragma once
 
 # include "BasicBlock.h"
+# include "IRInstr.h"
 # include <list>
 # include <iostream>
 
 using namespace std;
 
 class BasicBlock;
+class IRInstr;
 class Programme;
 
 class ControlFlowGraph
@@ -15,9 +17,11 @@ class ControlFlowGraph
 
 	public :
 
-		list <BasicBlock> getBasicBlocks() const;
+		void addIRInstr(IRInstr iRInstr);
 
-		void addBasicBlock(BasicBlock basicBlock);
+		list <BasicBlock *> getBasicBlocks() const;
+
+		void newBasicBlock();
 
 		void generateProlog(ostream &os, string functionName, int addressRangeSize) const;
 		
@@ -36,5 +40,6 @@ class ControlFlowGraph
 	private :
 
 		Programme * programme;
-		list <BasicBlock> basicBlocks;
+		list <BasicBlock *> basicBlocks;
+		BasicBlock * currentBasicBlock;
 };

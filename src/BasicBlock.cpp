@@ -11,15 +11,8 @@ list <IRInstr> BasicBlock::getIRInstrs() const
 	return iRInstrs;
 }
 
-void BasicBlock::addFunctionDefinition(string functionName, int addressRangeSize)
+void BasicBlock::addIRInstr(IRInstr iRInstr)
 {
-	list <string> params;
-
-	params.push_back(functionName);
-	params.push_back(to_string(addressRangeSize));
-
-	IRInstr iRInstr(FUNCTION_DECLARATION, params);
-
 	iRInstrs.push_back(iRInstr);
 }
 

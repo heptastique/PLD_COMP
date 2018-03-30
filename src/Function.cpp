@@ -7,25 +7,26 @@ using namespace std;
 # include <iostream>
 
 // Generate IR
-ControlFlowGraph Function::generateIR()
+void Function::generateIR(ControlFlowGraph * controlFlowGraph)
 {
-	// Create Function ControlFlowGraph
-	ControlFlowGraph controlFlowGraph;
-
-	// Create Prolog BasicBlock
-	BasicBlock prologBasicBlock;
-
+	controlFlowGraph->newBasicBlock();
+	
 	// Calculate Address Range Size
 	int addressRangeSize = calculateAddressRangeSize();
 
-	// Add Function Definition to Prolog BasicBlock
-	prologBasicBlock.addFunctionDefinition(name, addressRangeSize);
+	list <string> params;
 
-	// Add Prolog BasicBlock to Function ControlFlowGraph
-	controlFlowGraph.addBasicBlock(prologBasicBlock);
+	params.push_back(name);
+	params.push_back(to_string(addressRangeSize));
 
+	IRInstr iRInstr(FUNCTION_DECLARATION, params);
+
+	controlFlowGraph->addIRInstr(iRInstr);
+	
+	controlFlowGraph->newBasicBlock();
+	
 	// Generate IR for Body
-	bloc->generateIR(&controlFlowGraph);
+	bloc->generateIR(controlFlowGraph);
 
 	// Create Epilog BasicBlock
 	//BasicBlock epilogBasicBlock;
@@ -35,9 +36,6 @@ ControlFlowGraph Function::generateIR()
 
 	// Add Epilog BasicBlock to Function ControlFlowGraph
 	//controlFlowGraph.addBasicBlock(epilogBasicBlock);
-
-
-	return controlFlowGraph;
 }
 
 int Function::calculateAddressRangeSize()

@@ -7,16 +7,16 @@ void IR::generateASM(ostream & os) const
 {
 	for (auto controlFlowGraph : controlFlowGraphs)
 	{
-		controlFlowGraph.generateASM(os);
+		controlFlowGraph->generateASM(os);
 	}
 }
 
-void IR::addControlFlowGraph(ControlFlowGraph controlFlowGraph)
+void IR::addControlFlowGraph(ControlFlowGraph * controlFlowGraph)
 {
 	controlFlowGraphs.push_back(controlFlowGraph);
 }
 
-list <ControlFlowGraph> IR::getControlFlowGraphs() const
+list <ControlFlowGraph *> IR::getControlFlowGraphs() const
 {
 	return controlFlowGraphs;
 }
@@ -34,10 +34,13 @@ IR::IR(const IR & iR)
 		cout << "Appel au constructeur de copie de <IR>" << endl;
 	#endif
 
-	controlFlowGraphs = iR.controlFlowGraphs;
+	for (auto controlFlowGraph : iR.controlFlowGraphs)
+	{
+		controlFlowGraphs.push_back(controlFlowGraph);
+	}
 }
 
-IR::IR(list <ControlFlowGraph> controlFlowGraphs)
+IR::IR(list <ControlFlowGraph *> controlFlowGraphs)
 {
 	#ifdef MAP
 		cout << "Appel au constructeur de <IR>" << endl;

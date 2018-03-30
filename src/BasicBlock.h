@@ -16,7 +16,7 @@ class BasicBlock
 
 		list <IRInstr> getIRInstrs() const;
 
-		void addFunctionDefinition(string functionName, int adressRangeSize);
+		void addIRInstr(IRInstr iRInstr);
 
 		void generateASM();
 

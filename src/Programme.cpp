@@ -9,15 +9,16 @@ IR Programme::generateIR()
 {
 	// Create IR
 	IR iR;
-
-	// Create Control Flow Graph
-	ControlFlowGraph controlFlowGraph;
+	
+	ControlFlowGraph * controlFlowGraph;
 
 	// For each Function of Program
 	for (auto function : functions)
 	{
+		controlFlowGraph = new ControlFlowGraph;
+		
 		// Generate Function Control Flow Graph
-		controlFlowGraph = function->generateIR();
+		function->generateIR(controlFlowGraph);
 
 		// Add Function Control Flow Graph to IR
 		iR.addControlFlowGraph(controlFlowGraph);

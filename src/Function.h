@@ -14,7 +14,7 @@ class Function
 {
 	public:
 
-        ControlFlowGraph generateIR();
+        void generateIR(ControlFlowGraph * controlFlowGraph);
 
         friend ostream & operator<<(ostream & stream, const Function & function);
 
