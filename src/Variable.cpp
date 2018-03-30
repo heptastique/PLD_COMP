@@ -7,6 +7,12 @@ using namespace std;
 void Variable::generateIR(ControlFlowGraph * controlFlowGraph)
 {
 	cout << "Variable::generateIR" << endl;
+
+	/*
+	string reg = createNewReg();
+	controlFlowGraph->addInstruction("reg<-value");
+	return reg;
+	*/
 }
 
 void Variable::print(std::ostream &stream) const
