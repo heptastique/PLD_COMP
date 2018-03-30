@@ -56,7 +56,7 @@ namespace antlr4 {
     ///
     ///  This does not trace states visited during prediction.
     /// </summary>
-    //	public vector<Integer> states;
+    //	public List<Integer> states;
 
     Token *start;
     Token *stop;
