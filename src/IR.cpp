@@ -5,6 +5,10 @@ using namespace std;
 
 void IR::generateASM(ostream & os) const
 {
+	os << "\n";
+	os << "\t.globl main\n";
+	os << "\n";
+
 	for (auto controlFlowGraph : controlFlowGraphs)
 	{
 		controlFlowGraph->generateASM(os);

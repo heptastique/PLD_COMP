@@ -41,6 +41,7 @@ void ControlFlowGraph::generateEpilog(ostream & os, int addressRangeSize) const
 		cout << "Appel a la methode ControlFlowGraph::generateProlog" << endl;
 	#endif
 
+	os << "\n";
 	os << "\taddq\t$" << addressRangeSize << ", %rsp\n";
 	os << "\tpopq\t%rbp\n";
 	os << "\tretq\n";
@@ -78,6 +79,11 @@ void ControlFlowGraph::generateASM(ostream & os) const
 					generateEpilog(os, stoi(iRInstr.getParam(0)));
 					
 					break;
+				}
+				case PUTCHAR :
+				{
+					os << "\tmovl\t$111, %edi\n";
+					os << "\tcall putchar\n";
 				}
 			}
 		}

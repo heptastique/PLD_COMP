@@ -15,9 +15,9 @@ void AppelFunction::generateIR(ControlFlowGraph * controlFlowGraph)
 		cout << "call putchar" << endl;
 		
 		// handles param
-		// special mnemo for putchar
-		
-		//IRInstr iRInstr(PUTCHAR);
+
+		//controlFlowGraph->addIRInstr(IRInstr(PUTCHAR, {variables[0]->generateIR()}));
+		controlFlowGraph->addIRInstr(IRInstr(PUTCHAR, {"tmp1"}));
 	}
 	
 	// Generate IR for Parameters
