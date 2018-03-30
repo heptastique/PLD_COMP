@@ -1,6 +1,7 @@
 using namespace std;
 
 #include "Bloc.h"
+#include "ErrorHandling.h"
 #include <iostream>
 
 
@@ -43,7 +44,7 @@ void Bloc::resolveScopeVariables(std::vector<Declaration*> declProgramme, std::v
             Declaration * declaration2 = *it2;
             if ( declaration->getName().compare(declaration2->getName()) == 0)
             {
-                cout << "variable " << declaration2->getName() << " already exist inside this bloc" << endl;
+                ErrorHandling::ThrowError(101,0, declaration2->getName());
             }
             ++it2;
         }

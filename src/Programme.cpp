@@ -1,6 +1,7 @@
 using namespace std;
 
 # include "Programme.h"
+#include "ErrorHandling.h"
 
 # include <iostream>
 
@@ -79,7 +80,7 @@ void Programme::resolveScopeVariables()
 			Declaration * declaration2 = *it2;
 			if ( declaration->getName().compare(declaration2->getName()) == 0)
 			{
-				cout << "variable " << declaration2->getName() << " already exist !" << endl;
+                ErrorHandling::ThrowError(103,0, declaration2->getName());
 			}
             ++it2;
 		}
@@ -94,7 +95,7 @@ void Programme::resolveScopeVariables()
             Function * function2 = *itfunction2;
             if ( function->getName().compare(function2->getName()) == 0)
             {
-                cout << "function " << function2->getName() << " already exist" << endl;
+                ErrorHandling::ThrowError(105,0, function2->getName());
             }
             ++itfunction2;
         }

@@ -19,11 +19,12 @@ install:
 
 before_script:
   - cd ../tests
-  - chmod +x asm-test.sh symbols-test.sh lib/assert.sh
+  - chmod +x asm-test.sh symbols-test.sh errors-test.sh lib/assert.sh
 
 script:
   - ./symbols-test.sh -v
   - ./asm-test.sh -v
+  - ./errors-test.sh -v
 
 before_cache:
   - cd ..
