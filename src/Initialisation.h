@@ -1,11 +1,11 @@
 #pragma once
 
-#include "Instruction.h"
+#include "Declaration.h"
 #include "Type.h"
 #include "Expression.h"
 #include <string>
 
-class Initialisation : public Instruction {
+class Initialisation : public Declaration {
 
 public:
 
@@ -14,10 +14,6 @@ public:
     void print(std::ostream& stream) const;
 
     friend std::ostream& operator<< (std::ostream& stream, const Initialisation& initialisation);
-
-    void setType(Type type){
-        this->type = type;
-    }
 
     Initialisation &operator=(const Initialisation &unInitialisation);
 
@@ -32,8 +28,6 @@ public:
     virtual ~Initialisation();
 
 protected:
-    Type type;
     Expression* expression;
-    std::string name;
 
 };
