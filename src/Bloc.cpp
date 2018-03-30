@@ -44,7 +44,7 @@ void Bloc::resolveScopeVariables(std::list<Declaration*> declProgramme, std::lis
             Declaration * declaration2 = *it2;
             if ( declaration->getName().compare(declaration2->getName()) == 0)
             {
-                ErrorHandling::ThrowError(102,0, declaration2->getName());
+                ErrorHandling::ThrowError(101,0, declaration2->getName());
             }
             ++it2;
         }

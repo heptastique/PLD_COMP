@@ -108,7 +108,7 @@ void Function::resolveScopeVariables(std::list<Declaration*> declProgramme, std:
             Declaration *parameters = *it;
             Declaration *parameters2 = *it2;
             if (parameters->getName().compare(parameters2->getName()) == 0) {
-                ErrorHandling::ThrowError(102,0, parameters2->getName());
+                ErrorHandling::ThrowError(102,0, parameters->getName());
             }
             ++it2;
         }
