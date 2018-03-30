@@ -28,7 +28,8 @@ Ligne 2 - Erreur 101 : Déclaration de variable nombre déjà existante
 102|Déclaration de la variable nomdelavariable déjà définie en paramètre de la fonction
 103|Déclaration de la variable nomdelavariable déjà définie globalement
 104|Utilisation d'une variable non déclarée : nomdelavariable
-105|la fonction nomdelafonction existe dèjà
+105|La fonction nomdelafonction existe dèjà
+106|La fonction nomdelafonction n'existe pas
 
 ### Lex errors
 |Code|Description|
