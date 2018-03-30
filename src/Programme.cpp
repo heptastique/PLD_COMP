@@ -1,6 +1,7 @@
 using namespace std;
 
 # include "Programme.h"
+#include "ErrorHandling.h"
 
 # include <iostream>
 
@@ -51,7 +52,7 @@ void Programme::addFunction(Function *function)
 	this->functions.emplace_back(function);
 }
 
-void Programme::addDeclarations(list<Declaration*> declarations)
+void Programme::addDeclarations(vector<Declaration*> declarations)
 {
 	for(auto decl : declarations){
 		this->declarations.emplace_back(decl);
@@ -59,34 +60,34 @@ void Programme::addDeclarations(list<Declaration*> declarations)
 
 }
 
-list <Function*> Programme::getFunctions()
+vector <Function*> Programme::getFunctions()
 {
 	return this->functions;
 }
 
-list <Declaration*> Programme::getDeclarations()
+vector <Declaration*> Programme::getDeclarations()
 {
 	return this->declarations;
 }
 
 void Programme::resolveScopeVariables()
 {
-	list<Declaration*>::iterator it;
+	vector<Declaration*>::iterator it;
 	for(it = this->declarations.begin(); it != this->declarations.end(); ++it){
-        list<Declaration*>::iterator it2 = it;
+        vector<Declaration*>::iterator it2 = it;
         ++it2;
         while(it2 != this->declarations.end()){
 			Declaration * declaration = *it;
 			Declaration * declaration2 = *it2;
 			if ( declaration->getName().compare(declaration2->getName()) == 0)
 			{
-				cout << "variable " << declaration2->getName() << " already exist !" << endl;
+                ErrorHandling::ThrowError(103,0, declaration2->getName());
 			}
             ++it2;
 		}
 	}
     // test if 2 functions share the same name
-    list<Function*>::iterator itfunction;
+    vector<Function*>::iterator itfunction;
     for(itfunction = this->functions.begin(); itfunction!=this->functions.end(); ++itfunction){
         auto itfunction2 = itfunction;
         ++itfunction2;
@@ -95,7 +96,7 @@ void Programme::resolveScopeVariables()
             Function * function2 = *itfunction2;
             if ( function->getName().compare(function2->getName()) == 0)
             {
-                cout << "function " << function2->getName() << " already exist" << endl;
+                ErrorHandling::ThrowError(105,0, function2->getName());
             }
             ++itfunction2;
         }

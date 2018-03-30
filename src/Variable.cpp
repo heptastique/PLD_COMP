@@ -2,6 +2,7 @@ using namespace std;
 
 #include "Variable.h"
 #include "VariableIndex.h"
+#include "ErrorHandling.h"
 #include <iostream>
 
 void Variable::generateIR(ControlFlowGraph * controlFlowGraph)
@@ -37,7 +38,7 @@ std::ostream& operator<<(std::ostream& stream, const Variable& variable)
 Variable &Variable::operator=(const Variable &unVariable) {
 }
 
-void Variable::resolveScopeVariables(std::list<Declaration*> declProgramme, std::list<Declaration*> paramFunction, std::list<Declaration*> declBloc, std::list<Function*> functionProgram){
+void Variable::resolveScopeVariables(std::vector<Declaration*> declProgramme, std::vector<Declaration*> paramFunction, std::vector<Declaration*> declBloc, std::vector<Function*> functionProgram){
     if (this->typeVariable == NAME) {
         bool notfound = true;
         for (auto decl : declBloc) {
@@ -70,19 +71,19 @@ void Variable::resolveScopeVariables(std::list<Declaration*> declProgramme, std:
             }
         }
         if (notfound) {
-            cout << "variable " << this->valeur << " is not instantiated" << endl;
+            ErrorHandling::ThrowError(104, 0, this->valeur);
         }
     }
 }
 
 void Variable::resolveTypeExpr() {
     cout << declarationAssociee << endl;
-    if (this->declarationAssociee != nullptr){
-        this->setType(this->declarationAssociee->getType());
-    }
-    else
-    {
-        cout << "np" << endl;
+    if ( this->typeVariable == NAME) {
+        if (this->declarationAssociee != nullptr) {
+            this->setType(this->declarationAssociee->getType());
+        } else {
+            ErrorHandling::ThrowError(104, 0, this->valeur);
+        }
     }
 }
 

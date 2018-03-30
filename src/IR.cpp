@@ -16,7 +16,8 @@ void IR::addControlFlowGraph(ControlFlowGraph * controlFlowGraph)
 	controlFlowGraphs.push_back(controlFlowGraph);
 }
 
-list <ControlFlowGraph *> IR::getControlFlowGraphs() const
+vector <ControlFlowGraph*> IR::getControlFlowGraphs() const
+
 {
 	return controlFlowGraphs;
 }
@@ -40,7 +41,8 @@ IR::IR(const IR & iR)
 	}
 }
 
-IR::IR(list <ControlFlowGraph *> controlFlowGraphs)
+IR::IR(vector <ControlFlowGraph*> controlFlowGraphs)
+
 {
 	#ifdef MAP
 		cout << "Appel au constructeur de <IR>" << endl;

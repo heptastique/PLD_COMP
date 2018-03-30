@@ -22,11 +22,11 @@ class Function
 
 		int calculateAddressRangeSize();
 
-        void setParameters(list <Declaration*> parameters);
+        void setParameters(vector <Declaration*> parameters);
 
-        std::list<Declaration*> getParameters();
+        std::vector<Declaration*> getParameters();
 
-        void resolveScopeVariables(std::list<Declaration*> declProgramme, std::list<Function*> functionProgram);
+        void resolveScopeVariables(std::vector<Declaration*> declProgramme, std::vector<Function*> functionProgram);
 
         void resolveTypeExpr();
 
@@ -46,6 +46,6 @@ class Function
     private:
         std::string name;
         Bloc* bloc;
-        std::list<Declaration*> parameters;
+        std::vector<Declaration*> parameters;
         Type typeRetour;
 };

@@ -1,12 +1,12 @@
 # include "BasicBlock.h"
 
 # include <string>
-# include <list>
+# include <vector>
 # include <iostream>
 
 using namespace std;
 
-list <IRInstr> BasicBlock::getIRInstrs() const
+vector <IRInstr> BasicBlock::getIRInstrs() const
 {
 	return iRInstrs;
 }

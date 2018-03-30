@@ -2,7 +2,7 @@
 
 # include "IRInstr.h"
 # include <string>
-# include <list>
+# include <vector>
 
 using namespace std;
 
@@ -14,7 +14,7 @@ class BasicBlock
 
 	public :
 
-		list <IRInstr> getIRInstrs() const;
+		vector <IRInstr> getIRInstrs() const;
 
 		void addIRInstr(IRInstr iRInstr);
 
@@ -28,7 +28,7 @@ class BasicBlock
 
 	private :
 
-		list <IRInstr> iRInstrs;
+		vector <IRInstr> iRInstrs;
 		BasicBlock * successor;
 		BasicBlock * condSuccessor;
 };

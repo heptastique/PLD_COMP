@@ -2,7 +2,8 @@
 
 # include "BasicBlock.h"
 # include "IRInstr.h"
-# include <list>
+# include "Programme.h"
+# include <vector>
 # include <iostream>
 
 using namespace std;
@@ -19,7 +20,7 @@ class ControlFlowGraph
 
 		void addIRInstr(IRInstr iRInstr);
 
-		list <BasicBlock *> getBasicBlocks() const;
+		vector <BasicBlock*> getBasicBlocks() const;
 
 		void newBasicBlock();
 
@@ -38,8 +39,7 @@ class ControlFlowGraph
 		virtual ~ControlFlowGraph();
 
 	private :
-
 		Programme * programme;
-		list <BasicBlock *> basicBlocks;
 		BasicBlock * currentBasicBlock;
+		vector <BasicBlock*> basicBlocks;
 };

@@ -7,7 +7,7 @@ void ControlFlowGraph::addIRInstr(IRInstr iRInstr)
 	currentBasicBlock->addIRInstr(iRInstr);
 }
 
-list <BasicBlock *> ControlFlowGraph::getBasicBlocks() const
+vector <BasicBlock*> ControlFlowGraph::getBasicBlocks() const
 {
 	return basicBlocks;
 }
