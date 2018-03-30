@@ -28,18 +28,16 @@ void Initialisation::resolveTypeExpr(){
     this->expression->resolveTypeExpr();
 }
 
-Initialisation::Initialisation(const Initialisation &unInitialisation)
+Initialisation::Initialisation(const Initialisation &unInitialisation) : Declaration(unInitialisation)
 {
 #ifdef MAP
     cout << "Appel au constructeur de copie de <Initialisation>" << endl;
 #endif
 }
 
-Initialisation::Initialisation(Type type, Expression* expression, std::string name)
+Initialisation::Initialisation(Type type, Expression* expression, std::string name) : Declaration( name, type)
 {
-    this->type = type;
     this->expression = expression;
-    this->name = name;
 #ifdef MAP
     cout << "Appel au constructeur de <Initialisation>" << endl;
 #endif
