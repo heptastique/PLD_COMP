@@ -42,11 +42,8 @@ void InitialisationTab::resolveTypeExpr(){
 InitialisationTab &InitialisationTab::operator=(const InitialisationTab &unInitialisationTab) {
 }
 
-InitialisationTab::InitialisationTab(Type type,std::string name, std::vector<Variable*> variables) {
-    this->name = name;
-    this->type = type;
+InitialisationTab::InitialisationTab(Type type,std::string name, std::vector<Variable*> variables) : DeclarationTab(name,type,to_string(variables.size())) {
     this->variables = variables;
-    this->size = to_string(variables.size());
 #ifdef MAP
     cout << "Appel au constructeur de <InitialisationTab>" << endl;
 #endif

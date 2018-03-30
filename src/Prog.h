@@ -118,15 +118,21 @@ class Prog : public ProgBaseVisitor
                 init->setType(type);
                 instructions.emplace_back(instruction);
             }
-            if(InitialisationTab* initTab = dynamic_cast<InitialisationTab*>(instruction))
+            else
             {
-                initTab->setType(type);
-                instructions.emplace_back(instruction);
-            }
-            if(Declaration* declaration = dynamic_cast<Declaration*>(instruction))
-            {
-                declaration->setType(type);
-                instructions.emplace_back(instruction);
+                if(InitialisationTab* initTab = dynamic_cast<InitialisationTab*>(instruction))
+                {
+                    initTab->setType(type);
+                    instructions.emplace_back(instruction);
+                }
+                else
+                {
+                    if(Declaration* declaration = dynamic_cast<Declaration*>(instruction))
+                    {
+                        declaration->setType(type);
+                        instructions.emplace_back(instruction);
+                    }
+                }
             }
         }
         return instructions;

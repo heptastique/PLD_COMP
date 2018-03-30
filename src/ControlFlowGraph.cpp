@@ -44,6 +44,7 @@ void ControlFlowGraph::generateEpilog(ostream & os, int addressRangeSize) const
 	os << "\taddq\t$" << addressRangeSize << ", %rsp\n";
 	os << "\tpopq\t%rbp\n";
 	os << "\tretq\n";
+	os << "\n";
 }
 
 // Generate ASM
@@ -59,24 +60,26 @@ void ControlFlowGraph::generateASM(ostream & os) const
 		// For each IRInstr of BasicBlock
 		for (auto iRInstr : basicBlock->getIRInstrs())
 		{
-			// If IRInstr if a Function Declaration
-			if (iRInstr.getMnemonique() == FUNCTION_DECLARATION)
+			// For each Kind of IRInstr
+			switch (iRInstr.getMnemonique())
 			{
-				// Generate Prolog of Function
-				generateProlog(os, iRInstr.getParam(0), stoi(iRInstr.getParam(1)));
-
-				// Generate Body
-				// 
-
-				// Generate Epilog
-				generateEpilog(os,stoi(iRInstr.getParam(1)));
+				// Function Declaration
+				case FUNCTION_DECLARATION :
+				{
+					// Generate Prolog of Function
+					generateProlog(os, iRInstr.getParam(0), stoi(iRInstr.getParam(1)));
+					
+					break;
+				}
+				// Function Return
+				case FUNCTION_RETURN :
+				{
+					// Generate Epilog
+					generateEpilog(os, stoi(iRInstr.getParam(0)));
+					
+					break;
+				}
 			}
-			// If IRInstr if a Function Return
-			//else if (iRInstr.getMnemonique() == FUNCTION_RETURN)
-			//{
-				// Generate Epilog
-				//generateEpilog(os,stoi(iRInstr.getParam(1)));
-			//}
 		}
 	}
 }

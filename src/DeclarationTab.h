@@ -22,6 +22,6 @@ public:
 
     virtual ~DeclarationTab();
 
-private:
+protected:
     std::string size;
 };
