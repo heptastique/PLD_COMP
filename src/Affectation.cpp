@@ -6,7 +6,16 @@ using namespace std;
 
 string Affectation::generateIR(ControlFlowGraph * controlFlowGraph)
 {
-	return "";
+    string right = variable->generateIR(controlFlowGraph);
+    string left = expression->generateIR(controlFlowGraph);
+
+    vector <string> params;
+    params.emplace_back(right);
+    params.emplace_back(left);
+
+    IRInstr iRInstr(AFFECTATION, params);
+
+	return right;
 }
 
 void Affectation::print(std::ostream &stream) const

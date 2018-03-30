@@ -15,7 +15,8 @@ enum Mnemonique
 	FUNCTION_RETURN = 1,
 	FUNCTION_CALL = 2,
 	
-	REG_STORE = 3
+	REG_STORE = 3,
+    AFFECTATION = 40
 };
 
 class IRInstr
