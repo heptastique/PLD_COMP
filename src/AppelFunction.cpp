@@ -14,28 +14,27 @@ void AppelFunction::generateIR(ControlFlowGraph * controlFlowGraph)
 	{
 		cout << "call putchar" << endl;
 		
+		// handles param
+		// special mnemo for putchar
 		
+		//IRInstr iRInstr(PUTCHAR);
 	}
 	
 	// Generate IR for Parameters
 
-	for (auto variable : variables)
+	/*for (auto variable : variables)
 	{
 		//variable->generateIR();
-	}
+	}*/
 
 	// add IRInstr call
 
-
-
-	vector <string> params;
+	/*vector <string> params;
 
 	params.push_back(name);
 	params.push_back("r0");
 
-	IRInstr iRInstr(FUNCTION_CALL, params);
-
-
+	IRInstr iRInstr(FUNCTION_CALL, params);*/
 }
 
 void AppelFunction::print(std::ostream &stream) const
