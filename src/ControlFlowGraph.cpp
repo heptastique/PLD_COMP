@@ -82,7 +82,7 @@ void ControlFlowGraph::generateASM(ostream & os) const
 				}
 				case PUTCHAR :
 				{
-					os << "\tmovl\t$111, %edi\n";
+					os << "\tmovl\t$" << iRInstr.getParam(0) <<", %edi\n";
 					os << "\tcall putchar\n";
 				}
 			}
