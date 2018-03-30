@@ -15,37 +15,10 @@ vector <BasicBlock*> ControlFlowGraph::getBasicBlocks() const
 void ControlFlowGraph::newBasicBlock()
 {
 	BasicBlock * newBasicBlock = new BasicBlock;
-	
+
 	basicBlocks.push_back(newBasicBlock);
-	
+
 	currentBasicBlock = newBasicBlock;
-}
-
-// Generate Prolog of Function
-void ControlFlowGraph::generateProlog(ostream & os, string functionName, int addressRangeSize) const
-{
-	#ifdef MAP
-		cout << "Appel a la methode ControlFlowGraph::generateProlog" << endl;
-	#endif
-
-	os << functionName << ":\n";
-	os << "\n";
-	os << "\tpushq\t%rbp\n";
-	os << "\tmovq\t%rsp, %rbp\n";
-	os << "\tsubq\t$" << addressRangeSize << ", %rsp\n";
-	os << "\n";
-}
-void ControlFlowGraph::generateEpilog(ostream & os, int addressRangeSize) const
-{
-	#ifdef MAP
-		cout << "Appel a la methode ControlFlowGraph::generateProlog" << endl;
-	#endif
-
-	os << "\n";
-	os << "\taddq\t$" << addressRangeSize << ", %rsp\n";
-	os << "\tpopq\t%rbp\n";
-	os << "\tretq\n";
-	os << "\n";
 }
 
 // Generate ASM
@@ -68,16 +41,25 @@ void ControlFlowGraph::generateASM(ostream & os) const
 				case FUNCTION_DECLARATION :
 				{
 					// Generate Prolog of Function
-					generateProlog(os, iRInstr.getParam(0), stoi(iRInstr.getParam(1)));
-					
+					os << iRInstr.getParam(0) << ":\n";
+					os << "\n";
+					os << "\tpushq\t%rbp\n";
+					os << "\tmovq\t%rsp, %rbp\n";
+					os << "\tsubq\t$" << iRInstr.getParam(1) << ", %rsp\n";
+					os << "\n";
+
 					break;
 				}
 				// Function Return
 				case FUNCTION_RETURN :
 				{
 					// Generate Epilog
-					generateEpilog(os, stoi(iRInstr.getParam(0)));
-					
+					os << "\n";
+					os << "\taddq\t$" << iRInstr.getParam(0) << ", %rsp\n";
+					os << "\tpopq\t%rbp\n";
+					os << "\tretq\n";
+					os << "\n";
+
 					break;
 				}
 				case PUTCHAR :
