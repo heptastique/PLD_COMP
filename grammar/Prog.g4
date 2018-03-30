@@ -79,8 +79,25 @@ inselse: 'else' bloc						# Lelse;
 
 inswhile: 'while' '(' expr ')' bloc			# Lwhile;
 
+insfor: 'for' '(' forpartone? ';' forparttwo? ';' forpartthree? ')' bloc # Lfor;
+
 retourfonct: 'return' expr ';'              # Lretourfonct;
 
+forpartone: decl							# LforpartoneDecl
+		| init								# LforpartoneInit
+		| affectation						# LforpartoneAffectation
+		| expr								# LforpartoneExpr
+		;
+
+forparttwo: type Name '=' expr				# LforparttwoInit
+		| affectation						# LforparttwoAffectation
+		| expr								# LforparttwoExpr
+		;
+
+forpartthree: affectation					# LforpartthreeAffectation
+		| expr								# LforpartthreeExpr
+		;
+		
 operation: '='								# LoperationEqual
             | '+='                          # LoperationPlusequal
             | '-='                          # LoperationMoinsequal
