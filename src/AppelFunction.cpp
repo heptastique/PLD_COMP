@@ -9,25 +9,29 @@ using namespace std;
 
 string AppelFunction::generateIR(ControlFlowGraph * controlFlowGraph)
 {
+	// Special Case for putchar
+	if (name == "putchar")
+	{
+		controlFlowGraph->addIRInstr(IRInstr(PUTCHAR, {to_string((int)((variables[0]->getValeur())[1]))}));
+	}
+	
 	// Generate IR for Parameters
 
-	for (auto variable : variables)
+	/*for (auto variable : variables)
 	{
 		//variable->generateIR();
-	}
+	}*/
 
 	// add IRInstr call
 
-
-
-	vector <string> params;
+	/*vector <string> params;
 
 	params.push_back(name);
 	params.push_back("r0");
 
-	IRInstr iRInstr(FUNCTION_CALL, params);
+	IRInstr iRInstr(FUNCTION_CALL, params);*/
 
-    return "";
+	return "";
 }
 
 void AppelFunction::print(std::ostream &stream) const

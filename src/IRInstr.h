@@ -17,6 +17,7 @@ enum Mnemonique
 	
 	REG_STORE = 3,
     AFFECTATION = 40,
+	PUTCHAR = 100
 };
 
 class IRInstr
