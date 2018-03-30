@@ -167,9 +167,8 @@ assert_contains_file_0() {
     (( tests_ran++ )) || :
     [[ -z "$DISCOVERONLY" ]] || return
     expected=`cat ${2:-}`
-    result="$(eval 2>/dev/null $1 <<< ${3:-})" || true
     status=0
-    (eval $1 <<< ${3:-}) > /dev/null 2>&1 || status=$?
+    result="$(eval 2>/dev/null $1 <<< ${3:-})" || status=$?
     expectedExit=0
     if [[ "$result" =~ .*$expected.* ]]; then
         if [[ "$status" -eq 0 ]]; then
