@@ -3,7 +3,7 @@ using namespace std;
 #include "Declaration.h"
 #include <iostream>
 
-void Declaration::generateIR(ControlFlowGraph * controlFlowGraph)
+string Declaration::generateIR(ControlFlowGraph * controlFlowGraph)
 {
 
 }

@@ -5,7 +5,7 @@ using namespace std;
 #include "ErrorHandling.h"
 #include <iostream>
 
-void Variable::generateIR(ControlFlowGraph * controlFlowGraph)
+string Variable::generateIR(ControlFlowGraph * controlFlowGraph)
 {
 	cout << "Variable::generateIR" << endl;
 

@@ -4,7 +4,7 @@ using namespace std;
 #include "VariableIndex.h"
 #include <iostream>
 
-void Affectation::generateIR(ControlFlowGraph * controlFlowGraph)
+string Affectation::generateIR(ControlFlowGraph * controlFlowGraph)
 {
 	//
 }

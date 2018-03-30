@@ -6,7 +6,7 @@ class DeclarationTab : public Declaration{
 
 public:
 
-    void generateIR(ControlFlowGraph * controlFlowGraph);
+    std::string generateIR(ControlFlowGraph * controlFlowGraph);
 
     void print(std::ostream& stream) const;
 

@@ -6,7 +6,7 @@ using namespace std;
 #include "VariableOpe.h"
 #include <iostream>
 
-void AppelFunction::generateIR(ControlFlowGraph * controlFlowGraph)
+string AppelFunction::generateIR(ControlFlowGraph * controlFlowGraph)
 {
 	// Generate IR for Parameters
 

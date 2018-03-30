@@ -4,7 +4,7 @@ using namespace std;
 #include <iostream>
 
 
-void DeclarationTab::generateIR(ControlFlowGraph * controlFlowGraph)
+string DeclarationTab::generateIR(ControlFlowGraph * controlFlowGraph)
 {
 
 }
