@@ -31,5 +31,5 @@ public:
 private:
     std::string name;
     std::vector<Variable *> variables;
-    Function* functionAssociee;
+    Function* functionAssociee = nullptr;
 };
