@@ -4,11 +4,9 @@
 #include <vector>
 #include "Instruction.h"
 #include "Declaration.h"
-# include "ControlFlowGraph.h"
 
-class Instruction;
+
 class ControlFlowGraph;
-
 class Function;
 class Bloc {
 

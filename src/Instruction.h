@@ -1,12 +1,11 @@
 #pragma once
 
 #include "ostream"
-# include "ControlFlowGraph.h"
 #include <vector>
 
 class Declaration;
 class Function;
-
+class ControlFlowGraph;
 class Instruction {
 
 protected:

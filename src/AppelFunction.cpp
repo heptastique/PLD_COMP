@@ -19,7 +19,7 @@ void AppelFunction::generateIR(ControlFlowGraph * controlFlowGraph)
 
 
 
-	list <string> params;
+	vector <string> params;
 
 	params.push_back(name);
 	params.push_back("r0");

@@ -15,7 +15,7 @@ void Function::generateIR(ControlFlowGraph * controlFlowGraph)
 	// Calculate Address Range Size
 	int addressRangeSize = calculateAddressRangeSize();
 
-	list <string> params;
+	vector <string> params;
 
 	params.push_back(name);
 	params.push_back(to_string(addressRangeSize));
