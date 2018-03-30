@@ -4,6 +4,7 @@ using namespace std;
 #include "DeclarationTab.h"
 #include "VariableIndex.h"
 #include "VariableOpe.h"
+#include "ErrorHandling.h"
 #include <iostream>
 
 void AppelFunction::generateIR(ControlFlowGraph * controlFlowGraph)
@@ -73,7 +74,11 @@ void AppelFunction::resolveScopeVariables(std::vector<Declaration*> declProgramm
     for ( auto function : functionProgram){
         if (function->getName().compare(this->name) == 0){
             this->functionAssociee = function;
+            return;
         }
+    }
+    if ( this->name.compare("putchar") != 0){
+        ErrorHandling::ThrowError(106,0,this->name);
     }
 }
 
