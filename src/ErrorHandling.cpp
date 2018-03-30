@@ -26,7 +26,7 @@ void ErrorHandling::ThrowError(int code, int line, string name)
             exit(104);
             break;
         case 105:
-            cout << "la fonction " << name << " existe déjà" << endl;
+            cout << "La fonction " << name << " existe déjà" << endl;
             exit(105);
             break;
 
