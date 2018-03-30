@@ -6,14 +6,26 @@ using namespace std;
 
 string Affectation::generateIR(ControlFlowGraph * controlFlowGraph)
 {
-    string right = variable->generateIR(controlFlowGraph);
+    string right;
     string left = expression->generateIR(controlFlowGraph);
 
-    vector <string> params;
-    params.emplace_back(right);
-    params.emplace_back(left);
+    if(Variable* var = dynamic_cast<Variable*>(expression))
+    {
+        if(var->getType() == NAME)
+        {
+            right = var->getValeur();
+        }
+        else
+        {
+            right = var->generateIR(controlFlowGraph);
+        }
+    }
+    else
+    {
+        right = variable->generateIR(controlFlowGraph);
+    }
 
-    IRInstr iRInstr(AFFECTATION, params);
+    controlFlowGraph->addIRInstr(IRInstr(AFFECTATION, {right, left}));
 
 	return right;
 }
