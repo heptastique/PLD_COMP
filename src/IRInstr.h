@@ -3,7 +3,7 @@
 # include "ControlFlowGraph.h"
 
 # include <string>
-# include <list>
+# include <vector>
 
 using namespace std;
 
@@ -21,12 +21,12 @@ class IRInstr
 		Mnemonique getMnemonique() const;
 
 		string getParam(int index) const;
-		list <string> getParams() const;
+		vector <string> getParams() const;
 
 		IRInstr(const IRInstr & iRInstr);
 
     		IRInstr();
-		IRInstr(Mnemonique mnemonique, list <string> params);
+		IRInstr(Mnemonique mnemonique, vector <string> params);
 
 		virtual ~IRInstr();
 
@@ -35,5 +35,5 @@ class IRInstr
 		ControlFlowGraph * controlFlowGraph;
 
 		Mnemonique mnemonique;
-		list <string> params;
+		vector <string> params;
 };

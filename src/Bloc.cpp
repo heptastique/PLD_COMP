@@ -14,7 +14,7 @@ ostream& operator<<(ostream& stream, const Bloc& bloc)
     return stream;
 }
 
-void Bloc::addInstructions(std::list<Instruction*> instructions)
+void Bloc::addInstructions(std::vector<Instruction*> instructions)
 {
     for(auto inst : instructions){
         this->instructions.emplace_back(inst);
@@ -25,7 +25,7 @@ void Bloc::addInstructions(std::list<Instruction*> instructions)
     }
 }
 
-void Bloc::addDeclarations(std::list<Declaration*> declarations)
+void Bloc::addDeclarations(std::vector<Declaration*> declarations)
 {
     for(auto decl : declarations)
     {
@@ -33,8 +33,8 @@ void Bloc::addDeclarations(std::list<Declaration*> declarations)
     }
 }
 
-void Bloc::resolveScopeVariables(std::list<Declaration*> declProgramme, std::list<Declaration*> paramFunction, std::list<Function*> functionProgram){
-    list<Declaration*>::iterator it;
+void Bloc::resolveScopeVariables(std::vector<Declaration*> declProgramme, std::vector<Declaration*> paramFunction, std::vector<Function*> functionProgram){
+    vector<Declaration*>::iterator it;
     for(it = this->declarations.begin(); it!=this->declarations.end(); ++it){
         auto it2 = it;
         ++it2;
@@ -53,7 +53,7 @@ void Bloc::resolveScopeVariables(std::list<Declaration*> declProgramme, std::lis
         instruction->resolveScopeVariables(declProgramme,paramFunction,this->declarations, functionProgram);
     }
 }
-void Bloc::resolveScopeVariables(std::list<Declaration*> declProgramme, std::list<Declaration*> paramFunction, std::list<Declaration*> declBloc, std::list<Function*> functionProgram){
+void Bloc::resolveScopeVariables(std::vector<Declaration*> declProgramme, std::vector<Declaration*> paramFunction, std::vector<Declaration*> declBloc, std::vector<Function*> functionProgram){
     for ( auto instruction : this->instructions){
         instruction->resolveScopeVariables(declProgramme,paramFunction,declBloc, functionProgram);
     }
@@ -68,12 +68,12 @@ void Bloc::resolveTypeExpr(){
 Bloc &Bloc::operator=(const Bloc &unBloc) {
 }
 
-std::list<Instruction*> Bloc::getInstructions()
+std::vector<Instruction*> Bloc::getInstructions()
 {
     return this->instructions;
 }
 
-std::list<Declaration*> Bloc::getDeclarations()
+std::vector<Declaration*> Bloc::getDeclarations()
 {
     return this->declarations;
 }

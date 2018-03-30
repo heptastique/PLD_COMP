@@ -42,8 +42,8 @@ std::ostream& operator<<(std::ostream& stream, const AppelFunction& appelFunctio
 AppelFunction &AppelFunction::operator=(const AppelFunction &unAppelFunction) {
 }
 
-void AppelFunction::resolveScopeVariables(std::list<Declaration*> declProgramme, std::list<Declaration*> paramFunction, std::list<Declaration*> declBloc, std::list<Function*> functionProgram){
-    std::list<Variable *> variables = getVariables();
+void AppelFunction::resolveScopeVariables(std::vector<Declaration*> declProgramme, std::vector<Declaration*> paramFunction, std::vector<Declaration*> declBloc, std::vector<Function*> functionProgram){
+    std::vector<Variable *> variables = getVariables();
     for (auto variable : variables){
         variable->resolveScopeVariables(declProgramme,paramFunction,declBloc,functionProgram);
     }
@@ -64,7 +64,7 @@ void AppelFunction::resolveTypeExpr(){
     }
 }
 
-list <Variable *> AppelFunction::getVariables(){
+vector <Variable *> AppelFunction::getVariables(){
     return this->variables;
 }
 
@@ -75,7 +75,7 @@ AppelFunction::AppelFunction(const AppelFunction &unAppelFunction) {
 }
 
 
-AppelFunction::AppelFunction(std::string name, std::list<Variable *> variables) {
+AppelFunction::AppelFunction(std::string name, std::vector<Variable *> variables) {
     this->name = name;
     this->variables = variables;
 #ifdef MAP

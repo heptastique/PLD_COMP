@@ -3,7 +3,7 @@
 
 #include "Initialisation.h"
 #include "Variable.h"
-#include <list>
+#include <vector>
 
 class InitialisationTab : public Instruction {
 
@@ -17,7 +17,7 @@ public:
         this->size = size;
     }
 
-    void resolveScopeVariables(std::list<Declaration*> declProgramme, std::list<Declaration*> paramFunction, std::list<Declaration*> declBloc, std::list<Function*> functionProgram);
+    void resolveScopeVariables(std::vector<Declaration*> declProgramme, std::vector<Declaration*> paramFunction, std::vector<Declaration*> declBloc, std::vector<Function*> functionProgram);
 
     void resolveTypeExpr();
 
@@ -27,7 +27,7 @@ public:
 
     InitialisationTab &operator=(const InitialisationTab &unInitialisationTab);
 
-    InitialisationTab(Type type, std::string name, std::list<Variable*> variables);
+    InitialisationTab(Type type, std::string name, std::vector<Variable*> variables);
 
     virtual ~InitialisationTab();
 
@@ -35,7 +35,7 @@ private:
 
     // There could be no size
     std::string size;
-    std::list<Variable*> variables;
+    std::vector<Variable*> variables;
     std::string name;
     Type type;
 };

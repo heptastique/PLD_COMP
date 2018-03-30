@@ -3,7 +3,7 @@
 #include "Instruction.h"
 #include "Variable.h"
 #include "Function.h"
-#include <list>
+#include <vector>
 
 class AppelFunction : public Expression {
 public:
@@ -13,20 +13,20 @@ public:
 
     AppelFunction &operator=(const AppelFunction &unAppelFunction);
 
-    void resolveScopeVariables(std::list<Declaration*> declProgramme, std::list<Declaration*> paramFunction, std::list<Declaration*> declBloc, std::list<Function*> functionProgram);
+    void resolveScopeVariables(std::vector<Declaration*> declProgramme, std::vector<Declaration*> paramFunction, std::vector<Declaration*> declBloc, std::vector<Function*> functionProgram);
 
     void resolveTypeExpr();
 
-    list <Variable *> getVariables();
+    vector <Variable *> getVariables();
 
     AppelFunction(const AppelFunction &unAppelFunction);
 
-    AppelFunction(std::string name, std::list<Variable *> variables);
+    AppelFunction(std::string name, std::vector<Variable *> variables);
 
     virtual ~AppelFunction();
 
 private:
     std::string name;
-    std::list<Variable *> variables;
+    std::vector<Variable *> variables;
     Function* functionAssociee;
 };

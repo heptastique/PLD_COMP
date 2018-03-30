@@ -20,7 +20,7 @@ std::ostream& operator<<(std::ostream& stream, const OperationBinaire& operation
 OperationBinaire &OperationBinaire::operator=(const OperationBinaire &unOperationBinaire) {
 }
 
-void OperationBinaire::resolveScopeVariables(std::list<Declaration*> declProgramme, std::list<Declaration*> paramFunction, std::list<Declaration*> declBloc, std::list<Function*> functionProgram){
+void OperationBinaire::resolveScopeVariables(std::vector<Declaration*> declProgramme, std::vector<Declaration*> paramFunction, std::vector<Declaration*> declBloc, std::vector<Function*> functionProgram){
     this->expressionL->resolveScopeVariables(declProgramme, paramFunction, declBloc, functionProgram);
     this->expressionR->resolveScopeVariables(declProgramme, paramFunction, declBloc, functionProgram);
 }

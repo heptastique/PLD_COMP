@@ -1,7 +1,7 @@
 #pragma once
 
 #include <string>
-#include <list>
+#include <vector>
 #include "Instruction.h"
 #include "Declaration.h"
 
@@ -12,19 +12,19 @@ public:
 
     friend std::ostream& operator<< (std::ostream& stream, const Bloc& bloc);
 
-    void addInstructions(std::list<Instruction*> instructions);
+    void addInstructions(std::vector<Instruction*> instructions);
 
-    void addDeclarations(std::list<Declaration*> declarations);
+    void addDeclarations(std::vector<Declaration*> declarations);
 
     void addDeclaration(Declaration * declaration);
 
-    std::list<Instruction*> getInstructions();
+    std::vector<Instruction*> getInstructions();
 
-    std::list<Declaration*> getDeclarations();
+    std::vector<Declaration*> getDeclarations();
 
-    void resolveScopeVariables(std::list<Declaration*> declProgramme, std::list<Declaration*> paramFunction, std::list<Function*> functionProgram);
+    void resolveScopeVariables(std::vector<Declaration*> declProgramme, std::vector<Declaration*> paramFunction, std::vector<Function*> functionProgram);
 
-    void resolveScopeVariables(std::list<Declaration*> declProgramme, std::list<Declaration*> paramFunction, std::list<Declaration*> declBloc, std::list<Function*> functionProgram);
+    void resolveScopeVariables(std::vector<Declaration*> declProgramme, std::vector<Declaration*> paramFunction, std::vector<Declaration*> declBloc, std::vector<Function*> functionProgram);
 
     void resolveTypeExpr();
 
@@ -37,6 +37,6 @@ public:
     virtual ~Bloc();
 
 private:
-    std::list<Instruction*> instructions;
-    std::list<Declaration*> declarations;
+    std::vector<Instruction*> instructions;
+    std::vector<Declaration*> declarations;
 };

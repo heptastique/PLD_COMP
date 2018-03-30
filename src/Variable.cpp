@@ -19,7 +19,7 @@ std::ostream& operator<<(std::ostream& stream, const Variable& variable)
 Variable &Variable::operator=(const Variable &unVariable) {
 }
 
-void Variable::resolveScopeVariables(std::list<Declaration*> declProgramme, std::list<Declaration*> paramFunction, std::list<Declaration*> declBloc, std::list<Function*> functionProgram){
+void Variable::resolveScopeVariables(std::vector<Declaration*> declProgramme, std::vector<Declaration*> paramFunction, std::vector<Declaration*> declBloc, std::vector<Function*> functionProgram){
     if (this->typeVariable == NAME) {
         bool notfound = true;
         for (auto decl : declBloc) {

@@ -21,7 +21,7 @@ std::ostream& operator<<(std::ostream& stream, const InitialisationTab& initiali
     return stream;
 }
 
-void InitialisationTab::resolveScopeVariables(std::list<Declaration*> declProgramme, std::list<Declaration*> paramFunction, std::list<Declaration*> declBloc, std::list<Function*> functionProgram){
+void InitialisationTab::resolveScopeVariables(std::vector<Declaration*> declProgramme, std::vector<Declaration*> paramFunction, std::vector<Declaration*> declBloc, std::vector<Function*> functionProgram){
     for(auto var : this->variables){
         var->resolveScopeVariables(declProgramme, paramFunction, declBloc, functionProgram);
     }
@@ -37,7 +37,7 @@ void InitialisationTab::resolveTypeExpr(){
 InitialisationTab &InitialisationTab::operator=(const InitialisationTab &unInitialisationTab) {
 }
 
-InitialisationTab::InitialisationTab(Type type,std::string name, std::list<Variable*> variables) {
+InitialisationTab::InitialisationTab(Type type,std::string name, std::vector<Variable*> variables) {
     this->name = name;
     this->type = type;
     this->variables = variables;
