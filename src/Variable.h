@@ -10,7 +10,8 @@
 class Variable : public Expression {
 
 public:
-	void generateIR(ControlFlowGraph * controlFlowGraph);
+
+	virtual void generateIR(ControlFlowGraph * controlFlowGraph);
 
     void print(std::ostream& stream) const;
 

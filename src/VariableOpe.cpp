@@ -3,6 +3,11 @@ using namespace std;
 #include "VariableOpe.h"
 #include <iostream>
 
+void VariableOpe::generateIR(ControlFlowGraph * controlFlowGraph)
+{
+	
+}
+
 void VariableOpe::print(std::ostream &stream) const
 {
     stream << " VariableOpe: " << "Type=" << typeVariable << " Valeur=" << valeur << " " << " Ope=" << ope << endl;

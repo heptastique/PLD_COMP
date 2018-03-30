@@ -6,7 +6,7 @@ class VariableOpe : public Variable {
 
 public:
 
-    void generateIR(ControlFlowGraph * controlFlowGraph){};
+    void generateIR(ControlFlowGraph * controlFlowGraph);
 
     void print(std::ostream& stream) const;
 
