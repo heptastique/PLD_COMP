@@ -29,6 +29,10 @@ void ErrorHandling::ThrowError(int code, int line, string name)
             cout << "La fonction " << name << " existe déjà" << endl;
             exit(105);
             break;
+        case 106:
+            cout << "La fonction " << name << " n'existe pas" << endl;
+            exit(106);
+            break;
 
         // Lex errors
         case 201:
