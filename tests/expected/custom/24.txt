@@ -5,5 +5,10 @@ Programme:
      Bloc:
       Instruction: AppelFunction: Name=appel VariableIndex: Type=0 Valeur=a Tab=Expression: Variable: Type=1 Valeur=1 
 
+ Fonction: Name=appel TypeRetour=0
+     Param:
+      Declaration: Name=c Type=3
+     Bloc:
+
 
 Fin

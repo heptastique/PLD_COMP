@@ -1,6 +1,7 @@
 Programme:
  Fonction: Name=main TypeRetour=0
      Bloc:
+      Instruction: Declaration: Name=name Type=1
       Instruction: RetourFonction: Expression: Variable: Type=0 Valeur=name 
 
 

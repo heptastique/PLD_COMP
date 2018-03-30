@@ -1,8 +1,14 @@
 Programme:
+ Declaration: Name=test Type=3
  Fonction: Name=main TypeRetour=0
      Bloc:
       Instruction: RetourFonction: Expression: AppelFunction: Name=fun Variable: Type=0 Valeur=test 
 
+
+ Fonction: Name=fun TypeRetour=0
+     Param:
+      Declaration: Name=a Type=1
+     Bloc:
 
 
 Fin
