@@ -2,41 +2,41 @@ using namespace std;
 
 # include "Function.h"
 # include "BasicBlock.h"
-#include "DeclarationTab.h"
-#include "ErrorHandling.h"
+# include "DeclarationTab.h"
+# include "ErrorHandling.h"
 
 # include <iostream>
 
 // Generate IR
 void Function::generateIR(ControlFlowGraph * controlFlowGraph)
 {
-	controlFlowGraph->newBasicBlock();
-	
 	// Calculate Address Range Size
 	int addressRangeSize = calculateAddressRangeSize();
-
-	vector <string> params;
-
-	params.push_back(name);
-	params.push_back(to_string(addressRangeSize));
-
-	IRInstr iRInstr(FUNCTION_DECLARATION, params);
-
-	controlFlowGraph->addIRInstr(iRInstr);
+	
+	/*
+	 * Prolog
+	 */
+	
+	controlFlowGraph->newBasicBlock();
+	
+	controlFlowGraph->addIRInstr(IRInstr(FUNCTION_DECLARATION, {name, to_string(addressRangeSize)}));
+	
+	/*
+	 * Body
+	 */
 	
 	controlFlowGraph->newBasicBlock();
 	
 	// Generate IR for Body
 	bloc->generateIR(controlFlowGraph);
 
-	// Create Epilog BasicBlock
-	//BasicBlock epilogBasicBlock;
+	/*
+	 * Epilog
+	 */
 
-	// Add Function Return to Function ControlFlowGraph
-	//epilogBasicBlock.addFunctionReturn();
-
-	// Add Epilog BasicBlock to Function ControlFlowGraph
-	//controlFlowGraph.addBasicBlock(epilogBasicBlock);
+	controlFlowGraph->newBasicBlock();
+	
+	controlFlowGraph->addIRInstr(IRInstr(FUNCTION_RETURN, {to_string(addressRangeSize)}));
 }
 
 int Function::calculateAddressRangeSize()
