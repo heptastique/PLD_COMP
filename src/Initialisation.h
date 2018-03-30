@@ -9,6 +9,8 @@ class Initialisation : public Instruction {
 
 public:
 
+    void generateIR(ControlFlowGraph * controlFlowGraph);
+
     void print(std::ostream& stream) const;
 
     friend std::ostream& operator<< (std::ostream& stream, const Initialisation& initialisation);
@@ -19,7 +21,7 @@ public:
 
     Initialisation &operator=(const Initialisation &unInitialisation);
 
-    void resolveScopeVariables(std::list<Declaration*> declProgramme, std::list<Declaration*> paramFunction, std::list<Declaration*> declBloc, std::list<Function*> functionProgram);
+    void resolveScopeVariables(std::vector<Declaration*> declProgramme, std::vector<Declaration*> paramFunction, std::vector<Declaration*> declBloc, std::vector<Function*> functionProgram);
 
     void resolveTypeExpr();
 

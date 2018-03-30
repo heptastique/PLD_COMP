@@ -6,6 +6,8 @@ class DeclarationTab : public Declaration{
 
 public:
 
+    void generateIR(ControlFlowGraph * controlFlowGraph);
+
     void print(std::ostream& stream) const;
 
     friend std::ostream& operator<< (std::ostream& stream, const DeclarationTab& declarationTab);

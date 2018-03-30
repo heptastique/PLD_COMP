@@ -3,7 +3,7 @@
 # include "ControlFlowGraph.h"
 
 # include <iostream>
-# include <list>
+# include <vector>
 
 using namespace std;
 
@@ -15,17 +15,17 @@ class IR
 
 		void generateASM(ostream & os) const;
 
-		void addControlFlowGraph(ControlFlowGraph controlFlowGraph);
+		void addControlFlowGraph(ControlFlowGraph * controlFlowGraph);
 
-		list <ControlFlowGraph> getControlFlowGraphs() const;
+		vector <ControlFlowGraph*> getControlFlowGraphs() const;
 
-    		IR();
+    	IR();
 		IR(const IR & iR);
-		IR(list <ControlFlowGraph> controlFlowGraphs);
+		IR(vector <ControlFlowGraph*> controlFlowGraphs);
 
 		virtual ~IR();
 
 	private :
 
-		list <ControlFlowGraph> controlFlowGraphs;
+		vector <ControlFlowGraph*> controlFlowGraphs;
 };

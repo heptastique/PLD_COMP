@@ -3,10 +3,16 @@
 #include <ostream>
 #include "Type.h"
 #include "Expression.h"
+# include "ControlFlowGraph.h"
 #include "Declaration.h"
 
+
 class Variable : public Expression {
+
 public:
+
+	virtual void generateIR(ControlFlowGraph * controlFlowGraph);
+
     void print(std::ostream& stream) const;
 
     friend std::ostream& operator<< (std::ostream& stream, const Variable& variable);
@@ -21,7 +27,7 @@ public:
 
     Variable &operator=(const Variable &unVariable);
 
-    void resolveScopeVariables(std::list<Declaration*> declProgramme, std::list<Declaration*> paramFunction, std::list<Declaration*> declBloc, std::list<Function*> functionProgram);
+    void resolveScopeVariables(std::vector<Declaration*> declProgramme, std::vector<Declaration*> paramFunction, std::vector<Declaration*> declBloc, std::vector<Function*> functionProgram);
 
     void resolveTypeExpr();
 

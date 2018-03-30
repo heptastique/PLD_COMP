@@ -3,6 +3,8 @@ using namespace std;
 #include "Expression.h"
 #include <iostream>
 
+//void Expression::generateIR(ControlFlowGraph *controlFlowGraph) {}
+
 std::ostream& operator<<(std::ostream& stream, const Expression& expression)
 {
     stream << "Expression:";
@@ -13,7 +15,7 @@ std::ostream& operator<<(std::ostream& stream, const Expression& expression)
 Expression &Expression::operator=(const Expression &unExpression) {
 }
 
-void Expression::resolveScopeVariables(std::list<Declaration*> declProgramme, std::list<Declaration*> paramFunction, std::list<Declaration*> declBloc, std::list<Function*> functionProgram){
+void Expression::resolveScopeVariables(std::vector<Declaration*> declProgramme, std::vector<Declaration*> paramFunction, std::vector<Declaration*> declBloc, std::vector<Function*> functionProgram){
 
 }
 

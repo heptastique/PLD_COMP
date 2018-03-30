@@ -3,28 +3,40 @@ using namespace std;
 # include "Function.h"
 # include "BasicBlock.h"
 #include "DeclarationTab.h"
+#include "ErrorHandling.h"
 
 # include <iostream>
 
 // Generate IR
-ControlFlowGraph Function::generateIR()
+void Function::generateIR(ControlFlowGraph * controlFlowGraph)
 {
-	// Create Function ControlFlowGraph
-	ControlFlowGraph controlFlowGraph;
-
-	// Create Prolog BasicBlock
-	BasicBlock prologBasicBlock;
-
+	controlFlowGraph->newBasicBlock();
+	
 	// Calculate Address Range Size
 	int addressRangeSize = calculateAddressRangeSize();
 
-	// Add Function Definition to Prolog BasicBlock
-	prologBasicBlock.addFunctionDefinition(name, addressRangeSize);
+	vector <string> params;
 
-	// Add Prolog BasicBlock to Function ControlFlowGraph
-	controlFlowGraph.addBasicBlock(prologBasicBlock);
+	params.push_back(name);
+	params.push_back(to_string(addressRangeSize));
 
-	return controlFlowGraph;
+	IRInstr iRInstr(FUNCTION_DECLARATION, params);
+
+	controlFlowGraph->addIRInstr(iRInstr);
+	
+	controlFlowGraph->newBasicBlock();
+	
+	// Generate IR for Body
+	bloc->generateIR(controlFlowGraph);
+
+	// Create Epilog BasicBlock
+	//BasicBlock epilogBasicBlock;
+
+	// Add Function Return to Function ControlFlowGraph
+	//epilogBasicBlock.addFunctionReturn();
+
+	// Add Epilog BasicBlock to Function ControlFlowGraph
+	//controlFlowGraph.addBasicBlock(epilogBasicBlock);
 }
 
 int Function::calculateAddressRangeSize()
@@ -87,19 +99,19 @@ Type Function::getTypeRetour (){
     return this->typeRetour;
 }
 
-void Function::setParameters(std::list<Declaration*> parameters)
+void Function::setParameters(std::vector<Declaration*> parameters)
 {
     this->parameters = parameters;
 }
 
-std::list<Declaration*> Function::getParameters()
+std::vector<Declaration*> Function::getParameters()
 {
     return this->parameters;
 }
 
-void Function::resolveScopeVariables(std::list<Declaration*> declProgramme, std::list<Function*> functionProgram)
+void Function::resolveScopeVariables(std::vector<Declaration*> declProgramme, std::vector<Function*> functionProgram)
 {
-	list<Declaration*>::iterator it;
+	vector<Declaration*>::iterator it;
 	for(it = this->parameters.begin(); it!=this->parameters.end(); ++it){
         auto it2 = it;
         ++it2;
@@ -107,7 +119,7 @@ void Function::resolveScopeVariables(std::list<Declaration*> declProgramme, std:
             Declaration *parameters = *it;
             Declaration *parameters2 = *it2;
             if (parameters->getName().compare(parameters2->getName()) == 0) {
-                cout << "variable " << parameters2->getName() << " already exist in functions parameters" << endl;
+                ErrorHandling::ThrowError(102,0, parameters->getName());
             }
             ++it2;
         }

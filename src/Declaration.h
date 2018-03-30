@@ -1,12 +1,18 @@
 #pragma once
 
 #include "Type.h"
+//# include "ControlFlowGraph.h"
+
 #include <string>
 #include "Instruction.h"
+
+//class ControlFlowGraph;
 
 class Declaration : public Instruction {
 
 public:
+
+	void generateIR(ControlFlowGraph * controlFlowGraph);
 
     void print(std::ostream& stream) const;
 
@@ -14,7 +20,7 @@ public:
 
     Declaration &operator=(const Declaration &unDeclaration);
 
-    void resolveScopeVariables(std::list<Declaration*> declProgramme, std::list<Declaration*> paramFunction, std::list<Declaration*> declBloc, std::list<Function*> functionProgram);
+    void resolveScopeVariables(std::vector<Declaration*> declProgramme, std::vector<Declaration*> paramFunction, std::vector<Declaration*> declBloc, std::vector<Function*> functionProgram);
 
     void resolveTypeExpr();
 

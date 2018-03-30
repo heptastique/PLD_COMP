@@ -6,13 +6,16 @@
 class OperationUnaire : public Expression{
 
 public:
+
+    void generateIR(ControlFlowGraph * controlFlowGraph){};
+
     friend std::ostream& operator<< (std::ostream& stream, const OperationUnaire& operationUnaire);
 
     void print(std::ostream& stream) const;
 
     OperationUnaire &operator=(const OperationUnaire &unOperationUnaire);
 
-    void resolveScopeVariables(std::list<Declaration*> declProgramme, std::list<Declaration*> paramFunction, std::list<Declaration*> declBloc, std::list<Function*> functionProgram);
+    void resolveScopeVariables(std::vector<Declaration*> declProgramme, std::vector<Declaration*> paramFunction, std::vector<Declaration*> declBloc, std::vector<Function*> functionProgram);
 
     void resolveTypeExpr();
 

@@ -4,7 +4,31 @@ using namespace std;
 #include "DeclarationTab.h"
 #include "VariableIndex.h"
 #include "VariableOpe.h"
+#include "ErrorHandling.h"
 #include <iostream>
+
+void AppelFunction::generateIR(ControlFlowGraph * controlFlowGraph)
+{
+	// Generate IR for Parameters
+
+	for (auto variable : variables)
+	{
+		//variable->generateIR();
+	}
+
+	// add IRInstr call
+
+
+
+	vector <string> params;
+
+	params.push_back(name);
+	params.push_back("r0");
+
+	IRInstr iRInstr(FUNCTION_CALL, params);
+
+
+}
 
 void AppelFunction::print(std::ostream &stream) const
 {
@@ -42,15 +66,19 @@ std::ostream& operator<<(std::ostream& stream, const AppelFunction& appelFunctio
 AppelFunction &AppelFunction::operator=(const AppelFunction &unAppelFunction) {
 }
 
-void AppelFunction::resolveScopeVariables(std::list<Declaration*> declProgramme, std::list<Declaration*> paramFunction, std::list<Declaration*> declBloc, std::list<Function*> functionProgram){
-    std::list<Variable *> variables = getVariables();
+void AppelFunction::resolveScopeVariables(std::vector<Declaration*> declProgramme, std::vector<Declaration*> paramFunction, std::vector<Declaration*> declBloc, std::vector<Function*> functionProgram){
+    std::vector<Variable *> variables = getVariables();
     for (auto variable : variables){
         variable->resolveScopeVariables(declProgramme,paramFunction,declBloc,functionProgram);
     }
     for ( auto function : functionProgram){
         if (function->getName().compare(this->name) == 0){
             this->functionAssociee = function;
+            return;
         }
+    }
+    if ( this->name.compare("putchar") != 0){
+        ErrorHandling::ThrowError(106,0,this->name);
     }
 }
 
@@ -64,7 +92,7 @@ void AppelFunction::resolveTypeExpr(){
     }
 }
 
-list <Variable *> AppelFunction::getVariables(){
+vector <Variable *> AppelFunction::getVariables(){
     return this->variables;
 }
 
@@ -75,7 +103,7 @@ AppelFunction::AppelFunction(const AppelFunction &unAppelFunction) {
 }
 
 
-AppelFunction::AppelFunction(std::string name, std::list<Variable *> variables) {
+AppelFunction::AppelFunction(std::string name, std::vector<Variable *> variables) {
     this->name = name;
     this->variables = variables;
 #ifdef MAP

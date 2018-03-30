@@ -10,7 +10,7 @@ Mnemonique IRInstr::getMnemonique() const
 
 string IRInstr::getParam(int index) const
 {
-	list <string> :: const_iterator param = params.begin();
+	vector <string> :: const_iterator param = params.begin();
 
 	int i = 0;
 
@@ -28,7 +28,7 @@ string IRInstr::getParam(int index) const
 	return "";
 }
 
-list <string> IRInstr::getParams() const
+vector <string> IRInstr::getParams() const
 {
 	return params;
 }
@@ -50,7 +50,7 @@ IRInstr::IRInstr(const IRInstr &iRInstr)
 	params = iRInstr.params;
 }
 
-IRInstr::IRInstr(Mnemonique mnemonique, list <string> params)
+IRInstr::IRInstr(Mnemonique mnemonique, vector <string> params)
 {
 	#ifdef MAP
 		cout << "Appel au constructeur de <IRInstr>" << endl;

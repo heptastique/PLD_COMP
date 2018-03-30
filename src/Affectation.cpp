@@ -4,15 +4,21 @@ using namespace std;
 #include "VariableIndex.h"
 #include <iostream>
 
+void Affectation::generateIR(ControlFlowGraph * controlFlowGraph)
+{
+	//
+}
+
 void Affectation::print(std::ostream &stream) const
 {
-    if(VariableIndex *var= dynamic_cast<VariableIndex*>(variable))
+    
+	if(VariableIndex *var= dynamic_cast<VariableIndex*>(variable))
     {
         stream << " Affectation: " << *var << " Operateur=" << operateur << " " << *expression << endl;
     }else{
         stream << " Affectation: " << *variable << " Operateur=" << operateur << " " << *expression << endl;
     }
-
+	
 }
 
 std::ostream& operator<<(std::ostream& stream, const Affectation& affectation)
@@ -25,7 +31,7 @@ std::ostream& operator<<(std::ostream& stream, const Affectation& affectation)
 Affectation &Affectation::operator=(const Affectation &unAffectation) {
 }
 
-void Affectation::resolveScopeVariables(std::list<Declaration *> declProgramme, std::list<Declaration *> paramFunction, std::list<Declaration *> declBloc, std::list<Function*> functionProgram) {
+void Affectation::resolveScopeVariables(std::vector<Declaration *> declProgramme, std::vector<Declaration *> paramFunction, std::vector<Declaration *> declBloc, std::vector<Function*> functionProgram) {
     this->variable->resolveScopeVariables(declProgramme,paramFunction,declBloc, functionProgram);
 }
 

@@ -8,13 +8,15 @@ class Affectation : public Instruction{
 
 public:
 
-    void print(std::ostream& stream) const;
+	void generateIR(ControlFlowGraph * controlFlowGraph);
+
+	void print(std::ostream& stream) const;
 
     friend std::ostream& operator<< (std::ostream& stream, const Affectation& affectation);
 
     Affectation &operator=(const Affectation &unAffectation);
 
-    void resolveScopeVariables(std::list<Declaration*> declProgramme, std::list<Declaration*> paramFunction, std::list<Declaration*> declBloc, std::list<Function*> functionProgram);
+    void resolveScopeVariables(std::vector<Declaration*> declProgramme, std::vector<Declaration*> paramFunction, std::vector<Declaration*> declBloc, std::vector<Function*> functionProgram);
 
     void resolveTypeExpr();
 
