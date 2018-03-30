@@ -3,6 +3,11 @@ using namespace std;
 #include "VariableIndex.h"
 #include <iostream>
 
+void VariableIndex::generateIR(ControlFlowGraph * controlFlowGraph)
+{
+
+}
+
 void VariableIndex::print(std::ostream &stream) const
 {
     stream << " VariableIndex: " << "Type=" << typeVariable << " Valeur=" << valeur << " " << " Tab=" << *index ;

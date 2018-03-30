@@ -15,17 +15,17 @@ class IR
 
 		void generateASM(ostream & os) const;
 
-		void addControlFlowGraph(ControlFlowGraph controlFlowGraph);
+		void addControlFlowGraph(ControlFlowGraph * controlFlowGraph);
 
-		vector <ControlFlowGraph> getControlFlowGraphs() const;
+		vector <ControlFlowGraph*> getControlFlowGraphs() const;
 
-    		IR();
+    	IR();
 		IR(const IR & iR);
-		IR(vector <ControlFlowGraph> controlFlowGraphs);
+		IR(vector <ControlFlowGraph*> controlFlowGraphs);
 
 		virtual ~IR();
 
 	private :
 
-		vector <ControlFlowGraph> controlFlowGraphs;
+		vector <ControlFlowGraph*> controlFlowGraphs;
 };

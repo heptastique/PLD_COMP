@@ -1,12 +1,18 @@
 #pragma once
 
 #include "Type.h"
+//# include "ControlFlowGraph.h"
+
 #include <string>
 #include "Instruction.h"
+
+//class ControlFlowGraph;
 
 class Declaration : public Instruction {
 
 public:
+
+	void generateIR(ControlFlowGraph * controlFlowGraph);
 
     void print(std::ostream& stream) const;
 

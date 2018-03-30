@@ -3,10 +3,16 @@
 #include <ostream>
 #include "Type.h"
 #include "Expression.h"
+# include "ControlFlowGraph.h"
 #include "Declaration.h"
 
+
 class Variable : public Expression {
+
 public:
+
+	virtual void generateIR(ControlFlowGraph * controlFlowGraph);
+
     void print(std::ostream& stream) const;
 
     friend std::ostream& operator<< (std::ostream& stream, const Variable& variable);

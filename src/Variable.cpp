@@ -5,6 +5,24 @@ using namespace std;
 #include "ErrorHandling.h"
 #include <iostream>
 
+void Variable::generateIR(ControlFlowGraph * controlFlowGraph)
+{
+	cout << "Variable::generateIR" << endl;
+
+	/*
+	string reg = createNewReg();
+	
+	list <string> params;
+	
+	params.push_back(reg);
+	params.push_back(valeur);
+	
+	controlFlowGraph->addInstruction(IRInstr(REG_STORE), params);
+	
+	return reg;
+	*/
+}
+
 void Variable::print(std::ostream &stream) const
 {
     stream << " Variable: " << "Type=" << typeVariable << " Valeur=" << valeur << " ";

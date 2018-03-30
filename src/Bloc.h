@@ -5,10 +5,14 @@
 #include "Instruction.h"
 #include "Declaration.h"
 
+
+class ControlFlowGraph;
 class Function;
 class Bloc {
 
 public:
+
+	void generateIR(ControlFlowGraph * controlFlowGraph);
 
     friend std::ostream& operator<< (std::ostream& stream, const Bloc& bloc);
 
@@ -16,7 +20,6 @@ public:
 
     void addDeclarations(std::vector<Declaration*> declarations);
 
-    void addDeclaration(Declaration * declaration);
 
     std::vector<Instruction*> getInstructions();
 

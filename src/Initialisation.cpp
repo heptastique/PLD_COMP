@@ -3,6 +3,10 @@ using namespace std;
 #include "Initialisation.h"
 #include <iostream>
 
+void Initialisation::generateIR(ControlFlowGraph * controlFlowGraph){
+
+}
+
 void Initialisation::print(std::ostream &stream) const
 {
     stream << " Initialisation: Type=" << type << " Name=" << name << " ";
