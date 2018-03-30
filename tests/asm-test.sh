@@ -15,7 +15,10 @@ assert_file "cat ./target/prog.s" "./ASM/00-basic.s"
 ../bin/app Front/ValidPrograms/01_SimpleDeclaration.c > ./target/output
 assert_file "cat ./target/prog.s" "./ASM/01-simpleDeclaration.s"
 
-## Clean up after tests
-rm -rf target
+../bin/app Custom/27-putchar.c > ./target/output
+assert_file "cat ./target/prog.s" "./ASM/02-putchar.s"
+
+../bin/app Custom/11-multiple-func.c > ./target/output
+assert_file "cat ./target/prog.s" "./ASM/03-multiple-func.s"
 
 assert_end examples
