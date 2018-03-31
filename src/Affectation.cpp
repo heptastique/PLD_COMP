@@ -7,8 +7,15 @@ using namespace std;
 string Affectation::generateIR(ControlFlowGraph * controlFlowGraph)
 {
     string right;
-    string left = expression->generateIR(controlFlowGraph);
 
+    // string left = controlFlowGraph->createNewVar();
+    string left = "tmp";
+    //int offset = controlFlowGraph->getOffsetFromSymbolTable(varName);
+    int offset = 1;
+    controlFlowGraph->addIRInstr(IRInstr(REG_STORE, { left, to_string(offset)}));
+    //controlFlowGraph->addIRInstr(IRInstr(ADD, { left, !bp, left}));
+
+    // If the expression is a Rvalue
     if(Variable* var = dynamic_cast<Variable*>(expression))
     {
         if(var->getType() == NAME)
