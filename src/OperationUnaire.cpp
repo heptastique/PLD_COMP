@@ -1,11 +1,15 @@
 using namespace std;
 
 #include "OperationUnaire.h"
+#include "IRInstr.h"
 #include <iostream>
 
 string OperationUnaire::generateIR(ControlFlowGraph *controlFlowGraph)
 {
-    return "";
+    string var = expression->generateIR(controlFlowGraph);
+    // string var3 = createNewVAr();
+    controlFlowGraph->addIRInstr(IRInstr(BINARYOPERATION, {to_string(operateur), var}));
+    return var;
 }
 
 void OperationUnaire::print(std::ostream &stream) const
