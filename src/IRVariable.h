@@ -15,4 +15,5 @@ class IRVariable
 	protected :
 
 		string name;
+		int offset; // position dans la pile par rapport à rsp
 };

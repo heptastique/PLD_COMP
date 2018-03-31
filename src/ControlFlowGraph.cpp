@@ -2,24 +2,37 @@ using namespace std;
 
 # include "ControlFlowGraph.h"
 
-string ControlFlowGraph::createNewVariable()
+string ControlFlowGraph::createNewVariable(string name)
 {
-	nbVariables = nbVariables + 1;
+	string variableName = "VAR." + name;
 
-	string name = "tmp" + to_string(nbVariables);
+	IRVariable iRVariable(variableName);
 
-	IRVariable iRVariable(name);
+	variableMap.insert(pair <string, IRVariable> (variableName, iRVariable));
 
-	variableMap.insert(pair <string, IRVariable> (name, iRVariable));
+	return variableName;
+}
 
-	return name;
+string ControlFlowGraph::createNewTemp()
+{
+	nbTemp = nbTemp + 1;
+
+	string tempName = "TMP." + to_string(nbTemp);
+
+	IRVariable iRVariable(tempName);
+
+	variableMap.insert(pair <string, IRVariable> (tempName, iRVariable));
+
+	return tempName;
 }
 
 IRVariable ControlFlowGraph::getVariable(string name)
 {
 	map <string, IRVariable> :: iterator variable;
 
-	//variable = 
+	variable = variableMap.find(name);
+
+	return variable->second;
 }
 
 void ControlFlowGraph::addIRInstr(IRInstr iRInstr)

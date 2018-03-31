@@ -21,7 +21,11 @@ class ControlFlowGraph
 
 	public :
 
-		string createNewVariable();
+		string createNewVariable(string name);
+
+		string createNewTemp();
+
+		IRVariable getVariable(string name);
 
 		void addIRInstr(IRInstr iRInstr);
 
@@ -49,5 +53,5 @@ class ControlFlowGraph
 
 		map <string, IRVariable> variableMap;
 
-		int nbVariables;
+		int nbTemp;
 };
