@@ -18,6 +18,7 @@ enum Mnemonique
 	REG_STORE = 3,
     AFFECTATION = 40,
 	BINARYOPERATION= 41,
+    UNARYOPERATION= 42,
 	PUTCHAR = 100
 };
 
