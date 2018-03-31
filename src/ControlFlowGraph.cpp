@@ -84,6 +84,7 @@ void ControlFlowGraph::generateASM(ostream & os) const
 				{
 					os << "\tmovl\t$" << iRInstr.getParam(0) <<", %edi\n";
 					os << "\tcall putchar\n";
+					break;
 				}
 			}
 		}
