@@ -5,7 +5,11 @@ using namespace std;
 
 string OperationBinaire::generateIR(ControlFlowGraph *controlFlowGraph)
 {
-    return "";
+    string var1 = expressionL->generateIR(controlFlowGraph);
+    string var2 = expressionR->generateIR(controlFlowGraph);
+    string var3 = "tmp";
+    controlFlowGraph->addIRInstr(IRInstr(BINARYOPERATION, {operateur, var3, var1, var2}));
+    return var3;
 }
 
 void OperationBinaire::print(std::ostream &stream) const
