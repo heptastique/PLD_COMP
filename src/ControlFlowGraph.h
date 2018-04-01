@@ -1,10 +1,10 @@
-# pragma once
+#pragma once
 
-# include "BasicBlock.h"
-# include "IRInstr.h"
-# include "Programme.h"
-# include <vector>
-# include <iostream>
+#include "BasicBlock.h"
+#include "IRInstr.h"
+#include "Programme.h"
+#include <vector>
+#include <iostream>
 
 using namespace std;
 
@@ -14,32 +14,29 @@ class Programme;
 
 class ControlFlowGraph
 {
-	protected :
+    public:
+        void addIRInstr(IRInstr iRInstr);
 
-	public :
+        vector <BasicBlock*> getBasicBlocks() const;
 
-		void addIRInstr(IRInstr iRInstr);
+        void newBasicBlock();
 
-		vector <BasicBlock*> getBasicBlocks() const;
+        void generateProlog(ostream &os, string functionName, int addressRangeSize) const;
 
-		void newBasicBlock();
+        void generateEpilog(ostream & os, int addressRangeSize) const;
 
-		void generateProlog(ostream &os, string functionName, int addressRangeSize) const;
-		
-		void generateEpilog(ostream & os, int addressRangeSize) const;
+        void generateASM(ostream &os) const;
 
-		void generateASM(ostream &os) const;
+        ControlFlowGraph(const ControlFlowGraph &controlFlowGraph);
 
-		ControlFlowGraph(const ControlFlowGraph &controlFlowGraph);
+        ControlFlowGraph();
 
-    		ControlFlowGraph();
+        ControlFlowGraph(Programme * prog);
 
-    		ControlFlowGraph(Programme * prog);
+        virtual ~ControlFlowGraph();
 
-		virtual ~ControlFlowGraph();
-
-	private :
-		Programme * programme;
-		BasicBlock * currentBasicBlock;
-		vector <BasicBlock*> basicBlocks;
+    private:
+        Programme * programme;
+        BasicBlock * currentBasicBlock;
+        vector <BasicBlock*> basicBlocks;
 };

@@ -2,10 +2,8 @@
 
 #include "Declaration.h"
 
-class DeclarationTab : public Declaration{
-
+class DeclarationTab : public Declaration {
 public:
-
     void generateIR(ControlFlowGraph * controlFlowGraph);
 
     void print(std::ostream& stream) const;

@@ -6,28 +6,25 @@
 #include <string>
 
 class Initialisation : public Declaration {
+    public:
+        void generateIR(ControlFlowGraph * controlFlowGraph);
 
-public:
+        void print(std::ostream& stream) const;
 
-    void generateIR(ControlFlowGraph * controlFlowGraph);
+        friend std::ostream& operator<< (std::ostream& stream, const Initialisation& initialisation);
 
-    void print(std::ostream& stream) const;
+        Initialisation &operator=(const Initialisation &unInitialisation);
 
-    friend std::ostream& operator<< (std::ostream& stream, const Initialisation& initialisation);
+        void resolveScopeVariables(std::vector<Declaration*> declProgramme, std::vector<Declaration*> paramFunction, std::vector<Declaration*> declBloc, std::vector<Function*> functionProgram);
 
-    Initialisation &operator=(const Initialisation &unInitialisation);
+        void resolveTypeExpr();
 
-    void resolveScopeVariables(std::vector<Declaration*> declProgramme, std::vector<Declaration*> paramFunction, std::vector<Declaration*> declBloc, std::vector<Function*> functionProgram);
+        Initialisation(const Initialisation &unInitialisation);
 
-    void resolveTypeExpr();
+        Initialisation(Type type, Expression* expression, std::string name);
 
-    Initialisation(const Initialisation &unInitialisation);
+        virtual ~Initialisation();
 
-    Initialisation(Type type, Expression* expression, std::string name);
-
-    virtual ~Initialisation();
-
-protected:
-    Expression* expression;
-
+    protected:
+        Expression* expression;
 };

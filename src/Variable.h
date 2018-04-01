@@ -3,42 +3,39 @@
 #include <ostream>
 #include "Type.h"
 #include "Expression.h"
-# include "ControlFlowGraph.h"
+#include "ControlFlowGraph.h"
 #include "Declaration.h"
 
-
 class Variable : public Expression {
+    public:
+        virtual void generateIR(ControlFlowGraph * controlFlowGraph);
 
-public:
+        void print(std::ostream& stream) const;
 
-	virtual void generateIR(ControlFlowGraph * controlFlowGraph);
+        friend std::ostream& operator<< (std::ostream& stream, const Variable& variable);
 
-    void print(std::ostream& stream) const;
+        TypeVariable getType(){
+            return typeVariable;
+        }
 
-    friend std::ostream& operator<< (std::ostream& stream, const Variable& variable);
+        std::string getValeur(){
+            return valeur;
+        }
 
-    TypeVariable getType(){
-        return typeVariable;
-    }
+        Variable &operator=(const Variable &unVariable);
 
-    std::string getValeur(){
-        return valeur;
-    }
+        void resolveScopeVariables(std::vector<Declaration*> declProgramme, std::vector<Declaration*> paramFunction, std::vector<Declaration*> declBloc, std::vector<Function*> functionProgram);
 
-    Variable &operator=(const Variable &unVariable);
+        void resolveTypeExpr();
 
-    void resolveScopeVariables(std::vector<Declaration*> declProgramme, std::vector<Declaration*> paramFunction, std::vector<Declaration*> declBloc, std::vector<Function*> functionProgram);
+        Variable(const Variable &unVariable);
 
-    void resolveTypeExpr();
+        Variable(TypeVariable typeVariable, std::string valeur);
 
-    Variable(const Variable &unVariable);
+        virtual ~Variable();
 
-    Variable(TypeVariable typeVariable, std::string valeur);
-
-    virtual ~Variable();
-
-protected:
-    TypeVariable typeVariable;
-    std::string valeur;
-    Declaration * declarationAssociee = nullptr;
+    protected:
+        TypeVariable typeVariable;
+        std::string valeur;
+        Declaration * declarationAssociee = nullptr;
 };

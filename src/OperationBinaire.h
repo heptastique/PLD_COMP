@@ -4,29 +4,27 @@
 #include "Type.h"
 
 class OperationBinaire : public Expression {
+    public:
+        void generateIR(ControlFlowGraph * controlFlowGraph){};
 
-public:
+        friend std::ostream& operator<< (std::ostream& stream, const OperationBinaire& operationBinaire);
 
-    void generateIR(ControlFlowGraph * controlFlowGraph){};
+        void print(std::ostream& stream) const;
 
-    friend std::ostream& operator<< (std::ostream& stream, const OperationBinaire& operationBinaire);
+        OperationBinaire &operator=(const OperationBinaire &unOperationBinaire);
 
-    void print(std::ostream& stream) const;
+        void resolveScopeVariables(std::vector<Declaration*> declProgramme, std::vector<Declaration*> paramFunction, std::vector<Declaration*> declBloc, std::vector<Function*> functionProgram);
 
-    OperationBinaire &operator=(const OperationBinaire &unOperationBinaire);
+        void resolveTypeExpr();
 
-    void resolveScopeVariables(std::vector<Declaration*> declProgramme, std::vector<Declaration*> paramFunction, std::vector<Declaration*> declBloc, std::vector<Function*> functionProgram);
+        OperationBinaire(const OperationBinaire &unOperationBinaire);
 
-    void resolveTypeExpr();
+        OperationBinaire(Expression* expressionL, Expression* expressionR, Operateur operateur);
 
-    OperationBinaire(const OperationBinaire &unOperationBinaire);
+        virtual ~OperationBinaire();
 
-    OperationBinaire(Expression* expressionL, Expression* expressionR, Operateur operateur);
-
-    virtual ~OperationBinaire();
-
-private:
-    Expression* expressionL;
-    Expression* expressionR;
-    Operateur operateur;
+    private:
+        Expression* expressionL;
+        Expression* expressionR;
+        Operateur operateur;
 };

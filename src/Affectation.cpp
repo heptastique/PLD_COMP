@@ -6,19 +6,17 @@ using namespace std;
 
 void Affectation::generateIR(ControlFlowGraph * controlFlowGraph)
 {
-	//
+    //
 }
 
 void Affectation::print(std::ostream &stream) const
 {
-    
-	if(VariableIndex *var= dynamic_cast<VariableIndex*>(variable))
+    if(VariableIndex *var= dynamic_cast<VariableIndex*>(variable))
     {
         stream << " Affectation: " << *var << " Operateur=" << operateur << " " << *expression << endl;
     }else{
         stream << " Affectation: " << *variable << " Operateur=" << operateur << " " << *expression << endl;
     }
-	
 }
 
 std::ostream& operator<<(std::ostream& stream, const Affectation& affectation)
@@ -46,7 +44,6 @@ Affectation::Affectation(const Affectation &unAffectation) {
 #endif
 }
 
-
 Affectation::Affectation(Variable *variable, Operateur operateur, Expression *expression) {
     this->variable = variable;
     this->operateur = operateur;
@@ -55,7 +52,6 @@ Affectation::Affectation(Variable *variable, Operateur operateur, Expression *ex
     cout << "Appel au constructeur de <Affectation>" << endl;
 #endif
 }
-
 
 Affectation::~Affectation() {
 #ifdef MAP

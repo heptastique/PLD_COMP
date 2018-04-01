@@ -1,7 +1,7 @@
 using namespace std;
 
-# include "ErrorHandling.h"
-# include <iostream>
+#include "ErrorHandling.h"
+#include <iostream>
 
 void ErrorHandling::ThrowError(int code, int line, string name)
 {
@@ -39,7 +39,7 @@ void ErrorHandling::ThrowError(int code, int line, string name)
             cout << "Caractère invalide rencontré" << endl;
             exit(201);
             break;
-        
+
         // Syntax errors:
         case 301:
             cout << "Deux opérateurs suivis recontrés" << endl;

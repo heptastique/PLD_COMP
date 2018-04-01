@@ -5,41 +5,38 @@
 #include "Instruction.h"
 #include "Declaration.h"
 
-
 class ControlFlowGraph;
 class Function;
+
 class Bloc {
+    public:
+        void generateIR(ControlFlowGraph * controlFlowGraph);
 
-public:
+        friend std::ostream& operator<< (std::ostream& stream, const Bloc& bloc);
 
-	void generateIR(ControlFlowGraph * controlFlowGraph);
+        void addInstructions(std::vector<Instruction*> instructions);
 
-    friend std::ostream& operator<< (std::ostream& stream, const Bloc& bloc);
+        void addDeclarations(std::vector<Declaration*> declarations);
 
-    void addInstructions(std::vector<Instruction*> instructions);
+        std::vector<Instruction*> getInstructions();
 
-    void addDeclarations(std::vector<Declaration*> declarations);
+        std::vector<Declaration*> getDeclarations();
 
+        void resolveScopeVariables(std::vector<Declaration*> declProgramme, std::vector<Declaration*> paramFunction, std::vector<Function*> functionProgram);
 
-    std::vector<Instruction*> getInstructions();
+        void resolveScopeVariables(std::vector<Declaration*> declProgramme, std::vector<Declaration*> paramFunction, std::vector<Declaration*> declBloc, std::vector<Function*> functionProgram);
 
-    std::vector<Declaration*> getDeclarations();
+        void resolveTypeExpr();
 
-    void resolveScopeVariables(std::vector<Declaration*> declProgramme, std::vector<Declaration*> paramFunction, std::vector<Function*> functionProgram);
+        Bloc &operator=(const Bloc &unBloc);
 
-    void resolveScopeVariables(std::vector<Declaration*> declProgramme, std::vector<Declaration*> paramFunction, std::vector<Declaration*> declBloc, std::vector<Function*> functionProgram);
+        Bloc(const Bloc &unBloc);
 
-    void resolveTypeExpr();
+        Bloc();
 
-    Bloc &operator=(const Bloc &unBloc);
+        virtual ~Bloc();
 
-    Bloc(const Bloc &unBloc);
-
-    Bloc();
-
-    virtual ~Bloc();
-
-private:
-    std::vector<Instruction*> instructions;
-    std::vector<Declaration*> declarations;
+    private:
+        std::vector<Instruction*> instructions;
+        std::vector<Declaration*> declarations;
 };

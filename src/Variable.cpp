@@ -7,20 +7,20 @@ using namespace std;
 
 void Variable::generateIR(ControlFlowGraph * controlFlowGraph)
 {
-	cout << "Variable::generateIR" << endl;
+    cout << "Variable::generateIR" << endl;
 
-	/*
-	string reg = createNewReg();
-	
-	list <string> params;
-	
-	params.push_back(reg);
-	params.push_back(valeur);
-	
-	controlFlowGraph->addInstruction(IRInstr(REG_STORE), params);
-	
-	return reg;
-	*/
+    /*
+    string reg = createNewReg();
+
+    list <string> params;
+
+    params.push_back(reg);
+    params.push_back(valeur);
+
+    controlFlowGraph->addInstruction(IRInstr(REG_STORE), params);
+
+    return reg;
+    */
 }
 
 void Variable::print(std::ostream &stream) const
@@ -33,7 +33,6 @@ std::ostream& operator<<(std::ostream& stream, const Variable& variable)
     stream << " Variable: " << "Type=" << variable.typeVariable << " Valeur=" << variable.valeur << " ";
     return stream;
 }
-
 
 Variable &Variable::operator=(const Variable &unVariable) {
 }
@@ -93,7 +92,6 @@ Variable::Variable(const Variable &unVariable) {
 #endif
 }
 
-
 Variable::Variable(TypeVariable typeVariable, std::string valeur) {
     this->typeVariable = typeVariable;
     this->valeur = valeur;
@@ -101,7 +99,6 @@ Variable::Variable(TypeVariable typeVariable, std::string valeur) {
     cout << "Appel au constructeur de <Variable>" << endl;
 #endif
 }
-
 
 Variable::~Variable() {
 #ifdef MAP

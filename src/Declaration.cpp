@@ -5,7 +5,6 @@ using namespace std;
 
 void Declaration::generateIR(ControlFlowGraph * controlFlowGraph)
 {
-
 }
 
 void Declaration::print(std::ostream &stream) const
@@ -19,11 +18,9 @@ std::ostream& operator<<(std::ostream& stream, const Declaration& declaration)
     return stream;
 }
 
-
 Declaration &Declaration::operator=(const Declaration &unDeclaration)
 {
 }
-
 
 void Declaration::resolveScopeVariables(std::vector<Declaration*> declProgramme, std::vector<Declaration*> paramFunction, std::vector<Declaration*> declBloc, std::vector<Function*> functionProgram)
 {
@@ -35,7 +32,6 @@ void Declaration::resolveTypeExpr(){
 void Declaration::setType(Type type)
 {
     this->type = type;
-
 }
 
 Type Declaration::getType()
@@ -61,7 +57,6 @@ Declaration::Declaration(const Declaration &unDeclaration)
 #endif
 }
 
-
 Declaration::Declaration(string name, Type type): Instruction()
 {
     this->name = name;
@@ -70,7 +65,6 @@ Declaration::Declaration(string name, Type type): Instruction()
     cout << "Appel au constructeur de <Declaration>" << endl;
 #endif
 }
-
 
 Declaration::~Declaration()
 {

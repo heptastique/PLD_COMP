@@ -3,10 +3,8 @@ using namespace std;
 #include "DeclarationTab.h"
 #include <iostream>
 
-
 void DeclarationTab::generateIR(ControlFlowGraph * controlFlowGraph)
 {
-
 }
 
 void DeclarationTab::print(std::ostream &stream) const
@@ -24,16 +22,12 @@ std::ostream& operator<<(std::ostream& stream, const DeclarationTab& declaration
 DeclarationTab &DeclarationTab::operator=(const DeclarationTab &unDeclarationTab) {
 }
 
-
-
-
 DeclarationTab::DeclarationTab(std::string name, Type type, std::string size):Declaration(name, type) {
     this->size = size;
 #ifdef MAP
     cout << "Appel au constructeur de <DeclarationTab>" << endl;
 #endif
 }
-
 
 DeclarationTab::~DeclarationTab() {
 #ifdef MAP

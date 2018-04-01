@@ -33,14 +33,12 @@ RetourFonction::RetourFonction(const RetourFonction &unRetourFonction) {
 #endif
 }
 
-
 RetourFonction::RetourFonction(Expression* expression) {
     this->expression = expression;
 #ifdef MAP
     cout << "Appel au constructeur de <RetourFonction>" << endl;
 #endif
 }
-
 
 RetourFonction::~RetourFonction() {
 #ifdef MAP

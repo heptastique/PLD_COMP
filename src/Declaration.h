@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Type.h"
-//# include "ControlFlowGraph.h"
+//#include "ControlFlowGraph.h"
 
 #include <string>
 #include "Instruction.h"
@@ -9,36 +9,34 @@
 //class ControlFlowGraph;
 
 class Declaration : public Instruction {
+    public:
+        void generateIR(ControlFlowGraph * controlFlowGraph);
 
-public:
+        void print(std::ostream& stream) const;
 
-	void generateIR(ControlFlowGraph * controlFlowGraph);
+        friend std::ostream& operator<< (std::ostream& stream, const Declaration& declaration);
 
-    void print(std::ostream& stream) const;
+        Declaration &operator=(const Declaration &unDeclaration);
 
-    friend std::ostream& operator<< (std::ostream& stream, const Declaration& declaration);
+        void resolveScopeVariables(std::vector<Declaration*> declProgramme, std::vector<Declaration*> paramFunction, std::vector<Declaration*> declBloc, std::vector<Function*> functionProgram);
 
-    Declaration &operator=(const Declaration &unDeclaration);
+        void resolveTypeExpr();
 
-    void resolveScopeVariables(std::vector<Declaration*> declProgramme, std::vector<Declaration*> paramFunction, std::vector<Declaration*> declBloc, std::vector<Function*> functionProgram);
+        void setType(Type type);
 
-    void resolveTypeExpr();
+        Type getType();
 
-    void setType(Type type);
+        std::string getName();
 
-    Type getType();
+        Declaration();
 
-    std::string getName();
+        Declaration(const Declaration &unDeclaration);
 
-    Declaration();
+        Declaration(std::string name, Type type);
 
-    Declaration(const Declaration &unDeclaration);
+        virtual ~Declaration();
 
-    Declaration(std::string name, Type type);
-
-    virtual ~Declaration();
-
-protected:
-    Type type;
-    std::string name;
+    protected:
+        Type type;
+        std::string name;
 };
