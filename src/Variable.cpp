@@ -43,8 +43,16 @@ std::ostream& operator<<(std::ostream& stream, const Variable& variable)
     return stream;
 }
 
+Declaration * Variable::getDeclaration()
+{
+	return declarationAssociee;
+}
 
-Variable &Variable::operator=(const Variable &unVariable) {
+Variable & Variable::operator=(const Variable & variable)
+{
+	typeVariable = variable.typeVariable;
+	valeur = variable.valeur;
+	declarationAssociee = variable.declarationAssociee;
 }
 
 void Variable::resolveScopeVariables(std::vector<Declaration*> declProgramme, std::vector<Declaration*> paramFunction, std::vector<Declaration*> declBloc, std::vector<Function*> functionProgram){

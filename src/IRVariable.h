@@ -7,6 +7,8 @@ class IRVariable
 {
 	public :
 
+		int getOffset();
+
 		IRVariable();
 		IRVariable(string name, int offset);
 		IRVariable(const IRVariable & iRVariable);

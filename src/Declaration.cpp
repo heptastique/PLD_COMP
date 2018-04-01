@@ -19,15 +19,16 @@ std::ostream& operator<<(std::ostream& stream, const Declaration& declaration)
     return stream;
 }
 
-
-Declaration &Declaration::operator=(const Declaration &unDeclaration)
+Declaration & Declaration::operator=(const Declaration & declaration)
 {
+	type = declaration.type;
+	name = declaration.name;
+	iRVariable = declaration.iRVariable;
 }
-
 
 void Declaration::resolveScopeVariables(std::vector<Declaration*> declProgramme, std::vector<Declaration*> paramFunction, std::vector<Declaration*> declBloc, std::vector<Function*> functionProgram)
 {
-	iRVariable = IRVariable(name, (int)(-(declBloc.size() * 8)));
+	iRVariable = IRVariable(name, declBloc.size() * 8);
 }
 
 void Declaration::resolveTypeExpr(){

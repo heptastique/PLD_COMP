@@ -17,6 +17,8 @@ public:
 
     friend std::ostream& operator<< (std::ostream& stream, const Variable& variable);
 
+	Declaration * getDeclaration();
+
     TypeVariable getType(){
         return typeVariable;
     }
