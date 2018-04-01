@@ -3,26 +3,23 @@
 #include "Variable.h"
 
 class VariableIndex : public Variable{
+    public:
+        void generateIR(ControlFlowGraph * controlFlowGraph);
 
-public:
+        void print(std::ostream& stream) const;
 
-    void generateIR(ControlFlowGraph * controlFlowGraph);
+        friend std::ostream& operator<< (std::ostream& stream, const VariableIndex& variableIndex);
 
-    void print(std::ostream& stream) const;
+        void resolveScopeVariables(std::vector<Declaration*> declProgramme, std::vector<Declaration*> paramFunction, std::vector<Declaration*> declBloc, std::vector<Function*> functionProgram);
 
-    friend std::ostream& operator<< (std::ostream& stream, const VariableIndex& variableIndex);
+        void resolveTypeExpr();
 
-    void resolveScopeVariables(std::vector<Declaration*> declProgramme, std::vector<Declaration*> paramFunction, std::vector<Declaration*> declBloc, std::vector<Function*> functionProgram);
+        VariableIndex &operator=(const VariableIndex &unVariableIndex);
 
-    void resolveTypeExpr();
+        VariableIndex(TypeVariable typeVariable, std::string valeur, Expression* index);
 
-    VariableIndex &operator=(const VariableIndex &unVariableIndex);
+        virtual ~VariableIndex();
 
-    VariableIndex(TypeVariable typeVariable, std::string valeur, Expression* index);
-
-    virtual ~VariableIndex();
-
-private:
-    Expression* index;
-
+    private:
+        Expression* index;
 };

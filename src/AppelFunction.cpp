@@ -9,34 +9,33 @@ using namespace std;
 
 void AppelFunction::generateIR(ControlFlowGraph * controlFlowGraph)
 {
-	// Special Case for putchar
-	if (name == "putchar")
-	{
-		controlFlowGraph->addIRInstr(IRInstr(PUTCHAR, {to_string((int)((variables[0]->getValeur())[1]))}));
-	}
-	
-	// Generate IR for Parameters
+    // Special Case for putchar
+    if (name == "putchar")
+    {
+        controlFlowGraph->addIRInstr(IRInstr(PUTCHAR, {to_string((int)((variables[0]->getValeur())[1]))}));
+    }
 
-	/*for (auto variable : variables)
-	{
-		//variable->generateIR();
-	}*/
+    // Generate IR for Parameters
 
-	// add IRInstr call
+    /*for (auto variable : variables)
+    {
+        //variable->generateIR();
+    }*/
 
-	/*vector <string> params;
+    // add IRInstr call
 
-	params.push_back(name);
-	params.push_back("r0");
+    /*vector <string> params;
 
-	IRInstr iRInstr(FUNCTION_CALL, params);*/
+    params.push_back(name);
+    params.push_back("r0");
+
+    IRInstr iRInstr(FUNCTION_CALL, params);*/
 }
 
 void AppelFunction::print(std::ostream &stream) const
 {
     stream << " AppelFunction: Name=" << name;
     for (auto it : variables){
-
         if(VariableIndex *varInd = dynamic_cast<VariableIndex*>(it))
         {
             stream << *varInd;
@@ -104,7 +103,6 @@ AppelFunction::AppelFunction(const AppelFunction &unAppelFunction) {
 #endif
 }
 
-
 AppelFunction::AppelFunction(std::string name, std::vector<Variable *> variables) {
     this->name = name;
     this->variables = variables;
@@ -112,7 +110,6 @@ AppelFunction::AppelFunction(std::string name, std::vector<Variable *> variables
     cout << "Appel au constructeur de <AppelFunction>" << endl;
 #endif
 }
-
 
 AppelFunction::~AppelFunction() {
 #ifdef MAP

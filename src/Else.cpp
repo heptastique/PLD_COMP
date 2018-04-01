@@ -37,7 +37,6 @@ Else::Else(Bloc* bloc) {
 #endif
 }
 
-
 Else::~Else() {
 #ifdef MAP
     cout << "Appel au destructeur de <Else>" << endl;

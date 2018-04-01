@@ -6,35 +6,32 @@
 #include "Type.h"
 
 class ControlFlowGraph;
+
 class Expression : public Instruction {
+    protected:
+        //virtual void generateIR(ControlFlowGraph * controlFlowGraph) = 0;
 
-protected:
+        virtual void print(std::ostream& stream) const = 0;
 
-	//virtual void generateIR(ControlFlowGraph * controlFlowGraph) = 0;
+    public:
+        friend std::ostream& operator<< (std::ostream& stream, Expression const& expression);
 
-	virtual void print(std::ostream& stream) const = 0;
+        Expression &operator=(const Expression &unExpression);
 
-public:
+        void resolveScopeVariables(std::vector<Declaration*> declProgramme, std::vector<Declaration*> paramFunction, std::vector<Declaration*> declBloc, std::vector<Function*> functionProgram);
 
-    friend std::ostream& operator<< (std::ostream& stream, Expression const& expression);
+        Type getType();
 
-    Expression &operator=(const Expression &unExpression);
+        void setType(Type type);
 
-    void resolveScopeVariables(std::vector<Declaration*> declProgramme, std::vector<Declaration*> paramFunction, std::vector<Declaration*> declBloc, std::vector<Function*> functionProgram);
+        virtual void resolveTypeExpr() = 0;
 
-    Type getType();
+        Expression(const Expression &unExpression);
 
-    void setType(Type type);
+        Expression();
 
-    virtual void resolveTypeExpr() = 0;
+        virtual ~Expression();
 
-    Expression(const Expression &unExpression);
-
-    Expression();
-
-    virtual ~Expression();
-
-private:
-    Type type;
-
+    private:
+        Type type;
 };

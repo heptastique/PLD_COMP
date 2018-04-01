@@ -6,33 +6,30 @@
 #include "Expression.h"
 
 class If : public Instruction {
+    public:
+        void generateIR(ControlFlowGraph * controlFlowGraph){};
 
-public:
+        void print(std::ostream& stream) const;
 
-    void generateIR(ControlFlowGraph * controlFlowGraph){};
+        friend std::ostream& operator<< (std::ostream& stream, const If& anIf);
 
-    void print(std::ostream& stream) const;
+        void resolveScopeVariables(std::vector<Declaration*> declProgramme, std::vector<Declaration*> paramFunction, std::vector<Declaration*> declBloc, std::vector<Function*> functionProgram);
 
-    friend std::ostream& operator<< (std::ostream& stream, const If& anIf);
+        void resolveTypeExpr();
 
-    void resolveScopeVariables(std::vector<Declaration*> declProgramme, std::vector<Declaration*> paramFunction, std::vector<Declaration*> declBloc, std::vector<Function*> functionProgram);
+        void setElse(Else* anElse);
 
-    void resolveTypeExpr();
+        If &operator=(const If &unIf);
 
-    void setElse(Else* anElse);
+        If(const If &unIf);
 
-    If &operator=(const If &unIf);
+        If(Expression* condition, Bloc* bloc);
 
-    If(const If &unIf);
+        virtual ~If();
 
-    If(Expression* condition, Bloc* bloc);
-
-    virtual ~If();
-
-private:
-    Expression* condition;
-    Bloc* bloc;
-    Else* anElse;
-    bool hasElse = false;
-
+    private:
+        Expression* condition;
+        Bloc* bloc;
+        Else* anElse;
+        bool hasElse = false;
 };

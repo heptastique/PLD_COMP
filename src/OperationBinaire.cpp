@@ -49,7 +49,6 @@ OperationBinaire::OperationBinaire(const OperationBinaire &unOperationBinaire) {
 #endif
 }
 
-
 OperationBinaire::OperationBinaire(Expression* expressionL, Expression* expressionR, Operateur operateur) {
     this->expressionL = expressionL;
     this->expressionR = expressionR;
@@ -58,7 +57,6 @@ OperationBinaire::OperationBinaire(Expression* expressionL, Expression* expressi
     cout << "Appel au constructeur de <OperationBinaire>" << endl;
 #endif
 }
-
 
 OperationBinaire::~OperationBinaire() {
 #ifdef MAP

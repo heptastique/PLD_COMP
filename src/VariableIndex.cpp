@@ -5,7 +5,6 @@ using namespace std;
 
 void VariableIndex::generateIR(ControlFlowGraph * controlFlowGraph)
 {
-
 }
 
 void VariableIndex::print(std::ostream &stream) const
@@ -33,14 +32,12 @@ void VariableIndex::resolveTypeExpr(){
 VariableIndex &VariableIndex::operator=(const VariableIndex &unVariableIndex) {
 }
 
-
 VariableIndex::VariableIndex(TypeVariable typeVariable, std::string valeur, Expression* index): Variable(typeVariable, valeur) {
     this->index = index;
 #ifdef MAP
     cout << "Appel au constructeur de <VariableIndex>" << endl;
 #endif
 }
-
 
 VariableIndex::~VariableIndex() {
 #ifdef MAP

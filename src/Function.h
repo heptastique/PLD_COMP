@@ -10,17 +10,17 @@ using namespace std;
 class ControlFlowGraph;
 class Bloc;
 class Declaration;
+
 class Function
 {
-	public:
-
+    public:
         void generateIR(ControlFlowGraph * controlFlowGraph);
 
         friend ostream & operator<<(ostream & stream, const Function & function);
 
         Function & operator=(const Function & function);
 
-		int calculateAddressRangeSize();
+        int calculateAddressRangeSize();
 
         void setParameters(vector <Declaration*> parameters);
 
@@ -41,7 +41,6 @@ class Function
         Function(string name, Bloc * bloc, Type typeRetour);
 
         virtual ~Function();
-
 
     private:
         std::string name;

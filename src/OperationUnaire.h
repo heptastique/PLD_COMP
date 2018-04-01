@@ -4,28 +4,26 @@
 #include "Type.h"
 
 class OperationUnaire : public Expression{
+    public:
+        void generateIR(ControlFlowGraph * controlFlowGraph){};
 
-public:
+        friend std::ostream& operator<< (std::ostream& stream, const OperationUnaire& operationUnaire);
 
-    void generateIR(ControlFlowGraph * controlFlowGraph){};
+        void print(std::ostream& stream) const;
 
-    friend std::ostream& operator<< (std::ostream& stream, const OperationUnaire& operationUnaire);
+        OperationUnaire &operator=(const OperationUnaire &unOperationUnaire);
 
-    void print(std::ostream& stream) const;
+        void resolveScopeVariables(std::vector<Declaration*> declProgramme, std::vector<Declaration*> paramFunction, std::vector<Declaration*> declBloc, std::vector<Function*> functionProgram);
 
-    OperationUnaire &operator=(const OperationUnaire &unOperationUnaire);
+        void resolveTypeExpr();
 
-    void resolveScopeVariables(std::vector<Declaration*> declProgramme, std::vector<Declaration*> paramFunction, std::vector<Declaration*> declBloc, std::vector<Function*> functionProgram);
+        OperationUnaire(const OperationUnaire &unOperationUnaire);
 
-    void resolveTypeExpr();
+        OperationUnaire(Operateur operateur, Expression* expression);
 
-    OperationUnaire(const OperationUnaire &unOperationUnaire);
+        virtual ~OperationUnaire();
 
-    OperationUnaire(Operateur operateur, Expression* expression);
-
-    virtual ~OperationUnaire();
-
-private:
-    Operateur operateur;
-    Expression* expression;
+    private:
+        Operateur operateur;
+        Expression* expression;
 };

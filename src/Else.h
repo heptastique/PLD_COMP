@@ -4,26 +4,23 @@
 #include "Bloc.h"
 
 class Else {
+    public:
+        void print(std::ostream& stream) const;
 
-public:
+        friend std::ostream& operator<< (std::ostream& stream, const Else& anElse);
 
-    void print(std::ostream& stream) const;
+        Else &operator=(const Else &unElse);
 
-    friend std::ostream& operator<< (std::ostream& stream, const Else& anElse);
+        void resolveScopeVariables(std::vector<Declaration*> declProgramme, std::vector<Declaration*> paramFunction, std::vector<Declaration*> declBloc, std::vector<Function*> functionProgram);
 
-    Else &operator=(const Else &unElse);
+        void resolveTypeExpr();
 
-    void resolveScopeVariables(std::vector<Declaration*> declProgramme, std::vector<Declaration*> paramFunction, std::vector<Declaration*> declBloc, std::vector<Function*> functionProgram);
+        Else(const Else &unElse);
 
-    void resolveTypeExpr();
+        Else(Bloc* bloc);
 
-    Else(const Else &unElse);
+        virtual ~Else();
 
-    Else(Bloc* bloc);
-
-    virtual ~Else();
-
-private:
-    Bloc* bloc;
-
+    private:
+        Bloc* bloc;
 };

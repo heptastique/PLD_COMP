@@ -21,14 +21,12 @@ Instruction::Instruction(const Instruction &unInstruction)
 #endif
 }
 
-
 Instruction::Instruction()
 {
 #ifdef MAP
     cout << "Appel au constructeur de <Instruction>" << endl;
 #endif
 }
-
 
 Instruction::~Instruction()
 {
