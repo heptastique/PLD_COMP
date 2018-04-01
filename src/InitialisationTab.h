@@ -1,6 +1,5 @@
 #pragma once
 
-
 #include "DeclarationTab.h"
 #include "Variable.h"
 #include <vector>

@@ -44,7 +44,6 @@ Affectation::Affectation(const Affectation &unAffectation) {
 #endif
 }
 
-
 Affectation::Affectation(Variable *variable, Operateur operateur, Expression *expression) {
     this->variable = variable;
     this->operateur = operateur;
@@ -53,7 +52,6 @@ Affectation::Affectation(Variable *variable, Operateur operateur, Expression *ex
     cout << "Appel au constructeur de <Affectation>" << endl;
 #endif
 }
-
 
 Affectation::~Affectation() {
 #ifdef MAP
