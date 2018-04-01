@@ -6,7 +6,7 @@ string ControlFlowGraph::createNewVariable(string name)
 {
 	string variableName = "VAR." + name;
 
-	IRVariable iRVariable(variableName);
+	IRVariable iRVariable(variableName, 2);
 
 	variableMap.insert(pair <string, IRVariable> (variableName, iRVariable));
 
@@ -19,7 +19,7 @@ string ControlFlowGraph::createNewTemp()
 
 	string tempName = "TMP." + to_string(nbTemp);
 
-	IRVariable iRVariable(tempName);
+	IRVariable iRVariable(tempName, 2);
 
 	variableMap.insert(pair <string, IRVariable> (tempName, iRVariable));
 

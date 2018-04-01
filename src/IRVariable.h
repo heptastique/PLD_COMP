@@ -8,7 +8,7 @@ class IRVariable
 	public :
 
 		IRVariable();
-		IRVariable(string name);
+		IRVariable(string name, int offset);
 		IRVariable(const IRVariable & iRVariable);
 		~IRVariable();
 

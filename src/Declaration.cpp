@@ -27,6 +27,7 @@ Declaration &Declaration::operator=(const Declaration &unDeclaration)
 
 void Declaration::resolveScopeVariables(std::vector<Declaration*> declProgramme, std::vector<Declaration*> paramFunction, std::vector<Declaration*> declBloc, std::vector<Function*> functionProgram)
 {
+	iRVariable = IRVariable(name, (int)(-(declBloc.size() * 8)));
 }
 
 void Declaration::resolveTypeExpr(){
@@ -36,6 +37,16 @@ void Declaration::setType(Type type)
 {
     this->type = type;
 
+}
+
+void Declaration::setIRVariable(IRVariable iRVariable)
+{
+	this->iRVariable = iRVariable;
+}
+
+IRVariable Declaration::getIRVariable()
+{
+	return iRVariable;
 }
 
 Type Declaration::getType()

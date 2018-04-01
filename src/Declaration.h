@@ -1,12 +1,11 @@
 #pragma once
 
 #include "Type.h"
-//# include "ControlFlowGraph.h"
-
 #include <string>
 #include "Instruction.h"
+# include "IRVariable.h"
 
-//class ControlFlowGraph;
+class IRVariable;
 
 class Declaration : public Instruction {
 
@@ -23,6 +22,10 @@ public:
     void resolveScopeVariables(std::vector<Declaration*> declProgramme, std::vector<Declaration*> paramFunction, std::vector<Declaration*> declBloc, std::vector<Function*> functionProgram);
 
     void resolveTypeExpr();
+
+	void setIRVariable(IRVariable);
+
+	IRVariable getIRVariable();
 
     void setType(Type type);
 
@@ -41,4 +44,5 @@ public:
 protected:
     Type type;
     std::string name;
+	IRVariable iRVariable;
 };
