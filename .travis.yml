@@ -20,13 +20,13 @@ install:
 
 before_script:
   - cd ../tests
-  - chmod +x asm-test.sh symbols-test.sh errors-test.sh lib/assert.sh
+  - chmod +x asm-test.sh symbols-test.sh errors-test.sh lint.sh lib/assert.sh
 
 script:
   - ./symbols-test.sh -v
   - ./asm-test.sh -v
   - ./errors-test.sh -v
-  - if [ "${TRAVIS_PULL_REQUEST}" != "false" ]; then (lintspaces -v -n -b -l 1 -d spaces -s 4 -i 'js-comments' ../src/** ../main.cpp ../grammar/prog.g4) fi
+  - ./lint.sh
 
 before_cache:
   - cd ..
