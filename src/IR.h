@@ -1,9 +1,9 @@
-# pragma once
+#pragma once
 
-# include "ControlFlowGraph.h"
+#include "ControlFlowGraph.h"
 
-# include <iostream>
-# include <vector>
+#include <iostream>
+#include <vector>
 
 using namespace std;
 

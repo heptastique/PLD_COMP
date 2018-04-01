@@ -1,14 +1,14 @@
-# include <sys/stat.h>
-# include <iostream>
+#include <sys/stat.h>
+#include <iostream>
 
-# include "antlr4-runtime.h"
+#include "antlr4-runtime.h"
 
-# include "grammar/ProgLexer.h"
-# include "grammar/ProgParser.h"
-# include "grammar/ProgBaseVisitor.h"
-# include "src/Prog.h"
-# include "src/ControlFlowGraph.h"
-# include "src/IR.h"
+#include "grammar/ProgLexer.h"
+#include "grammar/ProgParser.h"
+#include "grammar/ProgBaseVisitor.h"
+#include "src/Prog.h"
+#include "src/ControlFlowGraph.h"
+#include "src/IR.h"
 
 using namespace antlr4;
 using namespace std;

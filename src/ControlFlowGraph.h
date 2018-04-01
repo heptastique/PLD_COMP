@@ -1,10 +1,10 @@
-# pragma once
+#pragma once
 
-# include "BasicBlock.h"
-# include "IRInstr.h"
-# include "Programme.h"
-# include <vector>
-# include <iostream>
+#include "BasicBlock.h"
+#include "IRInstr.h"
+#include "Programme.h"
+#include <vector>
+#include <iostream>
 
 using namespace std;
 

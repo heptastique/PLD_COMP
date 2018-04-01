@@ -1,9 +1,9 @@
-# pragma once
+#pragma once
 
-# include <string>
-# include "ControlFlowGraph.h"
-# include "Bloc.h"
-# include "Type.h"
+#include <string>
+#include "ControlFlowGraph.h"
+#include "Bloc.h"
+#include "Type.h"
 
 using namespace std;
 

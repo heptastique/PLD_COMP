@@ -1,11 +1,11 @@
 using namespace std;
 
-# include "Function.h"
-# include "BasicBlock.h"
-# include "DeclarationTab.h"
-# include "ErrorHandling.h"
+#include "Function.h"
+#include "BasicBlock.h"
+#include "DeclarationTab.h"
+#include "ErrorHandling.h"
 
-# include <iostream>
+#include <iostream>
 
 // Generate IR
 void Function::generateIR(ControlFlowGraph * controlFlowGraph)

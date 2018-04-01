@@ -1,7 +1,7 @@
 using namespace std;
 
-# include "IR.h"
-# include <iostream>
+#include "IR.h"
+#include <iostream>
 
 void IR::generateASM(ostream & os) const
 {

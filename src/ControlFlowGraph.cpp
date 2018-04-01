@@ -1,6 +1,6 @@
 using namespace std;
 
-# include "ControlFlowGraph.h"
+#include "ControlFlowGraph.h"
 
 void ControlFlowGraph::addIRInstr(IRInstr iRInstr)
 {

@@ -1,8 +1,8 @@
-# pragma once
+#pragma once
 
-# include "IRInstr.h"
-# include <string>
-# include <vector>
+#include "IRInstr.h"
+#include <string>
+#include <vector>
 
 using namespace std;
 

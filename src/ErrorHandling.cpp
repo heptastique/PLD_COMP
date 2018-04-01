@@ -1,7 +1,7 @@
 using namespace std;
 
-# include "ErrorHandling.h"
-# include <iostream>
+#include "ErrorHandling.h"
+#include <iostream>
 
 void ErrorHandling::ThrowError(int code, int line, string name)
 {

@@ -1,11 +1,11 @@
-# pragma once
+#pragma once
 
-# include "Function.h"
-# include "Declaration.h"
-# include "ControlFlowGraph.h"
-# include "IR.h"
+#include "Function.h"
+#include "Declaration.h"
+#include "ControlFlowGraph.h"
+#include "IR.h"
 
-# include <vector>
+#include <vector>
 
 using namespace std;
 

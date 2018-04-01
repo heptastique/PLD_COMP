@@ -1,9 +1,9 @@
 using namespace std;
 
-# include "Programme.h"
+#include "Programme.h"
 #include "ErrorHandling.h"
 
-# include <iostream>
+#include <iostream>
 
 // Generate IR
 IR Programme::generateIR()
