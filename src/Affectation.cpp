@@ -4,9 +4,37 @@ using namespace std;
 #include "VariableIndex.h"
 #include <iostream>
 
-void Affectation::generateIR(ControlFlowGraph * controlFlowGraph)
+string Affectation::generateIR(ControlFlowGraph * controlFlowGraph)
 {
-	//
+    string right;
+
+    // string left = controlFlowGraph->createNewVar();
+    string left = "tmp";
+    //int offset = controlFlowGraph->getOffsetFromSymbolTable(varName);
+    int offset = 1;
+    controlFlowGraph->addIRInstr(IRInstr(REG_STORE, { left, to_string(offset)}));
+    //controlFlowGraph->addIRInstr(IRInstr(ADD, { left, !bp, left}));
+
+    // If the expression is a Rvalue
+    if(Variable* var = dynamic_cast<Variable*>(expression))
+    {
+        if(var->getType() == NAME)
+        {
+            right = var->getValeur();
+        }
+        else
+        {
+            right = var->generateIR(controlFlowGraph);
+        }
+    }
+    else
+    {
+        right = variable->generateIR(controlFlowGraph);
+    }
+
+    controlFlowGraph->addIRInstr(IRInstr(AFFECTATION, {right, left}));
+
+	return right;
 }
 
 void Affectation::print(std::ostream &stream) const

@@ -3,9 +3,9 @@ using namespace std;
 #include "VariableIndex.h"
 #include <iostream>
 
-void VariableIndex::generateIR(ControlFlowGraph * controlFlowGraph)
+std::string VariableIndex::generateIR(ControlFlowGraph * controlFlowGraph)
 {
-
+    return "";
 }
 
 void VariableIndex::print(std::ostream &stream) const

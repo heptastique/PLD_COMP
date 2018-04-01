@@ -7,7 +7,7 @@ class OperationBinaire : public Expression {
 
 public:
 
-    void generateIR(ControlFlowGraph * controlFlowGraph){};
+    std::string generateIR(ControlFlowGraph * controlFlowGraph);
 
     friend std::ostream& operator<< (std::ostream& stream, const OperationBinaire& operationBinaire);
 

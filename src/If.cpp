@@ -3,6 +3,11 @@ using namespace std;
 #include "If.h"
 #include <iostream>
 
+string If::generateIR(ControlFlowGraph * controlFlowGraph)
+{
+    return "";
+}
+
 void If::print(std::ostream &stream) const
 {
     stream << " If: Condition=" << *condition << *bloc;

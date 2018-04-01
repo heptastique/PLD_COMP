@@ -3,9 +3,9 @@ using namespace std;
 #include "Declaration.h"
 #include <iostream>
 
-void Declaration::generateIR(ControlFlowGraph * controlFlowGraph)
+string Declaration::generateIR(ControlFlowGraph * controlFlowGraph)
 {
-
+    return "";
 }
 
 void Declaration::print(std::ostream &stream) const

@@ -7,7 +7,7 @@ using namespace std;
 #include "ErrorHandling.h"
 #include <iostream>
 
-void AppelFunction::generateIR(ControlFlowGraph * controlFlowGraph)
+string AppelFunction::generateIR(ControlFlowGraph * controlFlowGraph)
 {
 	// Special Case for putchar
 	if (name == "putchar")
@@ -30,6 +30,8 @@ void AppelFunction::generateIR(ControlFlowGraph * controlFlowGraph)
 	params.push_back("r0");
 
 	IRInstr iRInstr(FUNCTION_CALL, params);*/
+
+	return "";
 }
 
 void AppelFunction::print(std::ostream &stream) const

@@ -3,9 +3,9 @@ using namespace std;
 #include "InitialisationTab.h"
 #include <iostream>
 
-void InitialisationTab::generateIR(ControlFlowGraph * controlFlowGraph)
+string InitialisationTab::generateIR(ControlFlowGraph * controlFlowGraph)
 {
-
+    return "";
 }
 
 void InitialisationTab::print(std::ostream &stream) const

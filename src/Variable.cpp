@@ -5,9 +5,17 @@ using namespace std;
 #include "ErrorHandling.h"
 #include <iostream>
 
-void Variable::generateIR(ControlFlowGraph * controlFlowGraph)
+string Variable::generateIR(ControlFlowGraph * controlFlowGraph)
 {
 	cout << "Variable::generateIR" << endl;
+
+	if(this->typeVariable == ENTIER)
+    {
+        string var = "tmp1";
+        //string var = controlFlowGraph-->createNewVar();
+        controlFlowGraph->addIRInstr(IRInstr(REG_STORE, {var, valeur}));
+        return var;
+    }
 
 	/*
 	string reg = createNewReg();
@@ -21,6 +29,7 @@ void Variable::generateIR(ControlFlowGraph * controlFlowGraph)
 	
 	return reg;
 	*/
+	return "";
 }
 
 void Variable::print(std::ostream &stream) const

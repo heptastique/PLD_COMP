@@ -14,7 +14,7 @@ protected:
 
 public:
 
-    virtual void generateIR(ControlFlowGraph * controlFlowGraph) = 0;
+    virtual std::string generateIR(ControlFlowGraph * controlFlowGraph) = 0;
 
     friend std::ostream& operator<< (std::ostream& stream, Instruction const& instruction);
 

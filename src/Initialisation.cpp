@@ -3,8 +3,9 @@ using namespace std;
 #include "Initialisation.h"
 #include <iostream>
 
-void Initialisation::generateIR(ControlFlowGraph * controlFlowGraph){
-
+string Initialisation::generateIR(ControlFlowGraph * controlFlowGraph)
+{
+    return "";
 }
 
 void Initialisation::print(std::ostream &stream) const

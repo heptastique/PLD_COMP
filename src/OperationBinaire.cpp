@@ -1,7 +1,18 @@
 using namespace std;
 
 #include "OperationBinaire.h"
+#include "IRInstr.h"
 #include <iostream>
+
+string OperationBinaire::generateIR(ControlFlowGraph *controlFlowGraph)
+{
+    string var1 = expressionL->generateIR(controlFlowGraph);
+    string var2 = expressionR->generateIR(controlFlowGraph);
+    // string var3 = createNewVAr();
+    string var3 = "tmp";
+    controlFlowGraph->addIRInstr(IRInstr(BINARYOPERATION, {to_string(operateur), var3, var1, var2}));
+    return var3;
+}
 
 void OperationBinaire::print(std::ostream &stream) const
 {

@@ -3,9 +3,9 @@ using namespace std;
 #include "VariableOpe.h"
 #include <iostream>
 
-void VariableOpe::generateIR(ControlFlowGraph * controlFlowGraph)
+string VariableOpe::generateIR(ControlFlowGraph * controlFlowGraph)
 {
-	
+    return "";
 }
 
 void VariableOpe::print(std::ostream &stream) const
