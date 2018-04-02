@@ -1,9 +1,9 @@
-# pragma once
+#pragma once
 
-# include "ControlFlowGraph.h"
+#include "ControlFlowGraph.h"
 
-# include <string>
-# include <vector>
+#include <string>
+#include <vector>
 
 using namespace std;
 
@@ -11,40 +11,39 @@ class ControlFlowGraph;
 
 enum Mnemonique
 {
-	FUNCTION_DECLARATION = 0,
-	FUNCTION_RETURN = 1,
-	FUNCTION_CALL = 2,
+    FUNCTION_DECLARATION = 0,
+    FUNCTION_RETURN = 1,
+    FUNCTION_CALL = 2,
 
-	REG_STORE = 3,
-	MEM_STORE = 4,
+    REG_STORE = 3,
+    MEM_STORE = 4,
 
     AFFECTATION = 40,
-	BINARYOPERATION= 41,
+    BINARYOPERATION= 41,
     UNARYOPERATION= 42,
 
-	PUTCHAR = 100
+    PUTCHAR = 100
 };
 
 class IRInstr
 {
-	public :
+    public:
+        Mnemonique getMnemonique() const;
 
-		Mnemonique getMnemonique() const;
+        string getParam(int index) const;
+        vector <string> getParams() const;
 
-		string getParam(int index) const;
-		vector <string> getParams() const;
+        IRInstr(const IRInstr & iRInstr);
 
-		IRInstr(const IRInstr & iRInstr);
+        IRInstr();
 
-    		IRInstr();
-		IRInstr(Mnemonique mnemonique, vector <string> params);
+        IRInstr(Mnemonique mnemonique, vector <string> params);
 
-		virtual ~IRInstr();
+        virtual ~IRInstr();
 
-	private :
+    private:
+        ControlFlowGraph * controlFlowGraph;
 
-		ControlFlowGraph * controlFlowGraph;
-
-		Mnemonique mnemonique;
-		vector <string> params;
+        Mnemonique mnemonique;
+        vector <string> params;
 };

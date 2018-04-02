@@ -7,9 +7,9 @@ using namespace std;
 
 string Variable::generateIR(ControlFlowGraph * controlFlowGraph)
 {
-	cout << "Variable::generateIR" << endl;
+    cout << "Variable::generateIR" << endl;
 
-	if(this->typeVariable == ENTIER)
+    if(this->typeVariable == ENTIER)
     {
         string var = "tmp1";
         //string var = controlFlowGraph-->createNewVar();
@@ -17,19 +17,19 @@ string Variable::generateIR(ControlFlowGraph * controlFlowGraph)
         return var;
     }
 
-	/*
-	string reg = createNewReg();
-	
-	list <string> params;
-	
-	params.push_back(reg);
-	params.push_back(valeur);
-	
-	controlFlowGraph->addInstruction(IRInstr(REG_STORE), params);
-	
-	return reg;
-	*/
-	return "";
+    /*
+    string reg = createNewReg();
+
+    list <string> params;
+
+    params.push_back(reg);
+    params.push_back(valeur);
+
+    controlFlowGraph->addInstruction(IRInstr(REG_STORE), params);
+    return reg;
+    */
+
+    return "";
 }
 
 void Variable::print(std::ostream &stream) const
@@ -43,6 +43,7 @@ std::ostream& operator<<(std::ostream& stream, const Variable& variable)
     return stream;
 }
 
+<<<<<<< HEAD
 Declaration * Variable::getDeclaration()
 {
 	return declarationAssociee;
@@ -53,6 +54,9 @@ Variable & Variable::operator=(const Variable & variable)
 	typeVariable = variable.typeVariable;
 	valeur = variable.valeur;
 	declarationAssociee = variable.declarationAssociee;
+=======
+Variable &Variable::operator=(const Variable &unVariable) {
+>>>>>>> master
 }
 
 void Variable::resolveScopeVariables(std::vector<Declaration*> declProgramme, std::vector<Declaration*> paramFunction, std::vector<Declaration*> declBloc, std::vector<Function*> functionProgram){
@@ -110,7 +114,6 @@ Variable::Variable(const Variable &unVariable) {
 #endif
 }
 
-
 Variable::Variable(TypeVariable typeVariable, std::string valeur) {
     this->typeVariable = typeVariable;
     this->valeur = valeur;
@@ -118,7 +121,6 @@ Variable::Variable(TypeVariable typeVariable, std::string valeur) {
     cout << "Appel au constructeur de <Variable>" << endl;
 #endif
 }
-
 
 Variable::~Variable() {
 #ifdef MAP

@@ -3,44 +3,48 @@
 #include <ostream>
 #include "Type.h"
 #include "Expression.h"
-# include "ControlFlowGraph.h"
+#include "ControlFlowGraph.h"
 #include "Declaration.h"
 
-
-class Variable : public Expression {
-
-public:
+class Variable : public Expression
+{
+    public:
 
 	virtual std::string generateIR(ControlFlowGraph * controlFlowGraph);
 
-    void print(std::ostream& stream) const;
+        void print(std::ostream& stream) const;
 
-    friend std::ostream& operator<< (std::ostream& stream, const Variable& variable);
+        friend std::ostream& operator<< (std::ostream& stream, const Variable& variable);
 
-	Declaration * getDeclaration();
+        Declaration * getDeclaration();
 
-    TypeVariable getType(){
-        return typeVariable;
-    }
+        TypeVariable getType()
+        {
+            return typeVariable;
+        }
 
-    std::string getValeur(){
-        return valeur;
-    }
+        std::string getValeur()
+        {
+            return valeur;
+        }
 
-    Variable &operator=(const Variable &unVariable);
+        Variable &operator=(const Variable &unVariable);
 
-    void resolveScopeVariables(std::vector<Declaration*> declProgramme, std::vector<Declaration*> paramFunction, std::vector<Declaration*> declBloc, std::vector<Function*> functionProgram);
+        void resolveScopeVariables(std::vector<Declaration*> declProgramme, std::vector<Declaration*> paramFunction, std::vector<Declaration*> declBloc, std::vector<Function*> functionProgram);
 
-    void resolveTypeExpr();
+        void resolveTypeExpr();
 
-    Variable(const Variable &unVariable);
+        Variable(const Variable &unVariable);
 
-    Variable(TypeVariable typeVariable, std::string valeur);
+        Variable(TypeVariable typeVariable, std::string valeur);
 
-    virtual ~Variable();
+        virtual ~Variable();
 
-protected:
-    TypeVariable typeVariable;
-    std::string valeur;
-    Declaration * declarationAssociee = nullptr;
+    protected:
+
+        TypeVariable typeVariable;
+
+        std::string valeur;
+
+        Declaration * declarationAssociee = nullptr;
 };

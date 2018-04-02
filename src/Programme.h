@@ -1,11 +1,11 @@
-# pragma once
+#pragma once
 
-# include "Function.h"
-# include "Declaration.h"
-# include "ControlFlowGraph.h"
-# include "IR.h"
+#include "Function.h"
+#include "Declaration.h"
+#include "ControlFlowGraph.h"
+#include "IR.h"
 
-# include <vector>
+#include <vector>
 
 using namespace std;
 
@@ -16,35 +16,32 @@ class Declaration;
 
 class Programme
 {
-	public:
+    public:
+        IR generateIR();
 
-		IR generateIR();
+        friend ostream & operator<<(ostream & stream, const Programme & programme);
 
-		friend ostream & operator<<(ostream & stream, const Programme & programme);
+        void addFunction(Function * function);
 
-		void addFunction(Function * function);
+        void addDeclarations(std::vector<Declaration*> declarations);
 
-		void addDeclarations(std::vector<Declaration*> declarations);
+        vector <Function*> getFunctions();
 
-		vector <Function*> getFunctions();
+        vector <Declaration*> getDeclarations();
 
-		vector <Declaration*> getDeclarations();
+        Programme & operator=(const Programme & programme);
 
-		Programme & operator=(const Programme & programme);
-
-    	void resolveScopeVariables();
+        void resolveScopeVariables();
 
         void resolveTypeExpr();
 
-		Programme(const Programme & programme);
+        Programme(const Programme & programme);
 
-		Programme();
+        Programme();
 
-		virtual ~Programme();
+        virtual ~Programme();
 
-	private :
-
-		vector <Function*> functions;
-		vector <Declaration*> declarations;
+    private:
+        vector <Function*> functions;
+        vector <Declaration*> declarations;
 };
-

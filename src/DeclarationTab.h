@@ -2,26 +2,28 @@
 
 #include "Declaration.h"
 
-class DeclarationTab : public Declaration{
+class DeclarationTab : public Declaration
+{
+    public:
 
-public:
+        std::string generateIR(ControlFlowGraph * controlFlowGraph);
 
-    std::string generateIR(ControlFlowGraph * controlFlowGraph);
+        void print(std::ostream& stream) const;
 
-    void print(std::ostream& stream) const;
+        friend std::ostream& operator<< (std::ostream& stream, const DeclarationTab& declarationTab);
 
-    friend std::ostream& operator<< (std::ostream& stream, const DeclarationTab& declarationTab);
+        void setSize(std::string size)
+        {
+            this->size=size;
+        }
 
-    void setSize(std::string size){
-        this->size=size;
-    }
+        DeclarationTab &operator=(const DeclarationTab &unDeclarationTab);
 
-    DeclarationTab &operator=(const DeclarationTab &unDeclarationTab);
+        DeclarationTab(std::string name, Type type, std::string size);
 
-    DeclarationTab(std::string name, Type type, std::string size);
+        virtual ~DeclarationTab();
 
-    virtual ~DeclarationTab();
+    protected:
 
-protected:
-    std::string size;
+        std::string size;
 };

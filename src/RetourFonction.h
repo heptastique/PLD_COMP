@@ -4,27 +4,34 @@
 #include "Instruction.h"
 #include "Variable.h"
 
-class RetourFonction : public Instruction{
-public:
+class RetourFonction : public Instruction
+{
+    public:
 
-    std::string generateIR(ControlFlowGraph * controlFlowGraph){return "";};
+        void generateIR(ControlFlowGraph * controlFlowGraph){};
 
-    friend std::ostream& operator<< (std::ostream& stream, const RetourFonction& retourFonction);
+        std::string generateIR(ControlFlowGraph * controlFlowGraph)
+        {
+            return "";
+        };
 
-    void print(std::ostream& stream) const;
+        friend std::ostream& operator<< (std::ostream& stream, const RetourFonction& retourFonction);
 
-    RetourFonction &operator=(const RetourFonction &unRetourFonction);
+        void print(std::ostream& stream) const;
 
-    void resolveScopeVariables(std::vector<Declaration*> declProgramme, std::vector<Declaration*> paramFunction, std::vector<Declaration*> declBloc, std::vector<Function*> functionProgram);
+        RetourFonction &operator=(const RetourFonction &unRetourFonction);
 
-    void resolveTypeExpr();
+        void resolveScopeVariables(std::vector<Declaration*> declProgramme, std::vector<Declaration*> paramFunction, std::vector<Declaration*> declBloc, std::vector<Function*> functionProgram);
 
-    RetourFonction(const RetourFonction &unRetourFonction);
+        void resolveTypeExpr();
 
-    RetourFonction(Expression* expression);
+        RetourFonction(const RetourFonction &unRetourFonction);
 
-    virtual ~RetourFonction();
+        RetourFonction(Expression* expression);
 
-private:
-    Expression* expression;
+        virtual ~RetourFonction();
+
+    private:
+
+        Expression* expression;
 };

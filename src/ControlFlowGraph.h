@@ -1,4 +1,4 @@
-# pragma once
+#pragma once
 
 # include "BasicBlock.h"
 # include "IRInstr.h"
@@ -17,41 +17,44 @@ class IRVariable;
 
 class ControlFlowGraph
 {
-	protected :
+    public:
+        void addIRInstr(IRInstr iRInstr);
 
-	public :
+        vector <BasicBlock*> getBasicBlocks() const;
 
-		string createNewVariable(string name);
+        string createNewVariable(string name);
 
-		string createNewTemp();
+        string createNewTemp();
 
-		IRVariable getVariable(string name);
+        IRVariable getVariable(string name);
 
-		void addIRInstr(IRInstr iRInstr);
+        void addIRInstr(IRInstr iRInstr);
 
-		vector <BasicBlock*> getBasicBlocks() const;
+        void newBasicBlock();
 
-		void newBasicBlock();
+        void generateProlog(ostream &os, string functionName, int addressRangeSize) const;
 
-		void generateASM(ostream &os) const;
+        void generateEpilog(ostream & os, int addressRangeSize) const;
 
-		ControlFlowGraph(const ControlFlowGraph &controlFlowGraph);
+        void generateASM(ostream &os) const;
 
-    		ControlFlowGraph();
+        ControlFlowGraph(const ControlFlowGraph &controlFlowGraph);
 
-    		ControlFlowGraph(Programme * prog);
+        ControlFlowGraph();
 
-		virtual ~ControlFlowGraph();
+        ControlFlowGraph(Programme * prog);
 
-	private :
+        virtual ~ControlFlowGraph();
 
-		Programme * programme;
+    private:
 
-		BasicBlock * currentBasicBlock;
+        Programme * programme;
 
-		vector <BasicBlock*> basicBlocks;
+        BasicBlock * currentBasicBlock;
 
-		map <string, IRVariable> variableMap;
+        vector <BasicBlock*> basicBlocks;
 
-		int nbTemp;
+	map <string, IRVariable> variableMap;
+
+	int nbTemp;
 };

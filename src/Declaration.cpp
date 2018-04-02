@@ -37,7 +37,6 @@ void Declaration::resolveTypeExpr(){
 void Declaration::setType(Type type)
 {
     this->type = type;
-
 }
 
 void Declaration::setIRVariable(IRVariable iRVariable)
@@ -60,33 +59,33 @@ std::string Declaration::getName()
     return this->name;
 }
 
-Declaration::Declaration(){
-#ifdef MAP
-    cout << "Appel au constructeur par default de <Declaration>" << endl;
-#endif
+Declaration::Declaration()
+{
+    #ifdef MAP
+        cout << "Appel au constructeur par default de <Declaration>" << endl;
+    #endif
 }
 
 Declaration::Declaration(const Declaration &unDeclaration)
 {
-#ifdef MAP
-    cout << "Appel au constructeur de copie de <Declaration>" << endl;
-#endif
+    #ifdef MAP
+        cout << "Appel au constructeur de copie de <Declaration>" << endl;
+    #endif
 }
-
 
 Declaration::Declaration(string name, Type type): Instruction()
 {
+    #ifdef MAP
+        cout << "Appel au constructeur de <Declaration>" << endl;
+    #endif
+
     this->name = name;
     this->type = type;
-#ifdef MAP
-    cout << "Appel au constructeur de <Declaration>" << endl;
-#endif
 }
-
 
 Declaration::~Declaration()
 {
-#ifdef MAP
-    cout << "Appel au destructeur de <Declaration>" << endl;
-#endif
+    #ifdef MAP
+        cout << "Appel au destructeur de <Declaration>" << endl;
+    #endif
 }

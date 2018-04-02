@@ -37,7 +37,6 @@ While::While(const While &unWhile) {
 #endif
 }
 
-
 While::While(Bloc* bloc, Expression* condition) {
     this->bloc = bloc;
     this->condition = condition;
@@ -45,7 +44,6 @@ While::While(Bloc* bloc, Expression* condition) {
     cout << "Appel au constructeur de <While>" << endl;
 #endif
 }
-
 
 While::~While() {
 #ifdef MAP

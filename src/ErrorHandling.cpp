@@ -1,11 +1,11 @@
 using namespace std;
 
-# include "ErrorHandling.h"
-# include <iostream>
+#include "ErrorHandling.h"
+#include <iostream>
 
 void ErrorHandling::ThrowError(int code, int line, string name)
 {
-    cout << "\033[1;31mLigne " << line << " - Erreur " << code << " : ";
+    cout << "Ligne " << line << " - Erreur " << code << " : ";
 
     switch(code) {
         // Semantic errors
@@ -39,7 +39,7 @@ void ErrorHandling::ThrowError(int code, int line, string name)
             cout << "Caractère invalide rencontré" << endl;
             exit(201);
             break;
-        
+
         // Syntax errors:
         case 301:
             cout << "Deux opérateurs suivis recontrés" << endl;
@@ -63,7 +63,7 @@ void ErrorHandling::ThrowError(int code, int line, string name)
             break;
     }
 
-    cout << "033[0m\n" << endl;
+    cout << "\n" << endl;
 
     exit(code);
 }

@@ -5,29 +5,31 @@
 #include "Expression.h"
 #include <string>
 
-class Initialisation : public Declaration {
+class Initialisation : public Declaration
+{
+    public:
 
-public:
+        void generateIR(ControlFlowGraph * controlFlowGraph);
 
-    std::string generateIR(ControlFlowGraph * controlFlowGraph);
+        void print(std::ostream& stream) const;
 
-    void print(std::ostream& stream) const;
+        std::string generateIR(ControlFlowGraph * controlFlowGraph);
 
-    friend std::ostream& operator<< (std::ostream& stream, const Initialisation& initialisation);
+        friend std::ostream& operator<< (std::ostream& stream, const Initialisation& initialisation);
 
-    Initialisation &operator=(const Initialisation &unInitialisation);
+        Initialisation &operator=(const Initialisation &unInitialisation);
 
-    void resolveScopeVariables(std::vector<Declaration*> declProgramme, std::vector<Declaration*> paramFunction, std::vector<Declaration*> declBloc, std::vector<Function*> functionProgram);
+        void resolveScopeVariables(std::vector<Declaration*> declProgramme, std::vector<Declaration*> paramFunction, std::vector<Declaration*> declBloc, std::vector<Function*> functionProgram);
 
-    void resolveTypeExpr();
+        void resolveTypeExpr();
 
-    Initialisation(const Initialisation &unInitialisation);
+        Initialisation(const Initialisation &unInitialisation);
 
-    Initialisation(Type type, Expression* expression, std::string name);
+        Initialisation(Type type, Expression* expression, std::string name);
 
-    virtual ~Initialisation();
+        virtual ~Initialisation();
 
-protected:
-    Expression* expression;
+    protected:
 
+        Expression* expression;
 };

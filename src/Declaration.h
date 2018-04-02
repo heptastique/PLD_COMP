@@ -1,48 +1,56 @@
 #pragma once
 
-#include "Type.h"
-#include <string>
-#include "Instruction.h"
+# include "Type.h"
+# include "Instruction.h"
 # include "IRVariable.h"
+
+# include <string>
 
 class IRVariable;
 
-class Declaration : public Instruction {
+class Declaration : public Instruction 
+{
+    public:
 
-public:
+        void generateIR(ControlFlowGraph * controlFlowGraph);
+
+        void print(std::ostream& stream) const;
 
 	std::string generateIR(ControlFlowGraph * controlFlowGraph);
 
-    void print(std::ostream& stream) const;
+        friend std::ostream& operator<< (std::ostream& stream, const Declaration& declaration);
 
-    friend std::ostream& operator<< (std::ostream& stream, const Declaration& declaration);
+        Declaration &operator=(const Declaration &unDeclaration);
 
-    Declaration &operator=(const Declaration &unDeclaration);
+        void resolveScopeVariables(std::vector<Declaration*> declProgramme, std::vector<Declaration*> paramFunction, std::vector<Declaration*> declBloc, std::vector<Function*> functionProgram);
 
-    void resolveScopeVariables(std::vector<Declaration*> declProgramme, std::vector<Declaration*> paramFunction, std::vector<Declaration*> declBloc, std::vector<Function*> functionProgram);
+        void resolveTypeExpr();
 
-    void resolveTypeExpr();
+        void setType(Type type);
 
-	void setIRVariable(IRVariable);
+        Type getType();
 
-	IRVariable getIRVariable();
+        void setIRVariable(IRVariable);
 
-    void setType(Type type);
+        IRVariable getIRVariable();
 
-    Type getType();
+        void setType(Type type);
 
-    std::string getName();
+        std::string getName();
 
-    Declaration();
+        Declaration();
 
-    Declaration(const Declaration &unDeclaration);
+        Declaration(const Declaration &unDeclaration);
 
-    Declaration(std::string name, Type type);
+        Declaration(std::string name, Type type);
 
-    virtual ~Declaration();
+        virtual ~Declaration();
 
-protected:
-    Type type;
-    std::string name;
-	IRVariable iRVariable;
+    protected:
+
+        Type type;
+
+        std::string name;
+
+        IRVariable iRVariable;
 };

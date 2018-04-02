@@ -2,27 +2,29 @@
 
 #include "Variable.h"
 
-class VariableOpe : public Variable {
+class VariableOpe : public Variable
+{
+    public:
 
-public:
+        void generateIR(ControlFlowGraph * controlFlowGraph);
 
-    std::string generateIR(ControlFlowGraph * controlFlowGraph);
+        void print(std::ostream& stream) const;
 
-    void print(std::ostream& stream) const;
+        std::string generateIR(ControlFlowGraph * controlFlowGraph);
 
-    friend std::ostream& operator<< (std::ostream& stream, const VariableOpe& variableOpe);
+        friend std::ostream& operator<< (std::ostream& stream, const VariableOpe& variableOpe);
 
-    VariableOpe &operator=(const VariableOpe &unVariableOpe);
+        VariableOpe &operator=(const VariableOpe &unVariableOpe);
 
-    void resolveScopeVariables(std::vector<Declaration*> declProgramme, std::vector<Declaration*> paramFunction, std::vector<Declaration*> declBloc, std::vector<Function*> functionProgram);
+        void resolveScopeVariables(std::vector<Declaration*> declProgramme, std::vector<Declaration*> paramFunction, std::vector<Declaration*> declBloc, std::vector<Function*> functionProgram);
 
-    void resolveTypeExpr();
+        void resolveTypeExpr();
 
-    VariableOpe(TypeVariable typeVariable, std::string valeur, PrePos ope);
+        VariableOpe(TypeVariable typeVariable, std::string valeur, PrePos ope);
 
-    virtual ~VariableOpe();
+        virtual ~VariableOpe();
 
-private:
-    PrePos ope;
+    private:
 
+        PrePos ope;
 };

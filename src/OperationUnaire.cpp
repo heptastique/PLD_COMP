@@ -25,7 +25,6 @@ std::ostream& operator<<(std::ostream& stream, const OperationUnaire& operationU
     return stream;
 }
 
-
 OperationUnaire &OperationUnaire::operator=(const OperationUnaire &unOperationUnaire) {
 }
 
@@ -57,7 +56,6 @@ OperationUnaire::OperationUnaire(const OperationUnaire &unOperationUnaire) {
 #endif
 }
 
-
 OperationUnaire::OperationUnaire(Operateur operateur, Expression* expression) {
     this->operateur = operateur;
     this->expression = expression;
@@ -65,7 +63,6 @@ OperationUnaire::OperationUnaire(Operateur operateur, Expression* expression) {
     cout << "Appel au constructeur de <OperationUnaire>" << endl;
 #endif
 }
-
 
 OperationUnaire::~OperationUnaire() {
 #ifdef MAP

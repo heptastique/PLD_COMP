@@ -45,13 +45,11 @@ void If::setElse(Else *anElse) {
 If &If::operator=(const If &unIf) {
 }
 
-
 If::If(const If &unIf) {
 #ifdef MAP
     cout << "Appel au constructeur de copie de <If>" << endl;
 #endif
 }
-
 
 If::If(Expression* condition, Bloc* bloc) {
     this->condition = condition;
@@ -60,7 +58,6 @@ If::If(Expression* condition, Bloc* bloc) {
     cout << "Appel au constructeur de <If>" << endl;
 #endif
 }
-
 
 If::~If() {
 #ifdef MAP
