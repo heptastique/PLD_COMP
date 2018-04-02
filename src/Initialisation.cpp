@@ -23,7 +23,7 @@ std::ostream& operator<<(std::ostream& stream, const Initialisation& initialisat
 
 Initialisation &Initialisation::operator=(const Initialisation &unInitialisation)
 {
-
+    //
 }
 
 void Initialisation::resolveScopeVariables(std::vector<Declaration*> declProgramme, std::vector<Declaration*> paramFunction, std::vector<Declaration*> declBloc, std::vector<Function*> functionProgram)

@@ -5,10 +5,9 @@
 class DeclarationTab : public Declaration
 {
     public:
-
         std::string generateIR(ControlFlowGraph * controlFlowGraph);
 
-        void print(std::ostream & stream) const;
+        void print(std::ostream& stream) const;
 
         friend std::ostream& operator<< (std::ostream& stream, const DeclarationTab& declarationTab);
 
@@ -24,6 +23,5 @@ class DeclarationTab : public Declaration
         virtual ~DeclarationTab();
 
     protected:
-
         std::string size;
 };

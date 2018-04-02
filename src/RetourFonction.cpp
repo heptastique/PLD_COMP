@@ -13,35 +13,43 @@ std::ostream& operator<<(std::ostream& stream, const RetourFonction& retourFonct
 {
     stream << " RetourFonction: " << *retourFonction.expression;
     stream << endl;
+    
     return stream;
 }
 
-RetourFonction &RetourFonction::operator=(const RetourFonction &unRetourFonction) {
+RetourFonction &RetourFonction::operator=(const RetourFonction &unRetourFonction)
+{
 }
 
-void RetourFonction::resolveScopeVariables(std::vector<Declaration*> declProgramme, std::vector<Declaration*> paramFunction, std::vector<Declaration*> declBloc, std::vector<Function*> functionProgram){
+void RetourFonction::resolveScopeVariables(std::vector<Declaration*> declProgramme, std::vector<Declaration*> paramFunction, std::vector<Declaration*> declBloc, std::vector<Function*> functionProgram)
+{
     this->expression->resolveScopeVariables(declProgramme, paramFunction, declBloc, functionProgram);
 }
 
-void RetourFonction::resolveTypeExpr(){
+void RetourFonction::resolveTypeExpr()
+{
     this->expression->resolveTypeExpr();
 }
 
-RetourFonction::RetourFonction(const RetourFonction &unRetourFonction) {
-#ifdef MAP
-    cout << "Appel au constructeur de copie de <RetourFonction>" << endl;
-#endif
+RetourFonction::RetourFonction(const RetourFonction &unRetourFonction)
+{
+    #ifdef MAP
+        cout << "Appel au constructeur de copie de <RetourFonction>" << endl;
+    #endif
 }
 
-RetourFonction::RetourFonction(Expression* expression) {
+RetourFonction::RetourFonction(Expression* expression)
+{
+    #ifdef MAP
+        cout << "Appel au constructeur de <RetourFonction>" << endl;
+    #endif
+
     this->expression = expression;
-#ifdef MAP
-    cout << "Appel au constructeur de <RetourFonction>" << endl;
-#endif
 }
 
-RetourFonction::~RetourFonction() {
-#ifdef MAP
-    cout << "Appel au destructeur de <RetourFonction>" << endl;
-#endif
+RetourFonction::~RetourFonction()
+{
+    #ifdef MAP
+        cout << "Appel au destructeur de <RetourFonction>" << endl;
+    #endif
 }

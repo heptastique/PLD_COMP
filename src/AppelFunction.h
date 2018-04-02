@@ -5,7 +5,8 @@
 #include "Function.h"
 #include <vector>
 
-class AppelFunction : public Expression {
+class AppelFunction : public Expression
+{
     public:
 
 	std::string generateIR(ControlFlowGraph * controlFlowGraph);
@@ -31,5 +32,5 @@ class AppelFunction : public Expression {
     private:
         std::string name;
         std::vector<Variable *> variables;
-        Function* functionAssociee = nullptr;
+        Function * functionAssociee = nullptr;
 };

@@ -3,7 +3,8 @@
 #include "Instruction.h"
 #include "Bloc.h"
 
-class Else {
+class Else
+{
     public:
         void print(std::ostream& stream) const;
 

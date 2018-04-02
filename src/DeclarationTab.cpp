@@ -17,12 +17,13 @@ std::ostream& operator<<(std::ostream& stream, const DeclarationTab& declaration
 {
     stream << " DeclarationTab: Name=" << declarationtTab.name << " Type=" << declarationtTab.type;
     stream << " Size=" << declarationtTab.size << endl;
+    
     return stream;
 }
 
 DeclarationTab &DeclarationTab::operator=(const DeclarationTab &unDeclarationTab)
 {
-
+    //
 }
 
 DeclarationTab::DeclarationTab(std::string name, Type type, std::string size):Declaration(name, type)
@@ -30,10 +31,12 @@ DeclarationTab::DeclarationTab(std::string name, Type type, std::string size):De
     #ifdef MAP
         cout << "Appel au constructeur de <DeclarationTab>" << endl;
     #endif
+
     this->size = size;
 }
 
-DeclarationTab::~DeclarationTab() {
+DeclarationTab::~DeclarationTab()
+{
     #ifdef MAP
         cout << "Appel au destructeur de <DeclarationTab>" << endl;
     #endif

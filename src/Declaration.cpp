@@ -36,7 +36,9 @@ void Declaration::resolveScopeVariables(std::vector<Declaration*> declProgramme,
     //iRVariable = IRVariable(name, declBloc.size() * 8);
 }
 
-void Declaration::resolveTypeExpr(){
+void Declaration::resolveTypeExpr()
+{
+    //
 }
 
 void Declaration::setType(Type type)

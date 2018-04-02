@@ -89,13 +89,14 @@ void Programme::resolveScopeVariables()
                 ErrorHandling::ThrowError(103,0, declaration2->getName());
             }
 
+            
             ++it2;
         }
     }
-
+    
     // test if 2 functions share the same name
     vector<Function*>::iterator itfunction;
-
+    
     for(itfunction = this->functions.begin(); itfunction!=this->functions.end(); ++itfunction)
     {
         auto itfunction2 = itfunction;
@@ -131,7 +132,7 @@ void Programme::resolveTypeExpr()
 
 Programme & Programme::operator=(const Programme & programme)
 {
-
+    //
 }
 
 Programme::Programme(const Programme & programme)

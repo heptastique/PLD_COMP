@@ -51,7 +51,9 @@ void Affectation::print(std::ostream &stream) const
     if(VariableIndex *var= dynamic_cast<VariableIndex*>(variable))
     {
         stream << " Affectation: " << *var << " Operateur=" << operateur << " " << *expression << endl;
-    }else{
+    }
+    else
+    {
         stream << " Affectation: " << *variable << " Operateur=" << operateur << " " << *expression << endl;
     }
 }
@@ -63,35 +65,43 @@ std::ostream& operator<<(std::ostream& stream, const Affectation& affectation)
     return stream;
 }
 
-Affectation &Affectation::operator=(const Affectation &unAffectation) {
+Affectation &Affectation::operator=(const Affectation &unAffectation)
+{
+    //
 }
 
-void Affectation::resolveScopeVariables(std::vector<Declaration *> declProgramme, std::vector<Declaration *> paramFunction, std::vector<Declaration *> declBloc, std::vector<Function*> functionProgram) {
+void Affectation::resolveScopeVariables(std::vector<Declaration *> declProgramme, std::vector<Declaration *> paramFunction, std::vector<Declaration *> declBloc, std::vector<Function*> functionProgram)
+{
     this->variable->resolveScopeVariables(declProgramme,paramFunction,declBloc, functionProgram);
     this->expression->resolveScopeVariables(declProgramme,paramFunction,declBloc, functionProgram);
 }
 
-void Affectation::resolveTypeExpr(){
+void Affectation::resolveTypeExpr()
+{
     this->expression->resolveTypeExpr();
 }
 
-Affectation::Affectation(const Affectation &unAffectation) {
-#ifdef MAP
-    cout << "Appel au constructeur de copie de <Affectation>" << endl;
-#endif
+Affectation::Affectation(const Affectation &unAffectation)
+{
+    #ifdef MAP
+        cout << "Appel au constructeur de copie de <Affectation>" << endl;
+    #endif
 }
 
-Affectation::Affectation(Variable *variable, Operateur operateur, Expression *expression) {
+Affectation::Affectation(Variable *variable, Operateur operateur, Expression *expression)
+{
+    #ifdef MAP
+        cout << "Appel au constructeur de <Affectation>" << endl;
+    #endif
+
     this->variable = variable;
     this->operateur = operateur;
     this->expression = expression;
-#ifdef MAP
-    cout << "Appel au constructeur de <Affectation>" << endl;
-#endif
 }
 
-Affectation::~Affectation() {
-#ifdef MAP
-    cout << "Appel au destructeur de <Affectation>" << endl;
-#endif
+Affectation::~Affectation()
+{
+    #ifdef MAP
+        cout << "Appel au destructeur de <Affectation>" << endl;
+    #endif
 }

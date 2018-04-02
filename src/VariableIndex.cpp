@@ -16,6 +16,7 @@ void VariableIndex::print(std::ostream &stream) const
 std::ostream& operator<<(std::ostream& stream, const VariableIndex& variableIndex)
 {
     stream << " VariableIndex: " << "Type=" << variableIndex.typeVariable << " Valeur=" << variableIndex.valeur << " Tab=" << *variableIndex.index ;
+    
     return stream;
 }
 
@@ -33,10 +34,10 @@ void VariableIndex::resolveTypeExpr()
 
 VariableIndex &VariableIndex::operator=(const VariableIndex &unVariableIndex)
 {
-
+    //
 }
 
-VariableIndex::VariableIndex(TypeVariable typeVariable, std::string valeur, Expression* index): Variable(typeVariable, valeur)
+VariableIndex::VariableIndex(TypeVariable typeVariable, std::string valeur, Expression* index): Variable(typeVariable, valeur) 
 {
     #ifdef MAP
         cout << "Appel au constructeur de <VariableIndex>" << endl;

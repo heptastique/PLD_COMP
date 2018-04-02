@@ -40,9 +40,11 @@ void Variable::print(std::ostream &stream) const
 std::ostream& operator<<(std::ostream& stream, const Variable& variable)
 {
     stream << " Variable: " << "Type=" << variable.typeVariable << " Valeur=" << variable.valeur << " ";
+    
     return stream;
 }
 
+<<<<<<< HEAD
 Declaration * Variable::getDeclaration()
 {
         return declarationAssociee;
@@ -53,6 +55,11 @@ Variable & Variable::operator=(const Variable & variable)
         typeVariable = variable.typeVariable;
         valeur = variable.valeur;
        declarationAssociee = variable.declarationAssociee;
+=======
+Variable &Variable::operator=(const Variable &unVariable)
+{
+    //
+>>>>>>> Formatting_End
 }
 
 void Variable::resolveScopeVariables(std::vector<Declaration*> declProgramme, std::vector<Declaration*> paramFunction, std::vector<Declaration*> declBloc, std::vector<Function*> functionProgram)
@@ -60,7 +67,11 @@ void Variable::resolveScopeVariables(std::vector<Declaration*> declProgramme, st
     if (this->typeVariable == NAME)
     {
         bool notfound = true;
+<<<<<<< HEAD
 
+=======
+        
+>>>>>>> Formatting_End
         for (auto decl : declBloc)
         {
             if (decl->getName().compare(this->valeur) == 0)
@@ -71,7 +82,11 @@ void Variable::resolveScopeVariables(std::vector<Declaration*> declProgramme, st
                 break;
             }
         }
+<<<<<<< HEAD
 
+=======
+        
+>>>>>>> Formatting_End
         if (notfound)
         {
             for (auto decl : paramFunction)
@@ -85,8 +100,11 @@ void Variable::resolveScopeVariables(std::vector<Declaration*> declProgramme, st
                 }
             }
         }
-        if (notfound) {
-            for (auto decl : declProgramme) {
+        
+        if (notfound)
+        {
+            for (auto decl : declProgramme)
+            {
                 cout << decl <<endl;
                 if (decl->getName().compare(this->valeur) == 0)
                 {
@@ -97,6 +115,7 @@ void Variable::resolveScopeVariables(std::vector<Declaration*> declProgramme, st
                 }
             }
         }
+
         if (notfound)
         {
             ErrorHandling::ThrowError(104, 0, this->valeur);
@@ -107,6 +126,7 @@ void Variable::resolveScopeVariables(std::vector<Declaration*> declProgramme, st
 void Variable::resolveTypeExpr()
 {
     cout << declarationAssociee << endl;
+
     if ( this->typeVariable == NAME)
     {
         if (this->declarationAssociee != nullptr)

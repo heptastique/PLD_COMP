@@ -7,7 +7,8 @@ void ErrorHandling::ThrowError(int code, int line, string name)
 {
     cout << "Ligne " << line << " - Erreur " << code << " : ";
 
-    switch(code) {
+    switch(code)
+    {
         // Semantic errors
         case 101:
             cout << "Déclaration de la variable " << name << " déjà existante dans le bloc de la fonction" << endl;

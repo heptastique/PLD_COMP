@@ -48,7 +48,7 @@ void InitialisationTab::resolveTypeExpr()
 
 InitialisationTab &InitialisationTab::operator=(const InitialisationTab &unInitialisationTab)
 {
-
+    //
 }
 
 InitialisationTab::InitialisationTab(Type type,std::string name, std::vector<Variable*> variables) : DeclarationTab(name,type,to_string(variables.size()))

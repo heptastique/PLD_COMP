@@ -16,10 +16,13 @@ void VariableOpe::print(std::ostream &stream) const
 std::ostream& operator<<(std::ostream& stream, const VariableOpe& variableOpe)
 {
     stream << " VariableOpe: " << "Type=" << variableOpe.typeVariable << " Valeur=" << variableOpe.valeur << " Ope=" << variableOpe.ope << endl;
+    
     return stream;
 }
 
-VariableOpe &VariableOpe::operator=(const VariableOpe &unVariableOpe) {
+VariableOpe &VariableOpe::operator=(const VariableOpe &unVariableOpe)
+{
+    //
 }
 
 void VariableOpe::resolveScopeVariables(std::vector<Declaration*> declProgramme, std::vector<Declaration*> paramFunction, std::vector<Declaration*> declBloc, std::vector<Function*> functionProgram)

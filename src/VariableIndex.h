@@ -23,6 +23,5 @@ class VariableIndex : public Variable
         virtual ~VariableIndex();
 
     private:
-
         Expression* index;
 };

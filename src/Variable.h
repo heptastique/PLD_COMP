@@ -6,11 +6,10 @@
 #include "ControlFlowGraph.h"
 #include "Declaration.h"
 
-class Variable : public Expression
+class Variable : public Expression 
 {
     public:
-
-	virtual std::string generateIR(ControlFlowGraph * controlFlowGraph);
+        virtual std::string generateIR(ControlFlowGraph * controlFlowGraph);
 
         void print(std::ostream& stream) const;
 
@@ -41,10 +40,7 @@ class Variable : public Expression
         virtual ~Variable();
 
     protected:
-
         TypeVariable typeVariable;
-
         std::string valeur;
-
         Declaration * declarationAssociee = nullptr;
 };
