@@ -8,11 +8,9 @@
 
 class IRVariable;
 
-class Declaration : public Instruction 
+class Declaration : public Instruction
 {
     public:
-
-        void generateIR(ControlFlowGraph * controlFlowGraph);
 
         void print(std::ostream& stream) const;
 
@@ -33,8 +31,6 @@ class Declaration : public Instruction
         void setIRVariable(IRVariable);
 
         IRVariable getIRVariable();
-
-        void setType(Type type);
 
         std::string getName();
 

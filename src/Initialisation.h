@@ -9,8 +9,6 @@ class Initialisation : public Declaration
 {
     public:
 
-        void generateIR(ControlFlowGraph * controlFlowGraph);
-
         void print(std::ostream& stream) const;
 
         std::string generateIR(ControlFlowGraph * controlFlowGraph);

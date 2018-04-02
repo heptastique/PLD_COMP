@@ -1,16 +1,16 @@
 using namespace std;
 
 #include "InitialisationTab.h"
-#include <iostream>
 
 string InitialisationTab::generateIR(ControlFlowGraph * controlFlowGraph)
 {
     return "";
 }
 
-void InitialisationTab::print(std::ostream &stream) const
+void InitialisationTab::print(std::ostream & stream) const
 {
     stream << " InitialisationTab: Type=" << type << " Name=" << name << " Size=" << size;
+
     for(auto var : variables)
     {
         stream << *var;

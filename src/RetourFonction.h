@@ -8,8 +8,6 @@ class RetourFonction : public Instruction
 {
     public:
 
-        void generateIR(ControlFlowGraph * controlFlowGraph){};
-
         std::string generateIR(ControlFlowGraph * controlFlowGraph)
         {
             return "";

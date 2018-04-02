@@ -4,9 +4,9 @@
 #include "Variable.h"
 #include "Expression.h"
 
-class Affectation : public Instruction{
+class Affectation : public Instruction
+{
     public:
-        void generateIR(ControlFlowGraph * controlFlowGraph);
 
         void print(std::ostream& stream) const;
 
@@ -27,7 +27,10 @@ class Affectation : public Instruction{
         virtual ~Affectation();
 
     private:
+
         Variable* variable;
+
         Operateur operateur;
+
         Expression* expression;
 };

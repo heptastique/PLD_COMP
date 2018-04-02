@@ -18,7 +18,6 @@ class IRVariable;
 class ControlFlowGraph
 {
     public:
-        void addIRInstr(IRInstr iRInstr);
 
         vector <BasicBlock*> getBasicBlocks() const;
 

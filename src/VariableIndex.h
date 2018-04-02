@@ -6,8 +6,6 @@ class VariableIndex : public Variable
 {
     public:
 
-        void generateIR(ControlFlowGraph * controlFlowGraph);
-
         void print(std::ostream& stream) const;
 
         std::string generateIR(ControlFlowGraph * controlFlowGraph);
