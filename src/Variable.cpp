@@ -44,22 +44,16 @@ std::ostream& operator<<(std::ostream& stream, const Variable& variable)
     return stream;
 }
 
-<<<<<<< HEAD
 Declaration * Variable::getDeclaration()
 {
-        return declarationAssociee;
+    return declarationAssociee;
 }
 
 Variable & Variable::operator=(const Variable & variable)
 {
-        typeVariable = variable.typeVariable;
-        valeur = variable.valeur;
-       declarationAssociee = variable.declarationAssociee;
-=======
-Variable &Variable::operator=(const Variable &unVariable)
-{
-    //
->>>>>>> Formatting_End
+    typeVariable = variable.typeVariable;
+    valeur = variable.valeur;
+    declarationAssociee = variable.declarationAssociee;
 }
 
 void Variable::resolveScopeVariables(std::vector<Declaration*> declProgramme, std::vector<Declaration*> paramFunction, std::vector<Declaration*> declBloc, std::vector<Function*> functionProgram)
@@ -67,11 +61,7 @@ void Variable::resolveScopeVariables(std::vector<Declaration*> declProgramme, st
     if (this->typeVariable == NAME)
     {
         bool notfound = true;
-<<<<<<< HEAD
 
-=======
-        
->>>>>>> Formatting_End
         for (auto decl : declBloc)
         {
             if (decl->getName().compare(this->valeur) == 0)
@@ -82,11 +72,7 @@ void Variable::resolveScopeVariables(std::vector<Declaration*> declProgramme, st
                 break;
             }
         }
-<<<<<<< HEAD
 
-=======
-        
->>>>>>> Formatting_End
         if (notfound)
         {
             for (auto decl : paramFunction)
