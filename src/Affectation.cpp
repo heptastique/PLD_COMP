@@ -29,6 +29,11 @@ string Affectation::generateIR(ControlFlowGraph * controlFlowGraph)
             right = var->generateIR(controlFlowGraph);
         }
 */
+	if (VariableIndex * varIndex = dynamic_cast<VariableIndex*>(variable))
+	{
+		return "nop";
+	}
+
 	IRVariable iRVariable = controlFlowGraph->getVariable("VAR." + variable->getValeur());
 
 	controlFlowGraph->addIRInstr(IRInstr(STACK_STORE, {var->getValeur(), to_string(iRVariable.getOffset())}));
