@@ -7,7 +7,6 @@
 class RetourFonction : public Instruction
 {
     public:
-
         std::string generateIR(ControlFlowGraph * controlFlowGraph)
         {
             return "";
@@ -30,6 +29,5 @@ class RetourFonction : public Instruction
         virtual ~RetourFonction();
 
     private:
-
         Expression* expression;
 };

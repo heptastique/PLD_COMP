@@ -1,9 +1,9 @@
 using namespace std;
 
-# include "Declaration.h"
-# include "ControlFlowGraph.h"
+#include "Declaration.h"
+#include "ControlFlowGraph.h"
 
-# include <iostream>
+#include <iostream>
 
 string Declaration::generateIR(ControlFlowGraph * controlFlowGraph)
 {

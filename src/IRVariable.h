@@ -1,21 +1,19 @@
 
-# include <string>
+#include <string>
 
 using namespace std;
 
 class IRVariable
 {
-	public :
+    public:
+        int getOffset();
 
-		int getOffset();
+        IRVariable();
+        IRVariable(string name, int offset);
+        IRVariable(const IRVariable & iRVariable);
+        ~IRVariable();
 
-		IRVariable();
-		IRVariable(string name, int offset);
-		IRVariable(const IRVariable & iRVariable);
-		~IRVariable();
-
-	protected :
-
-		string name;
-		int offset; // position dans la pile par rapport à rsp
+    protected:
+        string name;
+        int offset; // position dans la pile par rapport à rsp
 };

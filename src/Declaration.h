@@ -1,20 +1,19 @@
 #pragma once
 
-# include "Type.h"
-# include "Instruction.h"
-# include "IRVariable.h"
+#include "Type.h"
+#include "Instruction.h"
+#include "IRVariable.h"
 
-# include <string>
+#include <string>
 
 class IRVariable;
 
 class Declaration : public Instruction
 {
     public:
-
         void print(std::ostream& stream) const;
 
-	std::string generateIR(ControlFlowGraph * controlFlowGraph);
+        std::string generateIR(ControlFlowGraph * controlFlowGraph);
 
         friend std::ostream& operator<< (std::ostream& stream, const Declaration& declaration);
 
@@ -43,7 +42,6 @@ class Declaration : public Instruction
         virtual ~Declaration();
 
     protected:
-
         Type type;
 
         std::string name;

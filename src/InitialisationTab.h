@@ -1,16 +1,15 @@
 # pragma once
 
-# include "DeclarationTab.h"
-# include "Variable.h"
-# include <vector>
-# include <iostream>
+#include "DeclarationTab.h"
+#include "Variable.h"
+#include <vector>
+#include <iostream>
 
 using namespace std;
 
 class InitialisationTab : public DeclarationTab
 {
     public:
-
         string generateIR(ControlFlowGraph * controlFlowGraph);
 
         void print(ostream & stream) const;
@@ -28,7 +27,6 @@ class InitialisationTab : public DeclarationTab
         virtual ~InitialisationTab();
 
     private:
-
         // There could be no size
         vector <Variable*> variables;
 };

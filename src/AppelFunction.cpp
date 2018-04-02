@@ -29,9 +29,9 @@ string AppelFunction::generateIR(ControlFlowGraph * controlFlowGraph)
     params.push_back(name);
     params.push_back("r0");
 
-	IRInstr iRInstr(FUNCTION_CALL, params);*/
+    IRInstr iRInstr(FUNCTION_CALL, params);*/
 
-	return "";
+    return "";
 }
 
 void AppelFunction::print(std::ostream &stream) const

@@ -12,7 +12,7 @@ string ControlFlowGraph::createNewVariable(string name)
 
     variableMap.insert(pair <string, IRVariable> (variableName, iRVariable));
 
-   return variableName;
+    return variableName;
 }
 
 string ControlFlowGraph::createNewTemp()
@@ -123,12 +123,11 @@ void ControlFlowGraph::generateASM(ostream & os) const
                     break;
                 }
                 case STACK_STORE :
-		{
+                {
                     os << "\tmovl\t$" << iRInstr.getParam(0) << ", -" << iRInstr.getParam(1) << "(%rsp)\n";
 
                     break;
                 }
-
             }
         }
     }

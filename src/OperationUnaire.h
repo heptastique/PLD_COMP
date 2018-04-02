@@ -6,7 +6,6 @@
 class OperationUnaire : public Expression
 {
     public:
-
         friend std::ostream& operator<< (std::ostream& stream, const OperationUnaire& operationUnaire);
 
         std::string generateIR(ControlFlowGraph * controlFlowGraph);
@@ -26,7 +25,6 @@ class OperationUnaire : public Expression
         virtual ~OperationUnaire();
 
     private:
-
         Operateur operateur;
 
         Expression* expression;

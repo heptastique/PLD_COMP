@@ -8,8 +8,7 @@
 class AppelFunction : public Expression
 {
     public:
-
-	std::string generateIR(ControlFlowGraph * controlFlowGraph);
+        std::string generateIR(ControlFlowGraph * controlFlowGraph);
 
         friend std::ostream& operator<< (std::ostream& stream, const AppelFunction& appelFunction);
 

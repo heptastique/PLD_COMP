@@ -5,7 +5,6 @@
 class VariableOpe : public Variable
 {
     public:
-
         void print(std::ostream& stream) const;
 
         std::string generateIR(ControlFlowGraph * controlFlowGraph);
@@ -23,6 +22,5 @@ class VariableOpe : public Variable
         virtual ~VariableOpe();
 
     private:
-
         PrePos ope;
 };

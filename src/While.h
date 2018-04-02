@@ -7,7 +7,6 @@
 class While : public Instruction
 {
     public:
-
         void print(std::ostream& stream) const;
 
         std::string generateIR(ControlFlowGraph * controlFlowGraph);
@@ -27,7 +26,6 @@ class While : public Instruction
         virtual ~While();
 
     private:
-
         Bloc* bloc;
 
         Expression* condition;

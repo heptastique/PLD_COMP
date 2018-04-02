@@ -8,7 +8,6 @@
 class If : public Instruction
 {
     public:
-
         void print(std::ostream& stream) const;
 
         std::string generateIR(ControlFlowGraph * controlFlowGraph);
@@ -30,7 +29,6 @@ class If : public Instruction
         virtual ~If();
 
     private:
-
         Expression* condition;
 
         Bloc* bloc;

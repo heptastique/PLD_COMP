@@ -1,12 +1,12 @@
 #pragma once
 
-# include "BasicBlock.h"
-# include "IRInstr.h"
-# include "Programme.h"
-//# include "IRVariable.h"
-# include <vector>
-# include <iostream>
-# include <map>
+#include "BasicBlock.h"
+#include "IRInstr.h"
+#include "Programme.h"
+//#include "IRVariable.h"
+#include <vector>
+#include <iostream>
+#include <map>
 
 using namespace std;
 
@@ -18,7 +18,6 @@ class IRVariable;
 class ControlFlowGraph
 {
     public:
-
         vector <BasicBlock*> getBasicBlocks() const;
 
         string createNewVariable(string name);
@@ -46,16 +45,15 @@ class ControlFlowGraph
         virtual ~ControlFlowGraph();
 
     private:
-
         Programme * programme;
 
         BasicBlock * currentBasicBlock;
 
         vector <BasicBlock*> basicBlocks;
 
-	map <string, IRVariable> variableMap;
+        map <string, IRVariable> variableMap;
 
-	int nbTemp;
+        int nbTemp;
 
-	int lastOffset = 8;
+        int lastOffset = 8;
 };

@@ -10,11 +10,9 @@ class ControlFlowGraph;
 class Instruction
 {
     protected:
-
         virtual void print(std::ostream& stream) const = 0;
 
     public:
-
         virtual std::string generateIR(ControlFlowGraph * controlFlowGraph) = 0;
 
         friend std::ostream& operator<< (std::ostream& stream, Instruction const& instruction);

@@ -9,7 +9,7 @@ class Affectation : public Instruction
     public:
         void print(std::ostream& stream) const;
 
-	std::string generateIR(ControlFlowGraph * controlFlowGraph);
+        std::string generateIR(ControlFlowGraph * controlFlowGraph);
 
         friend std::ostream& operator<< (std::ostream& stream, const Affectation& affectation);
 

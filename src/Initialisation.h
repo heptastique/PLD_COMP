@@ -8,7 +8,6 @@
 class Initialisation : public Declaration
 {
     public:
-
         void print(std::ostream& stream) const;
 
         std::string generateIR(ControlFlowGraph * controlFlowGraph);
@@ -28,6 +27,5 @@ class Initialisation : public Declaration
         virtual ~Initialisation();
 
     protected:
-
         Expression* expression;
 };
