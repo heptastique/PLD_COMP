@@ -5,6 +5,7 @@ using namespace std;
 
 void VariableIndex::generateIR(ControlFlowGraph * controlFlowGraph)
 {
+    //
 }
 
 void VariableIndex::print(std::ostream &stream) const
@@ -15,6 +16,7 @@ void VariableIndex::print(std::ostream &stream) const
 std::ostream& operator<<(std::ostream& stream, const VariableIndex& variableIndex)
 {
     stream << " VariableIndex: " << "Type=" << variableIndex.typeVariable << " Valeur=" << variableIndex.valeur << " Tab=" << *variableIndex.index ;
+    
     return stream;
 }
 
@@ -24,23 +26,29 @@ void VariableIndex::resolveScopeVariables(std::vector<Declaration*> declProgramm
     this->index->resolveScopeVariables(declProgramme, paramFunction, declBloc, functionProgram);
 }
 
-void VariableIndex::resolveTypeExpr(){
+void VariableIndex::resolveTypeExpr()
+{
     Variable::resolveTypeExpr();
     this->index->resolveTypeExpr();
 }
 
-VariableIndex &VariableIndex::operator=(const VariableIndex &unVariableIndex) {
+VariableIndex &VariableIndex::operator=(const VariableIndex &unVariableIndex)
+{
+    //
 }
 
-VariableIndex::VariableIndex(TypeVariable typeVariable, std::string valeur, Expression* index): Variable(typeVariable, valeur) {
+VariableIndex::VariableIndex(TypeVariable typeVariable, std::string valeur, Expression* index): Variable(typeVariable, valeur) 
+{
+    #ifdef MAP
+        cout << "Appel au constructeur de <VariableIndex>" << endl;
+    #endif
+
     this->index = index;
-#ifdef MAP
-    cout << "Appel au constructeur de <VariableIndex>" << endl;
-#endif
 }
 
-VariableIndex::~VariableIndex() {
-#ifdef MAP
-    cout << "Appel au destructeur de <VariableIndex>" << endl;
-#endif
+VariableIndex::~VariableIndex()
+{
+    #ifdef MAP
+        cout << "Appel au destructeur de <VariableIndex>" << endl;
+    #endif
 }

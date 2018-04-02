@@ -8,7 +8,8 @@
 
 //class ControlFlowGraph;
 
-class Declaration : public Instruction {
+class Declaration : public Instruction
+{
     public:
         void generateIR(ControlFlowGraph * controlFlowGraph);
 

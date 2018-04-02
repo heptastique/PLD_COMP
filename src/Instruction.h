@@ -7,7 +7,8 @@ class Declaration;
 class Function;
 class ControlFlowGraph;
 
-class Instruction {
+class Instruction
+{
     protected:
         virtual void print(std::ostream& stream) const = 0;
 

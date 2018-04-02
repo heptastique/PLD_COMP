@@ -8,7 +8,8 @@
 class ControlFlowGraph;
 class Function;
 
-class Bloc {
+class Bloc
+{
     public:
         void generateIR(ControlFlowGraph * controlFlowGraph);
 

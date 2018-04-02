@@ -5,7 +5,8 @@
 #include "Expression.h"
 #include <string>
 
-class Initialisation : public Declaration {
+class Initialisation : public Declaration
+{
     public:
         void generateIR(ControlFlowGraph * controlFlowGraph);
 

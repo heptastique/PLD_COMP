@@ -5,7 +5,8 @@
 #include "Else.h"
 #include "Expression.h"
 
-class If : public Instruction {
+class If : public Instruction
+{
     public:
         void generateIR(ControlFlowGraph * controlFlowGraph){};
 

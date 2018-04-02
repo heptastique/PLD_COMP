@@ -35,11 +35,14 @@ void AppelFunction::generateIR(ControlFlowGraph * controlFlowGraph)
 void AppelFunction::print(std::ostream &stream) const
 {
     stream << " AppelFunction: Name=" << name;
-    for (auto it : variables){
+    
+    for (auto it : variables)
+    {
         if(VariableIndex *varInd = dynamic_cast<VariableIndex*>(it))
         {
             stream << *varInd;
-        } else
+        }
+        else
         {
             if(VariableOpe *varOpe = dynamic_cast<VariableOpe*>(it))
             {
@@ -51,6 +54,7 @@ void AppelFunction::print(std::ostream &stream) const
             }
         }
     }
+    
     stream << endl;
 }
 
@@ -64,27 +68,39 @@ std::ostream& operator<<(std::ostream& stream, const AppelFunction& appelFunctio
     return stream;
 }
 
-AppelFunction &AppelFunction::operator=(const AppelFunction &unAppelFunction) {
+AppelFunction &AppelFunction::operator=(const AppelFunction &unAppelFunction) 
+{
+    //
 }
 
-void AppelFunction::resolveScopeVariables(std::vector<Declaration*> declProgramme, std::vector<Declaration*> paramFunction, std::vector<Declaration*> declBloc, std::vector<Function*> functionProgram){
+void AppelFunction::resolveScopeVariables(std::vector<Declaration*> declProgramme, std::vector<Declaration*> paramFunction, std::vector<Declaration*> declBloc, std::vector<Function*> functionProgram)
+{
     std::vector<Variable *> variables = getVariables();
-    for (auto variable : variables){
+    
+    for (auto variable : variables)
+    {
         variable->resolveScopeVariables(declProgramme,paramFunction,declBloc,functionProgram);
     }
-    for ( auto function : functionProgram){
-        if (function->getName().compare(this->name) == 0){
+    
+    for ( auto function : functionProgram)
+    {
+        if (function->getName().compare(this->name) == 0)
+        {
             this->functionAssociee = function;
             return;
         }
     }
-    if ( this->name.compare("putchar") != 0){
+    
+    if ( this->name.compare("putchar") != 0)
+    {
         ErrorHandling::ThrowError(106,0,this->name);
     }
 }
 
-void AppelFunction::resolveTypeExpr(){
-    if ( this->functionAssociee != nullptr){
+void AppelFunction::resolveTypeExpr()
+{
+    if ( this->functionAssociee != nullptr)
+    {
         this->setType(this->functionAssociee->getTypeRetour());
     }
     else
@@ -93,26 +109,31 @@ void AppelFunction::resolveTypeExpr(){
     }
 }
 
-vector <Variable *> AppelFunction::getVariables(){
+vector <Variable *> AppelFunction::getVariables()
+{
     return this->variables;
 }
 
-AppelFunction::AppelFunction(const AppelFunction &unAppelFunction) {
-#ifdef MAP
-    cout << "Appel au constructeur de copie de <AppelFunction>" << endl;
-#endif
+AppelFunction::AppelFunction(const AppelFunction &unAppelFunction)
+{
+    #ifdef MAP
+        cout << "Appel au constructeur de copie de <AppelFunction>" << endl;
+    #endif
 }
 
-AppelFunction::AppelFunction(std::string name, std::vector<Variable *> variables) {
+AppelFunction::AppelFunction(std::string name, std::vector<Variable *> variables)
+{
+    #ifdef MAP
+        cout << "Appel au constructeur de <AppelFunction>" << endl;
+    #endif
+
     this->name = name;
     this->variables = variables;
-#ifdef MAP
-    cout << "Appel au constructeur de <AppelFunction>" << endl;
-#endif
 }
 
-AppelFunction::~AppelFunction() {
-#ifdef MAP
-    cout << "Appel au destructeur de <AppelFunction>" << endl;
-#endif
+AppelFunction::~AppelFunction()
+{
+    #ifdef MAP
+        cout << "Appel au destructeur de <AppelFunction>" << endl;
+    #endif
 }

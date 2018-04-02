@@ -3,7 +3,8 @@
 #include "Expression.h"
 #include "Type.h"
 
-class OperationBinaire : public Expression {
+class OperationBinaire : public Expression
+{
     public:
         void generateIR(ControlFlowGraph * controlFlowGraph){};
 

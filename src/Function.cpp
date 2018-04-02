@@ -61,13 +61,18 @@ int Function::calculateAddressRangeSize()
 ostream & operator<<(ostream & stream, const Function & function)
 {
     stream << " Fonction: Name=" << function.name << " TypeRetour=" << function.typeRetour << endl;
-    if(!function.parameters.empty()){
+    
+    if(!function.parameters.empty())
+    {
         stream << "     Param:" << endl;
-        for (auto it : function.parameters){
+        
+        for (auto it : function.parameters)
+        {
             if(DeclarationTab *decla = dynamic_cast<DeclarationTab*>(it))
             {
                 stream << "     " << *decla;
-            } else
+            }
+            else
             {
                 stream << "     " << *it;
             }
@@ -81,6 +86,7 @@ ostream & operator<<(ostream & stream, const Function & function)
 
 Function & Function::operator=(const Function & function)
 {
+    
 }
 
 string Function::getName()
@@ -93,7 +99,8 @@ Bloc * Function::getBloc()
     return this->bloc;
 }
 
-Type Function::getTypeRetour (){
+Type Function::getTypeRetour ()
+{
     return this->typeRetour;
 }
 
@@ -110,22 +117,31 @@ std::vector<Declaration*> Function::getParameters()
 void Function::resolveScopeVariables(std::vector<Declaration*> declProgramme, std::vector<Function*> functionProgram)
 {
     vector<Declaration*>::iterator it;
-    for(it = this->parameters.begin(); it!=this->parameters.end(); ++it){
+    
+    for(it = this->parameters.begin(); it!=this->parameters.end(); ++it)
+    {
         auto it2 = it;
         ++it2;
-        while(it2!= this->parameters.end()) {
+        
+        while(it2!= this->parameters.end())
+        {
             Declaration *parameters = *it;
             Declaration *parameters2 = *it2;
-            if (parameters->getName().compare(parameters2->getName()) == 0) {
+            
+            if (parameters->getName().compare(parameters2->getName()) == 0)
+            {
                 ErrorHandling::ThrowError(102,0, parameters->getName());
             }
+            
             ++it2;
         }
     }
+    
     this->bloc->resolveScopeVariables(declProgramme, this->getParameters(), functionProgram);
 }
 
-void Function::resolveTypeExpr(){
+void Function::resolveTypeExpr()
+{
     this->bloc->resolveTypeExpr();
 }
 

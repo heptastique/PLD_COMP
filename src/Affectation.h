@@ -4,7 +4,8 @@
 #include "Variable.h"
 #include "Expression.h"
 
-class Affectation : public Instruction{
+class Affectation : public Instruction
+{
     public:
         void generateIR(ControlFlowGraph * controlFlowGraph);
 

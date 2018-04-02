@@ -4,7 +4,8 @@
 #include "Bloc.h"
 #include "Expression.h"
 
-class While : public Instruction {
+class While : public Instruction
+{
     public:
         void generateIR(ControlFlowGraph * controlFlowGraph){};
 

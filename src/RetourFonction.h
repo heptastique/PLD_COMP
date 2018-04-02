@@ -4,7 +4,8 @@
 #include "Instruction.h"
 #include "Variable.h"
 
-class RetourFonction : public Instruction{
+class RetourFonction : public Instruction
+{
     public:
         void generateIR(ControlFlowGraph * controlFlowGraph){};
 

@@ -38,7 +38,6 @@ class IRInstr
 
     private:
         ControlFlowGraph * controlFlowGraph;
-
         Mnemonique mnemonique;
         vector <string> params;
 };

@@ -72,48 +72,65 @@ vector <Declaration*> Programme::getDeclarations()
 void Programme::resolveScopeVariables()
 {
     vector<Declaration*>::iterator it;
-    for(it = this->declarations.begin(); it != this->declarations.end(); ++it){
+    
+    for(it = this->declarations.begin(); it != this->declarations.end(); ++it)
+    {
         vector<Declaration*>::iterator it2 = it;
         ++it2;
-        while(it2 != this->declarations.end()){
+        
+        while(it2 != this->declarations.end())
+        {
             Declaration * declaration = *it;
             Declaration * declaration2 = *it2;
+            
             if ( declaration->getName().compare(declaration2->getName()) == 0)
             {
                 ErrorHandling::ThrowError(103,0, declaration2->getName());
             }
+            
             ++it2;
         }
     }
+    
     // test if 2 functions share the same name
     vector<Function*>::iterator itfunction;
-    for(itfunction = this->functions.begin(); itfunction!=this->functions.end(); ++itfunction){
+    
+    for(itfunction = this->functions.begin(); itfunction!=this->functions.end(); ++itfunction)
+    {
         auto itfunction2 = itfunction;
         ++itfunction2;
-        while(itfunction2!= this->functions.end()){
+        
+        while(itfunction2!= this->functions.end())
+        {
             Function * function = *itfunction;
             Function * function2 = *itfunction2;
+            
             if ( function->getName().compare(function2->getName()) == 0)
             {
                 ErrorHandling::ThrowError(105,0, function2->getName());
             }
+            
             ++itfunction2;
         }
     }
 
-    for (auto function :  this->functions){
+    for (auto function :  this->functions)
+    {
         function->resolveScopeVariables(this->getDeclarations(), this->functions);
     }
 }
 
-void Programme::resolveTypeExpr(){
-    for (auto function :  this->functions){
+void Programme::resolveTypeExpr()
+{
+    for (auto function :  this->functions)
+    {
         function->resolveTypeExpr();
     }
 }
 
 Programme & Programme::operator=(const Programme & programme)
 {
+    //
 }
 
 Programme::Programme(const Programme & programme)

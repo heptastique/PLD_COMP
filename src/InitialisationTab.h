@@ -4,7 +4,8 @@
 #include "Variable.h"
 #include <vector>
 
-class InitialisationTab : public DeclarationTab {
+class InitialisationTab : public DeclarationTab
+{
     public:
         void generateIR(ControlFlowGraph * controlFlowGraph);
 

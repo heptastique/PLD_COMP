@@ -2,7 +2,8 @@
 
 #include "Variable.h"
 
-class VariableIndex : public Variable{
+class VariableIndex : public Variable
+{
     public:
         void generateIR(ControlFlowGraph * controlFlowGraph);
 
