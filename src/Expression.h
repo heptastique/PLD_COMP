@@ -7,7 +7,8 @@
 
 class ControlFlowGraph;
 
-class Expression : public Instruction {
+class Expression : public Instruction
+{
     protected:
         //virtual void generateIR(ControlFlowGraph * controlFlowGraph) = 0;
 

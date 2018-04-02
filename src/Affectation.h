@@ -4,11 +4,12 @@
 #include "Variable.h"
 #include "Expression.h"
 
-class Affectation : public Instruction{
+class Affectation : public Instruction
+{
     public:
-        void generateIR(ControlFlowGraph * controlFlowGraph);
-
         void print(std::ostream& stream) const;
+
+        std::string generateIR(ControlFlowGraph * controlFlowGraph);
 
         friend std::ostream& operator<< (std::ostream& stream, const Affectation& affectation);
 
@@ -26,6 +27,8 @@ class Affectation : public Instruction{
 
     private:
         Variable* variable;
+
         Operateur operateur;
+
         Expression* expression;
 };

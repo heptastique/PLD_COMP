@@ -1,18 +1,19 @@
 #pragma once
 
 #include "Type.h"
-//#include "ControlFlowGraph.h"
+#include "Instruction.h"
+#include "IRVariable.h"
 
 #include <string>
-#include "Instruction.h"
 
-//class ControlFlowGraph;
+class IRVariable;
 
-class Declaration : public Instruction {
+class Declaration : public Instruction
+{
     public:
-        void generateIR(ControlFlowGraph * controlFlowGraph);
-
         void print(std::ostream& stream) const;
+
+        std::string generateIR(ControlFlowGraph * controlFlowGraph);
 
         friend std::ostream& operator<< (std::ostream& stream, const Declaration& declaration);
 
@@ -26,6 +27,10 @@ class Declaration : public Instruction {
 
         Type getType();
 
+        void setIRVariable(IRVariable);
+
+        IRVariable getIRVariable();
+
         std::string getName();
 
         Declaration();
@@ -38,5 +43,8 @@ class Declaration : public Instruction {
 
     protected:
         Type type;
+
         std::string name;
+
+        //IRVariable iRVariable;
 };

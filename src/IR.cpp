@@ -21,7 +21,6 @@ void IR::addControlFlowGraph(ControlFlowGraph * controlFlowGraph)
 }
 
 vector <ControlFlowGraph*> IR::getControlFlowGraphs() const
-
 {
     return controlFlowGraphs;
 }

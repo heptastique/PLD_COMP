@@ -3,11 +3,12 @@
 #include "Expression.h"
 #include "Type.h"
 
-class OperationUnaire : public Expression{
+class OperationUnaire : public Expression
+{
     public:
-        void generateIR(ControlFlowGraph * controlFlowGraph){};
-
         friend std::ostream& operator<< (std::ostream& stream, const OperationUnaire& operationUnaire);
+
+        std::string generateIR(ControlFlowGraph * controlFlowGraph);
 
         void print(std::ostream& stream) const;
 
@@ -25,5 +26,6 @@ class OperationUnaire : public Expression{
 
     private:
         Operateur operateur;
+
         Expression* expression;
 };

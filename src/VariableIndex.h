@@ -2,11 +2,12 @@
 
 #include "Variable.h"
 
-class VariableIndex : public Variable{
+class VariableIndex : public Variable
+{
     public:
-        void generateIR(ControlFlowGraph * controlFlowGraph);
-
         void print(std::ostream& stream) const;
+
+        std::string generateIR(ControlFlowGraph * controlFlowGraph);
 
         friend std::ostream& operator<< (std::ostream& stream, const VariableIndex& variableIndex);
 

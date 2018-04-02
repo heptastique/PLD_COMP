@@ -6,19 +6,24 @@
 #include "ControlFlowGraph.h"
 #include "Declaration.h"
 
-class Variable : public Expression {
+class Variable : public Expression 
+{
     public:
-        virtual void generateIR(ControlFlowGraph * controlFlowGraph);
+        virtual std::string generateIR(ControlFlowGraph * controlFlowGraph);
 
         void print(std::ostream& stream) const;
 
         friend std::ostream& operator<< (std::ostream& stream, const Variable& variable);
 
-        TypeVariable getType(){
+        Declaration * getDeclaration();
+
+        TypeVariable getType()
+        {
             return typeVariable;
         }
 
-        std::string getValeur(){
+        std::string getValeur()
+        {
             return valeur;
         }
 

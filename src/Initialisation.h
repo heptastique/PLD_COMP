@@ -5,11 +5,12 @@
 #include "Expression.h"
 #include <string>
 
-class Initialisation : public Declaration {
+class Initialisation : public Declaration
+{
     public:
-        void generateIR(ControlFlowGraph * controlFlowGraph);
-
         void print(std::ostream& stream) const;
+
+        std::string generateIR(ControlFlowGraph * controlFlowGraph);
 
         friend std::ostream& operator<< (std::ostream& stream, const Initialisation& initialisation);
 

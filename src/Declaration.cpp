@@ -1,10 +1,15 @@
 using namespace std;
 
 #include "Declaration.h"
+#include "ControlFlowGraph.h"
+
 #include <iostream>
 
-void Declaration::generateIR(ControlFlowGraph * controlFlowGraph)
+string Declaration::generateIR(ControlFlowGraph * controlFlowGraph)
 {
+    controlFlowGraph->createNewVariable(name);
+
+    return "";
 }
 
 void Declaration::print(std::ostream &stream) const
@@ -15,25 +20,42 @@ void Declaration::print(std::ostream &stream) const
 std::ostream& operator<<(std::ostream& stream, const Declaration& declaration)
 {
     stream << " Declaration: Name=" << declaration.name << " Type=" << declaration.type << endl;
+
     return stream;
 }
 
-Declaration &Declaration::operator=(const Declaration &unDeclaration)
+Declaration & Declaration::operator=(const Declaration & declaration)
 {
+    type = declaration.type;
+    name = declaration.name;
+    //iRVariable = declaration.iRVariable;
 }
 
 void Declaration::resolveScopeVariables(std::vector<Declaration*> declProgramme, std::vector<Declaration*> paramFunction, std::vector<Declaration*> declBloc, std::vector<Function*> functionProgram)
 {
+    //iRVariable = IRVariable(name, declBloc.size() * 8);
 }
 
-void Declaration::resolveTypeExpr(){
+void Declaration::resolveTypeExpr()
+{
+    //
 }
 
 void Declaration::setType(Type type)
 {
     this->type = type;
 }
+/*
+void Declaration::setIRVariable(IRVariable iRVariable)
+{
+    this->iRVariable = iRVariable;
+}
 
+IRVariable Declaration::getIRVariable()
+{
+    return iRVariable;
+}
+*/
 Type Declaration::getType()
 {
     return this->type;
@@ -44,31 +66,33 @@ std::string Declaration::getName()
     return this->name;
 }
 
-Declaration::Declaration(){
-#ifdef MAP
-    cout << "Appel au constructeur par default de <Declaration>" << endl;
-#endif
+Declaration::Declaration()
+{
+    #ifdef MAP
+        cout << "Appel au constructeur par default de <Declaration>" << endl;
+    #endif
 }
 
 Declaration::Declaration(const Declaration &unDeclaration)
 {
-#ifdef MAP
-    cout << "Appel au constructeur de copie de <Declaration>" << endl;
-#endif
+    #ifdef MAP
+        cout << "Appel au constructeur de copie de <Declaration>" << endl;
+    #endif
 }
 
 Declaration::Declaration(string name, Type type): Instruction()
 {
+    #ifdef MAP
+        cout << "Appel au constructeur de <Declaration>" << endl;
+    #endif
+
     this->name = name;
     this->type = type;
-#ifdef MAP
-    cout << "Appel au constructeur de <Declaration>" << endl;
-#endif
 }
 
 Declaration::~Declaration()
 {
-#ifdef MAP
-    cout << "Appel au destructeur de <Declaration>" << endl;
-#endif
+    #ifdef MAP
+        cout << "Appel au destructeur de <Declaration>" << endl;
+    #endif
 }

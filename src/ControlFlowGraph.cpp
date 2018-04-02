@@ -2,6 +2,41 @@ using namespace std;
 
 #include "ControlFlowGraph.h"
 
+string ControlFlowGraph::createNewVariable(string name)
+{
+    string variableName = "VAR." + name;
+
+    IRVariable iRVariable(variableName, lastOffset + 8);
+
+    lastOffset = lastOffset + 8;
+
+    variableMap.insert(pair <string, IRVariable> (variableName, iRVariable));
+
+    return variableName;
+}
+
+string ControlFlowGraph::createNewTemp()
+{
+    nbTemp = nbTemp + 1;
+
+    string tempName = "TMP." + to_string(nbTemp);
+
+    IRVariable iRVariable(tempName, 0);
+
+    variableMap.insert(pair <string, IRVariable> (tempName, iRVariable));
+
+    return tempName;
+}
+
+IRVariable ControlFlowGraph::getVariable(string name)
+{
+    map <string, IRVariable> :: iterator variable;
+
+    variable = variableMap.find(name);
+
+    return variable->second;
+}
+
 void ControlFlowGraph::addIRInstr(IRInstr iRInstr)
 {
     currentBasicBlock->addIRInstr(iRInstr);
@@ -87,6 +122,12 @@ void ControlFlowGraph::generateASM(ostream & os) const
                     os << "\tcall putchar\n";
                     break;
                 }
+                case STACK_STORE :
+                {
+                    os << "\tmovl\t$" << iRInstr.getParam(0) << ", -" << iRInstr.getParam(1) << "(%rsp)\n";
+
+                    break;
+                }
             }
         }
     }
@@ -106,6 +147,10 @@ ControlFlowGraph::ControlFlowGraph(const ControlFlowGraph &controlFlowGraph)
     }
 
     currentBasicBlock = basicBlocks.back();
+
+    nbTemp = controlFlowGraph.nbTemp;
+
+    lastOffset = controlFlowGraph.lastOffset;
 }
 
 ControlFlowGraph::ControlFlowGraph()

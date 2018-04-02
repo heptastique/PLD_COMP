@@ -5,11 +5,12 @@
 #include "Else.h"
 #include "Expression.h"
 
-class If : public Instruction {
+class If : public Instruction
+{
     public:
-        void generateIR(ControlFlowGraph * controlFlowGraph){};
-
         void print(std::ostream& stream) const;
+
+        std::string generateIR(ControlFlowGraph * controlFlowGraph);
 
         friend std::ostream& operator<< (std::ostream& stream, const If& anIf);
 
@@ -29,7 +30,10 @@ class If : public Instruction {
 
     private:
         Expression* condition;
+
         Bloc* bloc;
+
         Else* anElse;
+
         bool hasElse = false;
 };

@@ -7,12 +7,13 @@ class Declaration;
 class Function;
 class ControlFlowGraph;
 
-class Instruction {
+class Instruction
+{
     protected:
         virtual void print(std::ostream& stream) const = 0;
 
     public:
-        virtual void generateIR(ControlFlowGraph * controlFlowGraph) = 0;
+        virtual std::string generateIR(ControlFlowGraph * controlFlowGraph) = 0;
 
         friend std::ostream& operator<< (std::ostream& stream, Instruction const& instruction);
 

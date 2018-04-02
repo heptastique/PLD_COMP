@@ -16,6 +16,11 @@ enum Mnemonique
     FUNCTION_CALL = 2,
 
     REG_STORE = 3,
+    STACK_STORE = 4,
+
+    AFFECTATION = 40,
+    BINARYOPERATION= 41,
+    UNARYOPERATION= 42,
 
     PUTCHAR = 100
 };
@@ -38,7 +43,6 @@ class IRInstr
 
     private:
         ControlFlowGraph * controlFlowGraph;
-
         Mnemonique mnemonique;
         vector <string> params;
 };

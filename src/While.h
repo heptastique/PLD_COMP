@@ -4,11 +4,12 @@
 #include "Bloc.h"
 #include "Expression.h"
 
-class While : public Instruction {
+class While : public Instruction
+{
     public:
-        void generateIR(ControlFlowGraph * controlFlowGraph){};
-
         void print(std::ostream& stream) const;
+
+        std::string generateIR(ControlFlowGraph * controlFlowGraph);
 
         friend std::ostream& operator<< (std::ostream& stream, const While& aWhile);
 
@@ -26,5 +27,6 @@ class While : public Instruction {
 
     private:
         Bloc* bloc;
+
         Expression* condition;
 };

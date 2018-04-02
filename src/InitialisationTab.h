@@ -1,16 +1,20 @@
-#pragma once
+# pragma once
 
 #include "DeclarationTab.h"
 #include "Variable.h"
 #include <vector>
+#include <iostream>
 
-class InitialisationTab : public DeclarationTab {
+using namespace std;
+
+class InitialisationTab : public DeclarationTab
+{
     public:
-        void generateIR(ControlFlowGraph * controlFlowGraph);
+        string generateIR(ControlFlowGraph * controlFlowGraph);
 
-        void print(std::ostream& stream) const;
+        void print(ostream & stream) const;
 
-        friend std::ostream& operator<< (std::ostream& stream, const InitialisationTab& initialisationTab);
+        friend ostream& operator<< (std::ostream& stream, const InitialisationTab& initialisationTab);
 
         void resolveScopeVariables(std::vector<Declaration*> declProgramme, std::vector<Declaration*> paramFunction, std::vector<Declaration*> declBloc, std::vector<Function*> functionProgram);
 
@@ -18,11 +22,11 @@ class InitialisationTab : public DeclarationTab {
 
         InitialisationTab &operator=(const InitialisationTab &unInitialisationTab);
 
-        InitialisationTab(Type type, std::string name, std::vector<Variable*> variables);
+        InitialisationTab(Type type, string name, vector <Variable*> variables);
 
         virtual ~InitialisationTab();
 
     private:
         // There could be no size
-        std::vector<Variable*> variables;
+        vector <Variable*> variables;
 };
