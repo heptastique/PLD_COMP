@@ -16,7 +16,7 @@ enum Mnemonique
     FUNCTION_CALL = 2,
 
     REG_STORE = 3,
-    MEM_STORE = 4,
+    STACK_STORE = 4,
 
     AFFECTATION = 40,
     BINARYOPERATION= 41,

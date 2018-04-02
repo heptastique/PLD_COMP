@@ -48,5 +48,5 @@ class Declaration : public Instruction
 
         std::string name;
 
-        IRVariable iRVariable;
+        //IRVariable iRVariable;
 };

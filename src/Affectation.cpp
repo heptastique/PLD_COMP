@@ -6,12 +6,12 @@ using namespace std;
 
 string Affectation::generateIR(ControlFlowGraph * controlFlowGraph)
 {
-    string right;
+    string right = "ok";
 
     // string left = controlFlowGraph->createNewVar();
     string left = "tmp";
     //int offset = controlFlowGraph->getOffsetFromSymbolTable(varName);
-    int offset = 1;
+    //int offset = 1;
     //controlFlowGraph->addIRInstr(IRInstr(REG_STORE, { left, to_string(offset)}));
     //controlFlowGraph->addIRInstr(IRInstr(ADD, { left, !bp, left}));
 
@@ -29,16 +29,16 @@ string Affectation::generateIR(ControlFlowGraph * controlFlowGraph)
             right = var->generateIR(controlFlowGraph);
         }
 */
-	controlFlowGraph->addIRInstr(IRInstr(MEM_STORE, {var->getValeur(), to_string(variable->getDeclaration()->getIRVariable().getOffset())}));
+	IRVariable iRVariable = controlFlowGraph->getVariable("VAR." + variable->getValeur());
 
-	//cout << "MEM STORE " << to_string(variable->getDeclaration()->getIRVariable().getOffset()) << " " << var->getValeur() << endl;
+	controlFlowGraph->addIRInstr(IRInstr(STACK_STORE, {var->getValeur(), to_string(iRVariable.getOffset())}));
     }
     else
     {
         //right = variable->generateIR(controlFlowGraph);
     }
 
-	return right;
+    return right;
 }
 
 void Affectation::print(std::ostream &stream) const

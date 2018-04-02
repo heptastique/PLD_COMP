@@ -56,4 +56,6 @@ class ControlFlowGraph
 	map <string, IRVariable> variableMap;
 
 	int nbTemp;
+
+	int lastOffset = 8;
 };

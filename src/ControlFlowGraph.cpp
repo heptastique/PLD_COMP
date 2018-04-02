@@ -4,35 +4,37 @@ using namespace std;
 
 string ControlFlowGraph::createNewVariable(string name)
 {
-	string variableName = "VAR." + name;
+    string variableName = "VAR." + name;
 
-	IRVariable iRVariable(variableName, 2);
+    IRVariable iRVariable(variableName, lastOffset + 8);
 
-	variableMap.insert(pair <string, IRVariable> (variableName, iRVariable));
+    lastOffset = lastOffset + 8;
 
-	return variableName;
+    variableMap.insert(pair <string, IRVariable> (variableName, iRVariable));
+
+   return variableName;
 }
 
 string ControlFlowGraph::createNewTemp()
 {
-	nbTemp = nbTemp + 1;
+    nbTemp = nbTemp + 1;
 
-	string tempName = "TMP." + to_string(nbTemp);
+    string tempName = "TMP." + to_string(nbTemp);
 
-	IRVariable iRVariable(tempName, 2);
+    IRVariable iRVariable(tempName, 0);
 
-	variableMap.insert(pair <string, IRVariable> (tempName, iRVariable));
+    variableMap.insert(pair <string, IRVariable> (tempName, iRVariable));
 
-	return tempName;
+    return tempName;
 }
 
 IRVariable ControlFlowGraph::getVariable(string name)
 {
-	map <string, IRVariable> :: iterator variable;
+    map <string, IRVariable> :: iterator variable;
 
-	variable = variableMap.find(name);
+    variable = variableMap.find(name);
 
-	return variable->second;
+    return variable->second;
 }
 
 void ControlFlowGraph::addIRInstr(IRInstr iRInstr)
@@ -120,9 +122,9 @@ void ControlFlowGraph::generateASM(ostream & os) const
                     os << "\tcall putchar\n";
                     break;
                 }
-                case MEM_STORE :
+                case STACK_STORE :
 		{
-                    os << "\tmovl\t$" << iRInstr.getParam(0) << ", -" << iRInstr.getParam(1) << "(%rbp)\n";
+                    os << "\tmovl\t$" << iRInstr.getParam(0) << ", -" << iRInstr.getParam(1) << "(%rsp)\n";
 
                     break;
                 }
@@ -146,6 +148,10 @@ ControlFlowGraph::ControlFlowGraph(const ControlFlowGraph &controlFlowGraph)
     }
 
     currentBasicBlock = basicBlocks.back();
+
+    nbTemp = controlFlowGraph.nbTemp;
+
+    lastOffset = controlFlowGraph.lastOffset;
 }
 
 ControlFlowGraph::ControlFlowGraph()
