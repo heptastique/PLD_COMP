@@ -7,7 +7,6 @@
 class Affectation : public Instruction
 {
     public:
-
         void print(std::ostream& stream) const;
 
 	std::string generateIR(ControlFlowGraph * controlFlowGraph);
@@ -27,7 +26,6 @@ class Affectation : public Instruction
         virtual ~Affectation();
 
     private:
-
         Variable* variable;
 
         Operateur operateur;
