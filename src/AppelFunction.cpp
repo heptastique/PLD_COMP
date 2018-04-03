@@ -14,6 +14,15 @@ string AppelFunction::generateIR(ControlFlowGraph * controlFlowGraph)
     {
         controlFlowGraph->addIRInstr(IRInstr(PUTCHAR, {to_string((int)((variables[0]->getValeur())[1]))}));
     }
+    else
+    {
+        for (auto variable : variables)
+        {
+            variable->getDeclaration()->setOffset(controlFlowGraph->createNewOffset(variable->getDeclaration()->getType()));
+
+            //controlFlowGraph->addIRInstr(IRInstr(PUSH, {variable}));
+        }
+    }
 
     // Generate IR for Parameters
 

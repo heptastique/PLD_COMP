@@ -64,6 +64,11 @@ Type Declaration::getType()
     return this->type;
 }
 
+void Declaration::setOffset(int offset)
+{
+    this->offset = offset;
+}
+
 int Declaration::getOffset()
 {
     return offset;

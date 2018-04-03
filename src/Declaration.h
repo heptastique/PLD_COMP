@@ -27,6 +27,8 @@ class Declaration : public Instruction
 
         Type getType();
 
+        void setOffset(int offset);
+
         int getOffset();
 
         //void setIRVariable(IRVariable);
