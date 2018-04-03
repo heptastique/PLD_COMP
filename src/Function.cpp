@@ -19,7 +19,7 @@ void Function::generateIR(ControlFlowGraph * controlFlowGraph)
 
     controlFlowGraph->newBasicBlock();
 
-    controlFlowGraph->addIRInstr(IRInstr(FUNCTION_DECLARATION, {name, to_string(addressRangeSize)}));
+    controlFlowGraph->addIRInstr(IRInstr(DECL, {name, to_string(addressRangeSize)}));
 
     /*
      * Body
@@ -36,7 +36,7 @@ void Function::generateIR(ControlFlowGraph * controlFlowGraph)
 
     controlFlowGraph->newBasicBlock();
 
-    controlFlowGraph->addIRInstr(IRInstr(FUNCTION_RETURN, {to_string(addressRangeSize)}));
+    controlFlowGraph->addIRInstr(IRInstr(RET, {to_string(addressRangeSize)}));
 }
 
 int Function::calculateAddressRangeSize()

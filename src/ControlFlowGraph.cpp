@@ -123,7 +123,7 @@ void ControlFlowGraph::generateASM(ostream & os) const
             switch (iRInstr.getMnemonique())
             {
                 // Function Declaration
-                case FUNCTION_DECLARATION :
+                case DECL :
                 {
                     // Generate Prolog of Function
                     generateProlog(os, iRInstr.getParam(0), stoi(iRInstr.getParam(1)));
@@ -131,7 +131,7 @@ void ControlFlowGraph::generateASM(ostream & os) const
                     break;
                 }
                 // Function Return
-                case FUNCTION_RETURN :
+                case RET :
                 {
                     // Generate Epilog
                     generateEpilog(os, stoi(iRInstr.getParam(0)));
@@ -147,6 +147,18 @@ void ControlFlowGraph::generateASM(ostream & os) const
                 case STACK_STORE :
                 {
                     os << "\tmovl\t$" << iRInstr.getParam(0) << ", -" << iRInstr.getParam(1) << "(%rbp)\n";
+
+                    break;
+                }
+                case PUSH :
+                {
+                    os << "\tpushl\t" << "-" << iRInstr.getParam(0) << "(%rbp)\n";
+
+                    break;
+                }
+                case CALL :
+                {
+                    os << "\tcall\t" << iRInstr.getParam(0) << "\n";
 
                     break;
                 }

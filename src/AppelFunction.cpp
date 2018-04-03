@@ -18,10 +18,10 @@ string AppelFunction::generateIR(ControlFlowGraph * controlFlowGraph)
     {
         for (auto variable : variables)
         {
-            variable->getDeclaration()->setOffset(controlFlowGraph->createNewOffset(variable->getDeclaration()->getType()));
-
-            //controlFlowGraph->addIRInstr(IRInstr(PUSH, {variable}));
+            controlFlowGraph->addIRInstr(IRInstr(PUSH, {to_string(variable->getDeclaration()->getOffset())}));
         }
+
+        controlFlowGraph->addIRInstr(IRInstr(CALL, {name}));
     }
 
     // Generate IR for Parameters
@@ -46,7 +46,7 @@ string AppelFunction::generateIR(ControlFlowGraph * controlFlowGraph)
 void AppelFunction::print(std::ostream &stream) const
 {
     stream << " AppelFunction: Name=" << name;
-    
+
     for (auto it : variables)
     {
         if(VariableIndex *varInd = dynamic_cast<VariableIndex*>(it))
