@@ -18,7 +18,14 @@ string AppelFunction::generateIR(ControlFlowGraph * controlFlowGraph)
     {
         for (auto variable : variables)
         {
-            controlFlowGraph->addIRInstr(IRInstr(PUSH, {to_string(variable->getDeclaration()->getOffset())}));
+            if (variable->getType() == NAME)
+            {
+                controlFlowGraph->addIRInstr(IRInstr(PUSH, {to_string(variable->getDeclaration()->getOffset())}));
+            }
+            else
+            {
+                controlFlowGraph->addIRInstr(IRInstr(PUSH, {variable->getValeur()}));
+            }
         }
 
         controlFlowGraph->addIRInstr(IRInstr(CALL, {name}));
