@@ -7,7 +7,9 @@ using namespace std;
 
 string Declaration::generateIR(ControlFlowGraph * controlFlowGraph)
 {
-    controlFlowGraph->createNewVariable(name);
+    // controlFlowGraph->createNewVariable(name);
+
+    offset = controlFlowGraph->createNewOffset(type);
 
     return "";
 }
@@ -29,6 +31,7 @@ Declaration & Declaration::operator=(const Declaration & declaration)
     type = declaration.type;
     name = declaration.name;
     //iRVariable = declaration.iRVariable;
+    offset = declaration.offset;
 }
 
 void Declaration::resolveScopeVariables(std::vector<Declaration*> declProgramme, std::vector<Declaration*> paramFunction, std::vector<Declaration*> declBloc, std::vector<Function*> functionProgram)
@@ -59,6 +62,11 @@ IRVariable Declaration::getIRVariable()
 Type Declaration::getType()
 {
     return this->type;
+}
+
+int Declaration::getOffset()
+{
+    return offset;
 }
 
 std::string Declaration::getName()

@@ -21,6 +21,8 @@ void Function::generateIR(ControlFlowGraph * controlFlowGraph)
 
     controlFlowGraph->addIRInstr(IRInstr(FUNCTION_DECLARATION, {name, to_string(addressRangeSize)}));
 
+    // For each declaration (parameters of function) associate offset
+
     /*
      * Body
      */
