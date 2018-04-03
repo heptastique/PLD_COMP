@@ -18,6 +18,9 @@ enum Mnemonique
     REG_STORE = 3,
     STACK_STORE = 4,
     PUSH = 5,
+    PUSH_REL = 6,
+
+    ADD_SP = 10,
 
     AFFECTATION = 40,
     BINARYOPERATION= 41,

@@ -150,15 +150,27 @@ void ControlFlowGraph::generateASM(ostream & os) const
 
                     break;
                 }
+                case PUSH_REL :
+                {
+                    os << "\tpushl\t" << iRInstr.getParam(0) << "(%rbp)\n";
+
+                    break;
+                }
                 case PUSH :
                 {
-                    os << "\tpushl\t" << "-" << iRInstr.getParam(0) << "(%rbp)\n";
+                    os << "\tpushl\t$" << iRInstr.getParam(0) << "\n";
 
                     break;
                 }
                 case CALL :
                 {
                     os << "\tcall\t" << iRInstr.getParam(0) << "\n";
+
+                    break;
+                }
+                case ADD_SP :
+                {
+                    os << "\taddq\t$" << iRInstr.getParam(0) << ", %rsp\n";
 
                     break;
                 }

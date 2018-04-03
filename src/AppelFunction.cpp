@@ -16,19 +16,25 @@ string AppelFunction::generateIR(ControlFlowGraph * controlFlowGraph)
     }
     else
     {
+        int size = 8;
+
         for (auto variable : variables)
         {
             if (variable->getType() == NAME)
             {
-                controlFlowGraph->addIRInstr(IRInstr(PUSH, {to_string(variable->getDeclaration()->getOffset())}));
+                controlFlowGraph->addIRInstr(IRInstr(PUSH_REL, {"-" + to_string(variable->getDeclaration()->getOffset())}));
             }
             else
             {
                 controlFlowGraph->addIRInstr(IRInstr(PUSH, {variable->getValeur()}));
             }
+
+            // size = size +
         }
 
         controlFlowGraph->addIRInstr(IRInstr(CALL, {name}));
+
+        controlFlowGraph->addIRInstr(IRInstr(ADD_SP, {to_string(size)}));
     }
 
     // Generate IR for Parameters
