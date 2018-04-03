@@ -34,7 +34,7 @@ set(CMAKE_CXX_STANDARD 11)
 file(GLOB SRC_FILES ${PROJECT_SOURCE_DIR}/grammar/*.cpp ${PROJECT_SOURCE_DIR}/src/*.cpp ${PROJECT_SOURCE_DIR}/*.cpp)
 file(GLOB HEADER_FILES ${PROJECT_SOURCE_DIR}/grammar/*.h ${PROJECT_SOURCE_DIR}/src/*.h ${PROJECT_SOURCE_DIR}/*.h)
 
-add_executable(app ${SRC_FILES} ${HEADER_FILES} src/For.cpp src/For.h)
+add_executable(app ${SRC_FILES} ${HEADER_FILES})
 
 target_link_libraries(app ${ANTLR_LIBRARY})
 target_compile_options(app PRIVATE -Wno-attributes)
