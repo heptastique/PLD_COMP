@@ -7,6 +7,7 @@
 
 class If : public Instruction
 {
+
     public:
         void print(std::ostream& stream) const;
 

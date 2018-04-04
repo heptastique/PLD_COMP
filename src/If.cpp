@@ -11,7 +11,6 @@ string If::generateIR(ControlFlowGraph * controlFlowGraph)
 void If::print(std::ostream &stream) const
 {
     stream << " If: Condition=" << *condition << *bloc;
-    
     if(hasElse)
     {
         stream << *anElse << endl;
@@ -21,7 +20,6 @@ void If::print(std::ostream &stream) const
 std::ostream& operator<<(std::ostream& stream, const If& anIf)
 {
     stream << " If: Condition=" << *anIf.condition << *anIf.bloc << endl;
-    
     if(anIf.hasElse)
     {
         stream << *anIf.anElse << endl;
@@ -34,7 +32,6 @@ void If::resolveScopeVariables(std::vector<Declaration*> declProgramme, std::vec
 {
     this->condition->resolveScopeVariables(declProgramme, paramFunction, declBloc, functionProgram);
     this->bloc->resolveScopeVariables(declProgramme, paramFunction, declBloc, functionProgram);
-    
     if(this->hasElse)
     {
         this->anElse->resolveScopeVariables(declProgramme, paramFunction, declBloc, functionProgram);
@@ -44,6 +41,11 @@ void If::resolveScopeVariables(std::vector<Declaration*> declProgramme, std::vec
 void If::resolveTypeExpr()
 {
     this->bloc->resolveTypeExpr();
+    this->condition->resolveTypeExpr();
+    if(this->hasElse)
+    {
+        this->anElse->resolveTypeExpr();
+    }
 }
 
 void If::setElse(Else *anElse)
@@ -52,24 +54,21 @@ void If::setElse(Else *anElse)
     this->hasElse = true;
 }
 
-If &If::operator=(const If &unIf) 
+If &If::operator=(const If &unIf)
 {
-    //
 }
+
 
 If::If(const If &unIf)
 {
-    #ifdef MAP
-        cout << "Appel au constructeur de copie de <If>" << endl;
-    #endif
+#ifdef MAP
+    cout << "Appel au constructeur de copie de <If>" << endl;
+#endif
 }
+
 
 If::If(Expression* condition, Bloc* bloc)
 {
-    #ifdef MAP
-        cout << "Appel au constructeur de <If>" << endl;
-    #endif
-    
     this->condition = condition;
     this->bloc = bloc;
 }
