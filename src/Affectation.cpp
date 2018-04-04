@@ -36,7 +36,27 @@ string Affectation::generateIR(ControlFlowGraph * controlFlowGraph)
 
         // IRVariable iRVariable = controlFlowGraph->getVariable("VAR." + variable->getValeur());
 
-        controlFlowGraph->addIRInstr(IRInstr(STORE_RBP_REL, {var->getValeur(), to_string(variable->getDeclaration()->getOffset())}));
+        switch (var->getType())
+        {
+            case ENTIER :
+            {
+                controlFlowGraph->addIRInstr(IRInstr(STORE_RBP_REL, {var->getValeur(),
+                                                                     to_string(variable->getDeclaration()->getOffset())}));
+
+                break;
+            }
+            case CARACTERE :
+            {
+                controlFlowGraph->addIRInstr(IRInstr(STORE_RBP_REL, {to_string((int)(var->getValeur())[1]),
+                                                                     to_string(variable->getDeclaration()->getOffset())}));
+
+                break;
+            }
+            case NAME :
+            {
+                break;
+            }
+        }
     }
     else
     {
