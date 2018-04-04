@@ -143,7 +143,7 @@ assert_file() {
     result="$(sed -e :a -e '$!N;s/\n/\\n/;ta' <<< "$result")"
     [[ -z "$result" ]] && result="nothing" || result="\"$result\""
     [[ -z "$2" ]] && expected="nothing" || expected="\"$2\""
-    _assert_fail "expected to be $expected${_indent}got $result" "$1" "$3"
+    _assert_fail "expected to be what is in $expected${_indent}Rerun tests with --stop to debug first failed test${_indent}" "$1" "$3"
 }
 
 assert_contains_file() {
@@ -179,7 +179,7 @@ assert_contains_file_0() {
     result="$(sed -e :a -e '$!N;s/\n/\\n/;ta' <<< "$result")"
     [[ -z "$result" ]] && result="nothing" || result="\"$result\""
     [[ -z "$2" ]] && expected="nothing" || expected="\"$2\""
-    _assert_fail "expected to contain $expected${_indent}got $result" "$1" "$3"
+    _assert_fail "expected to contain what is in $expected and non-zero exit code${_indent}Returned exit code $status" "$1" "$3"
 }
 
 assert_raises() {
