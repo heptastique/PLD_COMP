@@ -45,7 +45,14 @@ string AppelFunction::generateIR(ControlFlowGraph * controlFlowGraph)
                 // Parameter is a Variable
                 case NAME :
                 {
-                    controlFlowGraph->addIRInstr(IRInstr(PUSH_RBP_REL, {to_string(variable->getDeclaration()->getOffset())}));
+                    // Store Variable in Register
+                    controlFlowGraph->addIRInstr(IRInstr(STORE_RBP_REL_REG, {to_string(variable->getDeclaration()->getOffset()), "edi"}));
+                    // Store Register at SP
+                    controlFlowGraph->addIRInstr(IRInstr(STORE_REG_RSP, {"edi"}));
+                    // Update SP
+                    controlFlowGraph->addIRInstr(IRInstr(SUB_RSP, {"8"}));
+
+                    //controlFlowGraph->addIRInstr(IRInstr(PUSH_RBP_REL, {to_string(variable->getDeclaration()->getOffset())}));
 
                     break;
                 }

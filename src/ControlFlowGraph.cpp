@@ -154,11 +154,21 @@ void ControlFlowGraph::generateASM(ostream & os) const
 
                     break;
                 }
-                case STORE_RBP_REL :
+                case STORE_RBP_REL_RSP :
+                {
+                    os << "\tmovl\t" << iRInstr.getParam(0) <<"(%rbp), %rsp\n"; 
+
+                    break;
+                }
+                case STORE_VALUE_RBP_REL :
                 {
                     os << "\tmovl\t$" << iRInstr.getParam(0) << ", " << iRInstr.getParam(1) << "(%rbp)\n";
 
                     break;
+                }
+                case STORE_RBP_REL_REG :
+                {
+                    
                 }
                 case PUSH_RBP_REL :
                 {
@@ -181,6 +191,12 @@ void ControlFlowGraph::generateASM(ostream & os) const
                 case ADD_RSP :
                 {
                     os << "\taddq\t$" << iRInstr.getParam(0) << ", %rsp\n";
+
+                    break;
+                }
+                case SUB_RSP :
+                {
+                    os << "\tsubq\t$" << iRInstr.getParam(0) << ", %rsp\n";
 
                     break;
                 }
