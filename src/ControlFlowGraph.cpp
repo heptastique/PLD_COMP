@@ -20,8 +20,12 @@ string ControlFlowGraph::createNewVariable(string name)
 string ControlFlowGraph::getOffset(std::string string)
 {
     auto pos = variableMap.find(string);
-    IRVariable var = pos->second;
-    return to_string(var.getOffset());
+    if(pos != variableMap.end())
+    {
+        IRVariable var = pos->second;
+        return to_string(var.getOffset());
+    }
+    return "0";
 }
 
 int ControlFlowGraph::createNewOffset(Type type)

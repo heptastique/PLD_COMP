@@ -60,11 +60,14 @@ string Affectation::generateIR(ControlFlowGraph * controlFlowGraph)
     }
     else
     {
-        right = expression->generateIR(controlFlowGraph);
-        controlFlowGraph->addIRInstr(IRInstr(AFFECTATION, {controlFlowGraph->getOffset(right), to_string(variable->getDeclaration()->getOffset())}));
+        if(OperationBinaire* operationBinaire = dynamic_cast<OperationBinaire*> (expression))
+        {
+            right = operationBinaire->generateIR(controlFlowGraph);
+            controlFlowGraph->addIRInstr(IRInstr(AFFECTATION, {controlFlowGraph->getOffset(right), to_string(variable->getDeclaration()->getOffset())}));
+        }
     }
 
-    return "ok";
+    return "";
 }
 
 void Affectation::print(std::ostream &stream) const
