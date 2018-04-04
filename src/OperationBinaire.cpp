@@ -11,12 +11,16 @@ string OperationBinaire::generateIR(ControlFlowGraph *controlFlowGraph)
     {
         if(Variable* variable2 = dynamic_cast<Variable*>(expressionR))
         {
-            if (variable1->getType() == ENTIER && variable2->getType() == ENTIER);
-            string var1 = variable1->getValeur();
-            string var2 = variable2->getValeur();
+            cout << "hello" << endl;
+            if (variable1->getType() == ENTIER && variable2->getType() == ENTIER)
+            {
+                string var1 = variable1->getValeur();
+                string var2 = variable2->getValeur();
 
-            string var3 = controlFlowGraph->createNewTemp();
-            controlFlowGraph->addIRInstr(IRInstr(ADD, { var3, var1, var2}));
+                string var3 = controlFlowGraph->createNewTemp();
+                controlFlowGraph->addIRInstr(IRInstr(ADD, { var3, var1, var2}));
+                return var3;
+            }
         }
     }
 

@@ -39,6 +39,8 @@ class ControlFlowGraph
 
         void generateASM(ostream &os) const;
 
+        string getOffset(std::string string);
+
         ControlFlowGraph(const ControlFlowGraph &controlFlowGraph);
 
         ControlFlowGraph();

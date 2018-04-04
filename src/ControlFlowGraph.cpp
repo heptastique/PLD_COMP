@@ -17,6 +17,13 @@ string ControlFlowGraph::createNewVariable(string name)
 }
 */
 
+string ControlFlowGraph::getOffset(std::string string)
+{
+    auto pos = variableMap.find(string);
+    IRVariable var = pos->second;
+    return to_string(var.getOffset());
+}
+
 int ControlFlowGraph::createNewOffset(Type type)
 {
     int size = 0;
@@ -180,10 +187,17 @@ void ControlFlowGraph::generateASM(ostream & os) const
                 case ADD :
                 {
                     string result = to_string(stoi(iRInstr.getParam(1)) + stoi(iRInstr.getParam(2)));
+
                     auto pos = variableMap.find(iRInstr.getParam(0));
                     IRVariable var = pos->second;
 
                     os << "\tmovl\t$" << result << ", " << var.getOffset() << "(%rbp)\n";
+                    break;
+                }
+                case AFFECTATION :
+                {
+                    os << "\tmov\t\t"  <<  iRInstr.getParam(0) << "(%rbp), %eax\n";
+                    os << "\tmovl\t" << "%eax, " << iRInstr.getParam(1) << "(%rbp)\n";
                     break;
                 }
             }

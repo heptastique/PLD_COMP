@@ -26,6 +26,7 @@ enum Mnemonique
     BINARYOPERATION= 41,
     UNARYOPERATION= 42,
     ADD = 43,
+    STORE_OFF_OFF = 44,
 
     PUTCHAR = 100
 };

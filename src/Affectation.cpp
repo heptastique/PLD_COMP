@@ -2,7 +2,9 @@ using namespace std;
 
 #include "Affectation.h"
 #include "VariableIndex.h"
+#include "OperationBinaire.h"
 #include <iostream>
+#include <typeinfo>
 
 string Affectation::generateIR(ControlFlowGraph * controlFlowGraph)
 {
@@ -40,7 +42,8 @@ string Affectation::generateIR(ControlFlowGraph * controlFlowGraph)
     }
     else
     {
-        //right = variable->generateIR(controlFlowGraph);
+        right = expression->generateIR(controlFlowGraph);
+        controlFlowGraph->addIRInstr(IRInstr(AFFECTATION, {controlFlowGraph->getOffset(right), to_string(variable->getDeclaration()->getOffset())}));
     }
 
     return right;
