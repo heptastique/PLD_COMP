@@ -23,7 +23,7 @@ class ControlFlowGraph
 
         vector <BasicBlock*> getBasicBlocks() const;
 
-        //string createNewVariable(string name);
+        string createNewVariable(string name);
 
         string createNewTemp();
 
@@ -58,7 +58,7 @@ class ControlFlowGraph
 
         map <string, IRVariable> variableMap;
 
-        int nbTemp;
+        int nbTemp = 0;
 
         int lastOffset = -8;
 };

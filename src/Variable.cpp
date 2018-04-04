@@ -9,25 +9,25 @@ string Variable::generateIR(ControlFlowGraph * controlFlowGraph)
 {
     cout << "Variable::generateIR" << endl;
 
-    if(this->typeVariable == ENTIER)
+    switch (this->getType())
     {
-        string var = "tmp1";
-        //string var = controlFlowGraph-->createNewVar();
-        controlFlowGraph->addIRInstr(IRInstr(REG_STORE, {var, valeur}));
-        return var;
+        case ENTIER :
+        {
+            string var = controlFlowGraph->createNewTemp();
+            controlFlowGraph->addIRInstr(IRInstr(REG_STORE, {valeur, var}));
+            return var;
+        }
+        case CARACTERE :
+        {
+            //controlFlowGraph->addIRInstr(IRInstr(STORE_RBP_REL, {to_string((int)(var->getValeur())[1]), to_string(variable->getDeclaration()->getOffset())}));
+
+            break;
+        }
+        case NAME :
+        {
+            break;
+        }
     }
-
-    /*
-    string reg = createNewReg();
-
-    list <string> params;
-
-    params.push_back(reg);
-    params.push_back(valeur);
-
-    controlFlowGraph->addInstruction(IRInstr(REG_STORE), params);
-    return reg;
-    */
 
     return "";
 }

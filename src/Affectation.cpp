@@ -8,10 +8,10 @@ using namespace std;
 
 string Affectation::generateIR(ControlFlowGraph * controlFlowGraph)
 {
-    string right = "ok";
+    //string right = "ok";
 
     // string left = controlFlowGraph->createNewVar();
-    string left = "tmp";
+    //string left = "tmp";
     //int offset = controlFlowGraph->getOffsetFromSymbolTable(varName);
     //int offset = 1;
     //controlFlowGraph->addIRInstr(IRInstr(REG_STORE, { left, to_string(offset)}));
@@ -19,9 +19,9 @@ string Affectation::generateIR(ControlFlowGraph * controlFlowGraph)
 
     // If the expression is a Rvalue
 
-    if(Variable* var = dynamic_cast<Variable*>(expression))
+   /* if(Variable* var = dynamic_cast<Variable*>(expression))
     {
-        /*
+        *
         if(var->getType() == NAME)
         {
             right = var->getValeur();
@@ -30,7 +30,7 @@ string Affectation::generateIR(ControlFlowGraph * controlFlowGraph)
         {
             right = var->generateIR(controlFlowGraph);
         }
-        */
+        *
         if (VariableIndex * varIndex = dynamic_cast<VariableIndex*>(variable))
         {
             return "nop";
@@ -65,9 +65,12 @@ string Affectation::generateIR(ControlFlowGraph * controlFlowGraph)
             right = operationBinaire->generateIR(controlFlowGraph);
             controlFlowGraph->addIRInstr(IRInstr(AFFECTATION, {controlFlowGraph->getOffset(right), to_string(variable->getDeclaration()->getOffset())}));
         }
-    }
+    }*/
 
-    return "";
+    string right = expression->generateIR(controlFlowGraph);
+    controlFlowGraph->addIRInstr(IRInstr(AFFECTATION, {controlFlowGraph->getOffset(right), to_string(variable->getDeclaration()->getOffset())}));
+
+    return right;
 }
 
 void Affectation::print(std::ostream &stream) const

@@ -7,7 +7,7 @@ using namespace std;
 
 string OperationBinaire::generateIR(ControlFlowGraph *controlFlowGraph)
 {
-    if(Variable* variable1 = dynamic_cast<Variable*>(expressionL))
+    /*if(Variable* variable1 = dynamic_cast<Variable*>(expressionL))
     {
         if(Variable* variable2 = dynamic_cast<Variable*>(expressionR))
         {
@@ -21,15 +21,17 @@ string OperationBinaire::generateIR(ControlFlowGraph *controlFlowGraph)
                 return var3;
             }
         }
-    }
+    }*/
 
 
-    //string var1 = expressionL->generateIR(controlFlowGraph);
-    //string var2 = expressionR->generateIR(controlFlowGraph);
+    string var1 = expressionL->generateIR(controlFlowGraph);
+    string var2 = expressionR->generateIR(controlFlowGraph);
+    string var3 = controlFlowGraph->createNewTemp();
+
+    controlFlowGraph->addIRInstr(IRInstr(ADD, { var3, var1, var2}));
 
 
-
-    return "nop";
+    return var3;
 }
 
 void OperationBinaire::print(std::ostream &stream) const

@@ -2,20 +2,20 @@ using namespace std;
 
 #include "ControlFlowGraph.h"
 
-/*
+
 string ControlFlowGraph::createNewVariable(string name)
 {
     string variableName = "VAR." + name;
 
-    IRVariable iRVariable(variableName, lastOffset + 8);
+    IRVariable iRVariable(variableName, lastOffset - 8);
 
-    lastOffset = lastOffset + 8;
+    lastOffset = lastOffset - 8;
 
     variableMap.insert(pair <string, IRVariable> (variableName, iRVariable));
 
     return variableName;
 }
-*/
+
 
 string ControlFlowGraph::getOffset(std::string string)
 {
@@ -52,7 +52,7 @@ string ControlFlowGraph::createNewTemp()
 {
     nbTemp = nbTemp + 1;
 
-    string tempName = "TMP." + to_string(nbTemp);
+    string tempName = "TMP." + to_string((nbTemp+1)*8);
 
     IRVariable iRVariable(tempName, createNewOffset(INT32_T));
 
@@ -197,19 +197,21 @@ void ControlFlowGraph::generateASM(ostream & os) const
                 }
                 case ADD :
                 {
-                    string result = to_string(stoi(iRInstr.getParam(1)) + stoi(iRInstr.getParam(2)));
+                    os << "\tmovl\t-" << iRInstr.getParam(1).substr(4)  << "(%rbp), %eax\n";
+                    os << "\tadd\t\t-"  << iRInstr.getParam(2).substr(4)  << "(%rbp), %eax\n";
+                    os << "\tmovl\t"  << "%eax, -" << iRInstr.getParam(0).substr(4)  << "(%rbp)\n";
 
-                    auto pos = variableMap.find(iRInstr.getParam(0));
-                    IRVariable var = pos->second;
-
-                    os << "\tmovl\t$" << result << ", " << var.getOffset() << "(%rbp)\n";
                     break;
                 }
                 case AFFECTATION :
                 {
-                    os << "\tmov\t\t"  <<  iRInstr.getParam(0) << "(%rbp), %eax\n";
+                    os << "\tmovl\t"  <<  iRInstr.getParam(0) << "(%rbp), %eax\n";
                     os << "\tmovl\t" << "%eax, " << iRInstr.getParam(1) << "(%rbp)\n";
                     break;
+                }
+                case REG_STORE :
+                {
+                    os << "\tmovl\t$" << iRInstr.getParam(0) << ", -" <<  iRInstr.getParam(1).substr(4) << "(%rbp)\n";
                 }
             }
         }
