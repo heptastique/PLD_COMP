@@ -58,5 +58,5 @@ class ControlFlowGraph
 
         int nbTemp;
 
-        int lastOffset = 8;
+        int lastOffset = -8;
 };

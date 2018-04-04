@@ -36,8 +36,7 @@ string Affectation::generateIR(ControlFlowGraph * controlFlowGraph)
 
         // IRVariable iRVariable = controlFlowGraph->getVariable("VAR." + variable->getValeur());
 
-        controlFlowGraph->addIRInstr(IRInstr(STACK_STORE, {var->getValeur(),
-                                                           to_string(variable->getDeclaration()->getOffset())}));
+        controlFlowGraph->addIRInstr(IRInstr(STORE_RBP_REL, {var->getValeur(), to_string(variable->getDeclaration()->getOffset())}));
     }
     else
     {

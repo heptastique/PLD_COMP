@@ -30,9 +30,11 @@ int ControlFlowGraph::createNewOffset(Type type)
         size = 16;
     }
 
-    lastOffset = lastOffset + size;
+    int offset = lastOffset;
 
-    return lastOffset;
+    lastOffset = lastOffset - size;
+
+    return offset;
 }
 
 string ControlFlowGraph::createNewTemp()
@@ -142,21 +144,22 @@ void ControlFlowGraph::generateASM(ostream & os) const
                 {
                     os << "\tmovl\t$" << iRInstr.getParam(0) <<", %edi\n";
                     os << "\tcall putchar\n";
-                    break;
-                }
-                case STACK_STORE :
-                {
-                    os << "\tmovl\t$" << iRInstr.getParam(0) << ", -" << iRInstr.getParam(1) << "(%rbp)\n";
 
                     break;
                 }
-                case PUSH_REL :
+                case STORE_RBP_REL :
+                {
+                    os << "\tmovl\t$" << iRInstr.getParam(0) << ", " << iRInstr.getParam(1) << "(%rbp)\n";
+
+                    break;
+                }
+                case PUSH_RBP_REL :
                 {
                     os << "\tpushl\t" << iRInstr.getParam(0) << "(%rbp)\n";
 
                     break;
                 }
-                case PUSH :
+                case PUSH_VALUE :
                 {
                     os << "\tpushl\t$" << iRInstr.getParam(0) << "\n";
 
@@ -168,7 +171,7 @@ void ControlFlowGraph::generateASM(ostream & os) const
 
                     break;
                 }
-                case ADD_SP :
+                case ADD_RSP :
                 {
                     os << "\taddq\t$" << iRInstr.getParam(0) << ", %rsp\n";
 

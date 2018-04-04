@@ -16,11 +16,11 @@ enum Mnemonique
     CALL = 2,
 
     REG_STORE = 3,
-    STACK_STORE = 4,
-    PUSH = 5,
-    PUSH_REL = 6,
+    STORE_RBP_REL = 4,
+    PUSH_VALUE = 5,
+    PUSH_RBP_REL = 6,
 
-    ADD_SP = 10,
+    ADD_RSP = 10,
 
     AFFECTATION = 40,
     BINARYOPERATION= 41,

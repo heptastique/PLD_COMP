@@ -12,46 +12,59 @@ string AppelFunction::generateIR(ControlFlowGraph * controlFlowGraph)
     // Special Case for putchar
     if (name == "putchar")
     {
-        controlFlowGraph->addIRInstr(IRInstr(PUTCHAR, {to_string((int)((variables[0]->getValeur())[1]))}));
+        switch (variables[0]->getType())
+        {
+            // Parameter is a Character
+            case CARACTERE :
+            {
+                controlFlowGraph->addIRInstr(IRInstr(PUTCHAR, {to_string((int)((variables[0]->getValeur())[1]))}));
+
+                break;
+            }
+            // Parameter is an Integer
+            case ENTIER :
+            {
+                break;
+            }
+            // Parameter is a Variable
+            case NAME :
+            {
+                break;
+            }
+        }
     }
     else
     {
-        int size = 8;
-
+        // For each Parameter
         for (auto variable : variables)
         {
-            if (variable->getType() == NAME)
+            switch (variable->getType())
             {
-                controlFlowGraph->addIRInstr(IRInstr(PUSH_REL, {"-" + to_string(variable->getDeclaration()->getOffset())}));
-            }
-            else
-            {
-                controlFlowGraph->addIRInstr(IRInstr(PUSH, {variable->getValeur()}));
-            }
+                // Parameter is a Variable
+                case NAME :
+                {
+                    controlFlowGraph->addIRInstr(IRInstr(PUSH_RBP_REL, {to_string(variable->getDeclaration()->getOffset())}));
 
-            // size = size +
+                    break;
+                }
+                // Parameter is an Integer
+                case ENTIER :
+                // Parameter is a Character
+                case CARACTERE :
+                {
+                    controlFlowGraph->addIRInstr(IRInstr(PUSH_VALUE, {variable->getValeur()}));
+
+                    break;
+                }
+            }
         }
 
+        // Call Function
         controlFlowGraph->addIRInstr(IRInstr(CALL, {name}));
 
-        controlFlowGraph->addIRInstr(IRInstr(ADD_SP, {to_string(size)}));
+        // Reset SP after Parameters push
+        controlFlowGraph->addIRInstr(IRInstr(ADD_RSP, {to_string(variables.size() * 8)}));
     }
-
-    // Generate IR for Parameters
-
-    /*for (auto variable : variables)
-    {
-        //variable->generateIR();
-    }*/
-
-    // add IRInstr call
-
-    /*vector <string> params;
-
-    params.push_back(name);
-    params.push_back("r0");
-
-    IRInstr iRInstr(FUNCTION_CALL, params);*/
 
     return "";
 }

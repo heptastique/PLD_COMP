@@ -14,6 +14,19 @@ void Function::generateIR(ControlFlowGraph * controlFlowGraph)
     int addressRangeSize = calculateAddressRangeSize();
 
     /*
+     * Set Offsets of Parameters
+     */
+
+    int offset = (parameters.size() + 1) * 8;
+
+    for (auto parameter : parameters)
+    {
+        parameter->setOffset(offset);
+
+        offset = offset - 8;
+    }
+
+    /*
      * Prolog
      */
 
