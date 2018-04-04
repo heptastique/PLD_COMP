@@ -4,11 +4,12 @@
 #include "Bloc.h"
 #include "Expression.h"
 
-class For : public Instruction {
+class For : public Instruction
+{
 
 public:
 
-    void generateIR(ControlFlowGraph * controlFlowGraph){};
+    //void generateIR(ControlFlowGraph * controlFlowGraph){};
 
     void print(std::ostream& stream) const;
 
@@ -31,7 +32,5 @@ private:
     Expression* condition;
     Instruction * PartThree; // affectation or expression or nothing
     Bloc* bloc;
-
-
 
 };

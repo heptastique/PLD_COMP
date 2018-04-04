@@ -14,31 +14,35 @@ std::ostream& operator<<(std::ostream& stream, const For& aFor)
     return stream;
 }
 
-For &For::operator=(const For &unFor) {
+For &For::operator=(const For &unFor)
+{
 }
 
-void For::resolveScopeVariables(std::vector<Declaration*> declProgramme, std::vector<Declaration*> paramFunction, std::vector<Declaration*> declBloc, std::vector<Function*> functionProgram){
+void For::resolveScopeVariables(std::vector<Declaration*> declProgramme, std::vector<Declaration*> paramFunction, std::vector<Declaration*> declBloc, std::vector<Function*> functionProgram)
+{
     this->PartOne->resolveScopeVariables(declProgramme, paramFunction, declBloc, functionProgram);
     this->condition->resolveScopeVariables(declProgramme, paramFunction, declBloc, functionProgram);
     this->PartThree->resolveScopeVariables(declProgramme, paramFunction, declBloc, functionProgram);
     this->bloc->resolveScopeVariables(declProgramme, paramFunction, declBloc, functionProgram);
 }
 
-void For::resolveTypeExpr(){
+void For::resolveTypeExpr()
+{
     this->bloc->resolveTypeExpr();
     this->PartOne->resolveTypeExpr();
     this->condition->resolveTypeExpr();
     this->PartThree->resolveTypeExpr();
 }
 
-For::For(const For &unFor) {
+For::For(const For &unFor)
+{
 #ifdef MAP
     cout << "Appel au constructeur de copie de <For>" << endl;
 #endif
 }
 
-
-For::For(Bloc* bloc, Expression* condition) {
+For::For(Bloc* bloc, Expression* condition)
+{
     this->bloc = bloc;
     this->condition = condition;
 #ifdef MAP
@@ -46,8 +50,8 @@ For::For(Bloc* bloc, Expression* condition) {
 #endif
 }
 
-
-For::~For() {
+For::~For()
+{
 #ifdef MAP
     cout << "Appel au destructeur de <For>" << endl;
 #endif
