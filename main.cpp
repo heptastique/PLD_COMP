@@ -20,6 +20,7 @@ using namespace antlr4;
 using namespace std;
 
 DEFINE_bool(o, false, "generate asm");
+DEFINE_string(Sout, "./target/prog.s", "generated asm path");
 
 std::string exec(const char *);
 
@@ -145,7 +146,7 @@ int main (int argc, char * argv[])
 
     ofstream aSMFile;
 
-    aSMFile.open("./target/prog.s");
+    aSMFile.open(FLAGS_Sout);
 
     if (aSMFile.bad() || aSMFile.fail() || !aSMFile.good())
     {
@@ -158,7 +159,7 @@ int main (int argc, char * argv[])
 
     aSMFile.close();
 
-    cout << "Assembly generated" << endl;
+    cout << "Assembly generated in "<< FLAGS_Sout << endl;
 
     if(FLAGS_o)
     {
