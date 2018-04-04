@@ -17,7 +17,7 @@ string AppelFunction::generateIR(ControlFlowGraph * controlFlowGraph)
             // Parameter is a Character
             case CARACTERE :
             {
-                controlFlowGraph->addIRInstr(IRInstr(PUTCHAR, {to_string((int)((variables[0]->getValeur())[1]))}));
+                controlFlowGraph->addIRInstr(IRInstr(PUTCHAR_VALUE, {to_string((int)((variables[0]->getValeur())[1]))}));
 
                 break;
             }
@@ -29,6 +29,8 @@ string AppelFunction::generateIR(ControlFlowGraph * controlFlowGraph)
             // Parameter is a Variable
             case NAME :
             {
+                controlFlowGraph->addIRInstr(IRInstr(PUTCHAR_RBP_REL, {to_string(variables[0]->getDeclaration()->getOffset())}));
+
                 break;
             }
         }

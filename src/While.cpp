@@ -22,7 +22,6 @@ std::ostream& operator<<(std::ostream& stream, const While& aWhile)
 
 While &While::operator=(const While &unWhile)
 {
-    //
 }
 
 void While::resolveScopeVariables(std::vector<Declaration*> declProgramme, std::vector<Declaration*> paramFunction, std::vector<Declaration*> declBloc, std::vector<Function*> functionProgram)
@@ -34,6 +33,7 @@ void While::resolveScopeVariables(std::vector<Declaration*> declProgramme, std::
 void While::resolveTypeExpr()
 {
     this->bloc->resolveTypeExpr();
+    this->condition->resolveTypeExpr();
 }
 
 While::While(const While &unWhile)
@@ -48,7 +48,6 @@ While::While(Bloc* bloc, Expression* condition)
     #ifdef MAP
         cout << "Appel au constructeur de <While>" << endl;
     #endif
-    
     this->bloc = bloc;
     this->condition = condition;
 }

@@ -28,7 +28,8 @@ enum Mnemonique
     ADD = 43,
     STORE_OFF_OFF = 44,
 
-    PUTCHAR = 100
+    PUTCHAR_VALUE = 100,
+    PUTCHAR_RBP_REL = 101
 };
 
 class IRInstr
