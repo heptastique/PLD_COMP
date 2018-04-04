@@ -10,15 +10,15 @@ mkdir -p target
 # assert_file "cat ./target/prog.s" "<Path to expected generated file>"
 
 ../bin/app Custom/01-simple-func.c > ./target/output
-assert_file "cat ./target/prog.s" "./ASM/00-basic.s"
+assert_file "cat ./target/prog.s" "./ASM/Custom/01-simple-func.s"
 
 ../bin/app Front/ValidPrograms/01_SimpleDeclaration.c > ./target/output
-assert_file "cat ./target/prog.s" "./ASM/01-simpleDeclaration.s"
+assert_file "cat ./target/prog.s" "./ASM/Front/01_SimpleDeclaration.s"
 
 ../bin/app Custom/27-putchar.c > ./target/output
-assert_file "cat ./target/prog.s" "./ASM/02-putchar.s"
+assert_file "cat ./target/prog.s" "./ASM/Custom/27-putchar.s"
 
 ../bin/app Custom/11-multiple-func.c > ./target/output
-assert_file "cat ./target/prog.s" "./ASM/03-multiple-func.s"
+assert_file "cat ./target/prog.s" "./ASM/Custom/11-multiple-func.s"
 
 assert_end examples
