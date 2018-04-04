@@ -4,30 +4,29 @@
 #include "Bloc.h"
 #include "Expression.h"
 
-class While : public Instruction {
+class While : public Instruction
+{
+    public:
+        void print(std::ostream& stream) const;
 
-public:
+        std::string generateIR(ControlFlowGraph * controlFlowGraph);
 
-    void generateIR(ControlFlowGraph * controlFlowGraph){};
+        friend std::ostream& operator<< (std::ostream& stream, const While& aWhile);
 
-    void print(std::ostream& stream) const;
+        While &operator=(const While &unWhile);
 
-    friend std::ostream& operator<< (std::ostream& stream, const While& aWhile);
+        void resolveScopeVariables(std::vector<Declaration*> declProgramme, std::vector<Declaration*> paramFunction, std::vector<Declaration*> declBloc, std::vector<Function*> functionProgram);
 
-    While &operator=(const While &unWhile);
+        void resolveTypeExpr();
 
-    void resolveScopeVariables(std::vector<Declaration*> declProgramme, std::vector<Declaration*> paramFunction, std::vector<Declaration*> declBloc, std::vector<Function*> functionProgram);
+        While(const While &unWhile);
 
-    void resolveTypeExpr();
+        While(Bloc* bloc, Expression* condition);
 
-    While(const While &unWhile);
+        virtual ~While();
 
-    While(Bloc* bloc, Expression* condition);
+    private:
+        Bloc* bloc;
 
-    virtual ~While();
-
-private:
-    Bloc* bloc;
-    Expression* condition;
-
+        Expression* condition;
 };

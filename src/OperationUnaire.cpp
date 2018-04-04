@@ -1,7 +1,16 @@
 using namespace std;
 
 #include "OperationUnaire.h"
+#include "IRInstr.h"
 #include <iostream>
+
+string OperationUnaire::generateIR(ControlFlowGraph *controlFlowGraph)
+{
+    string var = expression->generateIR(controlFlowGraph);
+    // string var3 = createNewVAr();
+    controlFlowGraph->addIRInstr(IRInstr(UNARYOPERATION, {to_string(operateur), var}));
+    return var;
+}
 
 void OperationUnaire::print(std::ostream &stream) const
 {
@@ -13,21 +22,27 @@ std::ostream& operator<<(std::ostream& stream, const OperationUnaire& operationU
 {
     stream << " OperationUnaire:  Operateur=" << operationUnaire.operateur << " " << *operationUnaire.expression;
     stream << endl;
+    
     return stream;
 }
 
-
-OperationUnaire &OperationUnaire::operator=(const OperationUnaire &unOperationUnaire) {
+OperationUnaire &OperationUnaire::operator=(const OperationUnaire &unOperationUnaire)
+{
+    
 }
 
-void OperationUnaire::resolveScopeVariables(std::vector<Declaration*> declProgramme, std::vector<Declaration*> paramFunction, std::vector<Declaration*> declBloc, std::vector<Function*> functionProgram){
+void OperationUnaire::resolveScopeVariables(std::vector<Declaration*> declProgramme, std::vector<Declaration*> paramFunction, std::vector<Declaration*> declBloc, std::vector<Function*> functionProgram)
+{
     this->expression->resolveScopeVariables(declProgramme, paramFunction, declBloc, functionProgram);
 }
 
-void OperationUnaire::resolveTypeExpr() {
+void OperationUnaire::resolveTypeExpr()
+{
     this->expression->resolveTypeExpr();
     Type typeExpr = expression->getType();
-    switch ( typeExpr){
+    
+    switch ( typeExpr)
+    {
         case CHAR :
             this->setType( INT32_T);
             break;
@@ -42,24 +57,26 @@ void OperationUnaire::resolveTypeExpr() {
     }
 }
 
-OperationUnaire::OperationUnaire(const OperationUnaire &unOperationUnaire) {
-#ifdef MAP
-    cout << "Appel au constructeur de copie de <OperationUnaire>" << endl;
-#endif
+OperationUnaire::OperationUnaire(const OperationUnaire &unOperationUnaire)
+{
+    #ifdef MAP
+        cout << "Appel au constructeur de copie de <OperationUnaire>" << endl;
+    #endif
 }
 
+OperationUnaire::OperationUnaire(Operateur operateur, Expression* expression)
+{
+    #ifdef MAP
+        cout << "Appel au constructeur de <OperationUnaire>" << endl;
+    #endif
 
-OperationUnaire::OperationUnaire(Operateur operateur, Expression* expression) {
     this->operateur = operateur;
     this->expression = expression;
-#ifdef MAP
-    cout << "Appel au constructeur de <OperationUnaire>" << endl;
-#endif
 }
 
-
-OperationUnaire::~OperationUnaire() {
-#ifdef MAP
-    cout << "Appel au destructeur de <OperationUnaire>" << endl;
-#endif
+OperationUnaire::~OperationUnaire()
+{
+    #ifdef MAP
+        cout << "Appel au destructeur de <OperationUnaire>" << endl;
+    #endif
 }

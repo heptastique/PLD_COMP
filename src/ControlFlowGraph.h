@@ -1,45 +1,62 @@
-# pragma once
+#pragma once
 
-# include "BasicBlock.h"
-# include "IRInstr.h"
-# include "Programme.h"
-# include <vector>
-# include <iostream>
+#include "BasicBlock.h"
+#include "IRInstr.h"
+#include "Programme.h"
+#include "Type.h"
+//#include "IRVariable.h"
+#include <vector>
+#include <iostream>
+#include <map>
 
 using namespace std;
 
 class BasicBlock;
 class IRInstr;
 class Programme;
+class IRVariable;
 
 class ControlFlowGraph
 {
-	protected :
+    public:
+        int createNewOffset(Type type);
 
-	public :
+        vector <BasicBlock*> getBasicBlocks() const;
 
-		void addIRInstr(IRInstr iRInstr);
+        //string createNewVariable(string name);
 
-		vector <BasicBlock*> getBasicBlocks() const;
+        string createNewTemp();
 
-		void newBasicBlock();
+        //IRVariable getVariable(string name);
 
-		void generateProlog(ostream &os, string functionName, int addressRangeSize) const;
-		
-		void generateEpilog(ostream & os, int addressRangeSize) const;
+        void addIRInstr(IRInstr iRInstr);
 
-		void generateASM(ostream &os) const;
+        void newBasicBlock();
 
-		ControlFlowGraph(const ControlFlowGraph &controlFlowGraph);
+        void generateProlog(ostream &os, string functionName, int addressRangeSize) const;
 
-    		ControlFlowGraph();
+        void generateEpilog(ostream & os, int addressRangeSize) const;
 
-    		ControlFlowGraph(Programme * prog);
+        void generateASM(ostream &os) const;
 
-		virtual ~ControlFlowGraph();
+        ControlFlowGraph(const ControlFlowGraph &controlFlowGraph);
 
-	private :
-		Programme * programme;
-		BasicBlock * currentBasicBlock;
-		vector <BasicBlock*> basicBlocks;
+        ControlFlowGraph();
+
+        ControlFlowGraph(Programme * prog);
+
+        virtual ~ControlFlowGraph();
+
+    private:
+        Programme * programme;
+
+        BasicBlock * currentBasicBlock;
+
+        vector <BasicBlock*> basicBlocks;
+
+        map <string, IRVariable> variableMap;
+
+        int nbTemp;
+
+        int lastOffset = -8;
 };

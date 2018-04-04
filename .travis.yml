@@ -4,6 +4,7 @@ sudo: required
 
 before_install:
   - if [ "${TRAVIS_EVENT_TYPE}" = "cron" ]; then (rm -rf build antlr/build antlr/install) fi
+  - if [ "${TRAVIS_PULL_REQUEST}" != "false" ]; then (npm install -g lintspaces-cli) fi
   - sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
   - sudo apt-get update -qq
   - sudo apt-get install -qq g++-6
@@ -19,12 +20,13 @@ install:
 
 before_script:
   - cd ../tests
-  - chmod +x asm-test.sh symbols-test.sh errors-test.sh lib/assert.sh
+  - chmod +x asm-test.sh symbols-test.sh errors-test.sh lint.sh lib/assert.sh
 
 script:
   - ./symbols-test.sh -v
   - ./asm-test.sh -v
   - ./errors-test.sh -v
+  - ./lint.sh
 
 before_cache:
   - cd ..
