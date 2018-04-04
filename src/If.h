@@ -8,32 +8,33 @@
 class If : public Instruction
 {
 
-public:
+    public:
+        void print(std::ostream& stream) const;
 
-    void generateIR(ControlFlowGraph * controlFlowGraph){};
+        std::string generateIR(ControlFlowGraph * controlFlowGraph);
 
-    void print(std::ostream& stream) const;
+        friend std::ostream& operator<< (std::ostream& stream, const If& anIf);
 
-    friend std::ostream& operator<< (std::ostream& stream, const If& anIf);
+        void resolveScopeVariables(std::vector<Declaration*> declProgramme, std::vector<Declaration*> paramFunction, std::vector<Declaration*> declBloc, std::vector<Function*> functionProgram);
 
-    void resolveScopeVariables(std::vector<Declaration*> declProgramme, std::vector<Declaration*> paramFunction, std::vector<Declaration*> declBloc, std::vector<Function*> functionProgram);
+        void resolveTypeExpr();
 
-    void resolveTypeExpr();
+        void setElse(Else* anElse);
 
-    void setElse(Else* anElse);
+        If &operator=(const If &unIf);
 
-    If &operator=(const If &unIf);
+        If(const If &unIf);
 
-    If(const If &unIf);
+        If(Expression* condition, Bloc* bloc);
 
-    If(Expression* condition, Bloc* bloc);
+        virtual ~If();
 
-    virtual ~If();
+    private:
+        Expression* condition;
 
-private:
-    Expression* condition;
-    Bloc* bloc;
-    Else* anElse;
-    bool hasElse = false;
+        Bloc* bloc;
 
+        Else* anElse;
+
+        bool hasElse = false;
 };

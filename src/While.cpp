@@ -3,6 +3,11 @@ using namespace std;
 #include "While.h"
 #include <iostream>
 
+string While::generateIR(ControlFlowGraph *controlFlowGraph)
+{
+    return "";
+}
+
 void While::print(std::ostream &stream) const
 {
     stream << " While: Condition=" << *condition << *bloc << endl;
@@ -11,6 +16,7 @@ void While::print(std::ostream &stream) const
 std::ostream& operator<<(std::ostream& stream, const While& aWhile)
 {
     stream << " While: Condition=" << *aWhile.condition << *aWhile.bloc << endl;
+
     return stream;
 }
 
@@ -32,23 +38,23 @@ void While::resolveTypeExpr()
 
 While::While(const While &unWhile)
 {
-#ifdef MAP
-    cout << "Appel au constructeur de copie de <While>" << endl;
-#endif
+    #ifdef MAP
+        cout << "Appel au constructeur de copie de <While>" << endl;
+    #endif
 }
 
 While::While(Bloc* bloc, Expression* condition)
 {
+    #ifdef MAP
+        cout << "Appel au constructeur de <While>" << endl;
+    #endif
     this->bloc = bloc;
     this->condition = condition;
-#ifdef MAP
-    cout << "Appel au constructeur de <While>" << endl;
-#endif
 }
 
 While::~While()
 {
-#ifdef MAP
-    cout << "Appel au destructeur de <While>" << endl;
-#endif
+    #ifdef MAP
+        cout << "Appel au destructeur de <While>" << endl;
+    #endif
 }

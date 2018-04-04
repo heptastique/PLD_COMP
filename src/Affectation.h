@@ -4,30 +4,31 @@
 #include "Variable.h"
 #include "Expression.h"
 
-class Affectation : public Instruction{
+class Affectation : public Instruction
+{
+    public:
+        void print(std::ostream& stream) const;
 
-public:
+        std::string generateIR(ControlFlowGraph * controlFlowGraph);
 
-	void generateIR(ControlFlowGraph * controlFlowGraph);
+        friend std::ostream& operator<< (std::ostream& stream, const Affectation& affectation);
 
-	void print(std::ostream& stream) const;
+        Affectation &operator=(const Affectation &unAffectation);
 
-    friend std::ostream& operator<< (std::ostream& stream, const Affectation& affectation);
+        void resolveScopeVariables(std::vector<Declaration*> declProgramme, std::vector<Declaration*> paramFunction, std::vector<Declaration*> declBloc, std::vector<Function*> functionProgram);
 
-    Affectation &operator=(const Affectation &unAffectation);
+        void resolveTypeExpr();
 
-    void resolveScopeVariables(std::vector<Declaration*> declProgramme, std::vector<Declaration*> paramFunction, std::vector<Declaration*> declBloc, std::vector<Function*> functionProgram);
+        Affectation(const Affectation &unAffectation);
 
-    void resolveTypeExpr();
+        Affectation(Variable* variable, Operateur operateur, Expression* expression);
 
-    Affectation(const Affectation &unAffectation);
+        virtual ~Affectation();
 
-    Affectation(Variable* variable, Operateur operateur, Expression* expression);
+    private:
+        Variable* variable;
 
-    virtual ~Affectation();
+        Operateur operateur;
 
-private:
-    Variable* variable;
-    Operateur operateur;
-    Expression* expression;
+        Expression* expression;
 };

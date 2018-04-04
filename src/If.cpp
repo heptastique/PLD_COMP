@@ -3,6 +3,11 @@ using namespace std;
 #include "If.h"
 #include <iostream>
 
+string If::generateIR(ControlFlowGraph * controlFlowGraph)
+{
+    return "";
+}
+
 void If::print(std::ostream &stream) const
 {
     stream << " If: Condition=" << *condition << *bloc;
@@ -19,6 +24,7 @@ std::ostream& operator<<(std::ostream& stream, const If& anIf)
     {
         stream << *anIf.anElse << endl;
     }
+    
     return stream;
 }
 
@@ -65,15 +71,11 @@ If::If(Expression* condition, Bloc* bloc)
 {
     this->condition = condition;
     this->bloc = bloc;
-#ifdef MAP
-    cout << "Appel au constructeur de <If>" << endl;
-#endif
 }
-
 
 If::~If()
 {
-#ifdef MAP
-    cout << "Appel au destructeur de <If>" << endl;
-#endif
+    #ifdef MAP
+        cout << "Appel au destructeur de <If>" << endl;
+    #endif
 }

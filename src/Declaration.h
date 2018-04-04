@@ -1,44 +1,55 @@
 #pragma once
 
 #include "Type.h"
-//# include "ControlFlowGraph.h"
+#include "Instruction.h"
+#include "IRVariable.h"
 
 #include <string>
-#include "Instruction.h"
 
-//class ControlFlowGraph;
+class IRVariable;
 
-class Declaration : public Instruction {
+class Declaration : public Instruction
+{
+    public:
+        void print(std::ostream& stream) const;
 
-public:
+        std::string generateIR(ControlFlowGraph * controlFlowGraph);
 
-	void generateIR(ControlFlowGraph * controlFlowGraph);
+        friend std::ostream& operator<< (std::ostream& stream, const Declaration& declaration);
 
-    void print(std::ostream& stream) const;
+        Declaration &operator=(const Declaration &unDeclaration);
 
-    friend std::ostream& operator<< (std::ostream& stream, const Declaration& declaration);
+        void resolveScopeVariables(std::vector<Declaration*> declProgramme, std::vector<Declaration*> paramFunction, std::vector<Declaration*> declBloc, std::vector<Function*> functionProgram);
 
-    Declaration &operator=(const Declaration &unDeclaration);
+        void resolveTypeExpr();
 
-    void resolveScopeVariables(std::vector<Declaration*> declProgramme, std::vector<Declaration*> paramFunction, std::vector<Declaration*> declBloc, std::vector<Function*> functionProgram);
+        void setType(Type type);
 
-    void resolveTypeExpr();
+        Type getType();
 
-    void setType(Type type);
+        void setOffset(int offset);
 
-    Type getType();
+        int getOffset();
 
-    std::string getName();
+        //void setIRVariable(IRVariable);
 
-    Declaration();
+        //IRVariable getIRVariable();
 
-    Declaration(const Declaration &unDeclaration);
+        std::string getName();
 
-    Declaration(std::string name, Type type);
+        Declaration();
 
-    virtual ~Declaration();
+        Declaration(const Declaration &unDeclaration);
 
-protected:
-    Type type;
-    std::string name;
+        Declaration(std::string name, Type type);
+
+        virtual ~Declaration();
+
+    protected:
+        Type type;
+
+        std::string name;
+
+        //IRVariable iRVariable;
+        int offset = 999;
 };
