@@ -25,7 +25,7 @@ string Variable::generateIR(ControlFlowGraph * controlFlowGraph)
         }
         case NAME :
         {
-            break;
+            return this->getDeclaration()->getName();
         }
     }
 

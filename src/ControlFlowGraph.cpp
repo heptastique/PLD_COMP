@@ -5,7 +5,9 @@ using namespace std;
 
 string ControlFlowGraph::createNewVariable(string name)
 {
-    string variableName = "VAR." + name;
+    nbTemp = nbTemp + 1;
+
+    string variableName = "VAR." + to_string(nbTemp*8);
 
     IRVariable iRVariable(variableName, lastOffset - 8);
 
@@ -52,7 +54,7 @@ string ControlFlowGraph::createNewTemp()
 {
     nbTemp = nbTemp + 1;
 
-    string tempName = "TMP." + to_string((nbTemp+1)*8);
+    string tempName = "TMP." + to_string(nbTemp*8);
 
     IRVariable iRVariable(tempName, createNewOffset(INT32_T));
 
@@ -205,8 +207,8 @@ void ControlFlowGraph::generateASM(ostream & os) const
                 }
                 case AFFECTATION :
                 {
-                    os << "\tmovl\t"  <<  iRInstr.getParam(0) << "(%rbp), %eax\n";
-                    os << "\tmovl\t" << "%eax, " << iRInstr.getParam(1) << "(%rbp)\n";
+                    os << "\tmovl\t-"  <<  iRInstr.getParam(0).substr(4) << "(%rbp), %eax\n";
+                    os << "\tmovl\t" << "%eax, -" << iRInstr.getParam(1).substr(4) << "(%rbp)\n";
                     break;
                 }
                 case REG_STORE :

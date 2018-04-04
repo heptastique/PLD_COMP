@@ -68,7 +68,8 @@ string Affectation::generateIR(ControlFlowGraph * controlFlowGraph)
     }*/
 
     string right = expression->generateIR(controlFlowGraph);
-    controlFlowGraph->addIRInstr(IRInstr(AFFECTATION, {controlFlowGraph->getOffset(right), to_string(variable->getDeclaration()->getOffset())}));
+    string left = variable->generateIR(controlFlowGraph);
+    controlFlowGraph->addIRInstr(IRInstr(AFFECTATION, {right, left}));
 
     return right;
 }
