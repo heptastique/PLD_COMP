@@ -1,5 +1,9 @@
 #include <sys/stat.h>
 #include <iostream>
+#include <memory>
+#include <stdexcept>
+#include <cstdio>
+#include <array>
 
 #include <gflags/gflags.h>
 
@@ -15,11 +19,17 @@
 using namespace antlr4;
 using namespace std;
 
-int main (int argc, const char * argv[])
+DEFINE_bool(o, false, "generate asm");
+
+std::string exec(const char *);
+
+int main (int argc, char * argv[])
 {
     /*
         Input C Programm
     */
+
+    gflags::ParseCommandLineFlags(&argc, &argv, true);
 
     cout << "Reading C Program" << endl;
 
@@ -150,5 +160,24 @@ int main (int argc, const char * argv[])
 
     cout << "Assembly generated" << endl;
 
+    if(FLAGS_o)
+    {
+        exec("as -o ./target/prog.o ./target/prog.s");
+        exec("gcc -o ./target/prog.out ./target/prog.o");
+    }
+
     return 0;
+}
+
+std::string exec(const char* cmd) 
+{
+    std::array<char, 128> buffer;
+    std::string result;
+    std::shared_ptr<FILE> pipe(popen(cmd, "r"), pclose);
+    if (!pipe) throw std::runtime_error("popen() failed!");
+    while (!feof(pipe.get())) {
+        if (fgets(buffer.data(), 128, pipe.get()) != nullptr)
+            result += buffer.data();
+    }
+    return result;
 }
