@@ -11,7 +11,6 @@ string OperationBinaire::generateIR(ControlFlowGraph *controlFlowGraph)
     {
         if(Variable* variable2 = dynamic_cast<Variable*>(expressionR))
         {
-            cout << "hello" << endl;
             if (variable1->getType() == ENTIER && variable2->getType() == ENTIER)
             {
                 string var1 = variable1->getValeur();

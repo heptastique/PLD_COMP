@@ -46,7 +46,7 @@ string Affectation::generateIR(ControlFlowGraph * controlFlowGraph)
         controlFlowGraph->addIRInstr(IRInstr(AFFECTATION, {controlFlowGraph->getOffset(right), to_string(variable->getDeclaration()->getOffset())}));
     }
 
-    return right;
+    return "ok";
 }
 
 void Affectation::print(std::ostream &stream) const
