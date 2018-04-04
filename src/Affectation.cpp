@@ -69,6 +69,7 @@ string Affectation::generateIR(ControlFlowGraph * controlFlowGraph)
 
     string right = expression->generateIR(controlFlowGraph);
     string left = variable->generateIR(controlFlowGraph);
+    cout << right << endl;
     controlFlowGraph->addIRInstr(IRInstr(AFFECTATION, {right, left}));
 
     return right;

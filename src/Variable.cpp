@@ -20,8 +20,9 @@ string Variable::generateIR(ControlFlowGraph * controlFlowGraph)
         case CARACTERE :
         {
             //controlFlowGraph->addIRInstr(IRInstr(STORE_RBP_REL, {to_string((int)(var->getValeur())[1]), to_string(variable->getDeclaration()->getOffset())}));
-
-            break;
+            string var = controlFlowGraph->createNewTemp();
+            controlFlowGraph->addIRInstr(IRInstr(REG_STORE, {to_string((int)valeur[1]), var}));
+            return var;
         }
         case NAME :
         {
