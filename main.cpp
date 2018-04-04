@@ -19,7 +19,7 @@
 using namespace antlr4;
 using namespace std;
 
-DEFINE_bool(o, false, "generate asm");
+DEFINE_bool(o, false, "generate binary executable");
 DEFINE_string(Sout, "./target/prog.s", "generated asm path");
 
 std::string exec(const char *);
