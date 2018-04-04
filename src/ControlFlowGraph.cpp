@@ -43,7 +43,7 @@ string ControlFlowGraph::createNewTemp()
 
     string tempName = "TMP." + to_string(nbTemp);
 
-    IRVariable iRVariable(tempName, 0);
+    IRVariable iRVariable(tempName, createNewOffset(INT32_T));
 
     variableMap.insert(pair <string, IRVariable> (tempName, iRVariable));
 
@@ -175,6 +175,15 @@ void ControlFlowGraph::generateASM(ostream & os) const
                 {
                     os << "\taddq\t$" << iRInstr.getParam(0) << ", %rsp\n";
 
+                    break;
+                }
+                case ADD :
+                {
+                    string result = to_string(stoi(iRInstr.getParam(1)) + stoi(iRInstr.getParam(2)));
+                    auto pos = variableMap.find(iRInstr.getParam(0));
+                    IRVariable var = pos->second;
+
+                    os << "\tmovl\t$" << result << ", " << var.getOffset() << "(%rbp)\n";
                     break;
                 }
             }

@@ -2,16 +2,31 @@ using namespace std;
 
 #include "OperationBinaire.h"
 #include "IRInstr.h"
+#include "Variable.h"
 #include <iostream>
 
 string OperationBinaire::generateIR(ControlFlowGraph *controlFlowGraph)
 {
-    string var1 = expressionL->generateIR(controlFlowGraph);
-    string var2 = expressionR->generateIR(controlFlowGraph);
-    // string var3 = createNewVAr();
-    string var3 = "tmp";
-    controlFlowGraph->addIRInstr(IRInstr(BINARYOPERATION, {to_string(operateur), var3, var1, var2}));
-    return var3;
+    if(Variable* variable1 = dynamic_cast<Variable*>(expressionL))
+    {
+        if(Variable* variable2 = dynamic_cast<Variable*>(expressionR))
+        {
+            if (variable1->getType() == ENTIER && variable2->getType() == ENTIER);
+            string var1 = variable1->getValeur();
+            string var2 = variable2->getValeur();
+
+            string var3 = controlFlowGraph->createNewTemp();
+            controlFlowGraph->addIRInstr(IRInstr(ADD, { var3, var1, var2}));
+        }
+    }
+
+
+    //string var1 = expressionL->generateIR(controlFlowGraph);
+    //string var2 = expressionR->generateIR(controlFlowGraph);
+
+
+
+    return "nop";
 }
 
 void OperationBinaire::print(std::ostream &stream) const

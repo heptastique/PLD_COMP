@@ -25,6 +25,7 @@ enum Mnemonique
     AFFECTATION = 40,
     BINARYOPERATION= 41,
     UNARYOPERATION= 42,
+    ADD = 43,
 
     PUTCHAR = 100
 };
