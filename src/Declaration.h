@@ -27,9 +27,13 @@ class Declaration : public Instruction
 
         Type getType();
 
-        void setIRVariable(IRVariable);
+        void setOffset(int offset);
 
-        IRVariable getIRVariable();
+        int getOffset();
+
+        //void setIRVariable(IRVariable);
+
+        //IRVariable getIRVariable();
 
         std::string getName();
 
@@ -47,4 +51,5 @@ class Declaration : public Instruction
         std::string name;
 
         //IRVariable iRVariable;
+        int offset = 999;
 };

@@ -19,7 +19,7 @@ string Affectation::generateIR(ControlFlowGraph * controlFlowGraph)
 
     if(Variable* var = dynamic_cast<Variable*>(expression))
     {
-/*
+        /*
         if(var->getType() == NAME)
         {
             right = var->getValeur();
@@ -28,15 +28,15 @@ string Affectation::generateIR(ControlFlowGraph * controlFlowGraph)
         {
             right = var->generateIR(controlFlowGraph);
         }
-*/
-    if (VariableIndex * varIndex = dynamic_cast<VariableIndex*>(variable))
-    {
-        return "nop";
-    }
+        */
+        if (VariableIndex * varIndex = dynamic_cast<VariableIndex*>(variable))
+        {
+            return "nop";
+        }
 
-    IRVariable iRVariable = controlFlowGraph->getVariable("VAR." + variable->getValeur());
+        // IRVariable iRVariable = controlFlowGraph->getVariable("VAR." + variable->getValeur());
 
-    controlFlowGraph->addIRInstr(IRInstr(STACK_STORE, {var->getValeur(), to_string(iRVariable.getOffset())}));
+        controlFlowGraph->addIRInstr(IRInstr(STORE_RBP_REL, {var->getValeur(), to_string(variable->getDeclaration()->getOffset())}));
     }
     else
     {

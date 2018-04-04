@@ -2,6 +2,7 @@ using namespace std;
 
 #include "ControlFlowGraph.h"
 
+/*
 string ControlFlowGraph::createNewVariable(string name)
 {
     string variableName = "VAR." + name;
@@ -13,6 +14,27 @@ string ControlFlowGraph::createNewVariable(string name)
     variableMap.insert(pair <string, IRVariable> (variableName, iRVariable));
 
     return variableName;
+}
+*/
+
+int ControlFlowGraph::createNewOffset(Type type)
+{
+    int size = 0;
+
+    if (type == INT32_T || type == CHAR)
+    {
+        size = 8;
+    }
+    else if (type == INT64_T)
+    {
+        size = 16;
+    }
+
+    int offset = lastOffset;
+
+    lastOffset = lastOffset - size;
+
+    return offset;
 }
 
 string ControlFlowGraph::createNewTemp()
@@ -28,6 +50,7 @@ string ControlFlowGraph::createNewTemp()
     return tempName;
 }
 
+/*
 IRVariable ControlFlowGraph::getVariable(string name)
 {
     map <string, IRVariable> :: iterator variable;
@@ -36,6 +59,7 @@ IRVariable ControlFlowGraph::getVariable(string name)
 
     return variable->second;
 }
+*/
 
 void ControlFlowGraph::addIRInstr(IRInstr iRInstr)
 {
@@ -101,7 +125,7 @@ void ControlFlowGraph::generateASM(ostream & os) const
             switch (iRInstr.getMnemonique())
             {
                 // Function Declaration
-                case FUNCTION_DECLARATION :
+                case DECL :
                 {
                     // Generate Prolog of Function
                     generateProlog(os, iRInstr.getParam(0), stoi(iRInstr.getParam(1)));
@@ -109,7 +133,7 @@ void ControlFlowGraph::generateASM(ostream & os) const
                     break;
                 }
                 // Function Return
-                case FUNCTION_RETURN :
+                case RET :
                 {
                     // Generate Epilog
                     generateEpilog(os, stoi(iRInstr.getParam(0)));
@@ -120,11 +144,36 @@ void ControlFlowGraph::generateASM(ostream & os) const
                 {
                     os << "\tmovl\t$" << iRInstr.getParam(0) <<", %edi\n";
                     os << "\tcall putchar\n";
+
                     break;
                 }
-                case STACK_STORE :
+                case STORE_RBP_REL :
                 {
-                    os << "\tmovl\t$" << iRInstr.getParam(0) << ", -" << iRInstr.getParam(1) << "(%rsp)\n";
+                    os << "\tmovl\t$" << iRInstr.getParam(0) << ", " << iRInstr.getParam(1) << "(%rbp)\n";
+
+                    break;
+                }
+                case PUSH_RBP_REL :
+                {
+                    os << "\tpushl\t" << iRInstr.getParam(0) << "(%rbp)\n";
+
+                    break;
+                }
+                case PUSH_VALUE :
+                {
+                    os << "\tpushl\t$" << iRInstr.getParam(0) << "\n";
+
+                    break;
+                }
+                case CALL :
+                {
+                    os << "\tcall\t" << iRInstr.getParam(0) << "\n";
+
+                    break;
+                }
+                case ADD_RSP :
+                {
+                    os << "\taddq\t$" << iRInstr.getParam(0) << ", %rsp\n";
 
                     break;
                 }

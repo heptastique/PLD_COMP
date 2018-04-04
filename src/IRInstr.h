@@ -11,12 +11,16 @@ class ControlFlowGraph;
 
 enum Mnemonique
 {
-    FUNCTION_DECLARATION = 0,
-    FUNCTION_RETURN = 1,
-    FUNCTION_CALL = 2,
+    DECL = 0,
+    RET = 1,
+    CALL = 2,
 
     REG_STORE = 3,
-    STACK_STORE = 4,
+    STORE_RBP_REL = 4,
+    PUSH_VALUE = 5,
+    PUSH_RBP_REL = 6,
+
+    ADD_RSP = 10,
 
     AFFECTATION = 40,
     BINARYOPERATION= 41,

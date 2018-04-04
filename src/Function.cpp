@@ -14,12 +14,25 @@ void Function::generateIR(ControlFlowGraph * controlFlowGraph)
     int addressRangeSize = calculateAddressRangeSize();
 
     /*
+     * Set Offsets of Parameters
+     */
+
+    int offset = (parameters.size() + 1) * 8;
+
+    for (auto parameter : parameters)
+    {
+        parameter->setOffset(offset);
+
+        offset = offset - 8;
+    }
+
+    /*
      * Prolog
      */
 
     controlFlowGraph->newBasicBlock();
 
-    controlFlowGraph->addIRInstr(IRInstr(FUNCTION_DECLARATION, {name, to_string(addressRangeSize)}));
+    controlFlowGraph->addIRInstr(IRInstr(DECL, {name, to_string(addressRangeSize)}));
 
     /*
      * Body
@@ -36,7 +49,7 @@ void Function::generateIR(ControlFlowGraph * controlFlowGraph)
 
     controlFlowGraph->newBasicBlock();
 
-    controlFlowGraph->addIRInstr(IRInstr(FUNCTION_RETURN, {to_string(addressRangeSize)}));
+    controlFlowGraph->addIRInstr(IRInstr(RET, {to_string(addressRangeSize)}));
 }
 
 int Function::calculateAddressRangeSize()

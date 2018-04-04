@@ -3,6 +3,7 @@
 #include "BasicBlock.h"
 #include "IRInstr.h"
 #include "Programme.h"
+#include "Type.h"
 //#include "IRVariable.h"
 #include <vector>
 #include <iostream>
@@ -18,13 +19,15 @@ class IRVariable;
 class ControlFlowGraph
 {
     public:
+        int createNewOffset(Type type);
+
         vector <BasicBlock*> getBasicBlocks() const;
 
-        string createNewVariable(string name);
+        //string createNewVariable(string name);
 
         string createNewTemp();
 
-        IRVariable getVariable(string name);
+        //IRVariable getVariable(string name);
 
         void addIRInstr(IRInstr iRInstr);
 
@@ -55,5 +58,5 @@ class ControlFlowGraph
 
         int nbTemp;
 
-        int lastOffset = 8;
+        int lastOffset = -8;
 };
