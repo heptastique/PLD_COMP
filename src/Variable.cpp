@@ -20,6 +20,15 @@ string Variable::generateIR(ControlFlowGraph * controlFlowGraph)
         case CARACTERE :
         {
             string var = controlFlowGraph->createNewTemp();
+            if(valeur.size()>3)
+            {
+                if(valeur.substr(1,2)=="\\n")
+                {
+                    controlFlowGraph->addIRInstr(IRInstr(REG_STORE, {to_string(10), var.substr(4)}));
+                    return var;
+                }
+
+            }
             controlFlowGraph->addIRInstr(IRInstr(REG_STORE, {to_string((int)valeur[1]), var.substr(4)}));
             return var;
         }

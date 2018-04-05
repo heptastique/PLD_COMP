@@ -30,4 +30,7 @@ assert_file "cat ./target/prog.s" "./ASM/Front/04_OperatorMinus.s"
 ../bin/app Front/ValidPrograms/50_CharConst.c > ./target/output
 assert_file "cat ./target/prog.s" "./ASM/Front/50_CharConst.s"
 
+../bin/app Front/ValidPrograms/51_CharConstSpecial.c > ./target/output
+assert_file "cat ./target/prog.s" "./ASM/Front/51_CharConstSpecial.s"
+
 assert_end examples
