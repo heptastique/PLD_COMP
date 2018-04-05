@@ -2,20 +2,35 @@ using namespace std;
 
 #include "ControlFlowGraph.h"
 
-/*
+
 string ControlFlowGraph::createNewVariable(string name)
 {
-    string variableName = "VAR." + name;
+    // name of a decl no more useful because all variable linked
 
-    IRVariable iRVariable(variableName, lastOffset + 8);
+    nbTemp = nbTemp + 1;
 
-    lastOffset = lastOffset + 8;
+    string variableName = "VAR." + to_string(nbTemp*8);
+
+    IRVariable iRVariable(variableName, lastOffset - 8);
+
+    lastOffset = lastOffset - 8;
 
     variableMap.insert(pair <string, IRVariable> (variableName, iRVariable));
 
     return variableName;
 }
-*/
+
+
+string ControlFlowGraph::getOffset(std::string string)
+{
+    auto pos = variableMap.find(string);
+    if(pos != variableMap.end())
+    {
+        IRVariable var = pos->second;
+        return to_string(var.getOffset());
+    }
+    return "0";
+}
 
 int ControlFlowGraph::createNewOffset(Type type)
 {
@@ -41,9 +56,9 @@ string ControlFlowGraph::createNewTemp()
 {
     nbTemp = nbTemp + 1;
 
-    string tempName = "TMP." + to_string(nbTemp);
+    string tempName = "TMP." + to_string(nbTemp*8);
 
-    IRVariable iRVariable(tempName, 0);
+    IRVariable iRVariable(tempName, createNewOffset(INT32_T));
 
     variableMap.insert(pair <string, IRVariable> (tempName, iRVariable));
 
@@ -217,6 +232,81 @@ void ControlFlowGraph::generateASM(ostream & os) const
 
                     break;
                 }
+                case BINARYOPERATION :
+                {
+                    os << "\tmovl\t-" << iRInstr.getParam(2)  << "(%rbp), %eax\n";
+
+                    if ( iRInstr.getParam(0) == to_string(PLUS))
+                    {
+                        os << "\tadd\t\t-" << iRInstr.getParam(3) << "(%rbp), %eax\n";
+                    }
+                    if ( iRInstr.getParam(0) == to_string(MINUS))
+                    {
+                        os << "\tsub\t\t-" << iRInstr.getParam(3) << "(%rbp), %eax\n";
+                    }
+                    if ( iRInstr.getParam(0) == to_string(MULT))
+                    {
+                        os << "\timul\t-" << iRInstr.getParam(3) << "(%rbp), %eax\n";
+                    }
+                    if ( iRInstr.getParam(0) == to_string(DIV))
+                    {
+                        os << "\tidiv\t-" << iRInstr.getParam(3) << "(%rbp), %eax\n";
+                    }
+                    if ( iRInstr.getParam(0) == to_string(MOD))
+                    {
+                        os << "\tidiv\t-" << iRInstr.getParam(3) << "(%rbp), %eax\n";
+                        os << "\tmovl\t"  << "%edx, %eax\n";
+                    }
+                    if ( iRInstr.getParam(0) == to_string(ANDBB))
+                    {
+                        os << "\tand\t-" << iRInstr.getParam(3) << "(%rbp), %eax\n";
+                    }
+                    if ( iRInstr.getParam(0) == to_string(ORBB))
+                    {
+                        os << "\tor\t-" << iRInstr.getParam(3) << "(%rbp), %eax\n";
+                    }
+                    if ( iRInstr.getParam(0) == to_string(XORBITWISEB))
+                    {
+                        os << "\txor\t-" << iRInstr.getParam(3) << "(%rbp), %eax\n";
+                    }
+                    if ( iRInstr.getParam(0) == to_string(LEFTSHIFTBITWISEB))
+                    {
+                        os << "\tshl\t-" << iRInstr.getParam(3) << "(%rbp), %eax\n";
+                    }
+                    if ( iRInstr.getParam(0) == to_string(RIGHTSHIFTBITWISEB))
+                    {
+                        os << "\tshr\t-" << iRInstr.getParam(3) << "(%rbp), %eax\n";
+                    }
+
+                    os << "\tmovl\t"  << "%eax, -" << iRInstr.getParam(1) << "(%rbp)\n";
+
+                    break;
+                }
+                case AFFECTATION :
+                {
+                    os << "\tmovl\t-"  <<  iRInstr.getParam(0) << "(%rbp), %eax\n";
+                    os << "\tmovl\t" << "%eax, -" << iRInstr.getParam(1) << "(%rbp)\n";
+                    break;
+                }
+                case REG_STORE :
+                {
+                    os << "\tmovl\t$" << iRInstr.getParam(0) << ", -" <<  iRInstr.getParam(1) << "(%rbp)\n";
+                    break;
+                }
+                case UNARYOPERATION :
+                {
+                    os << "\tmovl\t-"  << iRInstr.getParam(2) << "(%rbp), %eax\n";
+                    if ( iRInstr.getParam(0).compare(to_string(MINUSU)) == 0 )
+                    {
+                        os << "\tneg\t%eax\n";
+                    }
+                    if ( iRInstr.getParam(0).compare(to_string(NOT)) == 0 )
+                    {
+                        os << "\tnot\t%eax\n";
+                    }
+                    os << "\tmovl\t"  << "%eax, -" << iRInstr.getParam(1)  << "(%rbp)\n";
+                }
+
             }
         }
     }

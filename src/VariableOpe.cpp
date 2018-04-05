@@ -5,7 +5,26 @@ using namespace std;
 
 string VariableOpe::generateIR(ControlFlowGraph * controlFlowGraph)
 {
-    return "";
+    switch (ope){
+        case PREINC:
+        {
+            //controlFlowGraph->addIRInstr(IRInstr(PREINCIR, {this->getDeclaration()->getName()}));
+        }
+        case PREDEC:
+        {
+
+        }
+        case POSINC:
+        {
+
+        }
+        case POSDEC:
+        {
+
+        }
+    }
+
+    return this->getDeclaration()->getName();
 }
 
 void VariableOpe::print(std::ostream &stream) const

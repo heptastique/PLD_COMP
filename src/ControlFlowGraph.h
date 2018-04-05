@@ -27,6 +27,8 @@ class ControlFlowGraph
 
         //string createNewVariable(string name);
 
+        string createNewVariable(string name);
+
         string createNewTemp();
 
         //IRVariable getVariable(string name);
@@ -42,6 +44,8 @@ class ControlFlowGraph
         void generateASM(ostream &os) const;
 
         void setLastLabel(int label);
+
+        string getOffset(std::string string);
 
         ControlFlowGraph(const ControlFlowGraph &controlFlowGraph);
 
@@ -60,7 +64,7 @@ class ControlFlowGraph
 
         map <string, IRVariable> variableMap;
 
-        int nbTemp;
+        int nbTemp = 0;
 
         int lastOffset = -8;
 
