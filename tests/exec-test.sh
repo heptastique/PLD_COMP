@@ -19,4 +19,7 @@ assert "./target/prog.out" "****"
 ../bin/app Custom/50-function-in-parameters.c -o > ./target/output
 assert "./target/prog.out" "('')"
 
+../bin/app Custom/51-factorial.c -o > ./target/output
+assert "./target/prog.out" "("
+
 assert_end examples
