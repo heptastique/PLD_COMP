@@ -9,20 +9,9 @@ using namespace std;
 
 string Affectation::generateIR(ControlFlowGraph * controlFlowGraph)
 {
-    string right = "";
-    
-    if (AppelFunction * appelFunction = dynamic_cast <AppelFunction *> (expression))
-    {
-        appelFunction->generateIR(controlFlowGraph);
-        string left = variable->generateIR(controlFlowGraph);
-        controlFlowGraph->addIRInstr(IRInstr(MOV_REG_RBP_REL, {"rax", left.substr(4)}));
-    }
-    else
-    {
-        right = expression->generateIR(controlFlowGraph);
-        string left = variable->generateIR(controlFlowGraph);
-        controlFlowGraph->addIRInstr(IRInstr(AFFECTATION, {right.substr(4), left.substr(4)}));
-    }
+    string right = expression->generateIR(controlFlowGraph);
+    string left = variable->generateIR(controlFlowGraph);
+    controlFlowGraph->addIRInstr(IRInstr(AFFECTATION, {right.substr(4), left.substr(4)}));
 
     return right;
 }

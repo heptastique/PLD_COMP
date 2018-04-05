@@ -42,6 +42,10 @@ string AppelFunction::generateIR(ControlFlowGraph * controlFlowGraph)
     }
     else
     {
+        int safetyOffset = -controlFlowGraph->getLastOffset();
+
+        controlFlowGraph->addIRInstr(IRInstr(SUB_RSP, {to_string(safetyOffset)}));
+
         // For each Parameter
         for (auto variable : variables)
         {
@@ -75,7 +79,12 @@ string AppelFunction::generateIR(ControlFlowGraph * controlFlowGraph)
         controlFlowGraph->addIRInstr(IRInstr(CALL, {name}));
 
         // Reset SP after Parameters push
-        controlFlowGraph->addIRInstr(IRInstr(ADD_RSP, {to_string(variables.size() * 8)}));
+        controlFlowGraph->addIRInstr(IRInstr(ADD_RSP, {to_string(variables.size() * 8 + safetyOffset)}));
+
+        string tmp = controlFlowGraph->createNewTemp(this->getType());
+        controlFlowGraph->addIRInstr(IRInstr(MOV_REG_RBP_REL,{"rax", tmp.substr(4)}));
+
+        return tmp;
     }
 
     // For the moment

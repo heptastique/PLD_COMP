@@ -92,6 +92,11 @@ int ControlFlowGraph::getLastLabel() const
     return this->lastLabel;
 }
 
+int ControlFlowGraph::getLastOffset()
+{
+    return lastOffset;
+}
+
 void ControlFlowGraph::setLastLabel(int label)
 {
     this->lastLabel = label;

@@ -43,6 +43,8 @@ class ControlFlowGraph
 
         void setLastLabel(int label);
 
+        int getLastOffset();
+
         string getOffset(std::string string);
 
         ControlFlowGraph(const ControlFlowGraph &controlFlowGraph);
