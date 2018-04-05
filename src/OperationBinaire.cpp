@@ -62,6 +62,9 @@ void OperationBinaire::resolveTypeExpr()
         else
         {
             cout << "error attributing type" << endl;
+            cout << typeExprL << endl;
+            cout << typeExprR << endl;
+
         }
     }
 }
