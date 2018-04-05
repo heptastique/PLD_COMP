@@ -7,7 +7,7 @@ using namespace std;
 string DeclarationTab::generateIR(ControlFlowGraph * controlFlowGraph)
 {
     // Same as declaration for the moment
-    string var = controlFlowGraph->createNewVariable(name);
+    string var = controlFlowGraph->createNewVariable(name, type);
     this->name = var;
 
     return var;

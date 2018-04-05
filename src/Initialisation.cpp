@@ -1,6 +1,7 @@
 using namespace std;
 
 #include "Initialisation.h"
+#include "ControlFlowGraph.h"
 #include <iostream>
 
 string Initialisation::generateIR(ControlFlowGraph * controlFlowGraph)
