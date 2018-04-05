@@ -175,6 +175,12 @@ void ControlFlowGraph::generateASM(ostream & os) const
 
                     break;
                 }
+                case MOV_RBP_REL_REG :
+                {
+                    os << "\tmovl\t" << iRInstr.getParam(0) << "(%rbp), %" << iRInstr.getParam(1) << "\n";
+
+                    break;
+                }
                 case PUSH_RBP_REL :
                 {
                     os << "\tpushl\t" << iRInstr.getParam(0) << "(%rbp)\n";

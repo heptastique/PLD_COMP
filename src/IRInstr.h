@@ -1,3 +1,4 @@
+
 #pragma once
 
 #include "ControlFlowGraph.h"
@@ -19,6 +20,8 @@ enum Mnemonique
     STORE_RBP_REL = 4,
     PUSH_VALUE = 5,
     PUSH_RBP_REL = 6,
+
+    MOV_RBP_REL_REG = 7,
 
     ADD_RSP = 10,
 

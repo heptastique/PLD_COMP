@@ -12,6 +12,12 @@ string AppelFunction::generateIR(ControlFlowGraph * controlFlowGraph)
     // Special Case for putchar
     if (name == "putchar")
     {
+        string varName = variables[0]->generateIR(controlFlowGraph);
+        cout << varName << endl;
+        controlFlowGraph->addIRInstr(IRInstr(MOV_RBP_REL_REG, {controlFlowGraph->getOffset(varName), "edi"}));
+        controlFlowGraph->addIRInstr(IRInstr(CALL, {name}));
+
+        /*
         switch (variables[0]->getType())
         {
             // Parameter is a Character
@@ -34,6 +40,7 @@ string AppelFunction::generateIR(ControlFlowGraph * controlFlowGraph)
                 break;
             }
         }
+        */
     }
     else
     {
