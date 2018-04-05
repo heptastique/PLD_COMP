@@ -36,6 +36,8 @@ string If::generateIR(ControlFlowGraph * controlFlowGraph)
     // Prepare label for next if
     // ex : .L4
     controlFlowGraph->setLastLabel(labelNextBlock+1);
+
+    return "";
 }
 
 void If::print(std::ostream &stream) const
