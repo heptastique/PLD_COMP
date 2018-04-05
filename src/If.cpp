@@ -5,14 +5,15 @@ using namespace std;
 
 string If::generateIR(ControlFlowGraph * controlFlowGraph)
 {
+    cout << "If::generateIR" << endl;
     // Get label to use for this if-else
     int labelNextBlock = controlFlowGraph->getLastLabel();
 
     // Add instructions of condition
-    condition->generateIR(controlFlowGraph);
+    string result = condition->generateIR(controlFlowGraph);
     // Add jump (jump if condition is false) to the next label (either else or afterif)
     // ex : .L2
-    controlFlowGraph->addIRInstr(IRInstr(COMPJUMP,{to_string(labelNextBlock)}));
+    controlFlowGraph->addIRInstr(IRInstr(COMPJUMP,{to_string(labelNextBlock),result.substr(4)}));
     // Add instructions of the then part
     bloc->generateIR(controlFlowGraph);
 

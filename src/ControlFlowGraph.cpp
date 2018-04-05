@@ -160,7 +160,7 @@ void ControlFlowGraph::generateASM(ostream & os) const
 
                 case COMPJUMP :
                 {
-                    os << "\tcmpl\t$1, -8(%rbp)\n"; // a généraliser
+                    os << "\tcmpl\t$1, " << iRInstr.getParam(1) << "(%rbp)\n";
                     os << "\tjne .L" << iRInstr.getParam(0) << "\n";
 
                     break;

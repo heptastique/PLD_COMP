@@ -5,7 +5,8 @@ using namespace std;
 
 std::string Else::generateIR(ControlFlowGraph * controlFlowGraph, int label)
 {
-    // Generate Else basic bloc
+    cout << "Else::generateIR" << endl;
+    // Generate else basic block
     controlFlowGraph->newBasicBlock();
     controlFlowGraph->addIRInstr(IRInstr(LABEL,{to_string(label)}));
     bloc->generateIR(controlFlowGraph);
