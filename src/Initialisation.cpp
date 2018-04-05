@@ -5,6 +5,8 @@ using namespace std;
 
 string Initialisation::generateIR(ControlFlowGraph * controlFlowGraph)
 {
+    expression->generateIR(controlFlowGraph);
+
     return "";
 }
 
