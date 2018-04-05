@@ -9,7 +9,7 @@ string OperationBinaire::generateIR(ControlFlowGraph *controlFlowGraph)
 {
     string var1 = expressionL->generateIR(controlFlowGraph);
     string var2 = expressionR->generateIR(controlFlowGraph);
-    string var3 = controlFlowGraph->createNewTemp();
+    string var3 = controlFlowGraph->createNewTemp(this->getType());
 
     controlFlowGraph->addIRInstr(IRInstr(BINARYOPERATION, { to_string(this->operateur), var3.substr(4), var1.substr(4), var2.substr(4)}));
 

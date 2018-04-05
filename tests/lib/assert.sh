@@ -140,10 +140,9 @@ assert_file() {
         [[ -z "$DEBUG" ]] || echo -n .
         return
     fi
-    result="$(sed -e :a -e '$!N;s/\n/\\n/;ta' <<< "$result")"
-    [[ -z "$result" ]] && result="nothing" || result="\"$result\""
+    [[ -z "$result" ]] && result="nothing" || result="$result"
     [[ -z "$2" ]] && expected="nothing" || expected="\"$2\""
-    _assert_fail "expected to be what is in $expected${_indent}Rerun tests with --stop to debug first failed test${_indent}" "$1" "$3"
+    _assert_fail "expected to be what is in $expected${_indent}Got:${_indent}================${_indent}$result${_indent}================${_indent}${_indent}" "$1" "$3"
 }
 
 assert_contains_file() {

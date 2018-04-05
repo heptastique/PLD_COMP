@@ -23,9 +23,9 @@ class ControlFlowGraph
 
         vector <BasicBlock*> getBasicBlocks() const;
 
-        string createNewVariable(string name);
+        string createNewVariable(string name, Type type);
 
-        string createNewTemp();
+        string createNewTemp(Type type);
 
         //IRVariable getVariable(string name);
 
