@@ -3,6 +3,17 @@ using namespace std;
 #include "RetourFonction.h"
 #include <iostream>
 
+std::string RetourFonction::generateIR(ControlFlowGraph * controlFlowGraph)
+{
+    //string var = expression->generateIR(controlFlowGraph);
+
+    //cout << var << endl;
+
+    //controlFlowGraph->addIRInstr(IRInstr(MOV_RBP_REL_REG, {var.substr(4), "rax"}));
+
+    return "aaaaaa";
+}
+
 void RetourFonction::print(std::ostream &stream) const
 {
     stream << " RetourFonction: " << *expression;

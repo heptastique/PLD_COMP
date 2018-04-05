@@ -3,14 +3,26 @@ using namespace std;
 #include "Affectation.h"
 #include "VariableIndex.h"
 #include "OperationBinaire.h"
+#include "AppelFunction.h"
 #include <iostream>
 #include <typeinfo>
 
 string Affectation::generateIR(ControlFlowGraph * controlFlowGraph)
 {
-    string right = expression->generateIR(controlFlowGraph);
-    string left = variable->generateIR(controlFlowGraph);
-    controlFlowGraph->addIRInstr(IRInstr(AFFECTATION, {right.substr(4), left.substr(4)}));
+    string right = "";
+    
+    if (AppelFunction * appelFunction = dynamic_cast <AppelFunction *> (expression))
+    {
+        appelFunction->generateIR(controlFlowGraph);
+        string left = variable->generateIR(controlFlowGraph);
+        controlFlowGraph->addIRInstr(IRInstr(MOV_REG_RBP_REL, {"rax", left.substr(4)}));
+    }
+    else
+    {
+        right = expression->generateIR(controlFlowGraph);
+        string left = variable->generateIR(controlFlowGraph);
+        controlFlowGraph->addIRInstr(IRInstr(AFFECTATION, {right.substr(4), left.substr(4)}));
+    }
 
     return right;
 }

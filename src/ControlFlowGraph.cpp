@@ -8,7 +8,7 @@ string ControlFlowGraph::createNewVariable(string name, Type type)
     IRVariable iRVariable("VAR", createNewOffset(type));
     string variableName = "VAR." + to_string(iRVariable.getOffset());
     variableMap.insert(pair <string, IRVariable> (variableName, iRVariable));
-
+    
     return variableName;
 }
 
@@ -217,6 +217,12 @@ void ControlFlowGraph::generateASM(ostream & os) const
 
                     break;
                 }
+                case SUB_RSP :
+                {
+                    os << "\tsubq\t$" << iRInstr.getParam(0) << ", %rsp\n";
+
+                    break;
+                }
                 case BINARYOPERATION :
                 {
                     os << "\tmovl\t" << iRInstr.getParam(2)  << "(%rbp), %eax\n";
@@ -280,6 +286,16 @@ void ControlFlowGraph::generateASM(ostream & os) const
                 case REG_STORE :
                 {
                     os << "\tmovl\t$" << iRInstr.getParam(0) << ", " <<  iRInstr.getParam(1) << "(%rbp)\n";
+                    break;
+                }
+                case MOV_REG_RBP_REL :
+                {
+                    os << "\tmov \t%" << iRInstr.getParam(0) << ", " << iRInstr.getParam(1) << "(%rbp)\n";
+                    break;
+                }
+                case MOV_RBP_REL_REG :
+                {
+                    os << "\tmov \t" << iRInstr.getParam(0) << "(%rbp), %" << iRInstr.getParam(1) << "\n";
                     break;
                 }
                 case UNARYOPERATION :
