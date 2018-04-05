@@ -87,21 +87,7 @@ void AppelFunction::print(std::ostream &stream) const
 
     for (auto it : expressions)
     {
-        /*if(VariableIndex *varInd = dynamic_cast<VariableIndex*>(it))
-        {
-            stream << *varInd;
-        }
-        else
-        {
-            if(VariableOpe *varOpe = dynamic_cast<VariableOpe*>(it))
-            {
-                stream << *varOpe;
-            }
-            else
-            {*/
-                stream << *it;
-        /*}
-    }*/
+        stream << *it;
     }
     
     stream << endl;
