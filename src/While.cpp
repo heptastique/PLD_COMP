@@ -1,10 +1,35 @@
 using namespace std;
 
-#include "While.h"
 #include <iostream>
+#include "While.h"
+#include "ControlFlowGraph.h"
+#include "IRInstr.h"
 
 string While::generateIR(ControlFlowGraph *controlFlowGraph)
 {
+    cout << "While::generateIR" << endl;
+    // Get label to use for this while
+    int labelNextBlock = controlFlowGraph->getLastLabel();
+
+    // Instruction to jump to condition verification and after while parts
+    controlFlowGraph->addIRInstr(IRInstr(RETIF,{to_string(labelNextBlock)}));
+    labelNextBlock = labelNextBlock +1;
+
+    // Generate block
+    controlFlowGraph->newBasicBlock();
+    controlFlowGraph->addIRInstr(IRInstr(LABEL,{to_string(labelNextBlock)}));
+    bloc->generateIR(controlFlowGraph);
+
+    // Generate condition verification and after while parts
+    controlFlowGraph->newBasicBlock();
+    controlFlowGraph->addIRInstr(IRInstr(LABEL,{to_string(labelNextBlock-1)}));
+    // Add instructions of condition
+    string result = condition->generateIR(controlFlowGraph);
+    controlFlowGraph->addIRInstr(IRInstr(COMPJUMPEQUALS,{to_string(labelNextBlock),result.substr(4)}));
+
+    // Prepare label for next block
+    controlFlowGraph->setLastLabel(labelNextBlock+1);
+
     return "";
 }
 
