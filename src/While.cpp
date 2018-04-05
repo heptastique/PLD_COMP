@@ -1,11 +1,22 @@
 using namespace std;
 
-#include "While.h"
 #include <iostream>
+#include "While.h"
+#include "ControlFlowGraph.h"
+#include "IRInstr.h"
 
 string While::generateIR(ControlFlowGraph *controlFlowGraph)
 {
-    return "";
+    // Get label to use for this while
+    int labelNextBlock = controlFlowGraph->getLastLabel();
+    // Add instructions of condition
+    condition->generateIR(controlFlowGraph);
+    
+    // Add instructions of block
+    bloc->generateIR(controlFlowGraph);
+
+    // Prepare label for next block
+    controlFlowGraph->setLastLabel(labelNextBlock+1);
 }
 
 void While::print(std::ostream &stream) const
