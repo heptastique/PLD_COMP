@@ -29,6 +29,10 @@ class Programme
 
         vector <Declaration*> getDeclarations();
 
+        int getLastLabel() const;
+
+        void setLastLabel(int label);
+
         Programme & operator=(const Programme & programme);
 
         void resolveScopeVariables();
@@ -44,4 +48,5 @@ class Programme
     private:
         vector <Function*> functions;
         vector <Declaration*> declarations;
+        int lastLabel = 2;
 };
