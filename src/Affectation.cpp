@@ -8,69 +8,9 @@ using namespace std;
 
 string Affectation::generateIR(ControlFlowGraph * controlFlowGraph)
 {
-    //string right = "ok";
-
-    // string left = controlFlowGraph->createNewVar();
-    //string left = "tmp";
-    //int offset = controlFlowGraph->getOffsetFromSymbolTable(varName);
-    //int offset = 1;
-    //controlFlowGraph->addIRInstr(IRInstr(REG_STORE, { left, to_string(offset)}));
-    //controlFlowGraph->addIRInstr(IRInstr(ADD, { left, !bp, left}));
-
-    // If the expression is a Rvalue
-
-   /* if(Variable* var = dynamic_cast<Variable*>(expression))
-    {
-        *
-        if(var->getType() == NAME)
-        {
-            right = var->getValeur();
-        }
-        else
-        {
-            right = var->generateIR(controlFlowGraph);
-        }
-        *
-        if (VariableIndex * varIndex = dynamic_cast<VariableIndex*>(variable))
-        {
-            return "nop";
-        }
-
-        // IRVariable iRVariable = controlFlowGraph->getVariable("VAR." + variable->getValeur());
-
-        switch (var->getType())
-        {
-            case ENTIER :
-            {
-                controlFlowGraph->addIRInstr(IRInstr(STORE_RBP_REL, {var->getValeur(), to_string(variable->getDeclaration()->getOffset())}));
-
-                break;
-            }
-            case CARACTERE :
-            {
-                controlFlowGraph->addIRInstr(IRInstr(STORE_RBP_REL, {to_string((int)(var->getValeur())[1]), to_string(variable->getDeclaration()->getOffset())}));
-
-                break;
-            }
-            case NAME :
-            {
-                break;
-            }
-        }
-    }
-    else
-    {
-        if(OperationBinaire* operationBinaire = dynamic_cast<OperationBinaire*> (expression))
-        {
-            right = operationBinaire->generateIR(controlFlowGraph);
-            controlFlowGraph->addIRInstr(IRInstr(AFFECTATION, {controlFlowGraph->getOffset(right), to_string(variable->getDeclaration()->getOffset())}));
-        }
-    }*/
-
     string right = expression->generateIR(controlFlowGraph);
     string left = variable->generateIR(controlFlowGraph);
-    cout << right << endl;
-    controlFlowGraph->addIRInstr(IRInstr(AFFECTATION, {right, left}));
+    controlFlowGraph->addIRInstr(IRInstr(AFFECTATION, {right.substr(4), left.substr(4)}));
 
     return right;
 }

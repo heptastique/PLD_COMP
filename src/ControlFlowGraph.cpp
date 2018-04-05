@@ -201,33 +201,33 @@ void ControlFlowGraph::generateASM(ostream & os) const
                 }
                 case BINARYOPERATION :
                 {
-                    os << "\tmovl\t-" << iRInstr.getParam(2).substr(4)  << "(%rbp), %eax\n";
-                    if ( iRInstr.getParam(0).compare(to_string(ADD)) == 0 )
+                    os << "\tmovl\t-" << iRInstr.getParam(2)  << "(%rbp), %eax\n";
+                    if ( iRInstr.getParam(0) == to_string(ADD))
                     {
-                        os << "\tadd\t\t-" << iRInstr.getParam(3).substr(4) << "(%rbp), %eax\n";
+                        os << "\tadd\t\t-" << iRInstr.getParam(3) << "(%rbp), %eax\n";
                     }
-                    if ( iRInstr.getParam(0).compare(to_string(MINUS)) == 0 )
+                    if ( iRInstr.getParam(0) == to_string(MINUS))
                     {
-                        os << "\tsub\t\t-" << iRInstr.getParam(3).substr(4) << "(%rbp), %eax\n";
+                        os << "\tsub\t\t-" << iRInstr.getParam(3) << "(%rbp), %eax\n";
                     }
-                    os << "\tmovl\t"  << "%eax, -" << iRInstr.getParam(1).substr(4)  << "(%rbp)\n";
+                    os << "\tmovl\t"  << "%eax, -" << iRInstr.getParam(1) << "(%rbp)\n";
 
                     break;
                 }
                 case AFFECTATION :
                 {
-                    os << "\tmovl\t-"  <<  iRInstr.getParam(0).substr(4) << "(%rbp), %eax\n";
-                    os << "\tmovl\t" << "%eax, -" << iRInstr.getParam(1).substr(4) << "(%rbp)\n";
+                    os << "\tmovl\t-"  <<  iRInstr.getParam(0) << "(%rbp), %eax\n";
+                    os << "\tmovl\t" << "%eax, -" << iRInstr.getParam(1) << "(%rbp)\n";
                     break;
                 }
                 case REG_STORE :
                 {
-                    os << "\tmovl\t$" << iRInstr.getParam(0) << ", -" <<  iRInstr.getParam(1).substr(4) << "(%rbp)\n";
+                    os << "\tmovl\t$" << iRInstr.getParam(0) << ", -" <<  iRInstr.getParam(1) << "(%rbp)\n";
                     break;
                 }
                 case UNARYOPERATION :
                 {
-                    os << "\tmovl\t-"  << iRInstr.getParam(2).substr(4) << "(%rbp), %eax\n";
+                    os << "\tmovl\t-"  << iRInstr.getParam(2) << "(%rbp), %eax\n";
                     if ( iRInstr.getParam(0).compare(to_string(MINUSU)) == 0 )
                     {
                         os << "\tneg\t %eax\n";
@@ -236,7 +236,7 @@ void ControlFlowGraph::generateASM(ostream & os) const
                     {
                         os << "\tnot\t %eax\n";
                     }
-                    os << "\tmovl\t"  << "%eax, -" << iRInstr.getParam(1).substr(4)  << "(%rbp)\n";
+                    os << "\tmovl\t"  << "%eax, -" << iRInstr.getParam(1)  << "(%rbp)\n";
                 }
 
             }

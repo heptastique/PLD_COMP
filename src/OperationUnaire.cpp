@@ -8,7 +8,7 @@ string OperationUnaire::generateIR(ControlFlowGraph *controlFlowGraph)
 {
     string var = expression->generateIR(controlFlowGraph);
     string var2 = controlFlowGraph->createNewTemp();
-    controlFlowGraph->addIRInstr(IRInstr(UNARYOPERATION, {to_string(operateur), var2, var}));
+    controlFlowGraph->addIRInstr(IRInstr(UNARYOPERATION, {to_string(operateur), var2.substr(4), var.substr(4)}));
     return var2;
 }
 

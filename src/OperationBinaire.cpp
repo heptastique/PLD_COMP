@@ -7,29 +7,11 @@ using namespace std;
 
 string OperationBinaire::generateIR(ControlFlowGraph *controlFlowGraph)
 {
-    /*if(Variable* variable1 = dynamic_cast<Variable*>(expressionL))
-    {
-        if(Variable* variable2 = dynamic_cast<Variable*>(expressionR))
-        {
-            if (variable1->getType() == ENTIER && variable2->getType() == ENTIER)
-            {
-                string var1 = variable1->getValeur();
-                string var2 = variable2->getValeur();
-
-                string var3 = controlFlowGraph->createNewTemp();
-                controlFlowGraph->addIRInstr(IRInstr(ADD, { var3, var1, var2}));
-                return var3;
-            }
-        }
-    }*/
-
-
     string var1 = expressionL->generateIR(controlFlowGraph);
     string var2 = expressionR->generateIR(controlFlowGraph);
     string var3 = controlFlowGraph->createNewTemp();
 
-    controlFlowGraph->addIRInstr(IRInstr(BINARYOPERATION, { to_string(this->operateur), var3, var1, var2}));
-
+    controlFlowGraph->addIRInstr(IRInstr(BINARYOPERATION, { to_string(this->operateur), var3.substr(4), var1.substr(4), var2.substr(4)}));
 
     return var3;
 }

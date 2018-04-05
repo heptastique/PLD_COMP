@@ -14,14 +14,13 @@ string Variable::generateIR(ControlFlowGraph * controlFlowGraph)
         case ENTIER :
         {
             string var = controlFlowGraph->createNewTemp();
-            controlFlowGraph->addIRInstr(IRInstr(REG_STORE, {valeur, var}));
+            controlFlowGraph->addIRInstr(IRInstr(REG_STORE, {valeur, var.substr(4)}));
             return var;
         }
         case CARACTERE :
         {
-            //controlFlowGraph->addIRInstr(IRInstr(STORE_RBP_REL, {to_string((int)(var->getValeur())[1]), to_string(variable->getDeclaration()->getOffset())}));
             string var = controlFlowGraph->createNewTemp();
-            controlFlowGraph->addIRInstr(IRInstr(REG_STORE, {to_string((int)valeur[1]), var}));
+            controlFlowGraph->addIRInstr(IRInstr(REG_STORE, {to_string((int)valeur[1]), var.substr(4)}));
             return var;
         }
         case NAME :
