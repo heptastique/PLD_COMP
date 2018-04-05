@@ -21,12 +21,13 @@ install:
 
 before_script:
   - cd ../tests
-  - chmod +x asm-test.sh symbols-test.sh errors-test.sh cli-test.sh lint.sh lib/assert.sh
+  - chmod +x asm-test.sh symbols-test.sh errors-test.sh cli-test.sh exec-test.sh lint.sh lib/assert.sh
 
 script:
   - ./symbols-test.sh -v
   - ./asm-test.sh -v
   - ./errors-test.sh -v
+  - ./exec-test.sh -v
   - ./cli-test.sh -v
   - ./lint.sh
 
