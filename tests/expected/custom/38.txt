@@ -1,0 +1,12 @@
+Programme:
+ Fonction: Name=main TypeRetour=0
+     Bloc:
+      Instruction: Declaration: Name=a Type=1
+      Instruction: Affectation:  Variable: Type=0 Valeur=a  Operateur=0 Expression: OperationBinaire: Expression: Variable: Type=1 Valeur=2  Operateur=23 Expression: Variable: Type=1 Valeur=2 
+
+      Instruction: Affectation:  Variable: Type=0 Valeur=a  Operateur=0 Expression: OperationBinaire: Expression: Variable: Type=0 Valeur=a  Operateur=13 Expression: Variable: Type=1 Valeur=40 
+
+      Instruction: AppelFunction: Name=putchar Variable: Type=0 Valeur=a 
+
+
+Fin
