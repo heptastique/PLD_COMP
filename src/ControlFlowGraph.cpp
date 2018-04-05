@@ -168,7 +168,6 @@ void ControlFlowGraph::generateASM(ostream & os) const
 
                 case RETIF :
                 {
-                    // Generate EpilogIF
                     os << "\tjmp .L" << iRInstr.getParam(0) << "\n";
 
                     break;

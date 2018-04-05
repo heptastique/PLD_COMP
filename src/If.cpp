@@ -5,6 +5,7 @@ using namespace std;
 
 string If::generateIR(ControlFlowGraph * controlFlowGraph)
 {
+    // Get labels to use for this if-else
     string labelThen = to_string(controlFlowGraph->getLastLabel());
     controlFlowGraph->increaseLastLabel();
     string labelAfter = to_string(controlFlowGraph->getLastLabel());
@@ -20,7 +21,6 @@ string If::generateIR(ControlFlowGraph * controlFlowGraph)
         anElse->getBloc()->generateIR(controlFlowGraph);
     }
     controlFlowGraph->addIRInstr(IRInstr(RETIF,{labelAfter}));
-    
 
     // Generate basic block for then
     controlFlowGraph->addIRInstr(IRInstr(LABEL,{labelThen}));
