@@ -39,10 +39,6 @@ void Else::resolveTypeExpr()
     this->bloc->resolveTypeExpr();
 }
 
-Bloc* Else::getBloc() const
-{
-    return this->bloc;
-}
 Else::Else(const Else &unElse)
 {
     #ifdef MAP
