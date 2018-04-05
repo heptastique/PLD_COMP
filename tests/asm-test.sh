@@ -21,4 +21,10 @@ assert_file "cat ./target/prog.s" "./ASM/Custom/27-putchar.s"
 ../bin/app Custom/11-multiple-func.c > ./target/output
 assert_file "cat ./target/prog.s" "./ASM/Custom/11-multiple-func.s"
 
+../bin/app Front/ValidPrograms/03_OperatorPlus.c > ./target/output
+assert_file "cat ./target/prog.s" "./ASM/Front/03_OperatorPlus.s"
+
+../bin/app Front/ValidPrograms/04_OperatorMinus.c > ./target/output
+assert_file "cat ./target/prog.s" "./ASM/Front/04_OperatorMinus.s"
+
 assert_end examples
