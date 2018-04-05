@@ -150,7 +150,6 @@ void ControlFlowGraph::generateASM(ostream & os) const
                 case PUTCHAR_VALUE :
                 {
                     os << "\tmovl\t" << iRInstr.getParam(0) <<"(%rbp), %edi\n";
-                    os << "\tmovl\t" << iRInstr.getParam(0) <<"(%rbp), %edi\n";
                     os << "\tcall\tputchar\n";
 
                     break;
