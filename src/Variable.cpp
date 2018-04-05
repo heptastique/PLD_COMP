@@ -13,13 +13,21 @@ string Variable::generateIR(ControlFlowGraph * controlFlowGraph)
     {
         case ENTIER :
         {
-            string var = controlFlowGraph->createNewTemp();
+            string var;
+            if(stoi(valeur) < 2147483647 && stoi(valeur) > -2147483648 )
+            {
+                var = controlFlowGraph->createNewTemp(INT32_T);
+            }
+            else
+            {
+                var = controlFlowGraph->createNewTemp(INT64_T);
+            }
             controlFlowGraph->addIRInstr(IRInstr(REG_STORE, {valeur, var.substr(4)}));
             return var;
         }
         case CARACTERE :
         {
-            string var = controlFlowGraph->createNewTemp();
+            string var = controlFlowGraph->createNewTemp(CHAR);
             if(valeur.size()>3)
             {
                 if(valeur.substr(1,2)=="\\n")
@@ -126,12 +134,18 @@ void Variable::resolveTypeExpr()
     {
         if (this->declarationAssociee != nullptr)
         {
+            cout << "hello" << this->declarationAssociee->getType() <<endl;
             this->setType(this->declarationAssociee->getType());
         }
         else
         {
             ErrorHandling::ThrowError(104, 0, this->valeur);
         }
+    }
+    else
+    {
+        cout << "type sets to INT32_T" << endl;
+        this->setType(INT32_T);
     }
 }
 

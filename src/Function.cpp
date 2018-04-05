@@ -17,13 +17,14 @@ void Function::generateIR(ControlFlowGraph * controlFlowGraph)
      * Set Offsets of Parameters
      */
 
-    int offset = (parameters.size() + 1) * 8;
+    //int offset = (parameters.size() + 1) * 8;
 
     for (auto parameter : parameters)
     {
-        parameter->setOffset(offset);
+        parameter->generateIR(controlFlowGraph);
+        //parameter->setOffset(offset);
 
-        offset = offset - 8;
+        //offset = offset - 8;
     }
 
     /*
