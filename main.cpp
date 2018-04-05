@@ -31,7 +31,7 @@ int main (int argc, char * argv[])
         Input C Programm
     */
 
-    gflags::ParseCommandLineFlags(&argc, &argv, true);
+    google::ParseCommandLineFlags(&argc, &argv, true);
 
     cout << "Reading C Program" << endl;
 
