@@ -89,7 +89,7 @@ void ControlFlowGraph::newBasicBlock()
 
 int ControlFlowGraph::getLastLabel() const
 {
-    return this->lastLabel;
+    return this->programme->getLastLabel();
 }
 
 int ControlFlowGraph::getLastOffset()
@@ -99,7 +99,7 @@ int ControlFlowGraph::getLastOffset()
 
 void ControlFlowGraph::setLastLabel(int label)
 {
-    this->lastLabel = label;
+    this->programme->setLastLabel(label);
 }
 
 // Generate Prolog of Function
@@ -288,32 +288,60 @@ void ControlFlowGraph::generateASM(ostream & os) const
                     if ( iRInstr.getParam(0) == to_string(EQUALEQUAL))
                     {
                         os << "\tcmp\t" << iRInstr.getParam(3) << "(%rbp), %eax\n";
+                        os << "\tmovl\t$0, %eax\n";
                         os << "\tsete\t%al\n";
                     }
                     if ( iRInstr.getParam(0) == to_string(NOTEQUAL))
                     {
                         os << "\tcmp\t" << iRInstr.getParam(3) << "(%rbp), %eax\n";
+                        os << "\tmovl\t$0, %eax\n";
                         os << "\tsetne\t%al\n";
                     }
                     if ( iRInstr.getParam(0) == to_string(LT))
                     {
                         os << "\tcmp\t" << iRInstr.getParam(3) << "(%rbp), %eax\n";
+                        os << "\tmovl\t$0, %eax\n";
                         os << "\tsetl\t%al\n";
                     }
                     if ( iRInstr.getParam(0) == to_string(GT))
                     {
                         os << "\tcmp\t" << iRInstr.getParam(3) << "(%rbp), %eax\n";
+                        os << "\tmovl\t$0, %eax\n";
                         os << "\tsetg\t%al\n";
                     }
                     if ( iRInstr.getParam(0) == to_string(LTE))
                     {
                         os << "\tcmp\t" << iRInstr.getParam(3) << "(%rbp), %eax\n";
+                        os << "\tmovl\t$0, %eax\n";
                         os << "\tsetle\t%al\n";
                     }
                     if ( iRInstr.getParam(0) == to_string(GTE))
                     {
                         os << "\tcmp\t" << iRInstr.getParam(3) << "(%rbp), %eax\n";
+                        os << "\tmovl\t$0, %eax\n";
                         os << "\tsetge\t%al\n";
+                    }
+                    if ( iRInstr.getParam(0) == to_string(AND))
+                    {
+                        os << "\tmovl\t"<< iRInstr.getParam(3) << "(%rbp), %ebx\n";
+                        os << "\tcmp\t$0, %eax\n";
+                        os << "\tmovl\t$0, %eax\n";
+                        os << "\tsetne\t%al\n";
+                        os << "\tcmp\t$0, %ebx\n";
+                        os << "\tmovl\t$0, %ebx\n";
+                        os << "\tsetne\t%bl\n";
+                        os << "\tand\t%bl, %al\n";
+                    }
+                    if ( iRInstr.getParam(0) == to_string(OR))
+                    {
+                        os << "\tmovl\t"<< iRInstr.getParam(3) << "(%rbp), %ebx\n";
+                        os << "\tcmp\t$0, %eax\n";
+                        os << "\tmovl\t$0, %eax\n";
+                        os << "\tsetne\t%al\n";
+                        os << "\tcmp\t$0, %ebx\n";
+                        os << "\tmovl\t$0, %ebx\n";
+                        os << "\tsetne\t%bl\n";
+                        os << "\tor\t%bl, %al\n";
                     }
                     os << "\tmovl\t"  << "%eax, " << iRInstr.getParam(1) << "(%rbp)\n";
 

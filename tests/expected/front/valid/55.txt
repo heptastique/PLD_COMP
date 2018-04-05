@@ -11,7 +11,7 @@ Programme:
      Bloc:
       Instruction: Declaration: Name=a Type=1
       Instruction: Affectation:  Variable: Type=0 Valeur=a  Operateur=0 Expression: Variable: Type=1 Valeur=1 
-      Instruction: Affectation:  Variable: Type=0 Valeur=a  Operateur=0 Expression: AppelFunction: Name=function Variable: Type=0 Valeur=a 
+      Instruction: Affectation:  Variable: Type=0 Valeur=a  Operateur=0 Expression: AppelFunction: Name=function Expression: Variable: Type=0 Valeur=a 
 
 
 

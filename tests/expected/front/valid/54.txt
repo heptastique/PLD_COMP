@@ -4,11 +4,11 @@ Programme:
      Param:
       Declaration: Name=a Type=3
      Bloc:
-      Instruction: AppelFunction: Name=putchar Variable: Type=0 Valeur=a 
+      Instruction: AppelFunction: Name=putchar Expression: Variable: Type=0 Valeur=a 
 
  Fonction: Name=main TypeRetour=0
      Bloc:
-      Instruction: AppelFunction: Name=function Variable: Type=2 Valeur='a' 
+      Instruction: AppelFunction: Name=function Expression: Variable: Type=2 Valeur='a' 
 
 
 Fin

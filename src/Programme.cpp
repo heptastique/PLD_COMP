@@ -16,7 +16,7 @@ IR Programme::generateIR()
     // For each Function of Program
     for (auto function : functions)
     {
-        controlFlowGraph = new ControlFlowGraph;
+        controlFlowGraph = new ControlFlowGraph(this);
 
         // Generate Function Control Flow Graph
         function->generateIR(controlFlowGraph);
@@ -68,6 +68,16 @@ vector <Function*> Programme::getFunctions()
 vector <Declaration*> Programme::getDeclarations()
 {
     return this->declarations;
+}
+
+int Programme::getLastLabel() const
+{
+    return this->lastLabel;
+}
+
+void Programme::setLastLabel(int label)
+{
+    this->lastLabel = label;
 }
 
 void Programme::resolveScopeVariables()
