@@ -22,6 +22,7 @@ main:
 	movl	$0, -40(%rbp)
 	movl	-8(%rbp), %eax
 	cmp	-40(%rbp), %eax
+	movl	$0, %eax
 	setne	%al
 	movl	%eax, -48(%rbp)
 	cmpl	$1, -48(%rbp)
