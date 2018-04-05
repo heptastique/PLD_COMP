@@ -18,6 +18,7 @@ string AppelFunction::generateIR(ControlFlowGraph * controlFlowGraph)
             case CARACTERE :
             {
                 string var = variables[0]->generateIR(controlFlowGraph);
+                cout<< var << "carac" <<endl;
                 controlFlowGraph->addIRInstr(IRInstr(PUTCHAR_VALUE, {var.substr(4)}));
                 break;
             }
@@ -25,6 +26,7 @@ string AppelFunction::generateIR(ControlFlowGraph * controlFlowGraph)
             case ENTIER :
             {
                 string var = variables[0]->generateIR(controlFlowGraph);
+                cout<< var << "entier" <<endl;
                 controlFlowGraph->addIRInstr(IRInstr(PUTCHAR_VALUE, {var.substr(4)}));
                 break;
             }
@@ -32,6 +34,7 @@ string AppelFunction::generateIR(ControlFlowGraph * controlFlowGraph)
             case NAME :
             {
                 string var = variables[0]->generateIR(controlFlowGraph);
+                cout<< var << "name" <<endl;
                 controlFlowGraph->addIRInstr(IRInstr(PUTCHAR_VALUE, {var.substr(4)}));
                 break;
             }
@@ -44,20 +47,28 @@ string AppelFunction::generateIR(ControlFlowGraph * controlFlowGraph)
         {
             switch (variable->getType())
             {
-                // Parameter is a Variable
-                case NAME :
-                {
-                    controlFlowGraph->addIRInstr(IRInstr(PUSH_RBP_REL, {to_string(variable->getDeclaration()->getOffset())}));
-
-                    break;
-                }
-                // Parameter is an Integer
-                case ENTIER :
                 // Parameter is a Character
                 case CARACTERE :
                 {
-                    controlFlowGraph->addIRInstr(IRInstr(PUSH_VALUE, {variable->getValeur()}));
-
+                    string var = variables[0]->generateIR(controlFlowGraph);
+                    cout<< var << "carac" <<endl;
+                    controlFlowGraph->addIRInstr(IRInstr(PUSH_RBP_REL, {var.substr(4)}));
+                    break;
+                }
+                    // Parameter is an Integer
+                case ENTIER :
+                {
+                    string var = variables[0]->generateIR(controlFlowGraph);
+                    cout<< var << "entier" <<endl;
+                    controlFlowGraph->addIRInstr(IRInstr(PUSH_RBP_REL, {var.substr(4)}));
+                    break;
+                }
+                    // Parameter is a Variable
+                case NAME :
+                {
+                    string var = variables[0]->generateIR(controlFlowGraph);
+                    cout<< var << "name" <<endl;
+                    controlFlowGraph->addIRInstr(IRInstr(PUSH_RBP_REL, {var.substr(4)}));
                     break;
                 }
             }

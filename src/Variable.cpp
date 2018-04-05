@@ -42,7 +42,6 @@ string Variable::generateIR(ControlFlowGraph * controlFlowGraph)
         }
         case NAME :
         {
-            cout << "bb "  <<  this->getDeclaration()->getName() << endl;
             return this->getDeclaration()->getName();
         }
     }
