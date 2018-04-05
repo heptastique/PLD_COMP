@@ -7,10 +7,7 @@
 class RetourFonction : public Instruction
 {
     public:
-        std::string generateIR(ControlFlowGraph * controlFlowGraph)
-        {
-            return "";
-        };
+        std::string generateIR(ControlFlowGraph * controlFlowGraph);
 
         friend std::ostream& operator<< (std::ostream& stream, const RetourFonction& retourFonction);
 

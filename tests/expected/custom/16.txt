@@ -3,9 +3,9 @@ Programme:
  Fonction: Name=main TypeRetour=1
      Bloc:
       Instruction: Declaration: Name=name Type=3
-      Instruction: AppelFunction: Name=func1 Variable: Type=2 Valeur='a' 
-      Instruction: AppelFunction: Name=func2 Variable: Type=0 Valeur=name 
-      Instruction: AppelFunction: Name=func3 Variable: Type=0 Valeur=name  Variable: Type=1 Valeur=4 
+      Instruction: AppelFunction: Name=func1 Expression: Variable: Type=2 Valeur='a' 
+      Instruction: AppelFunction: Name=func2 Expression: Variable: Type=0 Valeur=name 
+      Instruction: AppelFunction: Name=func3 Expression: Variable: Type=0 Valeur=name Expression: Variable: Type=1 Valeur=4 
 
  Fonction: Name=func1 TypeRetour=3
      Param:

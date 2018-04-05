@@ -7,7 +7,7 @@ Programme:
 
       Instruction: Affectation:  Variable: Type=0 Valeur=a  Operateur=0 Expression: OperationBinaire: Expression: Variable: Type=0 Valeur=a  Operateur=13 Expression: Variable: Type=1 Valeur=40 
 
-      Instruction: AppelFunction: Name=putchar Variable: Type=0 Valeur=a 
+      Instruction: AppelFunction: Name=putchar Expression: Variable: Type=0 Valeur=a 
 
 
 Fin

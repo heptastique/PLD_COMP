@@ -22,7 +22,7 @@ affectation: varleftpart (',' varleftpart)* operation expr (',' expr)* ';'      
 
 appelfonct: Name '(' valeurs ')'                # Lappelfonct;
 
-valeurs: variable (',' variable)*               # Lvaleurs
+valeurs: expr (',' expr)*                       # Lvaleurs
         | /* epsilon */                         # LvaleursEpsilon
         ;
 
