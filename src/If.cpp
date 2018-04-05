@@ -25,7 +25,6 @@ string If::generateIR(ControlFlowGraph * controlFlowGraph)
         // Instruction to jump from the then part to afterif
         // ex : .L3
         controlFlowGraph->addIRInstr(IRInstr(RETIF,{to_string(labelNextBlock)}));
-        controlFlowGraph->newBasicBlock();
         anElse->generateIR(controlFlowGraph, labelNextBlock-1);
     }
 
