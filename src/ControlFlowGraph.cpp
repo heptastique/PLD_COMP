@@ -202,14 +202,44 @@ void ControlFlowGraph::generateASM(ostream & os) const
                 case BINARYOPERATION :
                 {
                     os << "\tmovl\t-" << iRInstr.getParam(2)  << "(%rbp), %eax\n";
+
                     if ( iRInstr.getParam(0) == to_string(ADD))
                     {
                         os << "\tadd\t\t-" << iRInstr.getParam(3) << "(%rbp), %eax\n";
                     }
                     if ( iRInstr.getParam(0) == to_string(MINUS))
                     {
-                        os << "\tsub\t\t-" << iRInstr.getParam(3) << "(%rbp), %eax\n";
+                        os << "\tsub\t-" << iRInstr.getParam(3) << "(%rbp), %eax\n";
                     }
+                    if ( iRInstr.getParam(0) == to_string(MULT))
+                    {
+                        os << "\timul\t-" << iRInstr.getParam(3) << "(%rbp), %eax\n";
+                    }
+                    if ( iRInstr.getParam(0) == to_string(DIV))
+                    {
+                        os << "\tidiv\t-" << iRInstr.getParam(3) << "(%rbp), %eax\n";
+                    }
+                    if ( iRInstr.getParam(0) == to_string(ANDBB))
+                    {
+                        os << "\tand\t-" << iRInstr.getParam(3) << "(%rbp), %eax\n";
+                    }
+                    if ( iRInstr.getParam(0) == to_string(ORBB))
+                    {
+                        os << "\tor\t-" << iRInstr.getParam(3) << "(%rbp), %eax\n";
+                    }
+                    if ( iRInstr.getParam(0) == to_string(XORBITWISEB))
+                    {
+                        os << "\txor\t-" << iRInstr.getParam(3) << "(%rbp), %eax\n";
+                    }
+                    if ( iRInstr.getParam(0) == to_string(LEFTSHIFTBITWISEB))
+                    {
+                        os << "\tshl\t-" << iRInstr.getParam(3) << "(%rbp), %eax\n";
+                    }
+                    if ( iRInstr.getParam(0) == to_string(RIGHTSHIFTBITWISEB))
+                    {
+                        os << "\tshr\t-" << iRInstr.getParam(3) << "(%rbp), %eax\n";
+                    }
+
                     os << "\tmovl\t"  << "%eax, -" << iRInstr.getParam(1) << "(%rbp)\n";
 
                     break;
