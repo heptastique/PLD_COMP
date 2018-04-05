@@ -17,20 +17,22 @@ string AppelFunction::generateIR(ControlFlowGraph * controlFlowGraph)
             // Parameter is a Character
             case CARACTERE :
             {
-                controlFlowGraph->addIRInstr(IRInstr(PUTCHAR_VALUE, {to_string((int)((variables[0]->getValeur())[1]))}));
-
+                string var = variables[0]->generateIR(controlFlowGraph);
+                controlFlowGraph->addIRInstr(IRInstr(PUTCHAR_VALUE, {var.substr(4)}));
                 break;
             }
             // Parameter is an Integer
             case ENTIER :
             {
+                string var = variables[0]->generateIR(controlFlowGraph);
+                controlFlowGraph->addIRInstr(IRInstr(PUTCHAR_VALUE, {var.substr(4)}));
                 break;
             }
             // Parameter is a Variable
             case NAME :
             {
-                controlFlowGraph->addIRInstr(IRInstr(PUTCHAR_RBP_REL, {to_string(variables[0]->getDeclaration()->getOffset())}));
-
+                string var = variables[0]->generateIR(controlFlowGraph);
+                controlFlowGraph->addIRInstr(IRInstr(PUTCHAR_VALUE, {var.substr(4)}));
                 break;
             }
         }
@@ -145,7 +147,10 @@ void AppelFunction::resolveTypeExpr()
     }
     else
     {
-        cout << "error function does not exist" << endl;
+        if ( this->name.compare("putchar") != 0)
+        {
+            ErrorHandling::ThrowError(106,0,this->name);
+        }
     }
 }
 

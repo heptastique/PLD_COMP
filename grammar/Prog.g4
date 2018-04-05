@@ -115,11 +115,11 @@ operationunaire: '-'                        # LoperationunaireMoins
                 | '~'                       # LoperationunaireNot
                 ;
 
-operationbinaire: '+'                       # LoperationbinairePlus
-                | '-'                       # LoperationbinaireMoins
-                | '*'                       # LoperationbinaireMult
+operationbinaire: '*'                       # LoperationbinaireMult
                 | '/'                       # LoperationbinaireDiv
                 | '%'                       # LoperationbinaireMod
+                | '+'                       # LoperationbinairePlus
+                | '-'                       # LoperationbinaireMoins
                 | '=='                      # LoperationbinaireEqual
                 | '!='                      # LoperationbinaireNotequal
                 | '<'                       # LoperationbinaireLt
