@@ -6,11 +6,7 @@ using namespace std;
 
 string Initialisation::generateIR(ControlFlowGraph * controlFlowGraph)
 {
-    string var = controlFlowGraph->createNewVariable(name, type);
-    string expr = expression->generateIR(controlFlowGraph);
-    controlFlowGraph->addIRInstr(IRInstr(AFFECTATION, {expr.substr(4), var.substr(4)}));
-
-    return var;
+    return expression->generateIR(controlFlowGraph);
 }
 
 void Initialisation::print(std::ostream &stream) const
