@@ -2,10 +2,14 @@
 
 #include "Instruction.h"
 #include "Bloc.h"
+#include "ControlFlowGraph.h"
+#include "IRInstr.h"
 
 class Else
 {
     public:
+        std::string generateIR(ControlFlowGraph * controlFlowGraph, int label);
+
         void print(std::ostream& stream) const;
 
         friend std::ostream& operator<< (std::ostream& stream, const Else& anElse);

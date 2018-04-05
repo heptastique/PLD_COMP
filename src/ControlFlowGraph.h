@@ -41,7 +41,7 @@ class ControlFlowGraph
 
         void generateASM(ostream &os) const;
 
-        void increaseLastLabel();
+        void setLastLabel(int label);
 
         ControlFlowGraph(const ControlFlowGraph &controlFlowGraph);
 

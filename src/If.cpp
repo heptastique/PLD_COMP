@@ -5,31 +5,37 @@ using namespace std;
 
 string If::generateIR(ControlFlowGraph * controlFlowGraph)
 {
-    // Get labels to use for this if-else
-    string labelThen = to_string(controlFlowGraph->getLastLabel());
-    controlFlowGraph->increaseLastLabel();
-    string labelAfter = to_string(controlFlowGraph->getLastLabel());
-    controlFlowGraph->increaseLastLabel();
+    // Get label to use for this if-else
+    int labelNextBlock = controlFlowGraph->getLastLabel();
 
-    // Generation basic bloc for condition
+    // Add instructions of condition
     condition->generateIR(controlFlowGraph);
-    controlFlowGraph->addIRInstr(IRInstr(COMPJUMP,{labelThen}));
-    
+    // Add jump (jump if condition is false) to the next label (either else or afterif)
+    // ex : .L2
+    controlFlowGraph->addIRInstr(IRInstr(COMPJUMP,{to_string(labelNextBlock)}));
+    // Add instructions of the then part
+    bloc->generateIR(controlFlowGraph);
+
     // If there is an else, generate basic block for else
     if(this->hasElse)
     {
-        anElse->getBloc()->generateIR(controlFlowGraph);
+        // Else is the next block
+        labelNextBlock++; // Increase label
+        // Instruction to jump from the then part to afterif
+        // ex : .L3
+        controlFlowGraph->addIRInstr(IRInstr(RETIF,{to_string(labelNextBlock)}));
+        controlFlowGraph->newBasicBlock();
+        anElse->generateIR(controlFlowGraph, labelNextBlock-1);
     }
-    controlFlowGraph->addIRInstr(IRInstr(RETIF,{labelAfter}));
-
-    // Generate basic block for then
-    controlFlowGraph->addIRInstr(IRInstr(LABEL,{labelThen}));
-    controlFlowGraph->newBasicBlock();
-    bloc->generateIR(controlFlowGraph);
 
     // After if
     controlFlowGraph->newBasicBlock();
-    controlFlowGraph->addIRInstr(IRInstr(LABEL,{labelAfter}));
+    // ex : .L3 if there is a else, .L2 otherwise
+    controlFlowGraph->addIRInstr(IRInstr(LABEL,{to_string(labelNextBlock)}));
+
+    // Prepare label for next if
+    // ex : .L4
+    controlFlowGraph->setLastLabel(labelNextBlock+1);
 }
 
 void If::print(std::ostream &stream) const

@@ -3,6 +3,14 @@ using namespace std;
 #include "Else.h"
 #include <iostream>
 
+std::string Else::generateIR(ControlFlowGraph * controlFlowGraph, int label)
+{
+    // Generate Else basic bloc
+    controlFlowGraph->newBasicBlock();
+    controlFlowGraph->addIRInstr(IRInstr(LABEL,{to_string(label)}));
+    bloc->generateIR(controlFlowGraph);
+}
+
 void Else::print(std::ostream &stream) const
 {
     stream << "     Else: " << endl << *bloc << endl;

@@ -85,9 +85,9 @@ int ControlFlowGraph::getLastLabel() const
     return this->lastLabel;
 }
 
-void ControlFlowGraph::increaseLastLabel()
+void ControlFlowGraph::setLastLabel(int label)
 {
-    this->lastLabel = this->lastLabel+1;
+    this->lastLabel = label;
 }
 
 // Generate Prolog of Function
@@ -154,7 +154,7 @@ void ControlFlowGraph::generateASM(ostream & os) const
                 case COMPJUMP :
                 {
                     os << "\tcmpl\t$1, -8(%rbp)\n"; // a généraliser
-                    os << "\tje .L" << iRInstr.getParam(0) << "\n";
+                    os << "\tjne .L" << iRInstr.getParam(0) << "\n";
 
                     break;
                 }
