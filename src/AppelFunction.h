@@ -20,16 +20,16 @@ class AppelFunction : public Expression
 
         void resolveTypeExpr();
 
-        vector <Variable *> getVariables();
+        vector <Expression *> getExpressions();
 
         AppelFunction(const AppelFunction &unAppelFunction);
 
-        AppelFunction(std::string name, std::vector<Variable *> variables);
+        AppelFunction(std::string name, std::vector<Expression *> expressions);
 
         virtual ~AppelFunction();
 
     private:
         std::string name;
-        std::vector<Variable *> variables;
+        std::vector<Expression *> expressions;
         Function * functionAssociee = nullptr;
 };

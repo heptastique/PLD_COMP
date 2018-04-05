@@ -200,8 +200,8 @@ class Prog : public ProgBaseVisitor
         }
 
         antlrcpp::Any visitLappelfonct(ProgParser::LappelfonctContext *ctx) override {
-            std::vector<Variable*> vars = visit(ctx->valeurs());
-            AppelFunction* appelFunction = new AppelFunction(ctx->Name()->getText(), vars);
+            std::vector<Expression*> exprs = visit(ctx->valeurs());
+            AppelFunction* appelFunction = new AppelFunction(ctx->Name()->getText(), exprs);
             return appelFunction;
         }
 
@@ -276,16 +276,16 @@ class Prog : public ProgBaseVisitor
         }
 
         antlrcpp::Any visitLvaleurs(ProgParser::LvaleursContext *ctx) override {
-            std::vector<Variable*> vars;
-            for(auto it : ctx->variable()){
-                vars.emplace_back(visit(it));
+            std::vector<Expression*> exprs;
+            for(auto it : ctx->expr()){
+                exprs.emplace_back(visit(it));
             }
-            return vars;
+            return exprs;
         }
 
         antlrcpp::Any visitLvaleursEpsilon(ProgParser::LvaleursEpsilonContext *ctx) override {
-            std::vector<Variable*> vars;
-            return vars;
+            std::vector<Expression*> exprs;
+            return exprs;
         }
 
         antlrcpp::Any visitLvariablevarleftpart(ProgParser::LvariablevarleftpartContext *ctx) override {

@@ -12,29 +12,28 @@ string AppelFunction::generateIR(ControlFlowGraph * controlFlowGraph)
     // Special Case for putchar
     if (name == "putchar")
     {
-        switch (variables[0]->getType())
+        switch (expressions[0]->getType())
         {
             // Parameter is a Character
-            case CARACTERE :
+            case CHAR :
             {
-                string var = variables[0]->generateIR(controlFlowGraph);
+                string var = expressions[0]->generateIR(controlFlowGraph);
                 cout<< var << "carac" <<endl;
                 controlFlowGraph->addIRInstr(IRInstr(PUTCHAR_VALUE, {var.substr(4)}));
                 break;
             }
             // Parameter is an Integer
-            case ENTIER :
+            case INT32_T :
             {
-                string var = variables[0]->generateIR(controlFlowGraph);
+                string var = expressions[0]->generateIR(controlFlowGraph);
                 cout<< var << "entier" <<endl;
                 controlFlowGraph->addIRInstr(IRInstr(PUTCHAR_VALUE, {var.substr(4)}));
                 break;
             }
-            // Parameter is a Variable
-            case NAME :
+            case INT64_T :
             {
-                string var = variables[0]->generateIR(controlFlowGraph);
-                cout<< var << "name" <<endl;
+                string var = expressions[0]->generateIR(controlFlowGraph);
+                cout<< var << "entier" <<endl;
                 controlFlowGraph->addIRInstr(IRInstr(PUTCHAR_VALUE, {var.substr(4)}));
                 break;
             }
@@ -43,26 +42,26 @@ string AppelFunction::generateIR(ControlFlowGraph * controlFlowGraph)
     else
     {
         // For each Parameter
-        for (auto variable : variables)
+        for (auto variable : expressions)
         {
             switch (variable->getType())
             {
                 // Parameter is a Character
-                case CARACTERE :
+                case CHAR :
                 {
                     string var = variable->generateIR(controlFlowGraph);
                     controlFlowGraph->addIRInstr(IRInstr(PUSH_RBP_REL, {var.substr(4)}));
                     break;
                 }
                     // Parameter is an Integer
-                case ENTIER :
+                case INT32_T :
                 {
                     string var = variable->generateIR(controlFlowGraph);
                     controlFlowGraph->addIRInstr(IRInstr(PUSH_RBP_REL, {var.substr(4)}));
                     break;
                 }
                     // Parameter is a Variable
-                case NAME :
+                case INT64_T :
                 {
                     string var = variable->generateIR(controlFlowGraph);
                     controlFlowGraph->addIRInstr(IRInstr(PUSH_RBP_REL, {var.substr(4)}));
@@ -75,7 +74,7 @@ string AppelFunction::generateIR(ControlFlowGraph * controlFlowGraph)
         controlFlowGraph->addIRInstr(IRInstr(CALL, {name}));
 
         // Reset SP after Parameters push
-        controlFlowGraph->addIRInstr(IRInstr(ADD_RSP, {to_string(variables.size() * 8)}));
+        controlFlowGraph->addIRInstr(IRInstr(ADD_RSP, {to_string(expressions.size() * 8)}));
     }
 
     // For the moment
@@ -84,25 +83,11 @@ string AppelFunction::generateIR(ControlFlowGraph * controlFlowGraph)
 
 void AppelFunction::print(std::ostream &stream) const
 {
-    stream << " AppelFunction: Name=" << name;
+    stream << " AppelFunction: Name=" << name << " ";
 
-    for (auto it : variables)
+    for (auto it : expressions)
     {
-        if(VariableIndex *varInd = dynamic_cast<VariableIndex*>(it))
-        {
-            stream << *varInd;
-        }
-        else
-        {
-            if(VariableOpe *varOpe = dynamic_cast<VariableOpe*>(it))
-            {
-                stream << *varOpe;
-            }
-            else
-            {
-                stream << *it;
-            }
-        }
+        stream << *it;
     }
     
     stream << endl;
@@ -111,7 +96,7 @@ void AppelFunction::print(std::ostream &stream) const
 std::ostream& operator<<(std::ostream& stream, const AppelFunction& appelFunction)
 {
     stream << " AppelFunction: Name=" << appelFunction.name;
-    for (auto it : appelFunction.variables){
+    for (auto it : appelFunction.expressions){
         stream << *it;
     }
     stream << endl;
@@ -125,11 +110,11 @@ AppelFunction &AppelFunction::operator=(const AppelFunction &unAppelFunction)
 
 void AppelFunction::resolveScopeVariables(std::vector<Declaration*> declProgramme, std::vector<Declaration*> paramFunction, std::vector<Declaration*> declBloc, std::vector<Function*> functionProgram)
 {
-    std::vector<Variable *> variables = getVariables();
+    std::vector<Expression *> expressions = getExpressions();
     
-    for (auto variable : variables)
+    for (auto expression : expressions)
     {
-        variable->resolveScopeVariables(declProgramme,paramFunction,declBloc,functionProgram);
+        expression->resolveScopeVariables(declProgramme,paramFunction,declBloc,functionProgram);
     }
     
     for ( auto function : functionProgram)
@@ -149,6 +134,10 @@ void AppelFunction::resolveScopeVariables(std::vector<Declaration*> declProgramm
 
 void AppelFunction::resolveTypeExpr()
 {
+    for (auto expression : expressions)
+    {
+        expression->resolveTypeExpr();
+    }
     if ( this->functionAssociee != nullptr)
     {
         this->setType(this->functionAssociee->getTypeRetour());
@@ -162,9 +151,9 @@ void AppelFunction::resolveTypeExpr()
     }
 }
 
-vector <Variable *> AppelFunction::getVariables()
+vector <Expression *> AppelFunction::getExpressions()
 {
-    return this->variables;
+    return this->expressions;
 }
 
 AppelFunction::AppelFunction(const AppelFunction &unAppelFunction)
@@ -174,14 +163,14 @@ AppelFunction::AppelFunction(const AppelFunction &unAppelFunction)
     #endif
 }
 
-AppelFunction::AppelFunction(std::string name, std::vector<Variable *> variables)
+AppelFunction::AppelFunction(std::string name, std::vector<Expression *> expressions)
 {
     #ifdef MAP
         cout << "Appel au constructeur de <AppelFunction>" << endl;
     #endif
 
     this->name = name;
-    this->variables = variables;
+    this->expressions = expressions;
 }
 
 AppelFunction::~AppelFunction()
