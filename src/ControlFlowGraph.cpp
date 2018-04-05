@@ -89,9 +89,9 @@ void ControlFlowGraph::generateProlog(ostream & os, string functionName, int add
 
     os << functionName << ":\n";
     os << "\n";
-    os << "\tpush\t%ebp\n";
-    os << "\tmov\t%esp, %ebp\n";
-    os << "\tsub\t$" << addressRangeSize << ", %esp\n";
+    os << "\tpushq\t%rbp\n";
+    os << "\tmovq\t%rsp, %rbp\n";
+    os << "\tsubq\t$" << addressRangeSize << ", %rsp\n";
     os << "\n";
 }
 
@@ -102,9 +102,9 @@ void ControlFlowGraph::generateEpilog(ostream & os, int addressRangeSize) const
     #endif
 
     os << "\n";
-    os << "\tadd\t$" << addressRangeSize << ", %esp\n";
-    os << "\tpop\t%ebp\n";
-    os << "\tret\n";
+    os << "\taddq\t$" << addressRangeSize << ", %rsp\n";
+    os << "\tpopq\t%rbp\n";
+    os << "\tretq\n";
     os << "\n";
 }
 
@@ -142,51 +142,51 @@ void ControlFlowGraph::generateASM(ostream & os) const
                 }
                 case PUTCHAR_VALUE :
                 {
-                    os << "\tmov\t$" << iRInstr.getParam(0) <<", %edi\n";
+                    os << "\tmovl\t$" << iRInstr.getParam(0) <<", %edi\n";
                     os << "\tcall\tputchar\n";
 
                     break;
                 }
                 case PUTCHAR_RBP_REL :
                 {
-                    os << "\tmov\t" << iRInstr.getParam(0) <<"(%ebp), %edi\n";
+                    os << "\tmovq\t" << iRInstr.getParam(0) <<"(%rbp), %edi\n";
                     os << "\tcall\tputchar\n";
 
                     break;
                 }
                 case STORE_RBP_REL_RSP :
                 {
-                    os << "\tmov\t" << iRInstr.getParam(0) <<"(%ebp), %esp\n";
+                    os << "\tmovq\t" << iRInstr.getParam(0) <<"(%rbp), %rsp\n";
 
                     break;
                 }
                 case STORE_VALUE_RBP_REL :
                 {
-                    os << "\tmovl\t$" << iRInstr.getParam(0) << ", " << iRInstr.getParam(1) << "(%ebp)\n";
+                    os << "\tmovl\t$" << iRInstr.getParam(0) << ", " << iRInstr.getParam(1) << "(%rbp)\n";
 
                     break;
                 }
                 case STORE_RBP_REL_REG :
                 {
-                    os << "\tmov\t" << iRInstr.getParam(0) << "(%ebp), %" << iRInstr.getParam(1) << "\n";
+                    os << "\tmov\t" << iRInstr.getParam(0) << "(%rbp), %" << iRInstr.getParam(1) << "\n";
 
                     break;
                 }
                 case STORE_REG_RSP :
                 {
-                    os << "\tmov\t%" << iRInstr.getParam(0) << ", (%esp)\n";
+                    os << "\tmovq\t%" << iRInstr.getParam(0) << ", (%rsp)\n";
 
                     break;
                 }
                 case PUSH_RBP_REL :
                 {
-                    os << "\tpush\t" << iRInstr.getParam(0) << "(%ebp)\n";
+                    os << "\tpushq\t" << iRInstr.getParam(0) << "(%rbp)\n";
 
                     break;
                 }
                 case PUSH_VALUE :
                 {
-                    os << "\tpush\t$" << iRInstr.getParam(0) << "\n";
+                    os << "\tpushl\t$" << iRInstr.getParam(0) << "\n";
 
                     break;
                 }
@@ -198,13 +198,13 @@ void ControlFlowGraph::generateASM(ostream & os) const
                 }
                 case ADD_RSP :
                 {
-                    os << "\tadd\t$" << iRInstr.getParam(0) << ", %esp\n";
+                    os << "\taddq\t$" << iRInstr.getParam(0) << ", %rsp\n";
 
                     break;
                 }
                 case SUB_RSP :
                 {
-                    os << "\tsub\t$" << iRInstr.getParam(0) << ", %esp\n";
+                    os << "\tsubq\t$" << iRInstr.getParam(0) << ", %rsp\n";
 
                     break;
                 }
