@@ -12,6 +12,8 @@ main:
 	movl	%eax, -8(%rbp)
 	movl	$1, -24(%rbp)
 	movl	-8(%rbp), %eax
+	cmp	-24(%rbp), %eax
+	sete	%al
 	movl	%eax, -32(%rbp)
 	cmpl	$1, -32(%rbp)
 	jne .L2
