@@ -35,6 +35,11 @@ class Declaration : public Instruction
 
         //IRVariable getIRVariable();
 
+        void setName(std::string name)
+        {
+            this->name = name;
+        };
+
         std::string getName();
 
         Declaration();
