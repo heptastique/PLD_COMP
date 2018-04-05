@@ -3,7 +3,7 @@ Programme:
  Fonction: Name=main TypeRetour=0
      Bloc:
       Instruction: Declaration: Name=a Type=1
-      Instruction: Affectation:  Variable: Type=0 Valeur=a  Operateur=0 Expression: OperationBinaire: Expression: Variable: Type=1 Valeur=2  Operateur=19 Expression: Variable: Type=1 Valeur=3 
+      Instruction: Affectation:  Variable: Type=0 Valeur=a  Operateur=0 Expression: OperationBinaire: Expression: Variable: Type=1 Valeur=0  Operateur=25 Expression: Variable: Type=1 Valeur=0 
 
       Instruction: Affectation:  Variable: Type=0 Valeur=a  Operateur=0 Expression: OperationBinaire: Expression: Variable: Type=0 Valeur=a  Operateur=13 Expression: Variable: Type=1 Valeur=40 
 
@@ -11,3 +11,4 @@ Programme:
 
 
 Fin
+
