@@ -19,7 +19,7 @@ class Else
         void resolveScopeVariables(std::vector<Declaration*> declProgramme, std::vector<Declaration*> paramFunction, std::vector<Declaration*> declBloc, std::vector<Function*> functionProgram);
 
         void resolveTypeExpr();
-  
+
         Else(const Else &unElse);
 
         Else(Bloc* bloc);
