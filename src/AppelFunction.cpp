@@ -68,7 +68,8 @@ string AppelFunction::generateIR(ControlFlowGraph * controlFlowGraph)
         controlFlowGraph->addIRInstr(IRInstr(ADD_RSP, {to_string(variables.size() * 8)}));
     }
 
-    return "";
+    // For the moment
+    return "VAR.9999";
 }
 
 void AppelFunction::print(std::ostream &stream) const

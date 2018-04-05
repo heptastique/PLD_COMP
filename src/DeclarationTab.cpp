@@ -1,11 +1,16 @@
 using namespace std;
 
 #include "DeclarationTab.h"
+#include "ControlFlowGraph.h"
 #include <iostream>
 
 string DeclarationTab::generateIR(ControlFlowGraph * controlFlowGraph)
 {
-    return "";
+    // Same as declaration for the moment
+    string var = controlFlowGraph->createNewVariable(name);
+    this->name = var;
+
+    return var;
 }
 
 void DeclarationTab::print(std::ostream &stream) const

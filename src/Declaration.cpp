@@ -9,9 +9,12 @@ string Declaration::generateIR(ControlFlowGraph * controlFlowGraph)
 {
     // controlFlowGraph->createNewVariable(name);
 
-    offset = controlFlowGraph->createNewOffset(type);
+    //offset = controlFlowGraph->createNewOffset(type);
 
-    return "";
+    string var = controlFlowGraph->createNewVariable(name);
+    this->name = var;
+
+    return var;
 }
 
 void Declaration::print(std::ostream &stream) const

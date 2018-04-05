@@ -23,7 +23,7 @@ class ControlFlowGraph
 
         vector <BasicBlock*> getBasicBlocks() const;
 
-        //string createNewVariable(string name);
+        string createNewVariable(string name);
 
         string createNewTemp();
 
@@ -38,6 +38,8 @@ class ControlFlowGraph
         void generateEpilog(ostream & os, int addressRangeSize) const;
 
         void generateASM(ostream &os) const;
+
+        string getOffset(std::string string);
 
         ControlFlowGraph(const ControlFlowGraph &controlFlowGraph);
 
@@ -56,7 +58,7 @@ class ControlFlowGraph
 
         map <string, IRVariable> variableMap;
 
-        int nbTemp;
+        int nbTemp = 0;
 
         int lastOffset = -8;
 };

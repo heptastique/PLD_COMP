@@ -10,11 +10,13 @@ class ControlFlowGraph;
 class Expression : public Instruction
 {
     protected:
-        //virtual void generateIR(ControlFlowGraph * controlFlowGraph) = 0;
+
 
         virtual void print(std::ostream& stream) const = 0;
 
     public:
+        virtual std::string generateIR(ControlFlowGraph * controlFlowGraph) = 0;
+
         friend std::ostream& operator<< (std::ostream& stream, Expression const& expression);
 
         Expression &operator=(const Expression &unExpression);
