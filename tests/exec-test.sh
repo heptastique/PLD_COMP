@@ -13,4 +13,7 @@ assert "./target/prog.out" "OP\n"
 ../bin/app Custom/48-function-putchar.c -o > ./target/output
 assert "./target/prog.out" "OKP"
 
+../bin/app Custom/49-multi-operation-function.c -o > ./target/output
+assert "./target/prog.out" "****"
+
 assert_end examples
