@@ -4,6 +4,8 @@
 #include "Bloc.h"
 #include "Else.h"
 #include "Expression.h"
+#include "ControlFlowGraph.h"
+#include "IRInstr.h"
 
 class If : public Instruction
 {

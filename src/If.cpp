@@ -5,7 +5,31 @@ using namespace std;
 
 string If::generateIR(ControlFlowGraph * controlFlowGraph)
 {
-    return "";
+    string labelThen = to_string(controlFlowGraph->getLastLabel());
+    controlFlowGraph->increaseLastLabel();
+    string labelAfter = to_string(controlFlowGraph->getLastLabel());
+    controlFlowGraph->increaseLastLabel();
+
+    // Generation basic bloc for condition
+    condition->generateIR(controlFlowGraph);
+    controlFlowGraph->addIRInstr(IRInstr(COMPJUMP,{labelThen}));
+    
+    // If there is an else, generate basic block for else
+    if(this->hasElse)
+    {
+        anElse->getBloc()->generateIR(controlFlowGraph);
+    }
+    controlFlowGraph->addIRInstr(IRInstr(RETIF,{labelAfter}));
+    
+
+    // Generate basic block for then
+    controlFlowGraph->addIRInstr(IRInstr(LABEL,{labelThen}));
+    controlFlowGraph->newBasicBlock();
+    bloc->generateIR(controlFlowGraph);
+
+    // After if
+    controlFlowGraph->newBasicBlock();
+    controlFlowGraph->addIRInstr(IRInstr(LABEL,{labelAfter}));
 }
 
 void If::print(std::ostream &stream) const

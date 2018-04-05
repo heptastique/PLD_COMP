@@ -23,6 +23,8 @@ class ControlFlowGraph
 
         vector <BasicBlock*> getBasicBlocks() const;
 
+        int getLastLabel() const;
+
         //string createNewVariable(string name);
 
         string createNewTemp();
@@ -38,6 +40,8 @@ class ControlFlowGraph
         void generateEpilog(ostream & os, int addressRangeSize) const;
 
         void generateASM(ostream &os) const;
+
+        void increaseLastLabel();
 
         ControlFlowGraph(const ControlFlowGraph &controlFlowGraph);
 
@@ -59,4 +63,6 @@ class ControlFlowGraph
         int nbTemp;
 
         int lastOffset = -8;
+
+        int lastLabel = 2;
 };
