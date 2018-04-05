@@ -43,6 +43,14 @@ assert_contains_file_0 "../bin/app Custom/36-gttrue.c"										  "expected/cust
 assert_contains_file_0 "../bin/app Custom/37-gtfalse.c"										  "expected/custom/37.txt"
 assert_contains_file_0 "../bin/app Custom/38-gtetrue.c"										  "expected/custom/38.txt"
 assert_contains_file_0 "../bin/app Custom/39-gtefalse.c"									  "expected/custom/39.txt"
+assert_contains_file_0 "../bin/app Custom/40-ortrue.c"									      "expected/custom/40.txt"
+assert_contains_file_0 "../bin/app Custom/41-orltrue.c"									      "expected/custom/41.txt"
+assert_contains_file_0 "../bin/app Custom/42-orrtrue.c"									      "expected/custom/42.txt"
+assert_contains_file_0 "../bin/app Custom/43-orfalse.c"									      "expected/custom/43.txt"
+assert_contains_file_0 "../bin/app Custom/44-andtrue.c"									      "expected/custom/44.txt"
+assert_contains_file_0 "../bin/app Custom/45-andfalse.c"									  "expected/custom/45.txt"
+assert_contains_file_0 "../bin/app Custom/46-andlfalse.c"									  "expected/custom/46.txt"
+assert_contains_file_0 "../bin/app Custom/47-andrfalse.c"									  "expected/custom/47.txt"
 
 # Given tests
 
