@@ -89,12 +89,12 @@ void ControlFlowGraph::newBasicBlock()
 
 int ControlFlowGraph::getLastLabel() const
 {
-    return this->lastLabel;
+    return this->programme->getLastLabel();
 }
 
 void ControlFlowGraph::setLastLabel(int label)
 {
-    this->lastLabel = label;
+    this->programme->setLastLabel(label);
 }
 
 // Generate Prolog of Function
