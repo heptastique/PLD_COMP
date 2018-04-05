@@ -209,7 +209,7 @@ void ControlFlowGraph::generateASM(ostream & os) const
                     }
                     if ( iRInstr.getParam(0) == to_string(MINUS))
                     {
-                        os << "\tsub\t-" << iRInstr.getParam(3) << "(%rbp), %eax\n";
+                        os << "\tsub\t\t-" << iRInstr.getParam(3) << "(%rbp), %eax\n";
                     }
                     if ( iRInstr.getParam(0) == to_string(MULT))
                     {
