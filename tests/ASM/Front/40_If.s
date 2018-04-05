@@ -24,4 +24,3 @@ main:
 	popq	%rbp
 	retq
 
-    
