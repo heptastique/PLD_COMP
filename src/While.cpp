@@ -7,16 +7,30 @@ using namespace std;
 
 string While::generateIR(ControlFlowGraph *controlFlowGraph)
 {
+    cout << "While::generateIR" << endl;
     // Get label to use for this while
     int labelNextBlock = controlFlowGraph->getLastLabel();
-    // Add instructions of condition
-    condition->generateIR(controlFlowGraph);
-    
-    // Add instructions of block
+
+    // Instruction to jump to condition verification and after while parts
+    controlFlowGraph->addIRInstr(IRInstr(RETIF,{to_string(labelNextBlock)}));
+    labelNextBlock = labelNextBlock +1;
+
+    // Generate block
+    controlFlowGraph->newBasicBlock();
+    controlFlowGraph->addIRInstr(IRInstr(LABEL,{to_string(labelNextBlock)}));
     bloc->generateIR(controlFlowGraph);
+
+    // Generate condition verification and after while parts
+    controlFlowGraph->newBasicBlock();
+    controlFlowGraph->addIRInstr(IRInstr(LABEL,{to_string(labelNextBlock-1)}));
+    // Add instructions of condition
+    string result = condition->generateIR(controlFlowGraph);
+    controlFlowGraph->addIRInstr(IRInstr(COMPJUMPEQUALS,{to_string(labelNextBlock),result.substr(4)}));
 
     // Prepare label for next block
     controlFlowGraph->setLastLabel(labelNextBlock+1);
+
+    return "";
 }
 
 void While::print(std::ostream &stream) const
