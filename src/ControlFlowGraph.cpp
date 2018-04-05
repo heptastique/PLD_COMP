@@ -217,11 +217,11 @@ void ControlFlowGraph::generateASM(ostream & os) const
                     }
                     if ( iRInstr.getParam(0) == to_string(DIV))
                     {
-                        os << "\tidiv\t-" << iRInstr.getParam(3) << "(%rbp)\n";
+                        os << "\tidiv\t-" << iRInstr.getParam(3) << "(%rbp), %eax\n";
                     }
                     if ( iRInstr.getParam(0) == to_string(MOD))
                     {
-                        os << "\tidiv\t-" << iRInstr.getParam(3) << "(%rbp)\n";
+                        os << "\tidiv\t-" << iRInstr.getParam(3) << "(%rbp), %eax\n";
                         os << "\tmovl\t"  << "%edx, %eax";
                     }
                     if ( iRInstr.getParam(0) == to_string(ANDBB))
@@ -265,11 +265,11 @@ void ControlFlowGraph::generateASM(ostream & os) const
                     os << "\tmovl\t-"  << iRInstr.getParam(2) << "(%rbp), %eax\n";
                     if ( iRInstr.getParam(0).compare(to_string(MINUSU)) == 0 )
                     {
-                        os << "\tneg\t %eax\n";
+                        os << "\tneg\t%eax\n";
                     }
                     if ( iRInstr.getParam(0).compare(to_string(NOT)) == 0 )
                     {
-                        os << "\tnot\t %eax\n";
+                        os << "\tnot\t%eax\n";
                     }
                     os << "\tmovl\t"  << "%eax, -" << iRInstr.getParam(1)  << "(%rbp)\n";
                 }
