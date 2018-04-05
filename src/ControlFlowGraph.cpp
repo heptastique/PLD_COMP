@@ -3,18 +3,10 @@ using namespace std;
 #include "ControlFlowGraph.h"
 
 
-string ControlFlowGraph::createNewVariable(string name)
+string ControlFlowGraph::createNewVariable(string name, Type type)
 {
-    // name of a decl no more useful because all variable linked
-
-    nbTemp = nbTemp + 1;
-
-    string variableName = "VAR." + to_string(nbTemp*8);
-
-    IRVariable iRVariable(variableName, lastOffset - 8);
-
-    lastOffset = lastOffset - 8;
-
+    IRVariable iRVariable("VAR", createNewOffset(type));
+    string variableName = "VAR." + to_string(iRVariable.getOffset());
     variableMap.insert(pair <string, IRVariable> (variableName, iRVariable));
 
     return variableName;
@@ -52,13 +44,13 @@ int ControlFlowGraph::createNewOffset(Type type)
     return offset;
 }
 
-string ControlFlowGraph::createNewTemp()
+string ControlFlowGraph::createNewTemp(Type type)
 {
     nbTemp = nbTemp + 1;
 
-    string tempName = "TMP." + to_string(nbTemp*8);
+    IRVariable iRVariable("TMP", createNewOffset(type));
 
-    IRVariable iRVariable(tempName, createNewOffset(INT32_T));
+    string tempName = "TMP." + to_string(iRVariable.getOffset());
 
     variableMap.insert(pair <string, IRVariable> (tempName, iRVariable));
 
@@ -190,13 +182,6 @@ void ControlFlowGraph::generateASM(ostream & os) const
 
                 case PUTCHAR_VALUE :
                 {
-                    os << "\tmovl\t$" << iRInstr.getParam(0) <<", %edi\n";
-                    os << "\tcall\tputchar\n";
-
-                    break;
-                }
-                case PUTCHAR_RBP_REL :
-                {
                     os << "\tmovl\t" << iRInstr.getParam(0) <<"(%rbp), %edi\n";
                     os << "\tcall\tputchar\n";
 
@@ -210,13 +195,13 @@ void ControlFlowGraph::generateASM(ostream & os) const
                 }
                 case PUSH_RBP_REL :
                 {
-                    os << "\tpushl\t" << iRInstr.getParam(0) << "(%rbp)\n";
+                    os << "\tpush\t" << iRInstr.getParam(0) << "(%rbp)\n";
 
                     break;
                 }
                 case PUSH_VALUE :
                 {
-                    os << "\tpushl\t$" << iRInstr.getParam(0) << "\n";
+                    os << "\tpush\t$" << iRInstr.getParam(0) << "\n";
 
                     break;
                 }
@@ -234,68 +219,72 @@ void ControlFlowGraph::generateASM(ostream & os) const
                 }
                 case BINARYOPERATION :
                 {
-                    os << "\tmovl\t-" << iRInstr.getParam(2)  << "(%rbp), %eax\n";
+                    os << "\tmovl\t" << iRInstr.getParam(2)  << "(%rbp), %eax\n";
 
                     if ( iRInstr.getParam(0) == to_string(PLUS))
                     {
-                        os << "\tadd\t\t-" << iRInstr.getParam(3) << "(%rbp), %eax\n";
+                        os << "\tadd\t\t" << iRInstr.getParam(3) << "(%rbp), %eax\n";
                     }
                     if ( iRInstr.getParam(0) == to_string(MINUS))
                     {
-                        os << "\tsub\t\t-" << iRInstr.getParam(3) << "(%rbp), %eax\n";
+                        os << "\tsub\t\t" << iRInstr.getParam(3) << "(%rbp), %eax\n";
                     }
                     if ( iRInstr.getParam(0) == to_string(MULT))
                     {
-                        os << "\timul\t-" << iRInstr.getParam(3) << "(%rbp), %eax\n";
+                        os << "\timul\t" << iRInstr.getParam(3) << "(%rbp), %eax\n";
                     }
                     if ( iRInstr.getParam(0) == to_string(DIV))
                     {
-                        os << "\tidiv\t-" << iRInstr.getParam(3) << "(%rbp), %eax\n";
+                        os << "\tmovl\t"  << "$0, %edx\n";
+                        os << "\tmovl\t"  << iRInstr.getParam(3) <<"(%rbp), %ebx\n";
+                        os << "\tidiv\t%ebx\n";
                     }
                     if ( iRInstr.getParam(0) == to_string(MOD))
                     {
-                        os << "\tidiv\t-" << iRInstr.getParam(3) << "(%rbp), %eax\n";
-                        os << "\tmovl\t"  << "%edx, %eax\n";
+                        os << "\tmovl\t"  << "$0, %edx\n";
+                        os << "\tmovl\t"  << iRInstr.getParam(3) <<"(%rbp), %ebx\n";
+                        os << "\tidiv\t%ebx\n";
+                        os << "\tmovl\t"  << "%edx, %eax";
                     }
                     if ( iRInstr.getParam(0) == to_string(ANDBB))
                     {
-                        os << "\tand\t-" << iRInstr.getParam(3) << "(%rbp), %eax\n";
+                        os << "\tand\t" << iRInstr.getParam(3) << "(%rbp), %eax\n";
                     }
                     if ( iRInstr.getParam(0) == to_string(ORBB))
                     {
-                        os << "\tor\t-" << iRInstr.getParam(3) << "(%rbp), %eax\n";
+                        os << "\tor\t" << iRInstr.getParam(3) << "(%rbp), %eax\n";
                     }
                     if ( iRInstr.getParam(0) == to_string(XORBITWISEB))
                     {
-                        os << "\txor\t-" << iRInstr.getParam(3) << "(%rbp), %eax\n";
+                        os << "\txor\t" << iRInstr.getParam(3) << "(%rbp), %eax\n";
                     }
                     if ( iRInstr.getParam(0) == to_string(LEFTSHIFTBITWISEB))
                     {
-                        os << "\tshl\t-" << iRInstr.getParam(3) << "(%rbp), %eax\n";
+                        os << "\tshl\t" << iRInstr.getParam(3) << "(%rbp), %eax\n";
                     }
                     if ( iRInstr.getParam(0) == to_string(RIGHTSHIFTBITWISEB))
                     {
-                        os << "\tshr\t-" << iRInstr.getParam(3) << "(%rbp), %eax\n";
+                        os << "\tshr\t" << iRInstr.getParam(3) << "(%rbp), %eax\n";
                     }
 
-                    os << "\tmovl\t"  << "%eax, -" << iRInstr.getParam(1) << "(%rbp)\n";
+                    os << "\tmovl\t"  << "%eax, " << iRInstr.getParam(1) << "(%rbp)\n";
 
                     break;
                 }
                 case AFFECTATION :
                 {
-                    os << "\tmovl\t-"  <<  iRInstr.getParam(0) << "(%rbp), %eax\n";
-                    os << "\tmovl\t" << "%eax, -" << iRInstr.getParam(1) << "(%rbp)\n";
+                    os << "\tmovl\t"  <<  iRInstr.getParam(0) << "(%rbp), %eax\n";
+                    os << "\tmovl\t" << "%eax, " << iRInstr.getParam(1) << "(%rbp)\n";
                     break;
                 }
                 case REG_STORE :
                 {
-                    os << "\tmovl\t$" << iRInstr.getParam(0) << ", -" <<  iRInstr.getParam(1) << "(%rbp)\n";
+                    os << "\tmovl\t$" << iRInstr.getParam(0) << ", " <<  iRInstr.getParam(1) << "(%rbp)\n";
                     break;
                 }
                 case UNARYOPERATION :
                 {
-                    os << "\tmovl\t-"  << iRInstr.getParam(2) << "(%rbp), %eax\n";
+                    os << "\tmovl\t"  << iRInstr.getParam(2) << "(%rbp), %eax\n";
                     if ( iRInstr.getParam(0).compare(to_string(MINUSU)) == 0 )
                     {
                         os << "\tneg\t%eax\n";
@@ -304,7 +293,7 @@ void ControlFlowGraph::generateASM(ostream & os) const
                     {
                         os << "\tnot\t%eax\n";
                     }
-                    os << "\tmovl\t"  << "%eax, -" << iRInstr.getParam(1)  << "(%rbp)\n";
+                    os << "\tmovl\t"  << "%eax, " << iRInstr.getParam(1)  << "(%rbp)\n";
                 }
 
             }

@@ -1,11 +1,12 @@
 using namespace std;
 
 #include "Initialisation.h"
+#include "ControlFlowGraph.h"
 #include <iostream>
 
 string Initialisation::generateIR(ControlFlowGraph * controlFlowGraph)
 {
-    return "";
+    return expression->generateIR(controlFlowGraph);
 }
 
 void Initialisation::print(std::ostream &stream) const
