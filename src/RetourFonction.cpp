@@ -5,11 +5,11 @@ using namespace std;
 
 std::string RetourFonction::generateIR(ControlFlowGraph * controlFlowGraph)
 {
-    //string var = expression->generateIR(controlFlowGraph);
+    string var = expression->generateIR(controlFlowGraph);
 
     //cout << var << endl;
 
-    //controlFlowGraph->addIRInstr(IRInstr(MOV_RBP_REL_REG, {var.substr(4), "rax"}));
+    controlFlowGraph->addIRInstr(IRInstr(MOV_RBP_REL_REG, {var.substr(4), "rax"}));
 
     return "aaaaaa";
 }
