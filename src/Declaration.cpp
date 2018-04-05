@@ -11,7 +11,7 @@ string Declaration::generateIR(ControlFlowGraph * controlFlowGraph)
 
     //offset = controlFlowGraph->createNewOffset(type);
 
-    string var = controlFlowGraph->createNewVariable(name);
+    string var = controlFlowGraph->createNewVariable(name, type);
     this->name = var;
 
     offset = -stoi(var.substr(4));

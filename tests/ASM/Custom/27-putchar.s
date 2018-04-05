@@ -7,7 +7,8 @@ main:
 	movq	%rsp, %rbp
 	subq	$0, %rsp
 
-	movl	$97, %edi
+	movl	$97, -8(%rbp)
+	movl	-8(%rbp), %edi
 	call	putchar
 
 	addq	$0, %rsp
