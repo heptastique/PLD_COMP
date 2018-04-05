@@ -37,11 +37,11 @@ varleftpart: Name '[' expr ']'                  # LvarleftpartTable
             | Name                              # Lvarleftpart
             ;
 
-expr: variable                                  # LexprVariable
+expr: '(' expr ')'                              # LexprParentheses
+    |variable                                  # LexprVariable
     | appelfonct                                # LexprAppelfonction
-    | expr operationbinaire expr                # LexprOperationbinaire
     | operationunaire expr                      # LexprOperationunaire
-    | '(' expr ')'                              # LexprParentheses
+    | expr operationbinaire expr                # LexprOperationbinaire
     ;
 
 params: 'void'                                  # LparamsVoid
