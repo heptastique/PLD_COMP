@@ -8,11 +8,26 @@ using namespace std;
 // Generate IR
 void Bloc::generateIR(ControlFlowGraph * controlFlowGraph)
 {
-    // For each Instruction of Bloc
+    // For each Declaration of Bloc
     for (auto instruction : instructions)
     {
-        // Generate IR for Instruction
-        instruction->generateIR(controlFlowGraph);
+        if (Declaration * declaration = dynamic_cast <Declaration *> (instruction))
+        {
+            declaration->generateIR(controlFlowGraph);
+        }
+    }
+
+    // For each Instruction (non Declaration) of Bloc
+    for (auto instruction : instructions)
+    {
+        if (Declaration * declaration = dynamic_cast <Declaration *> (instruction))
+        {
+            //
+        }
+        else
+        {
+            instruction->generateIR(controlFlowGraph);
+        }
     }
 }
 

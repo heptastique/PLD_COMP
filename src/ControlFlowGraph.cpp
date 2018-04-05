@@ -87,6 +87,16 @@ void ControlFlowGraph::newBasicBlock()
     currentBasicBlock = newBasicBlock;
 }
 
+int ControlFlowGraph::getLastLabel() const
+{
+    return this->lastLabel;
+}
+
+void ControlFlowGraph::setLastLabel(int label)
+{
+    this->lastLabel = label;
+}
+
 // Generate Prolog of Function
 void ControlFlowGraph::generateProlog(ostream & os, string functionName, int addressRangeSize) const
 {
@@ -105,7 +115,7 @@ void ControlFlowGraph::generateProlog(ostream & os, string functionName, int add
 void ControlFlowGraph::generateEpilog(ostream & os, int addressRangeSize) const
 {
     #ifdef MAP
-        cout << "Appel a la methode ControlFlowGraph::generateProlog" << endl;
+        cout << "Appel a la methode ControlFlowGraph::generateEpilog" << endl;
     #endif
 
     os << "\n";
@@ -147,6 +157,29 @@ void ControlFlowGraph::generateASM(ostream & os) const
 
                     break;
                 }
+
+                case COMPJUMP :
+                {
+                    os << "\tcmpl\t$1, " << iRInstr.getParam(1) << "(%rbp)\n";
+                    os << "\tjne .L" << iRInstr.getParam(0) << "\n";
+
+                    break;
+                }
+
+                case LABEL :
+                {
+                    os << ".L" << iRInstr.getParam(0) << ":\n";
+
+                    break;
+                }
+
+                case RETIF :
+                {
+                    os << "\tjmp .L" << iRInstr.getParam(0) << "\n";
+
+                    break;
+                }
+
                 case PUTCHAR_VALUE :
                 {
                     os << "\tmovl\t" << iRInstr.getParam(0) <<"(%rbp), %edi\n";

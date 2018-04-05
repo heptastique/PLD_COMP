@@ -5,6 +5,38 @@ using namespace std;
 
 string If::generateIR(ControlFlowGraph * controlFlowGraph)
 {
+    cout << "If::generateIR" << endl;
+    // Get label to use for this if-else
+    int labelNextBlock = controlFlowGraph->getLastLabel();
+
+    // Add instructions of condition
+    string result = condition->generateIR(controlFlowGraph);
+    // Add jump (jump if condition is false) to the next label (either else or afterif)
+    // ex : .L2
+    controlFlowGraph->addIRInstr(IRInstr(COMPJUMP,{to_string(labelNextBlock),result.substr(4)}));
+    // Add instructions of the then part
+    bloc->generateIR(controlFlowGraph);
+
+    // If there is an else, generate basic block for else
+    if(this->hasElse)
+    {
+        // Else is the next block
+        labelNextBlock++; // Increase label
+        // Instruction to jump from the then part to afterif
+        // ex : .L3
+        controlFlowGraph->addIRInstr(IRInstr(RETIF,{to_string(labelNextBlock)}));
+        anElse->generateIR(controlFlowGraph, labelNextBlock-1);
+    }
+
+    // After if
+    controlFlowGraph->newBasicBlock();
+    // ex : .L3 if there is a else, .L2 otherwise
+    controlFlowGraph->addIRInstr(IRInstr(LABEL,{to_string(labelNextBlock)}));
+
+    // Prepare label for next if
+    // ex : .L4
+    controlFlowGraph->setLastLabel(labelNextBlock+1);
+
     return "";
 }
 
