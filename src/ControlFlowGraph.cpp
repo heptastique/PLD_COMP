@@ -199,11 +199,18 @@ void ControlFlowGraph::generateASM(ostream & os) const
 
                     break;
                 }
-                case ADD :
+                case BINARYOPERATION :
                 {
-                    os << "\tmovl\t-" << iRInstr.getParam(1).substr(4)  << "(%rbp), %eax\n";
-                    os << "\tadd\t\t-"  << iRInstr.getParam(2).substr(4)  << "(%rbp), %eax\n";
-                    os << "\tmovl\t"  << "%eax, -" << iRInstr.getParam(0).substr(4)  << "(%rbp)\n";
+                    os << "\tmovl\t-" << iRInstr.getParam(2).substr(4)  << "(%rbp), %eax\n";
+                    if ( iRInstr.getParam(0).compare(to_string(ADD)) == 0 )
+                    {
+                        os << "\tadd\t\t-" << iRInstr.getParam(3).substr(4) << "(%rbp), %eax\n";
+                    }
+                    if ( iRInstr.getParam(0).compare(to_string(MINUS)) == 0 )
+                    {
+                        os << "\tsub\t\t-" << iRInstr.getParam(3).substr(4) << "(%rbp), %eax\n";
+                    }
+                    os << "\tmovl\t"  << "%eax, -" << iRInstr.getParam(1).substr(4)  << "(%rbp)\n";
 
                     break;
                 }
