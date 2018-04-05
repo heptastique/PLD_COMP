@@ -5,6 +5,8 @@ using namespace std;
 
 string ControlFlowGraph::createNewVariable(string name)
 {
+    // name of a decl no more useful because all variable linked
+
     nbTemp = nbTemp + 1;
 
     string variableName = "VAR." + to_string(nbTemp*8);
@@ -214,7 +216,22 @@ void ControlFlowGraph::generateASM(ostream & os) const
                 case REG_STORE :
                 {
                     os << "\tmovl\t$" << iRInstr.getParam(0) << ", -" <<  iRInstr.getParam(1).substr(4) << "(%rbp)\n";
+                    break;
                 }
+                case UNARYOPERATION :
+                {
+                    os << "\tmovl\t-"  << iRInstr.getParam(2).substr(4) << "(%rbp), %eax\n";
+                    if ( iRInstr.getParam(0).compare(to_string(MINUSU)) == 0 )
+                    {
+                        os << "\tneg\t %eax\n";
+                    }
+                    if ( iRInstr.getParam(0).compare(to_string(NOT)) == 0 )
+                    {
+                        os << "\tnot\t %eax\n";
+                    }
+                    os << "\tmovl\t"  << "%eax, -" << iRInstr.getParam(1).substr(4)  << "(%rbp)\n";
+                }
+
             }
         }
     }

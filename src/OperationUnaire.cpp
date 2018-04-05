@@ -7,9 +7,9 @@ using namespace std;
 string OperationUnaire::generateIR(ControlFlowGraph *controlFlowGraph)
 {
     string var = expression->generateIR(controlFlowGraph);
-    // string var3 = createNewVAr();
-    controlFlowGraph->addIRInstr(IRInstr(UNARYOPERATION, {to_string(operateur), var}));
-    return var;
+    string var2 = controlFlowGraph->createNewTemp();
+    controlFlowGraph->addIRInstr(IRInstr(UNARYOPERATION, {to_string(operateur), var2, var}));
+    return var2;
 }
 
 void OperationUnaire::print(std::ostream &stream) const
