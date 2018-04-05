@@ -50,24 +50,21 @@ string AppelFunction::generateIR(ControlFlowGraph * controlFlowGraph)
                 // Parameter is a Character
                 case CARACTERE :
                 {
-                    string var = variables[0]->generateIR(controlFlowGraph);
-                    cout<< var << "carac" <<endl;
+                    string var = variable->generateIR(controlFlowGraph);
                     controlFlowGraph->addIRInstr(IRInstr(PUSH_RBP_REL, {var.substr(4)}));
                     break;
                 }
                     // Parameter is an Integer
                 case ENTIER :
                 {
-                    string var = variables[0]->generateIR(controlFlowGraph);
-                    cout<< var << "entier" <<endl;
+                    string var = variable->generateIR(controlFlowGraph);
                     controlFlowGraph->addIRInstr(IRInstr(PUSH_RBP_REL, {var.substr(4)}));
                     break;
                 }
                     // Parameter is a Variable
                 case NAME :
                 {
-                    string var = variables[0]->generateIR(controlFlowGraph);
-                    cout<< var << "name" <<endl;
+                    string var = variable->generateIR(controlFlowGraph);
                     controlFlowGraph->addIRInstr(IRInstr(PUSH_RBP_REL, {var.substr(4)}));
                     break;
                 }

@@ -23,7 +23,8 @@ void Function::generateIR(ControlFlowGraph * controlFlowGraph)
     {
         //parameter->generateIR(controlFlowGraph);
         parameter->setOffset(offset);
-
+        parameter->setName("VAR." + to_string(offset));
+        
         offset = offset - 8;
     }
 

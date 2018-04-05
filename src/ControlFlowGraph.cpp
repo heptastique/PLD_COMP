@@ -166,6 +166,14 @@ void ControlFlowGraph::generateASM(ostream & os) const
                     break;
                 }
 
+                case COMPJUMPEQUALS :
+                {
+                    os << "\tcmpl\t$1, " << iRInstr.getParam(1) << "(%rbp)\n";
+                    os << "\tje .L" << iRInstr.getParam(0) << "\n";
+
+                    break;
+                }
+
                 case LABEL :
                 {
                     os << ".L" << iRInstr.getParam(0) << ":\n";
@@ -272,7 +280,36 @@ void ControlFlowGraph::generateASM(ostream & os) const
                     {
                         os << "\tshr\t" << iRInstr.getParam(3) << "(%rbp), %eax\n";
                     }
-
+                    if ( iRInstr.getParam(0) == to_string(EQUALEQUAL))
+                    {
+                        os << "\tcmp\t" << iRInstr.getParam(3) << "(%rbp), %eax\n";
+                        os << "\tsete\t%al\n";
+                    }
+                    if ( iRInstr.getParam(0) == to_string(NOTEQUAL))
+                    {
+                        os << "\tcmp\t" << iRInstr.getParam(3) << "(%rbp), %eax\n";
+                        os << "\tsetne\t%al\n";
+                    }
+                    if ( iRInstr.getParam(0) == to_string(LT))
+                    {
+                        os << "\tcmp\t" << iRInstr.getParam(3) << "(%rbp), %eax\n";
+                        os << "\tsetl\t%al\n";
+                    }
+                    if ( iRInstr.getParam(0) == to_string(GT))
+                    {
+                        os << "\tcmp\t" << iRInstr.getParam(3) << "(%rbp), %eax\n";
+                        os << "\tsetg\t%al\n";
+                    }
+                    if ( iRInstr.getParam(0) == to_string(LTE))
+                    {
+                        os << "\tcmp\t" << iRInstr.getParam(3) << "(%rbp), %eax\n";
+                        os << "\tsetle\t%al\n";
+                    }
+                    if ( iRInstr.getParam(0) == to_string(GTE))
+                    {
+                        os << "\tcmp\t" << iRInstr.getParam(3) << "(%rbp), %eax\n";
+                        os << "\tsetge\t%al\n";
+                    }
                     os << "\tmovl\t"  << "%eax, " << iRInstr.getParam(1) << "(%rbp)\n";
 
                     break;
