@@ -8,10 +8,10 @@ class IRVariable
     public:
         int getOffset();
         void setValue(std::string value){
-          this->value = value;
+            this->value = value;
         };
         std::string getValue(){
-          return this->value;
+            return this->value;
         };
 
         IRVariable();
