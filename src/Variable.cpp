@@ -13,7 +13,15 @@ string Variable::generateIR(ControlFlowGraph * controlFlowGraph)
     {
         case ENTIER :
         {
-            string var = controlFlowGraph->createNewTemp(declarationAssociee->getType());
+            string var;
+            if(stoi(valeur) < 2147483647 && stoi(valeur) > -2147483648 )
+            {
+                var = controlFlowGraph->createNewTemp(INT32_T);
+            }
+            else
+            {
+                var = controlFlowGraph->createNewTemp(INT64_T);
+            }
             controlFlowGraph->addIRInstr(IRInstr(REG_STORE, {valeur, var.substr(4)}));
             return var;
         }
@@ -34,6 +42,7 @@ string Variable::generateIR(ControlFlowGraph * controlFlowGraph)
         }
         case NAME :
         {
+            cout << "bb "  <<  this->getDeclaration()->getName() << endl;
             return this->getDeclaration()->getName();
         }
     }
@@ -120,7 +129,7 @@ void Variable::resolveScopeVariables(std::vector<Declaration*> declProgramme, st
 
 void Variable::resolveTypeExpr()
 {
-    cout << "hello" << declarationAssociee << endl;
+    cout << declarationAssociee << endl;
 
     if ( this->typeVariable == NAME)
     {
@@ -136,6 +145,7 @@ void Variable::resolveTypeExpr()
     }
     else
     {
+        cout << "type sets to INT32_T" << endl;
         this->setType(INT32_T);
     }
 }
