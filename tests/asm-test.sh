@@ -36,9 +36,6 @@ assert_file "cat ./target/prog.s" "./ASM/Front/51_CharConstSpecial.s"
 ../bin/app Front/ValidPrograms/06_OperatorMult.c > ./target/output
 assert_file "cat ./target/prog.s" "./ASM/Front/06_OperatorMult.s"
 
-../bin/app Front/ValidPrograms/13_OperatorMod.c > ./target/output
-assert_file "cat ./target/prog.s" "./ASM/Front/13_OperatorMod.s"
-
 # Given Back tests
 
 ../bin/app Back/1_decls.c > ./target/output
