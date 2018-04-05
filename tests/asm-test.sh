@@ -33,4 +33,15 @@ assert_file "cat ./target/prog.s" "./ASM/Front/50_CharConst.s"
 ../bin/app Front/ValidPrograms/51_CharConstSpecial.c > ./target/output
 assert_file "cat ./target/prog.s" "./ASM/Front/51_CharConstSpecial.s"
 
+../bin/app Front/ValidPrograms/06_OperatorMult.c > ./target/output
+assert_file "cat ./target/prog.s" "./ASM/Front/06_OperatorMult.s"
+
+# Given Back tests
+
+../bin/app Back/1_decls.c > ./target/output
+assert_file "cat ./target/prog.s" "./ASM/Back/1_decls.s"
+
+../bin/app Back/1_empty.c > ./target/output
+assert_file "cat ./target/prog.s" "./ASM/Back/1_empty.s"
+
 assert_end examples

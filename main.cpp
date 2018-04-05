@@ -1,5 +1,11 @@
 #include <sys/stat.h>
 #include <iostream>
+#include <memory>
+#include <stdexcept>
+#include <cstdio>
+#include <array>
+
+#include <gflags/gflags.h>
 
 #include "antlr4-runtime.h"
 
@@ -13,11 +19,19 @@
 using namespace antlr4;
 using namespace std;
 
-int main (int argc, const char * argv[])
+DEFINE_bool(o, false, "generate binary executable");
+DEFINE_string(Sout, "./target/prog.s", "generated asm path");
+DEFINE_string(oout, "./target/prog.out", "generate binary executable to specified path");
+
+std::string exec(const char *);
+
+int main (int argc, char * argv[])
 {
     /*
         Input C Programm
     */
+
+    google::ParseCommandLineFlags(&argc, &argv, true);
 
     cout << "Reading C Program" << endl;
 
@@ -133,7 +147,7 @@ int main (int argc, const char * argv[])
 
     ofstream aSMFile;
 
-    aSMFile.open("./target/prog.s");
+    aSMFile.open(FLAGS_Sout);
 
     if (aSMFile.bad() || aSMFile.fail() || !aSMFile.good())
     {
@@ -146,7 +160,30 @@ int main (int argc, const char * argv[])
 
     aSMFile.close();
 
-    cout << "Assembly generated" << endl;
+    cout << "Assembly generated in "<< FLAGS_Sout << endl;
+
+    if(FLAGS_o || FLAGS_oout != "./target/prog.out")
+    {
+        const std::string assemble("as -o ./prog.o " + FLAGS_Sout);
+        const std::string compile("gcc -o " + FLAGS_oout + " ./prog.o");
+        cout << exec(assemble.c_str()) << endl;
+        cout << exec(compile.c_str()) << endl;
+        exec("rm ./prog.o"); 
+        cout << "Executable generated in " << FLAGS_oout << endl;
+    }
 
     return 0;
+}
+
+std::string exec(const char* cmd) 
+{
+    std::array<char, 128> buffer;
+    std::string result;
+    std::shared_ptr<FILE> pipe(popen(cmd, "r"), pclose);
+    if (!pipe) throw std::runtime_error("popen() failed!");
+    while (!feof(pipe.get())) {
+        if (fgets(buffer.data(), 128, pipe.get()) != nullptr)
+            result += buffer.data();
+    }
+    return result;
 }
