@@ -7,6 +7,8 @@ set (ANTLR4_CMD "./../antlr/antlr4.sh")
 set (ANTLR4_ARG "-visitor;-no-listener;-Dlanguage=Cpp;${GRAMMAR_FILE}")
 set(ANTLR4_INSTALL_CMD "./../antlr/antlr_installer.sh")
 
+find_library(gflags REQUIRED)
+
 find_library(ANTLR_LIBRARY antlr4-runtime PATHS ${PROJECT_SOURCE_DIR}/antlr/install/usr/local/lib)
 if(ANTLR_LIBRARY)
     message("Antlr library found")
@@ -37,4 +39,5 @@ file(GLOB HEADER_FILES ${PROJECT_SOURCE_DIR}/grammar/*.h ${PROJECT_SOURCE_DIR}/s
 add_executable(app ${SRC_FILES} ${HEADER_FILES})
 
 target_link_libraries(app ${ANTLR_LIBRARY})
+target_link_libraries(app gflags)
 target_compile_options(app PRIVATE -Wno-attributes)

@@ -120,18 +120,23 @@ void Variable::resolveScopeVariables(std::vector<Declaration*> declProgramme, st
 
 void Variable::resolveTypeExpr()
 {
-    cout << declarationAssociee << endl;
+    cout << "hello" << declarationAssociee << endl;
 
     if ( this->typeVariable == NAME)
     {
         if (this->declarationAssociee != nullptr)
         {
+            cout << "hello" << this->declarationAssociee->getType() <<endl;
             this->setType(this->declarationAssociee->getType());
         }
         else
         {
             ErrorHandling::ThrowError(104, 0, this->valeur);
         }
+    }
+    else
+    {
+        this->setType(INT32_T);
     }
 }
 
