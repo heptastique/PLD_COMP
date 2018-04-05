@@ -13,13 +13,13 @@ string Variable::generateIR(ControlFlowGraph * controlFlowGraph)
     {
         case ENTIER :
         {
-            string var = controlFlowGraph->createNewTemp();
+            string var = controlFlowGraph->createNewTemp(declarationAssociee->getType());
             controlFlowGraph->addIRInstr(IRInstr(REG_STORE, {valeur, var.substr(4)}));
             return var;
         }
         case CARACTERE :
         {
-            string var = controlFlowGraph->createNewTemp();
+            string var = controlFlowGraph->createNewTemp(CHAR);
             if(valeur.size()>3)
             {
                 if(valeur.substr(1,2)=="\\n")

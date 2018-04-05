@@ -3,18 +3,10 @@ using namespace std;
 #include "ControlFlowGraph.h"
 
 
-string ControlFlowGraph::createNewVariable(string name)
+string ControlFlowGraph::createNewVariable(string name, Type type)
 {
-    // name of a decl no more useful because all variable linked
-
-    nbTemp = nbTemp + 1;
-
+    IRVariable iRVariable("VAR", createNewOffset(type));
     string variableName = "VAR." + to_string(nbTemp*8);
-
-    IRVariable iRVariable(variableName, lastOffset - 8);
-
-    lastOffset = lastOffset - 8;
-
     variableMap.insert(pair <string, IRVariable> (variableName, iRVariable));
 
     return variableName;
@@ -52,13 +44,13 @@ int ControlFlowGraph::createNewOffset(Type type)
     return offset;
 }
 
-string ControlFlowGraph::createNewTemp()
+string ControlFlowGraph::createNewTemp(Type type)
 {
     nbTemp = nbTemp + 1;
 
-    string tempName = "TMP." + to_string(nbTemp*8);
+    IRVariable iRVariable("TMP", createNewOffset(type));
 
-    IRVariable iRVariable(tempName, createNewOffset(INT32_T));
+    string tempName = "TMP." + to_string(iRVariable.getOffset());
 
     variableMap.insert(pair <string, IRVariable> (tempName, iRVariable));
 

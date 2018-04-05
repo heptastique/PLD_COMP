@@ -7,9 +7,15 @@ class IRVariable
 {
     public:
         int getOffset();
+
+        void setName(std::string name){
+            this->name = name;
+        }
+
         void setValue(std::string value){
           this->value = value;
         };
+
         std::string getValue(){
           return this->value;
         };
