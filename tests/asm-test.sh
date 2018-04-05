@@ -63,6 +63,15 @@ assert_file "cat ./target/prog.s" "./ASM/Front/26_OperatorXor.s"
 ../bin/app Front/ValidPrograms/27_OperatorComp.c > ./target/output
 assert_file "cat ./target/prog.s" "./ASM/Front/27_OperatorComp.s"
 
+../bin/app Front/ValidPrograms/40_If.c > ./target/output
+assert_file "cat ./target/prog.s" "./ASM/Front/40_If.s"
+
+../bin/app Front/ValidPrograms/41_IfElse.c > ./target/output
+assert_file "cat ./target/prog.s" "./ASM/Front/41_IfElse.s"
+
+../bin/app Front/ValidPrograms/42_While.c > ./target/output
+assert_file "cat ./target/prog.s" "./ASM/Front/42_While.s"
+
 ../bin/app Front/ValidPrograms/50_CharConst.c > ./target/output
 assert_file "cat ./target/prog.s" "./ASM/Front/50_CharConst.s"
 

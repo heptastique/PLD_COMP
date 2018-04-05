@@ -25,6 +25,7 @@ enum Mnemonique
     COMPJUMP = 30,
     LABEL = 31,
     RETIF = 32,
+    COMPJUMPEQUALS = 33,
 
     AFFECTATION = 40,
     BINARYOPERATION= 41,
