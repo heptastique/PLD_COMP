@@ -49,7 +49,6 @@ void Affectation::resolveScopeVariables(std::vector<Declaration *> declProgramme
 void Affectation::resolveTypeExpr()
 {
     this->expression->resolveTypeExpr();
-    cout << this->expression->getType() << endl;
 }
 
 Affectation::Affectation(const Affectation &unAffectation)

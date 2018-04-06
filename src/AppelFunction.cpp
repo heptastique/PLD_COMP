@@ -18,7 +18,6 @@ string AppelFunction::generateIR(ControlFlowGraph * controlFlowGraph)
             case CHAR :
             {
                 string var = expressions[0]->generateIR(controlFlowGraph);
-                cout<< var << "carac" <<endl;
                 controlFlowGraph->addIRInstr(IRInstr(PUTCHAR_VALUE, {var.substr(4)}));
                 break;
             }
@@ -26,14 +25,12 @@ string AppelFunction::generateIR(ControlFlowGraph * controlFlowGraph)
             case INT32_T :
             {
                 string var = expressions[0]->generateIR(controlFlowGraph);
-                cout<< var << "entier" <<endl;
                 controlFlowGraph->addIRInstr(IRInstr(PUTCHAR_VALUE, {var.substr(4)}));
                 break;
             }
             case INT64_T :
             {
                 string var = expressions[0]->generateIR(controlFlowGraph);
-                cout<< var << "entier" <<endl;
                 controlFlowGraph->addIRInstr(IRInstr(PUTCHAR_VALUE, {var.substr(4)}));
                 break;
             }

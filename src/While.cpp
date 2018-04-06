@@ -7,7 +7,6 @@ using namespace std;
 
 string While::generateIR(ControlFlowGraph *controlFlowGraph)
 {
-    cout << "While::generateIR" << endl;
     // Get label to use for this while
     int labelNextBlock = controlFlowGraph->getLastLabel();
 

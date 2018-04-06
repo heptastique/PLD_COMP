@@ -7,8 +7,6 @@ using namespace std;
 
 string Variable::generateIR(ControlFlowGraph * controlFlowGraph)
 {
-    cout << "Variable::generateIR" << endl;
-
     switch (this->getType())
     {
         case ENTIER :
@@ -85,7 +83,6 @@ void Variable::resolveScopeVariables(std::vector<Declaration*> declProgramme, st
             {
                 notfound = false;
                 this->declarationAssociee = decl;
-                cout << decl->getName() << " from bloc assigned to " << this->valeur << endl;
                 break;
             }
         }
@@ -98,7 +95,6 @@ void Variable::resolveScopeVariables(std::vector<Declaration*> declProgramme, st
                 {
                     notfound = false;
                     this->declarationAssociee = decl;
-                    cout << decl->getName() << " from function parameters assigned to " << this->valeur << endl;
                     break;
                 }
             }
@@ -113,7 +109,6 @@ void Variable::resolveScopeVariables(std::vector<Declaration*> declProgramme, st
                 {
                     notfound = false;
                     this->declarationAssociee = decl;
-                    cout << decl->getName() << " from global variables assigned to " << this->valeur << endl;
                     break;
                 }
             }
@@ -134,7 +129,6 @@ void Variable::resolveTypeExpr()
     {
         if (this->declarationAssociee != nullptr)
         {
-            cout << "hello" << this->declarationAssociee->getType() <<endl;
             this->setType(this->declarationAssociee->getType());
         }
         else
@@ -144,7 +138,6 @@ void Variable::resolveTypeExpr()
     }
     else
     {
-        cout << "type sets to INT32_T" << endl;
         this->setType(INT32_T);
     }
 }

@@ -5,7 +5,6 @@ using namespace std;
 
 string If::generateIR(ControlFlowGraph * controlFlowGraph)
 {
-    cout << "If::generateIR" << endl;
     // Get label to use for this if-else
     int labelNextBlock = controlFlowGraph->getLastLabel();
 
