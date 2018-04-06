@@ -192,14 +192,6 @@ void ControlFlowGraph::generateASM(ostream & os) const
 
                     break;
                 }
-
-                case PUTCHAR_VALUE :
-                {
-                    os << "\tmovl\t" << iRInstr.getParam(0) <<"(%rbp), %edi\n";
-                    os << "\tcall\tputchar\n";
-
-                    break;
-                }
                 case STORE_RBP_REL :
                 {
                     os << "\tmovl\t$" << iRInstr.getParam(0) << ", " << iRInstr.getParam(1) << "(%rbp)\n";

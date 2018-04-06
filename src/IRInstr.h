@@ -39,9 +39,6 @@ enum Mnemonique
     PREDECIR = 51,
     POSINCIR = 52,
     POSDECIR = 53,
-
-    PUTCHAR_VALUE = 100,
-    PUTCHAR_RBP_REL = 101
 };
 
 class IRInstr
