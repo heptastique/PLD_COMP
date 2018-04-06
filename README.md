@@ -21,30 +21,30 @@
         
 ### Le backend implemente:
 
-    - Compiler un programme qui fait un putchar() (5.3)
-    - Compiler l’affectation vers une variable (5.4)
-    - Compiler des expressions (5.5) (- comma et {in/de}crémentations)
-    - Compiler le if ... else (5.6)
-    - Compiler les boucles while (5.7)
-    - Retour de valeur (5.8)
-    - Compiler l’affectation à une lvalue quelconque (5.9)
-    - Compiler les appels de fonction ayant jusqu’à 6 arguments (5.11)
-    - Test sur des programmes complexes (5.13) (Factorielle)
-    - Compiler les appels de fonction ayant plus de 6 arguments (5.15) (A Valider)
+- Compiler un programme qui fait un putchar() (5.3)
+- Compiler l’affectation vers une variable (5.4)
+- Compiler des expressions (5.5) (- comma et {in/de}crémentations)
+- Compiler le if ... else (5.6)
+- Compiler les boucles while (5.7)
+- Retour de valeur (5.8)
+- Compiler l’affectation à une lvalue quelconque (5.9)
+- Compiler les appels de fonction ayant jusqu’à 6 arguments (5.11)
+- Test sur des programmes complexes (5.13) (Factorielle)
+- Compiler les appels de fonction ayant plus de 6 arguments (5.15) (A Valider)
 
 ### A completer sur le back
 
-    - Variables globales
-    - Gestion des erreurs
-    - BasicBlocks
-    - Optimisations
-    - Initialisation (Héritage)
-    - Opérateurs (comma et {in/de}crémentations)
-    - Déclaration hors des blocs principaux des fonctions (Parcours déclaration en amont)
-    - Returns multiples (Double épilogue)
-    - Compiler des tableaux (5.10) (Accès Mémoire)
-    - Compiler les boucles for (5.12) (Temps)
-    - Gestion correcte des types (5.14) (Evaluation Taille)
+- Variables globales
+- Gestion des erreurs
+- BasicBlocks
+- Optimisations
+- Initialisation (Héritage)
+- Opérateurs (comma et {in/de}crémentations)
+- Déclaration hors des blocs principaux des fonctions (Parcours déclaration en amont)
+- Returns multiples (Double épilogue) 
+- Compiler des tableaux (5.10) (Accès Mémoire)
+- Compiler les boucles for (5.12) (Temps)
+- Gestion correcte des types (5.14) (Evaluation Taille)
 
 ## Linux installation
 
