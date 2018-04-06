@@ -21,6 +21,10 @@ enum Mnemonique
     PUSH_RBP_REL = 6,
 
     ADD_RSP = 10,
+    SUB_RSP = 11,
+
+    MOV_REG_RBP_REL = 20,
+    MOV_RBP_REL_REG = 21,
 
     COMPJUMP = 30,
     LABEL = 31,

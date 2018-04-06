@@ -21,7 +21,7 @@ class Expression : public Instruction
 
         Expression &operator=(const Expression &unExpression);
 
-        void resolveScopeVariables(std::vector<Declaration*> declProgramme, std::vector<Declaration*> paramFunction, std::vector<Declaration*> declBloc, std::vector<Function*> functionProgram);
+        virtual void resolveScopeVariables(std::vector<Declaration*> declProgramme, std::vector<Declaration*> paramFunction, std::vector<Declaration*> declBloc, std::vector<Function*> functionProgram);
 
         Type getType();
 

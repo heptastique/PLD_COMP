@@ -3,6 +3,7 @@ using namespace std;
 #include "Affectation.h"
 #include "VariableIndex.h"
 #include "OperationBinaire.h"
+#include "AppelFunction.h"
 #include <iostream>
 #include <typeinfo>
 
