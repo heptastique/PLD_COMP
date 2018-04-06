@@ -30,7 +30,7 @@
 - Compiler l’affectation à une lvalue quelconque (5.9)
 - Compiler les appels de fonction ayant jusqu’à 6 arguments (5.11)
 - Test sur des programmes complexes (5.13) (Factorielle)
-- Compiler les appels de fonction ayant plus de 6 arguments (5.15) (A Valider)
+- Compiler les appels de fonction ayant plus de 6 arguments (5.15)
 
 ### A completer sur le back
 
@@ -41,7 +41,7 @@
 - Initialisation (Héritage)
 - Opérateurs (comma et {in/de}crémentations)
 - Déclaration hors des blocs principaux des fonctions (Parcours déclaration en amont)
-- Returns multiples (Double épilogue) 
+- Returns multiples (Double épilogue) _Retours fonctionnels sur la branche `FixReturn`, mais les tests ne passent pas, car l'épilogue des fonctions peut être généré 2 fois, mais ne perturbe pas l'exécution du programme_
 - Compiler des tableaux (5.10) (Accès Mémoire)
 - Compiler les boucles for (5.12) (Temps)
 - Gestion correcte des types (5.14) (Evaluation Taille)
