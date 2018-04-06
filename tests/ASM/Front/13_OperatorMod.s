@@ -13,7 +13,8 @@ main:
 	movl	$0, %edx
 	movl	-24(%rbp), %ebx
 	idiv	%ebx
-	movl	%edx, %eax	movl	%eax, -32(%rbp)
+	movl	%edx, %eax
+	movl	%eax, -32(%rbp)
 	movl	-32(%rbp), %eax
 	movl	%eax, -8(%rbp)
 

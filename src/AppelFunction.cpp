@@ -41,7 +41,7 @@ string AppelFunction::generateIR(ControlFlowGraph * controlFlowGraph)
     }
     else
     {
-        int safetyOffset = -controlFlowGraph->getLastOffset();
+        int safetyOffset = -(controlFlowGraph->getLastOffset() + 8);
 
         controlFlowGraph->addIRInstr(IRInstr(SUB_RSP, {to_string(safetyOffset)}));
 
