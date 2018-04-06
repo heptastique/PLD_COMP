@@ -1,5 +1,3 @@
-Reading C Program
-C Program read
 Generating Abstract Syntaxic Tree
 Programme:
  Fonction: Name=main TypeRetour=0
@@ -16,35 +14,4 @@ Programme:
 
 
 Fin
-Abstract Syntaxic Tree generated
-a from bloc assigned to a
-0
-type sets to INT32_T
-0
-type sets to INT32_T
-0
-type sets to INT32_T
-0
-type sets to INT32_T
-0
-type sets to INT32_T
-0
-type sets to INT32_T
-0
-type sets to INT32_T
-0
-type sets to INT32_T
-1
-Generating Intermediate Representation
-Variable::generateIR
-Variable::generateIR
-Variable::generateIR
-Variable::generateIR
-Variable::generateIR
-Variable::generateIR
-Variable::generateIR
-Variable::generateIR
-Variable::generateIR
-Intermediate Representation generated
-Generating Assembly
-Assembly generated in ./target/prog.s
+
