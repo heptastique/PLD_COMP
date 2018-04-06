@@ -54,7 +54,7 @@ $ ./cli-test.sh -v
 $ ./exec-test.sh -v
 ```
 
-### Fonctionnalités
+## Fonctionnalités
 
 ### Front-end
 
