@@ -11,7 +11,17 @@ string Affectation::generateIR(ControlFlowGraph * controlFlowGraph)
 {
     string right = expression->generateIR(controlFlowGraph);
     string left = variable->generateIR(controlFlowGraph);
-    controlFlowGraph->addIRInstr(IRInstr(AFFECTATION, {right.substr(4), left.substr(4)}));
+    switch ( this->operateur)
+    {
+        case EQUAL :
+            controlFlowGraph->addIRInstr(IRInstr(AFFECTATION, {right.substr(4), left.substr(4)}));
+            break;
+        case PLUSEQUAL :
+            string temp = controlFlowGraph->createNewTemp(expression->getType());
+            controlFlowGraph->addIRInstr(IRInstr(AFFECTATION, {right.substr(4), left.substr(4)}));
+            break;
+    }
+
 
     return right;
 }
