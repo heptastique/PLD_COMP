@@ -164,40 +164,26 @@ void Bloc::resolvedUnUsedFonctAndDecl(std::vector<std::string>* remainingFunctio
     for ( auto instruction: this->instructions)
     {
         instruction->resolvedUnUsedFonctAndDecl(remainingFunctions, remainingDeclPrograme, remainingParam, &remainingDeclBloc);
-        for ( auto decl : remainingDeclBloc)
-        {
-            cout << "here " << decl  << endl;
-        }
     }
     // then discarded are put back value since we leave the bloc
     for ( auto removedParam : removeDeclParam)
     {
         remainingParam->push_back(removedParam);
     }
-    cout << " so we're here right ?" << endl;
     for ( auto removedDecl : removegDeclPrograme)
     {
         remainingDeclPrograme->push_back(removedDecl);
     }
-    cout << " what's wrong ?" << endl;
     // then print unused local variables
     for ( auto decl : remainingDeclBloc)
     {
-        cout << "here " << decl  << endl;
-    }
-    for ( auto decl : remainingDeclBloc)
-    {
-        cout << "here " << decl << " ?" << endl;
         WarningHandling::ThrowWarning(111,decl);
-        cout << "after " << decl << " ?" << endl;
     }
-    cout << "or here ?" << endl;
     // param also done there
     for ( auto param : *remainingParam)
     {
         WarningHandling::ThrowWarning(112,param);
     }
-    cout << " now ?" << endl;
 }
 
 void Bloc::resolvedUnUsedFonctAndDecl(std::vector<std::string>* remainingFunctions, std::vector<std::string>* remainingDeclPrograme, std::vector<std::string>* remainingParam, std::vector<std::string>* remainingDeclBloc)

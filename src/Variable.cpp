@@ -159,7 +159,6 @@ void Variable::resolvedUnUsedFonctAndDecl(std::vector<std::string>* remainingFun
                  auto declaration = *itdeclarationBloc;
                  if (this->declarationAssociee->getName().compare(declaration) == 0)
                  {
-                     cout << "i deleted " << declaration << endl;
                      remainingDeclBloc->erase(itdeclarationBloc);
                      return;
                  }
@@ -184,11 +183,9 @@ void Variable::resolvedUnUsedFonctAndDecl(std::vector<std::string>* remainingFun
              for (itdeclarationProg; itdeclarationProg != remainingDeclPrograme->end(); itdeclarationProg++)
              {
                  auto declaration = *itdeclarationProg;
-                 cout << " what's wrong here " << declaration << " ?" << endl;
                  if (this->declarationAssociee->getName().compare(declaration) == 0)
                  {
                      remainingDeclPrograme->erase(itdeclarationProg);
-                     cout << " what's wrong with you ?" << endl;
                      return;
                  }
              }
