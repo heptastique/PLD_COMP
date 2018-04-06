@@ -21,7 +21,6 @@ $ mkdir build
 $ cd build
 $ cmake ..
 $ make
-$ cd ..
 ```
 
 ## Testing
@@ -32,12 +31,12 @@ $ cd ..
 - exec-test checks tests the execution of the generated code
 - Testing
 ```bash
+$ cd tests
 $ ./symbols-test.sh -v
 $ ./asm-test.sh -v
 $ ./errors-test.sh -v
 $ ./cli-test.sh -v
 $ ./exec-test.sh
-cd ..
 ```
 ## Using
 - Usage:
