@@ -160,7 +160,7 @@ void AppelFunction::resolveTypeExpr()
     }
 }
 
-void AppelFunction::resolvedUnUsedFonctAndDecl(std::vector<std::string>* remainingFunctions std::vector<std::string>* remainingDeclPrograme, std::vector<std::string>* remainingParam, vector<string>* remainingDeclBloc)
+void AppelFunction::resolvedUnUsedFonctAndDecl(std::vector<std::string>* remainingFunctions, std::vector<std::string>* remainingDeclPrograme, std::vector<std::string>* remainingParam, std::vector<std::string>* remainingDeclBloc)
 {
     if ( this->functionAssociee != nullptr )
     {
