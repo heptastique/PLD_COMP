@@ -151,19 +151,22 @@ void Variable::resolvedUnUsedFonctAndDecl(std::vector<std::string>* remainingFun
 {
      if ( this->typeVariable == NAME)
      {
-         auto itdeclarationBloc = remainingDeclBloc->begin();
-         for ( itdeclarationBloc; itdeclarationBloc != remainingDeclBloc->end(); itdeclarationBloc++)
+         if ( !remainingDeclBloc->empty())
          {
-             auto declaration = *itdeclarationBloc;
-             if ( this->declarationAssociee->getName().compare(declaration) == 0)
+             auto itdeclarationBloc = remainingDeclBloc->begin();
+             for (itdeclarationBloc; itdeclarationBloc != remainingDeclBloc->end(); itdeclarationBloc++)
              {
-                 remainingDeclBloc->erase(itdeclarationBloc);
-                 return;
+                 auto declaration = *itdeclarationBloc;
+                 if (this->declarationAssociee->getName().compare(declaration) == 0)
+                 {
+                     cout << "i deleted " << declaration << endl;
+                     remainingDeclBloc->erase(itdeclarationBloc);
+                     return;
+                 }
              }
          }
          if ( !remainingParam->empty())
          {
-             cout<< "are you ok ?" << endl;
              auto itparamFunction = remainingParam->begin();
              for ( itparamFunction; itparamFunction != remainingParam->end(); itparamFunction++)
              {
@@ -174,16 +177,20 @@ void Variable::resolvedUnUsedFonctAndDecl(std::vector<std::string>* remainingFun
                      return;
                  }
              }
-             cout<< "just asking" << endl;
          }
-         auto itdeclarationProg = remainingDeclPrograme->begin();
-         for ( itdeclarationProg; itdeclarationProg != remainingDeclPrograme->end(); itdeclarationProg++)
+         if ( !remainingDeclPrograme->empty())
          {
-             auto declaration = *itdeclarationProg;
-             if ( this->declarationAssociee->getName().compare(declaration) == 0)
+             auto itdeclarationProg = remainingDeclPrograme->begin();
+             for (itdeclarationProg; itdeclarationProg != remainingDeclPrograme->end(); itdeclarationProg++)
              {
-                 remainingDeclBloc->erase(itdeclarationProg);
-                 return;
+                 auto declaration = *itdeclarationProg;
+                 cout << " what's wrong here " << declaration << " ?" << endl;
+                 if (this->declarationAssociee->getName().compare(declaration) == 0)
+                 {
+                     remainingDeclPrograme->erase(itdeclarationProg);
+                     cout << " what's wrong with you ?" << endl;
+                     return;
+                 }
              }
          }
      }
