@@ -97,9 +97,19 @@ int ControlFlowGraph::getLastOffset()
     return lastOffset;
 }
 
+int ControlFlowGraph::getAddressRangeSize()
+{
+    return addressRangeSize;
+}
+
 void ControlFlowGraph::setLastLabel(int label)
 {
     this->programme->setLastLabel(label);
+}
+
+void ControlFlowGraph::setAddressRangeSize(int addressRangeSize)
+{
+    this->addressRangeSize = addressRangeSize;
 }
 
 // Generate Prolog of Function

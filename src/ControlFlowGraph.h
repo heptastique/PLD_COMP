@@ -43,9 +43,13 @@ class ControlFlowGraph
 
         void setLastLabel(int label);
 
+        void setAddressRangeSize(int addressRangeSize);
+
         int getLastOffset();
 
         string getOffset(std::string string);
+
+        int getAddressRangeSize();
 
         ControlFlowGraph(const ControlFlowGraph &controlFlowGraph);
 
@@ -67,4 +71,6 @@ class ControlFlowGraph
         int nbTemp = 0;
 
         int lastOffset = -8;
+
+        int addressRangeSize = 0;
 };

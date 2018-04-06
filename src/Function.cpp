@@ -13,6 +13,8 @@ void Function::generateIR(ControlFlowGraph * controlFlowGraph)
     // Calculate Address Range Size
     int addressRangeSize = calculateAddressRangeSize();
 
+    controlFlowGraph->setAddressRangeSize(addressRangeSize);
+
     /*
      * Set Offsets of Parameters
      */
