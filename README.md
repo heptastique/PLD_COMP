@@ -3,7 +3,7 @@
 
 ## Usage
 ``` bash
-$ ./bin/app source.c [-o/-oout/-Sout] [targetFile]
+$ ./bin/app source.c [-o/-oout/-Sout] [source.c]
 
 # Par défaut, génère uniquement l'assembleur dans le chemin ./target.prog.s
 $ ./bin/app source.c
