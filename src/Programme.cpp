@@ -140,6 +140,36 @@ void Programme::resolveTypeExpr()
     }
 }
 
+void Programme::resolvedUnUsedFonctAndDecl(){
+    vector<string> remainingFunctions;
+    vector<string> remainingDeclProg;
+    for (auto function :  this->functions)
+    {
+        remainingFunctions.push_back(function->getName());
+    }
+    for (auto declaration :  this->declarations)
+    {
+        remainingDeclProg.push_back(declaration->getName());
+    }
+    for (auto function :  this->functions)
+    {
+        function->resolvedUnUsedFonctAndDecl(&remainingFunctions, &remainingDeclProg);
+    }
+    for (auto function : remainingFunctions)
+    {
+        if( function.compare("main") != 0)
+        {
+            // to be move to error handler
+            cout << "warning " << function << " is never used" << endl;
+        }
+    }
+    //sanity check
+    for (auto function :  this->functions)
+    {
+        cout << function << endl;
+    }
+}
+
 Programme & Programme::operator=(const Programme & programme)
 {
     //

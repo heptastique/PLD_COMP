@@ -29,6 +29,8 @@ class Bloc
 
         void resolveTypeExpr();
 
+        void resolvedUnUsedFonctAndDecl(std::vector<std::string>* remainingFunctions, std::vector<std::string>* remainingDeclPrograme, std::vector<std::string>* remainingParam);
+
         Bloc &operator=(const Bloc &unBloc);
 
         Bloc(const Bloc &unBloc);

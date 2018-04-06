@@ -20,6 +20,8 @@ class AppelFunction : public Expression
 
         void resolveTypeExpr();
 
+        virtual void resolvedUnUsedFonctAndDecl(std::vector<std::string>* remainingFunctions std::vector<std::string>* remainingDeclPrograme, std::vector<std::string>* remainingParam, vector<string>* remainingDeclBloc)
+
         vector <Expression *> getExpressions();
 
         AppelFunction(const AppelFunction &unAppelFunction);

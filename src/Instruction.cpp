@@ -15,6 +15,11 @@ Instruction &Instruction::operator=(const Instruction &unInstruction)
     //
 }
 
+void Instruction::resolvedUnUsedFonctAndDecl(std::vector<std::string>* remainingFunctions std::vector<std::string>* remainingDeclPrograme, std::vector<std::string>* remainingParam, vector<string>* remainingDeclBloc)
+{
+
+}
+
 Instruction::Instruction(const Instruction &unInstruction)
 {
     #ifdef MAP

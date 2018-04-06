@@ -160,6 +160,24 @@ void AppelFunction::resolveTypeExpr()
     }
 }
 
+void AppelFunction::resolvedUnUsedFonctAndDecl(std::vector<std::string>* remainingFunctions std::vector<std::string>* remainingDeclPrograme, std::vector<std::string>* remainingParam, vector<string>* remainingDeclBloc)
+{
+    if ( this->functionAssociee != nullptr )
+    {
+        auto itfunction = remainingFunctions->begin();
+        itfunction++;
+        for( itfunction; itfunction != remainingFunctions->end(); itfunction++)
+        {
+            auto function = *itfunction;
+            if ( function.compare(functionAssociee->getName()) == 0)
+            {
+                itfunction= remainingFunctions->erase(itfunction);
+                break;
+            }
+        }
+    }
+}
+
 vector <Expression *> AppelFunction::getExpressions()
 {
     return this->expressions;

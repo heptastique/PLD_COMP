@@ -159,7 +159,15 @@ void Function::resolveTypeExpr()
 {
     this->bloc->resolveTypeExpr();
 }
-
+void Function::resolvedUnUsedFonctAndDecl(std::vector<std::string> * remainingFunctions, std::vector<std::string>* remainingDeclPrograme)
+{
+    vector<string> remainingParam;
+    for (auto declaration :  this->parameters)
+    {
+        remainingParam.push_back(declaration->getName());
+    }
+    this->bloc->resolvedUnUsedFonctAndDecl(remainingFunctions,remainingDeclPrograme,&remainingParam);
+}
 Function::Function(const Function & function)
 {
     #ifdef MAP

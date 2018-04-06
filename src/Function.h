@@ -30,6 +30,8 @@ class Function
 
         void resolveTypeExpr();
 
+        void resolvedUnUsedFonctAndDecl(std::vector<std::string>* remainingFunctions, std::vector<std::string>* remainingDeclPrograme);
+
         string getName();
 
         Bloc * getBloc();

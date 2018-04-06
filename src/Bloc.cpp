@@ -111,6 +111,19 @@ void Bloc::resolveTypeExpr()
     }
 }
 
+void Bloc::resolvedUnUsedFonctAndDecl(std::vector<std::string>* remainingFunctions, std::vector<std::string>* remainingDeclPrograme, std::vector<std::string>* remainingParam)
+{
+    vector<string> remainingDeclBloc;
+    for ( auto declaration : this->declarations)
+    {
+        remainingDeclBloc.push_back(declaration->getName());
+    }
+    for ( auto instruction: this->instructions)
+    {
+        instruction->resolvedUnUsedFonctAndDecl(remainingFunctions, remainingDeclPrograme, remainingParam, &remainingDeclBloc);
+    }
+}
+
 Bloc &Bloc::operator=(const Bloc &unBloc)
 {
     //

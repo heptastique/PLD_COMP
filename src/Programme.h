@@ -39,6 +39,8 @@ class Programme
 
         void resolveTypeExpr();
 
+        void resolvedUnUsedFonctAndDecl();
+
         Programme(const Programme & programme);
 
         Programme();
