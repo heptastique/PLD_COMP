@@ -34,6 +34,9 @@ assert "./target/prog.out" ""
 ../bin/app Demo/5.2.3-int32-char-Declarations.c -o > ./target/output
 assert "./target/prog.out" ""
 
+../bin/app Demo/5.2.4-char-mult.c -o > ./target/output
+assert "./target/prog.out" "OK\n"
+
 ../bin/app Demo/5.3.1-putchar.c -o > ./target/output
 assert "./target/prog.out" "OK "
 
