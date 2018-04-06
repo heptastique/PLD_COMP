@@ -37,11 +37,17 @@ varleftpart: Name '[' expr ']'                  # LvarleftpartTable
             | Name                              # Lvarleftpart
             ;
 
-expr: '(' expr ')'                              # LexprParentheses
-    |variable                                  # LexprVariable
+expr:  expr operationbinairetest expr2           # LexprOperationbinaireTest
+    | expr2                                      # StandardCasesExpr3
+    ;
+expr2: expr2 operationbinaire expr3             # LexprOperationbinaire
+    | expr3                                     # StandardCasesExpr2
+    ;
+expr3: expr3 operationbinairemultdiv expr3      # LexprOperationbinairemultdiv
+    | '(' expr ')'                              # LexprParentheses
+    | variable                                  # LexprVariable
     | appelfonct                                # LexprAppelfonction
-    | operationunaire expr                      # LexprOperationunaire
-    | expr operationbinaire expr                # LexprOperationbinaire
+    | operationunaire expr3                     # LexprOperationunaire
     ;
 
 params: 'void'                                  # LparamsVoid
@@ -115,12 +121,7 @@ operationunaire: '-'                        # LoperationunaireMoins
                 | '~'                       # LoperationunaireNot
                 ;
 
-operationbinaire: '*'                       # LoperationbinaireMult
-                | '/'                       # LoperationbinaireDiv
-                | '%'                       # LoperationbinaireMod
-                | '+'                       # LoperationbinairePlus
-                | '-'                       # LoperationbinaireMoins
-                | '=='                      # LoperationbinaireEqual
+operationbinairetest: '=='                      # LoperationbinaireEqual
                 | '!='                      # LoperationbinaireNotequal
                 | '<'                       # LoperationbinaireLt
                 | '>'                       # LoperationbinaireGt
@@ -128,12 +129,20 @@ operationbinaire: '*'                       # LoperationbinaireMult
                 | '>='                      # LoperationbinaireGte
                 | '&&'                      # LoperationbinaireAnd
                 | '||'                      # LoperationbinaireOr
-                | '&'                       # LoperationbinaireAndbitwise
-                | '|'                       # LoperationbinaireOrbitwise
-                | '<<'                      # LoperationbinaireLeftshiftbiwise
-                | '>>'                      # LoperationbinaireRightshiftbitwise
-                | '^'                       # LoperationbinaireXorbitwise
                 ;
+operationbinaire : '+'                       # LoperationbinairePlus
+                   | '-'                       # LoperationbinaireMoins
+                   | '&'                       # LoperationbinaireAndbitwise
+                   | '|'                       # LoperationbinaireOrbitwise
+                   | '<<'                      # LoperationbinaireLeftshiftbiwise
+                   | '>>'                      # LoperationbinaireRightshiftbitwise
+                   | '^'                       # LoperationbinaireXorbitwise
+                   ;
+
+operationbinairemultdiv: '*'                       # LoperationbinaireMult
+              | '/'                       # LoperationbinaireDiv
+              | '%'                       # LoperationbinaireMod
+              ;
 
 prepostop: '++'                             # LprepostopInc
         | '--'                              # LprepostopDec
