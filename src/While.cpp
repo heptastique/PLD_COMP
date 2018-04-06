@@ -61,6 +61,12 @@ void While::resolveTypeExpr()
     this->condition->resolveTypeExpr();
 }
 
+void While::resolvedUnUsedFonctAndDecl(std::vector<std::string>* remainingFunctions, std::vector<std::string>* remainingDeclPrograme, std::vector<std::string>* remainingParam, std::vector<std::string>* remainingDeclBloc)
+{
+    this->condition->resolvedUnUsedFonctAndDecl(remainingFunctions,remainingDeclPrograme,remainingParam,remainingDeclBloc);
+    this->bloc->resolvedUnUsedFonctAndDecl(remainingFunctions,remainingDeclPrograme,remainingParam,remainingDeclBloc);
+}
+
 While::While(const While &unWhile)
 {
     #ifdef MAP

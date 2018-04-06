@@ -5,5 +5,5 @@
 class ErrorHandling
 {
     public:
-        static void ThrowError(int code, int line, std::string name);
+        static void ThrowError(int code, std::string name);
 };

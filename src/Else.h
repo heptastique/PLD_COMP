@@ -20,6 +20,8 @@ class Else
 
         void resolveTypeExpr();
 
+        virtual void resolvedUnUsedFonctAndDecl(std::vector<std::string>* remainingFunctions, std::vector<std::string>* remainingDeclPrograme, std::vector<std::string>* remainingParam, std::vector<std::string>* remainingDeclBloc);
+
         Else(const Else &unElse);
 
         Else(Bloc* bloc);

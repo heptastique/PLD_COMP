@@ -80,6 +80,15 @@ void If::resolveTypeExpr()
     }
 }
 
+void If::resolvedUnUsedFonctAndDecl(std::vector<std::string>* remainingFunctions, std::vector<std::string>* remainingDeclPrograme, std::vector<std::string>* remainingParam, std::vector<std::string>* remainingDeclBloc)
+{
+    this->bloc->resolvedUnUsedFonctAndDecl(remainingFunctions,remainingDeclPrograme,remainingParam,remainingDeclBloc);
+    if(this->hasElse)
+    {
+        this->anElse->resolvedUnUsedFonctAndDecl(remainingFunctions,remainingDeclPrograme,remainingParam,remainingDeclBloc);
+    }
+}
+
 void If::setElse(Else *anElse)
 {
     this->anElse = anElse;

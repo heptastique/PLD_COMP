@@ -2,6 +2,7 @@ using namespace std;
 
 #include "Bloc.h"
 #include "ErrorHandling.h"
+#include "WarningHandling.h"
 #include "RetourFonction.h"
 #include <iostream>
 
@@ -82,7 +83,7 @@ void Bloc::resolveScopeVariables(std::vector<Declaration*> declProgramme, std::v
             
             if ( declaration->getName().compare(declaration2->getName()) == 0)
             {
-                ErrorHandling::ThrowError(101,0, declaration2->getName());
+                ErrorHandling::ThrowError(101, declaration2->getName());
             }
             
             ++it2;
@@ -114,13 +115,84 @@ void Bloc::resolveTypeExpr()
 void Bloc::resolvedUnUsedFonctAndDecl(std::vector<std::string>* remainingFunctions, std::vector<std::string>* remainingDeclPrograme, std::vector<std::string>* remainingParam)
 {
     vector<string> remainingDeclBloc;
+    vector<string> removeDeclParam;
+    vector<string> removegDeclPrograme;
     for ( auto declaration : this->declarations)
     {
         remainingDeclBloc.push_back(declaration->getName());
     }
+    // remove from param and global decl sharing the same name with local decl
+    for ( auto declaration : remainingDeclBloc)
+    {
+        auto itparamfunction = remainingParam->begin();
+        for (itparamfunction; itparamfunction != remainingParam->end(); itparamfunction++)
+        {
+            auto param = *itparamfunction;
+            if(declaration.compare(param) == 0)
+            {
+                removeDeclParam.push_back(param);
+                remainingParam->erase(itparamfunction);
+                break;
+            }
+        }
+        auto itdeclProg = remainingDeclPrograme->begin();
+        for (itdeclProg; itdeclProg != remainingDeclPrograme->end(); itdeclProg++)
+        {
+            auto declProg = *itdeclProg;
+            if(declaration.compare(declProg) == 0)
+            {
+                removegDeclPrograme.push_back(declProg);
+                remainingDeclPrograme->erase(itdeclProg);
+                break;
+            }
+        }
+    }
+    //same between param and global decl
+    for ( auto declaration : *remainingParam)
+    {
+        auto itdeclProg = remainingDeclPrograme->begin();
+        for (itdeclProg; itdeclProg != remainingDeclPrograme->end(); itdeclProg++)
+        {
+            auto declProg = *itdeclProg;
+            if(declaration.compare(declProg) == 0)
+            {
+                removegDeclPrograme.push_back(declProg);
+                remainingDeclPrograme->erase(itdeclProg);
+            }
+        }
+    }
     for ( auto instruction: this->instructions)
     {
         instruction->resolvedUnUsedFonctAndDecl(remainingFunctions, remainingDeclPrograme, remainingParam, &remainingDeclBloc);
+    }
+
+    // then discarded are put back value since we leave the bloc
+    for ( auto removedParam : removeDeclParam)
+    {
+        remainingParam->push_back(removedParam);
+    }
+    for ( auto removedDecl : removegDeclPrograme)
+    {
+        remainingDeclPrograme->push_back(removedDecl);
+    }
+
+    // then print unused local variables
+    for ( auto decl : remainingDeclBloc)
+    {
+        WarningHandling::ThrowWarning(111,decl);
+    }
+    // param also done there
+    for ( auto param : *remainingParam)
+    {
+        WarningHandling::ThrowWarning(112,param);
+    }
+}
+
+void Bloc::resolvedUnUsedFonctAndDecl(std::vector<std::string>* remainingFunctions, std::vector<std::string>* remainingDeclPrograme, std::vector<std::string>* remainingParam, std::vector<std::string>* remainingDeclBloc)
+{
+    for ( auto instruction: this->instructions)
+    {
+        instruction->resolvedUnUsedFonctAndDecl(remainingFunctions, remainingDeclPrograme, remainingParam, remainingDeclBloc);
     }
 }
 

@@ -3,9 +3,9 @@ using namespace std;
 #include "ErrorHandling.h"
 #include <iostream>
 
-void ErrorHandling::ThrowError(int code, int line, string name)
+void ErrorHandling::ThrowError(int code, string name)
 {
-    cout << "Ligne " << line << " - Erreur " << code << " : ";
+    cout  << " Erreur " << code << " : ";
 
     switch(code)
     {

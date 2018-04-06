@@ -145,7 +145,7 @@ void Function::resolveScopeVariables(std::vector<Declaration*> declProgramme, st
             
             if (parameters->getName().compare(parameters2->getName()) == 0)
             {
-                ErrorHandling::ThrowError(102,0, parameters->getName());
+                ErrorHandling::ThrowError(102, parameters->getName());
             }
             
             ++it2;

@@ -48,6 +48,11 @@ void Declaration::resolveTypeExpr()
     //
 }
 
+void Declaration::resolvedUnUsedFonctAndDecl(std::vector<std::string>* remainingFunctions, std::vector<std::string>* remainingDeclPrograme, std::vector<std::string>* remainingParam, std::vector<std::string>* remainingDeclBloc)
+{
+    //
+}
+
 void Declaration::setType(Type type)
 {
     this->type = type;

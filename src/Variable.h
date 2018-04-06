@@ -33,6 +33,8 @@ class Variable : public Expression
 
         void resolveTypeExpr();
 
+        virtual void resolvedUnUsedFonctAndDecl(std::vector<std::string>* remainingFunctions, std::vector<std::string>* remainingDeclPrograme, std::vector<std::string>* remainingParam, std::vector<std::string>* remainingDeclBloc);
+
         Variable(const Variable &unVariable);
 
         Variable(TypeVariable typeVariable, std::string valeur);

@@ -31,6 +31,8 @@ class Bloc
 
         void resolvedUnUsedFonctAndDecl(std::vector<std::string>* remainingFunctions, std::vector<std::string>* remainingDeclPrograme, std::vector<std::string>* remainingParam);
 
+        virtual void resolvedUnUsedFonctAndDecl(std::vector<std::string>* remainingFunctions, std::vector<std::string>* remainingDeclPrograme, std::vector<std::string>* remainingParam, std::vector<std::string>* remainingDeclBloc);
+
         Bloc &operator=(const Bloc &unBloc);
 
         Bloc(const Bloc &unBloc);

@@ -54,7 +54,13 @@ void OperationUnaire::resolveTypeExpr()
             break;
         default :
             cout << "error attributing type" << endl;
+            break;
     }
+}
+
+void OperationUnaire::resolvedUnUsedFonctAndDecl(std::vector<std::string>* remainingFunctions, std::vector<std::string>* remainingDeclPrograme, std::vector<std::string>* remainingParam, std::vector<std::string>* remainingDeclBloc)
+{
+    this->expression->resolvedUnUsedFonctAndDecl(remainingFunctions,remainingDeclPrograme,remainingParam,remainingDeclBloc);
 }
 
 OperationUnaire::OperationUnaire(const OperationUnaire &unOperationUnaire)

@@ -2,6 +2,7 @@ using namespace std;
 
 #include "Programme.h"
 #include "ErrorHandling.h"
+#include "WarningHandling.h"
 
 #include <iostream>
 
@@ -96,7 +97,7 @@ void Programme::resolveScopeVariables()
 
             if ( declaration->getName().compare(declaration2->getName()) == 0)
             {
-                ErrorHandling::ThrowError(103,0, declaration2->getName());
+                ErrorHandling::ThrowError(103, declaration2->getName());
             }
 
             
@@ -119,7 +120,7 @@ void Programme::resolveScopeVariables()
 
             if ( function->getName().compare(function2->getName()) == 0)
             {
-                ErrorHandling::ThrowError(105,0, function2->getName());
+                ErrorHandling::ThrowError(105, function2->getName());
             }
 
             ++itfunction2;
@@ -159,14 +160,12 @@ void Programme::resolvedUnUsedFonctAndDecl(){
     {
         if( function.compare("main") != 0)
         {
-            // to be move to error handler
-            cout << "warning " << function << " is never used" << endl;
+            WarningHandling::ThrowWarning(110,function);
         }
     }
-    //sanity check
-    for (auto function :  this->functions)
+    for ( auto decl : remainingDeclProg)
     {
-        cout << function << endl;
+        WarningHandling::ThrowWarning(113,decl);
     }
 }
 

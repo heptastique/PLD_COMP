@@ -121,7 +121,7 @@ void Variable::resolveScopeVariables(std::vector<Declaration*> declProgramme, st
 
         if (notfound)
         {
-            ErrorHandling::ThrowError(104, 0, this->valeur);
+            ErrorHandling::ThrowError(104, this->valeur);
         }
     }
 }
@@ -134,19 +134,59 @@ void Variable::resolveTypeExpr()
     {
         if (this->declarationAssociee != nullptr)
         {
-            cout << "hello" << this->declarationAssociee->getType() <<endl;
             this->setType(this->declarationAssociee->getType());
         }
         else
         {
-            ErrorHandling::ThrowError(104, 0, this->valeur);
+            ErrorHandling::ThrowError(104, this->valeur);
         }
     }
     else
     {
-        cout << "type sets to INT32_T" << endl;
         this->setType(INT32_T);
     }
+}
+
+void Variable::resolvedUnUsedFonctAndDecl(std::vector<std::string>* remainingFunctions, std::vector<std::string>* remainingDeclPrograme, std::vector<std::string>* remainingParam, std::vector<std::string>* remainingDeclBloc)
+{
+     if ( this->typeVariable == NAME)
+     {
+         auto itdeclarationBloc = remainingDeclBloc->begin();
+         for ( itdeclarationBloc; itdeclarationBloc != remainingDeclBloc->end(); itdeclarationBloc++)
+         {
+             auto declaration = *itdeclarationBloc;
+             if ( this->declarationAssociee->getName().compare(declaration) == 0)
+             {
+                 remainingDeclBloc->erase(itdeclarationBloc);
+                 return;
+             }
+         }
+         if ( !remainingParam->empty())
+         {
+             cout<< "are you ok ?" << endl;
+             auto itparamFunction = remainingParam->begin();
+             for ( itparamFunction; itparamFunction != remainingParam->end(); itparamFunction++)
+             {
+                 auto declaration = *itparamFunction;
+                 if ( this->declarationAssociee->getName().compare(declaration) == 0)
+                 {
+                     remainingDeclBloc->erase(itparamFunction);
+                     return;
+                 }
+             }
+             cout<< "just asking" << endl;
+         }
+         auto itdeclarationProg = remainingDeclPrograme->begin();
+         for ( itdeclarationProg; itdeclarationProg != remainingDeclPrograme->end(); itdeclarationProg++)
+         {
+             auto declaration = *itdeclarationProg;
+             if ( this->declarationAssociee->getName().compare(declaration) == 0)
+             {
+                 remainingDeclBloc->erase(itdeclarationProg);
+                 return;
+             }
+         }
+     }
 }
 
 Variable::Variable(const Variable &unVariable)
