@@ -1,6 +1,21 @@
 # PLD_COMP
 [![Build Status](https://travis-ci.org/heptastique/PLD_COMP.svg?branch=master)](https://travis-ci.org/heptastique/PLD_COMP)
 
+--------------------
+## :loudspeaker: Note importante pour les correcteurs
+
+Le projet se poursuit après la date de rendu du projet uniquement par plaisir. Un git tag `v1.0.0` a été créé marquant le rendu du projet, avant le vendredi 6 avril 20h.
+
+Vous pouvez accéder à cette version [ici](https://github.com/heptastique/PLD_COMP/releases/tag/v1.0.0), en téléchargeant un dossier compressé, ou en clonant le dépôt et en accédant à cette release avec
+
+``` bash
+$ git checkout v1.0.0
+```
+
+Bien que la création de la release est postérieure à la date limite, il est possible de s'assurer de la date du dernier commit avec `git log`
+
+--------------------
+
 ## Usage
 ``` bash
 $ ./bin/app source.c [-o/-oout/-Sout] [source.c]
