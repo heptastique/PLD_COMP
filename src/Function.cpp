@@ -57,6 +57,7 @@ void Function::generateIR(ControlFlowGraph * controlFlowGraph)
         controlFlowGraph->newBasicBlock();
 
         controlFlowGraph->addIRInstr(IRInstr(EPILOG, {to_string(addressRangeSize)}));
+    }
 }
 
 int Function::calculateAddressRangeSize()
