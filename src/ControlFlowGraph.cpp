@@ -87,6 +87,16 @@ void ControlFlowGraph::newBasicBlock()
     currentBasicBlock = newBasicBlock;
 }
 
+void ControlFlowGraph::setEpilogGenerated()
+{
+    epilogGenerated = true;
+}
+
+bool ControlFlowGraph::getEpilogGenerated() const
+{
+    return epilogGenerated;
+}
+
 int ControlFlowGraph::getLastLabel() const
 {
     return this->programme->getLastLabel();

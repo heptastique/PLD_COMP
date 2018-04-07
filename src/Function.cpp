@@ -51,9 +51,13 @@ void Function::generateIR(ControlFlowGraph * controlFlowGraph)
      * Epilog
      */
 
-    controlFlowGraph->newBasicBlock();
+    // If epilog has not already been generated (the last instruction of the function's bloc is not a function return)
+    if (controlFlowGraph->getEpilogGenerated() == false)
+    {
+        controlFlowGraph->newBasicBlock();
 
-    controlFlowGraph->addIRInstr(IRInstr(RET, {to_string(addressRangeSize)}));
+        controlFlowGraph->addIRInstr(IRInstr(RET, {to_string(addressRangeSize)}));
+    }
 }
 
 int Function::calculateAddressRangeSize()

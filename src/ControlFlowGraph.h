@@ -39,6 +39,10 @@ class ControlFlowGraph
 
         void generateEpilog(ostream & os, int addressRangeSize) const;
 
+        bool getEpilogGenerated() const;
+
+        void setEpilogGenerated();
+
         void generateASM(ostream &os) const;
 
         void setLastLabel(int label);
@@ -73,4 +77,6 @@ class ControlFlowGraph
         int lastOffset = -8;
 
         int addressRangeSize = 0;
+
+        bool epilogGenerated = false;
 };
