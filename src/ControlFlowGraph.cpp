@@ -87,6 +87,16 @@ void ControlFlowGraph::newBasicBlock()
     currentBasicBlock = newBasicBlock;
 }
 
+void ControlFlowGraph::setEpilogGenerated()
+{
+    epilogGenerated = true;
+}
+
+bool ControlFlowGraph::getEpilogGenerated() const
+{
+    return epilogGenerated;
+}
+
 int ControlFlowGraph::getLastLabel() const
 {
     return this->programme->getLastLabel();
@@ -97,9 +107,19 @@ int ControlFlowGraph::getLastOffset()
     return lastOffset;
 }
 
+int ControlFlowGraph::getAddressRangeSize()
+{
+    return addressRangeSize;
+}
+
 void ControlFlowGraph::setLastLabel(int label)
 {
     this->programme->setLastLabel(label);
+}
+
+void ControlFlowGraph::setAddressRangeSize(int addressRangeSize)
+{
+    this->addressRangeSize = addressRangeSize;
 }
 
 // Generate Prolog of Function
