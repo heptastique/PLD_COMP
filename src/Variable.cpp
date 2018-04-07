@@ -22,7 +22,7 @@ string Variable::generateIR(ControlFlowGraph * controlFlowGraph)
             {
                 var = controlFlowGraph->createNewTemp(INT64_T);
             }
-            controlFlowGraph->addIRInstr(IRInstr(REG_STORE, {valeur, var.substr(4)}));
+            controlFlowGraph->addIRInstr(IRInstr(MOV_VALUE_RBP_REL, {valeur, var.substr(4)}));
             return var;
         }
         case CARACTERE :
@@ -32,12 +32,12 @@ string Variable::generateIR(ControlFlowGraph * controlFlowGraph)
             {
                 if(valeur.substr(1,2)=="\\n")
                 {
-                    controlFlowGraph->addIRInstr(IRInstr(REG_STORE, {to_string(10), var.substr(4)}));
+                    controlFlowGraph->addIRInstr(IRInstr(MOV_VALUE_RBP_REL, {to_string(10), var.substr(4)}));
                     return var;
                 }
 
             }
-            controlFlowGraph->addIRInstr(IRInstr(REG_STORE, {to_string((int)valeur[1]), var.substr(4)}));
+            controlFlowGraph->addIRInstr(IRInstr(MOV_VALUE_RBP_REL, {to_string((int)valeur[1]), var.substr(4)}));
             return var;
         }
         case NAME :
