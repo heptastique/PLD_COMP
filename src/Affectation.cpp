@@ -11,7 +11,38 @@ string Affectation::generateIR(ControlFlowGraph * controlFlowGraph)
 {
     string right = expression->generateIR(controlFlowGraph);
     string left = variable->generateIR(controlFlowGraph);
-    controlFlowGraph->addIRInstr(IRInstr(AFFECTATION, {right.substr(4), left.substr(4)}));
+    string temp;
+    switch ( this->operateur)
+    {
+        case EQUAL :
+            controlFlowGraph->addIRInstr(IRInstr(AFFECTATION, {right.substr(4), left.substr(4)}));
+            break;
+        case PLUSEQUAL :
+            temp = controlFlowGraph->createNewTemp(expression->getType());
+            controlFlowGraph->addIRInstr(IRInstr(BINARYOPERATION, {to_string(PLUS), temp.substr(4), left.substr(4), right.substr(4)}));
+            controlFlowGraph->addIRInstr(IRInstr(AFFECTATION, {temp.substr(4), left.substr(4)}));
+            break;
+        case MINUSEQUAL :
+            temp = controlFlowGraph->createNewTemp(expression->getType());
+            controlFlowGraph->addIRInstr(IRInstr(BINARYOPERATION, {to_string(MINUS), temp.substr(4), left.substr(4), right.substr(4)}));
+            controlFlowGraph->addIRInstr(IRInstr(AFFECTATION, {temp.substr(4), left.substr(4)}));
+            break;
+        case MULTEQUAL :
+            temp = controlFlowGraph->createNewTemp(expression->getType());
+            controlFlowGraph->addIRInstr(IRInstr(BINARYOPERATION, {to_string(MULT), temp.substr(4), left.substr(4), right.substr(4)}));
+            controlFlowGraph->addIRInstr(IRInstr(AFFECTATION, {temp.substr(4), left.substr(4)}));
+            break;
+        case DIVEQUAL :
+            temp = controlFlowGraph->createNewTemp(expression->getType());
+            controlFlowGraph->addIRInstr(IRInstr(BINARYOPERATION, {to_string(DIV), temp.substr(4), left.substr(4), right.substr(4)}));
+            controlFlowGraph->addIRInstr(IRInstr(AFFECTATION, {temp.substr(4), left.substr(4)}));
+            break;
+        case MODEQUAL :
+            temp = controlFlowGraph->createNewTemp(expression->getType());
+            controlFlowGraph->addIRInstr(IRInstr(BINARYOPERATION, {to_string(MOD), temp.substr(4), left.substr(4), right.substr(4)}));
+            controlFlowGraph->addIRInstr(IRInstr(AFFECTATION, {temp.substr(4), left.substr(4)}));
+            break;
+    }
 
     return right;
 }

@@ -337,6 +337,44 @@ class Prog : public ProgBaseVisitor
             return variable;
         }
 
+        antlrcpp::Any visitLexprOperationbinaireTest(ProgParser::LexprOperationbinaireTestContext *ctx) override {
+            Expression* expressionL = visit(ctx->expr());
+            Expression* expressionR = visit(ctx->expr2());
+            Operateur operateur = visit(ctx->operationbinairetest());
+            OperationBinaire* operationBinaire = new OperationBinaire(expressionL, expressionR, operateur);
+            return dynamic_cast<Expression*> (operationBinaire);
+        }
+
+        antlrcpp::Any visitLexprOperationbinaire(ProgParser::LexprOperationbinaireContext *ctx) override {
+            Expression* expressionL = visit(ctx->expr2());
+            Expression* expressionR = visit(ctx->expr3());
+            Operateur operateur = visit(ctx->operationbinaire());
+            OperationBinaire* operationBinaire = new OperationBinaire(expressionL, expressionR, operateur);
+            return dynamic_cast<Expression*> (operationBinaire);
+        }
+
+        antlrcpp::Any visitStandardCasesExpr2(ProgParser::StandardCasesExpr2Context *ctx) override {
+            Expression* expression = visit(ctx->expr3());
+            return expression;
+        }
+
+        antlrcpp::Any visitStandardCasesExpr3(ProgParser::StandardCasesExpr3Context *ctx) override {
+            Expression* expression = visit(ctx->expr2());
+            return expression;
+        }
+
+        antlrcpp::Any visitLexprOperationunaire(ProgParser::LexprOperationunaireContext *ctx) override {
+            Expression* expression = visit(ctx->expr3());
+            Operateur operateur = visit(ctx->operationunaire());
+            OperationUnaire* operationUnaire = new OperationUnaire (operateur, expression);
+            return dynamic_cast<Expression*> (operationUnaire);
+        }
+
+        antlrcpp::Any visitLexprParentheses(ProgParser::LexprParenthesesContext *ctx) override {
+            Expression* expression = visit(ctx->expr());
+            return expression;
+        }
+
         antlrcpp::Any visitLexprVariable(ProgParser::LexprVariableContext *ctx) override {
             Variable* var = visit(ctx->variable());
             return dynamic_cast<Expression*> (var);
@@ -347,24 +385,12 @@ class Prog : public ProgBaseVisitor
             return dynamic_cast<Expression*> (appelFunction);
         }
 
-        antlrcpp::Any visitLexprOperationbinaire(ProgParser::LexprOperationbinaireContext *ctx) override {
-            Expression* expressionL = visit(ctx->expr(0));
-            Expression* expressionR = visit(ctx->expr(1));
-            Operateur operateur = visit(ctx->operationbinaire());
+        antlrcpp::Any visitLexprOperationbinairemultdiv(ProgParser::LexprOperationbinairemultdivContext *ctx) override {
+            Expression* expressionL = visit(ctx->expr3(0));
+            Expression* expressionR = visit(ctx->expr3(1));
+            Operateur operateur = visit(ctx->operationbinairemultdiv());
             OperationBinaire* operationBinaire = new OperationBinaire(expressionL, expressionR, operateur);
-            return static_cast<Expression*> (operationBinaire);
-        }
-
-        antlrcpp::Any visitLexprOperationunaire(ProgParser::LexprOperationunaireContext *ctx) override {
-            Expression* expression = visit(ctx->expr());
-            Operateur operateur = visit(ctx->operationunaire());
-            OperationUnaire* operationUnaire = new OperationUnaire (operateur, expression);
-            return static_cast<Expression*> (operationUnaire);
-        }
-
-        antlrcpp::Any visitLexprParentheses(ProgParser::LexprParenthesesContext *ctx) override {
-            Expression* expression = visit(ctx->expr());
-            return expression;
+            return dynamic_cast<Expression*> (operationBinaire);
         }
 
         antlrcpp::Any visitLoperationEqual(ProgParser::LoperationEqualContext *ctx) override {

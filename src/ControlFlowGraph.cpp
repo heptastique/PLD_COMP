@@ -273,7 +273,7 @@ void ControlFlowGraph::generateASM(ostream & os) const
                         os << "\tmovl\t"  << "$0, %edx\n";
                         os << "\tmovl\t"  << iRInstr.getParam(3) <<"(%rbp), %ebx\n";
                         os << "\tidiv\t%ebx\n";
-                        os << "\tmovl\t"  << "%edx, %eax";
+                        os << "\tmovl\t"  << "%edx, %eax\n";
                     }
                     if ( iRInstr.getParam(0) == to_string(ANDBB))
                     {
