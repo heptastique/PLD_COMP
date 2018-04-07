@@ -147,7 +147,7 @@ void ControlFlowGraph::generateASM(ostream & os) const
             switch (iRInstr.getMnemonique())
             {
                 // Function Declaration
-                case DECL :
+                case PROLOG :
                 {
                     // Generate Prolog of Function
                     generateProlog(os, iRInstr.getParam(0), stoi(iRInstr.getParam(1)));
@@ -155,7 +155,7 @@ void ControlFlowGraph::generateASM(ostream & os) const
                     break;
                 }
                 // Function Return
-                case RET :
+                case EPILOG :
                 {
                     // Generate Epilog
                     generateEpilog(os, stoi(iRInstr.getParam(0)));
@@ -192,15 +192,7 @@ void ControlFlowGraph::generateASM(ostream & os) const
 
                     break;
                 }
-
-                case PUTCHAR_VALUE :
-                {
-                    os << "\tmovl\t" << iRInstr.getParam(0) <<"(%rbp), %edi\n";
-                    os << "\tcall\tputchar\n";
-
-                    break;
-                }
-                case STORE_RBP_REL :
+                case MOV_VALUE_RBP_REL :
                 {
                     os << "\tmovl\t$" << iRInstr.getParam(0) << ", " << iRInstr.getParam(1) << "(%rbp)\n";
 
@@ -347,15 +339,10 @@ void ControlFlowGraph::generateASM(ostream & os) const
 
                     break;
                 }
-                case AFFECTATION :
+                case MOV_RBP_REL_RBP_REl :
                 {
                     os << "\tmovl\t"  <<  iRInstr.getParam(0) << "(%rbp), %eax\n";
                     os << "\tmovl\t" << "%eax, " << iRInstr.getParam(1) << "(%rbp)\n";
-                    break;
-                }
-                case REG_STORE :
-                {
-                    os << "\tmovl\t$" << iRInstr.getParam(0) << ", " <<  iRInstr.getParam(1) << "(%rbp)\n";
                     break;
                 }
                 case MOV_REG_RBP_REL :

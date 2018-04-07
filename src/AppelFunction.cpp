@@ -12,32 +12,9 @@ string AppelFunction::generateIR(ControlFlowGraph * controlFlowGraph)
     // Special Case for putchar
     if (name == "putchar")
     {
-        switch (expressions[0]->getType())
-        {
-            // Parameter is a Character
-            case CHAR :
-            {
-                string var = expressions[0]->generateIR(controlFlowGraph);
-                cout<< var << "carac" <<endl;
-                controlFlowGraph->addIRInstr(IRInstr(PUTCHAR_VALUE, {var.substr(4)}));
-                break;
-            }
-            // Parameter is an Integer
-            case INT32_T :
-            {
-                string var = expressions[0]->generateIR(controlFlowGraph);
-                cout<< var << "entier" <<endl;
-                controlFlowGraph->addIRInstr(IRInstr(PUTCHAR_VALUE, {var.substr(4)}));
-                break;
-            }
-            case INT64_T :
-            {
-                string var = expressions[0]->generateIR(controlFlowGraph);
-                cout<< var << "entier" <<endl;
-                controlFlowGraph->addIRInstr(IRInstr(PUTCHAR_VALUE, {var.substr(4)}));
-                break;
-            }
-        }
+        string var = expressions[0]->generateIR(controlFlowGraph);
+        controlFlowGraph->addIRInstr(IRInstr(MOV_RBP_REL_REG, {var.substr(4), "edi"}));
+        controlFlowGraph->addIRInstr(IRInstr(CALL, {name}));
     }
     else
     {
