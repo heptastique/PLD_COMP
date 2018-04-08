@@ -13,6 +13,8 @@ void Function::generateIR(ControlFlowGraph * controlFlowGraph)
     // Calculate Address Range Size
     int addressRangeSize = calculateAddressRangeSize();
 
+    controlFlowGraph->setAddressRangeSize(addressRangeSize);
+
     /*
      * Set Offsets of Parameters
      */
@@ -24,7 +26,7 @@ void Function::generateIR(ControlFlowGraph * controlFlowGraph)
         //parameter->generateIR(controlFlowGraph);
         parameter->setOffset(offset);
         parameter->setName("VAR." + to_string(offset));
-        
+
         offset = offset - 8;
     }
 
@@ -49,9 +51,13 @@ void Function::generateIR(ControlFlowGraph * controlFlowGraph)
      * Epilog
      */
 
-    controlFlowGraph->newBasicBlock();
+    // If epilog has not already been generated (the last instruction of the function's bloc is not a function return)
+    if (controlFlowGraph->isEpilogGenerated() == false)
+    {
+        controlFlowGraph->newBasicBlock();
 
-    controlFlowGraph->addIRInstr(IRInstr(EPILOG, {to_string(addressRangeSize)}));
+        controlFlowGraph->addIRInstr(IRInstr(EPILOG, {to_string(addressRangeSize)}));
+    }
 }
 
 int Function::calculateAddressRangeSize()
@@ -76,11 +82,11 @@ int Function::calculateAddressRangeSize()
 ostream & operator<<(ostream & stream, const Function & function)
 {
     stream << " Fonction: Name=" << function.name << " TypeRetour=" << function.typeRetour << endl;
-    
+
     if(!function.parameters.empty())
     {
         stream << "     Param:" << endl;
-        
+
         for (auto it : function.parameters)
         {
             if(DeclarationTab *decla = dynamic_cast<DeclarationTab*>(it))
@@ -101,7 +107,7 @@ ostream & operator<<(ostream & stream, const Function & function)
 
 Function & Function::operator=(const Function & function)
 {
-    
+
 }
 
 string Function::getName()
@@ -132,26 +138,26 @@ std::vector<Declaration*> Function::getParameters()
 void Function::resolveScopeVariables(std::vector<Declaration*> declProgramme, std::vector<Function*> functionProgram)
 {
     vector<Declaration*>::iterator it;
-    
+
     for(it = this->parameters.begin(); it!=this->parameters.end(); ++it)
     {
         auto it2 = it;
         ++it2;
-        
+
         while(it2!= this->parameters.end())
         {
             Declaration *parameters = *it;
             Declaration *parameters2 = *it2;
-            
+
             if (parameters->getName().compare(parameters2->getName()) == 0)
             {
                 ErrorHandling::ThrowError(102,0, parameters->getName());
             }
-            
+
             ++it2;
         }
     }
-    
+
     this->bloc->resolveScopeVariables(declProgramme, this->getParameters(), functionProgram);
 }
 

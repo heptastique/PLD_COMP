@@ -26,6 +26,17 @@ void Bloc::generateIR(ControlFlowGraph * controlFlowGraph)
         }
         else
         {
+            // If instruction is the last one of the bloc
+            if (instruction == instructions[instructions.size() - 1])
+            {
+                // And if instruction is a function return
+                if (RetourFonction * retourFonction = dynamic_cast <RetourFonction *> (instruction))
+                {
+                    // Epilog is generated
+                    controlFlowGraph->setEpilogGenerated();
+                }
+            }
+
             instruction->generateIR(controlFlowGraph);
         }
     }

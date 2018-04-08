@@ -7,11 +7,11 @@ std::string RetourFonction::generateIR(ControlFlowGraph * controlFlowGraph)
 {
     string var = expression->generateIR(controlFlowGraph);
 
-    //cout << var << endl;
-
     controlFlowGraph->addIRInstr(IRInstr(MOV_RBP_REL_REG, {var.substr(4), "rax"}));
 
-    return "aaaaaa";
+    controlFlowGraph->addIRInstr(IRInstr(EPILOG, {to_string(controlFlowGraph->getAddressRangeSize())}));
+
+    return "RetourFonction";
 }
 
 void RetourFonction::print(std::ostream &stream) const
