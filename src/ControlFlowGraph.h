@@ -39,7 +39,7 @@ class ControlFlowGraph
 
         void generateEpilog(ostream & os, int addressRangeSize) const;
 
-        bool getEpilogGenerated() const;
+        bool isEpilogGenerated() const;
 
         void setEpilogGenerated();
 

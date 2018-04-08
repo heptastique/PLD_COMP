@@ -92,7 +92,7 @@ void ControlFlowGraph::setEpilogGenerated()
     epilogGenerated = true;
 }
 
-bool ControlFlowGraph::getEpilogGenerated() const
+bool ControlFlowGraph::isEpilogGenerated() const
 {
     return epilogGenerated;
 }

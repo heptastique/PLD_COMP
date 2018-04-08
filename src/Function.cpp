@@ -52,7 +52,7 @@ void Function::generateIR(ControlFlowGraph * controlFlowGraph)
      */
 
     // If epilog has not already been generated (the last instruction of the function's bloc is not a function return)
-    if (controlFlowGraph->getEpilogGenerated() == false)
+    if (controlFlowGraph->isEpilogGenerated() == false)
     {
         controlFlowGraph->newBasicBlock();
 
