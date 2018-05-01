@@ -4,19 +4,19 @@
 
 ### Prototype
 ```cpp
-static void ThrowError(int code, int line,string name);
+static void ThrowError(int code, string name);
 ```
 
 ### Example
 ```cpp
 #include "ErrorHandling.h"
 
-ErrorHandling::ThrowError(101, 2,"nombre");
+ErrorHandling::ThrowError(101, "nombre");
 ```
 
 Output :
 ```
-Ligne 2 - Erreur 101 : Déclaration de variable nombre déjà existante
+Erreur 101 : Déclaration de variable nombre déjà existante
 ```
 
 ## Error codes
@@ -44,3 +44,36 @@ Ligne 2 - Erreur 101 : Déclaration de variable nombre déjà existante
 303|Missing semicolon
 304|Missing parenthesis
 305|Too many closing parenthesis
+
+# Codes warning
+
+## Usage 
+
+### Prototype
+```cpp
+static void ThrowWarning(int code, string name);
+```
+
+### Example
+```cpp
+#include "WarningHandling.h"
+
+WarningHandling::ThrowWarning(101, "nombre");
+```
+
+Output :
+```
+Warning 110 : La fonction nombre n'est pas utilisée
+```
+
+
+## Warning codes
+
+### Semantic warnings
+|Code|Description|
+|------|------------|
+110|La fonction nomdelafonction  n'est pas utilisée
+111|La variable local nomdelavariable n'est pas utilisée
+112|La parametre nomdelavariable n'est pas utilisée
+113|La variable global nomdelavariable n'est pas utilisée
+

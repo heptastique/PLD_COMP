@@ -48,7 +48,7 @@ void OperationBinaire::resolveTypeExpr()
     this->expressionL->resolveTypeExpr();
     this->expressionR->resolveTypeExpr();
     Type typeExprL = expressionL->getType();
-    Type typeExprR = expressionL->getType();
+    Type typeExprR = expressionR->getType();
     
     if ( typeExprL == INT64_T || typeExprR == INT64_T)
     {
@@ -62,12 +62,15 @@ void OperationBinaire::resolveTypeExpr()
         }
         else
         {
-            cout << "error attributing type" << endl;
-            cout << typeExprL << endl;
-            cout << typeExprR << endl;
 
         }
     }
+}
+
+void OperationBinaire::resolvedUnUsedFonctAndDecl(std::vector<std::string>* remainingFunctions, std::vector<std::string>* remainingDeclPrograme, std::vector<std::string>* remainingParam, std::vector<std::string>* remainingDeclBloc)
+{
+    this->expressionL->resolvedUnUsedFonctAndDecl(remainingFunctions,remainingDeclPrograme,remainingParam,remainingDeclBloc);
+    this->expressionR->resolvedUnUsedFonctAndDecl(remainingFunctions,remainingDeclPrograme,remainingParam,remainingDeclBloc);
 }
 
 OperationBinaire::OperationBinaire(const OperationBinaire &unOperationBinaire)

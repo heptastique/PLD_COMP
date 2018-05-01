@@ -83,6 +83,12 @@ void Affectation::resolveTypeExpr()
     cout << this->expression->getType() << endl;
 }
 
+void Affectation::resolvedUnUsedFonctAndDecl(std::vector<std::string>* remainingFunctions, std::vector<std::string>* remainingDeclPrograme, std::vector<std::string>* remainingParam, std::vector<std::string>* remainingDeclBloc)
+{
+    this->expression->resolvedUnUsedFonctAndDecl(remainingFunctions,remainingDeclPrograme,remainingParam,remainingDeclBloc);
+    this->variable->resolvedUnUsedFonctAndDecl(remainingFunctions,remainingDeclPrograme,remainingParam,remainingDeclBloc);
+}
+
 Affectation::Affectation(const Affectation &unAffectation)
 {
     #ifdef MAP

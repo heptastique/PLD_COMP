@@ -127,6 +127,8 @@ int main (int argc, char * argv[])
 
     programme->resolveTypeExpr();
 
+    programme->resolvedUnUsedFonctAndDecl();
+
     /*
         C++ Memory Representation -> Intermediate Representation
     */

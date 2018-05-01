@@ -21,6 +21,8 @@ class If : public Instruction
 
         void resolveTypeExpr();
 
+        virtual void resolvedUnUsedFonctAndDecl(std::vector<std::string>* remainingFunctions, std::vector<std::string>* remainingDeclPrograme, std::vector<std::string>* remainingParam, std::vector<std::string>* remainingDeclBloc);
+
         void setElse(Else* anElse);
 
         If &operator=(const If &unIf);

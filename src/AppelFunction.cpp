@@ -114,7 +114,7 @@ void AppelFunction::resolveScopeVariables(std::vector<Declaration*> declProgramm
     
     if ( this->name.compare("putchar") != 0)
     {
-        ErrorHandling::ThrowError(106,0,this->name);
+        ErrorHandling::ThrowError(106,this->name);
     }
 }
 
@@ -132,9 +132,31 @@ void AppelFunction::resolveTypeExpr()
     {
         if ( this->name.compare("putchar") != 0)
         {
-            ErrorHandling::ThrowError(106,0,this->name);
+            ErrorHandling::ThrowError(106,this->name);
         }
     }
+}
+
+void AppelFunction::resolvedUnUsedFonctAndDecl(std::vector<std::string>* remainingFunctions, std::vector<std::string>* remainingDeclPrograme, std::vector<std::string>* remainingParam, std::vector<std::string>* remainingDeclBloc)
+{
+    if ( this->functionAssociee != nullptr )
+    {
+        auto itfunction = remainingFunctions->begin();
+        for( itfunction; itfunction != remainingFunctions->end(); itfunction++)
+        {
+            auto function = *itfunction;
+            if ( function.compare(functionAssociee->getName()) == 0)
+            {
+                remainingFunctions->erase(itfunction);
+                break;
+            }
+        }
+    }
+    for ( auto expression : this->expressions)
+    {
+        expression->resolvedUnUsedFonctAndDecl(remainingFunctions,remainingDeclPrograme,remainingParam,remainingDeclBloc);
+    }
+
 }
 
 vector <Expression *> AppelFunction::getExpressions()

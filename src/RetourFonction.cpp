@@ -42,6 +42,11 @@ void RetourFonction::resolveTypeExpr()
     this->expression->resolveTypeExpr();
 }
 
+void RetourFonction::resolvedUnUsedFonctAndDecl(std::vector<std::string>* remainingFunctions, std::vector<std::string>* remainingDeclPrograme, std::vector<std::string>* remainingParam, std::vector<std::string>* remainingDeclBloc)
+{
+    this->expression->resolvedUnUsedFonctAndDecl(remainingFunctions,remainingDeclPrograme,remainingParam,remainingDeclBloc);
+}
+
 RetourFonction::RetourFonction(const RetourFonction &unRetourFonction)
 {
     #ifdef MAP

@@ -21,6 +21,8 @@ class Instruction
 
         virtual void resolveTypeExpr() = 0;
 
+        virtual void resolvedUnUsedFonctAndDecl(std::vector<std::string>* remainingFunctions, std::vector<std::string>* remainingDeclPrograme, std::vector<std::string>* remainingParam, std::vector<std::string>* remainingDeclBloc);
+
         Instruction &operator=(const Instruction &unInstruction);
 
         Instruction(const Instruction &unInstruction);

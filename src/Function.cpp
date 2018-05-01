@@ -151,7 +151,7 @@ void Function::resolveScopeVariables(std::vector<Declaration*> declProgramme, st
 
             if (parameters->getName().compare(parameters2->getName()) == 0)
             {
-                ErrorHandling::ThrowError(102,0, parameters->getName());
+                ErrorHandling::ThrowError(102, parameters->getName());
             }
 
             ++it2;
@@ -165,7 +165,15 @@ void Function::resolveTypeExpr()
 {
     this->bloc->resolveTypeExpr();
 }
-
+void Function::resolvedUnUsedFonctAndDecl(std::vector<std::string> * remainingFunctions, std::vector<std::string>* remainingDeclPrograme)
+{
+    vector<string> remainingParam;
+    for (auto declaration :  this->parameters)
+    {
+        remainingParam.push_back(declaration->getName());
+    }
+    this->bloc->resolvedUnUsedFonctAndDecl(remainingFunctions,remainingDeclPrograme,&remainingParam);
+}
 Function::Function(const Function & function)
 {
     #ifdef MAP

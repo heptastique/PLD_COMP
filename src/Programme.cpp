@@ -2,6 +2,7 @@ using namespace std;
 
 #include "Programme.h"
 #include "ErrorHandling.h"
+#include "WarningHandling.h"
 
 #include <iostream>
 
@@ -96,7 +97,7 @@ void Programme::resolveScopeVariables()
 
             if ( declaration->getName().compare(declaration2->getName()) == 0)
             {
-                ErrorHandling::ThrowError(103,0, declaration2->getName());
+                ErrorHandling::ThrowError(103, declaration2->getName());
             }
 
             
@@ -119,7 +120,7 @@ void Programme::resolveScopeVariables()
 
             if ( function->getName().compare(function2->getName()) == 0)
             {
-                ErrorHandling::ThrowError(105,0, function2->getName());
+                ErrorHandling::ThrowError(105, function2->getName());
             }
 
             ++itfunction2;
@@ -137,6 +138,34 @@ void Programme::resolveTypeExpr()
     for (auto function :  this->functions)
     {
         function->resolveTypeExpr();
+    }
+}
+
+void Programme::resolvedUnUsedFonctAndDecl(){
+    vector<string> remainingFunctions;
+    vector<string> remainingDeclProg;
+    for (auto function :  this->functions)
+    {
+        remainingFunctions.push_back(function->getName());
+    }
+    for (auto declaration :  this->declarations)
+    {
+        remainingDeclProg.push_back(declaration->getName());
+    }
+    for (auto function :  this->functions)
+    {
+        function->resolvedUnUsedFonctAndDecl(&remainingFunctions, &remainingDeclProg);
+    }
+    for (auto function : remainingFunctions)
+    {
+        if( function.compare("main") != 0)
+        {
+            WarningHandling::ThrowWarning(110,function);
+        }
+    }
+    for ( auto decl : remainingDeclProg)
+    {
+        WarningHandling::ThrowWarning(113,decl);
     }
 }
 

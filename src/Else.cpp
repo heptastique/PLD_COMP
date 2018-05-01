@@ -39,6 +39,11 @@ void Else::resolveTypeExpr()
     this->bloc->resolveTypeExpr();
 }
 
+void Else::resolvedUnUsedFonctAndDecl(std::vector<std::string>* remainingFunctions, std::vector<std::string>* remainingDeclPrograme, std::vector<std::string>* remainingParam, std::vector<std::string>* remainingDeclBloc)
+{
+    this->bloc->resolvedUnUsedFonctAndDecl(remainingFunctions,remainingDeclPrograme,remainingParam,remainingDeclBloc);
+}
+
 Else::Else(const Else &unElse)
 {
     #ifdef MAP

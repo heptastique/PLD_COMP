@@ -23,6 +23,8 @@ class Declaration : public Instruction
 
         void resolveTypeExpr();
 
+        virtual void resolvedUnUsedFonctAndDecl(std::vector<std::string>* remainingFunctions, std::vector<std::string>* remainingDeclPrograme, std::vector<std::string>* remainingParam, std::vector<std::string>* remainingDeclBloc);
+
         void setType(Type type);
 
         Type getType();
